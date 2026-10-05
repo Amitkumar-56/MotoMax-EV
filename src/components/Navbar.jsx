@@ -284,15 +284,7 @@ const Navbar = () => {
             Enquire Now
           </Link>
         </li>
-        <li>
-          <Link
-            to="/admin"
-            style={{ color: "var(--primary)", fontWeight: "bold" }}
-            onClick={() => setIsOpen(false)}
-          >
-            Admin Panel
-          </Link>
-        </li>
+
       </ul>
     </nav>
   );

@@ -353,7 +353,7 @@ const Home = () => {
               scrollbarWidth: "none",
             }}
           >
-            <div className="product-card-light product-slide-card">
+            <Link to="/products/electric-scooter-battery" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
               <div className="product-card-img-wrapper">
                 <img
                   src="/assets/nav-automotive.jpg"
@@ -365,16 +365,15 @@ const Home = () => {
               <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
                 Engineered for electric mobility, including scooters and bikes.
               </p>
-              <Link
-                to="/products/electric-scooter-battery"
+              <span
                 className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem" }}
+                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
               >
                 View More
-              </Link>
-            </div>
+              </span>
+            </Link>
 
-            <div className="product-card-light product-slide-card">
+            <Link to="/products/lithium-inverter-battery-home" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
               <div className="product-card-img-wrapper">
                 <img
                   src="/assets/inverter-battery.jpg"
@@ -386,16 +385,15 @@ const Home = () => {
               <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
                 Reliable power backup solutions for homes and small offices.
               </p>
-              <Link
-                to="/products/lithium-inverter-battery-home"
+              <span
                 className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem" }}
+                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
               >
                 View More
-              </Link>
-            </div>
+              </span>
+            </Link>
 
-            <div className="product-card-light product-slide-card">
+            <Link to="/products/solar-street-light-storage" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
               <div className="product-card-img-wrapper">
                 <img
                   src="/assets/solar-battery-cluster.jpg"
@@ -409,16 +407,15 @@ const Home = () => {
               <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
                 Smart energy storage for solar installations and street lights.
               </p>
-              <Link
-                to="/products/solar-street-light-storage"
+              <span
                 className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem" }}
+                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
               >
                 View More
-              </Link>
-            </div>
+              </span>
+            </Link>
 
-            <div className="product-card-light product-slide-card">
+            <Link to="/products/solid-state" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
               <div className="product-card-img-wrapper">
                 <img
                   src="/assets/drone-single-battery.jpg"
@@ -431,16 +428,15 @@ const Home = () => {
                 Lightweight, high-capacity batteries engineered for advanced
                 drones.
               </p>
-              <Link
-                to="/products/solid-state"
+              <span
                 className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem" }}
+                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
               >
                 View More
-              </Link>
-            </div>
+              </span>
+            </Link>
 
-            <div className="product-card-light product-slide-card">
+            <Link to="/products/charger" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
               <div className="product-card-img-wrapper">
                 <img
                   src="/assets/nav-automotive.jpg"
@@ -452,16 +448,15 @@ const Home = () => {
               <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
                 Fast and reliable chargers for all types of electric vehicles.
               </p>
-              <Link
-                to="/products/charger"
+              <span
                 className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem" }}
+                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
               >
                 View More
-              </Link>
-            </div>
+              </span>
+            </Link>
 
-            <div className="product-card-light product-slide-card">
+            <Link to="/products/inverter" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
               <div className="product-card-img-wrapper">
                 <img
                   src="/assets/inverter-hero-house.jpg"
@@ -474,17 +469,16 @@ const Home = () => {
                 Sleek, durable device with flexible connectivity and easy
                 installation.
               </p>
-              <Link
-                to="/products/inverter"
+              <span
                 className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem" }}
+                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
               >
                 View More
-              </Link>
-            </div>
+              </span>
+            </Link>
 
             {/* Duplicated for endless slider effect */}
-            <div className="product-card-light product-slide-card">
+            <Link to="/products/electric-scooter-battery" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
               <div className="product-card-img-wrapper">
                 <img
                   src="/assets/nav-automotive.jpg"
@@ -496,16 +490,15 @@ const Home = () => {
               <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
                 Engineered for electric mobility, including scooters and bikes.
               </p>
-              <Link
-                to="/products/electric-scooter-battery"
+              <span
                 className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem" }}
+                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
               >
                 View More
-              </Link>
-            </div>
+              </span>
+            </Link>
 
-            <div className="product-card-light product-slide-card">
+            <Link to="/products/lithium-inverter-battery-home" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
               <div className="product-card-img-wrapper">
                 <img
                   src="/assets/inverter-battery.jpg"
@@ -517,16 +510,15 @@ const Home = () => {
               <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
                 Reliable power backup solutions for homes and small offices.
               </p>
-              <Link
-                to="/products/lithium-inverter-battery-home"
+              <span
                 className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem" }}
+                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
               >
                 View More
-              </Link>
-            </div>
+              </span>
+            </Link>
 
-            <div className="product-card-light product-slide-card">
+            <Link to="/products/solar-street-light-storage" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
               <div className="product-card-img-wrapper">
                 <img
                   src="/assets/solar-battery-cluster.jpg"
@@ -540,16 +532,15 @@ const Home = () => {
               <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
                 Smart energy storage for solar installations and street lights.
               </p>
-              <Link
-                to="/products/solar-street-light-storage"
+              <span
                 className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem" }}
+                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
               >
                 View More
-              </Link>
-            </div>
+              </span>
+            </Link>
 
-            <div className="product-card-light product-slide-card">
+            <Link to="/products/solid-state" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
               <div className="product-card-img-wrapper">
                 <img
                   src="/assets/drone-single-battery.jpg"
@@ -562,16 +553,15 @@ const Home = () => {
                 Lightweight, high-capacity batteries engineered for advanced
                 drones.
               </p>
-              <Link
-                to="/products/solid-state"
+              <span
                 className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem" }}
+                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
               >
                 View More
-              </Link>
-            </div>
+              </span>
+            </Link>
 
-            <div className="product-card-light product-slide-card">
+            <Link to="/products/charger" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
               <div className="product-card-img-wrapper">
                 <img
                   src="/assets/nav-automotive.jpg"
@@ -583,16 +573,15 @@ const Home = () => {
               <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
                 Fast and reliable chargers for all types of electric vehicles.
               </p>
-              <Link
-                to="/products/charger"
+              <span
                 className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem" }}
+                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
               >
                 View More
-              </Link>
-            </div>
+              </span>
+            </Link>
 
-            <div className="product-card-light product-slide-card">
+            <Link to="/products/inverter" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
               <div className="product-card-img-wrapper">
                 <img
                   src="/assets/inverter-hero-house.jpg"
@@ -605,14 +594,13 @@ const Home = () => {
                 Sleek, durable device with flexible connectivity and easy
                 installation.
               </p>
-              <Link
-                to="/products/inverter"
+              <span
                 className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem" }}
+                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
               >
                 View More
-              </Link>
-            </div>
+              </span>
+            </Link>
           </div>
         </div>
       </section>
