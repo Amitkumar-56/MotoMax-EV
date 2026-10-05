@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Blog = () => {
   const blogPosts = [
     {
@@ -80,7 +82,7 @@ const Blog = () => {
         }}
       >
         {blogPosts.map((post, index) => (
-          <div key={index} className="blog-card">
+          <Link key={index} to={`/post/blog-${index + 1}`} className="blog-card" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
             <div style={{ overflow: "hidden" }}>
               <img src={post.img} alt={`Blog ${index + 1}`} />
             </div>
@@ -89,7 +91,7 @@ const Blog = () => {
               <p>{post.excerpt}</p>
               <div className="arrow-btn">➔</div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

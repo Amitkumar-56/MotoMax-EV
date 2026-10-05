@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const NewsEvents = () => {
   return (
     <div
@@ -85,7 +87,7 @@ const NewsEvents = () => {
         }}
       >
         {/* News Item 1 */}
-        <div className="news-card-dynamic">
+        <Link to="/post/featured-in-battery-magazine" className="news-card-dynamic" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
           <img
             src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&q=80&w=600"
             alt="News 1"
@@ -118,10 +120,10 @@ const NewsEvents = () => {
               ecosystem.
             </p>
           </div>
-        </div>
+        </Link>
 
         {/* News Item 2 */}
-        <div className="news-card-dynamic">
+        <Link to="/post/future-proofing-india" className="news-card-dynamic" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
           <img
             src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=600"
             alt="News 2"
@@ -153,10 +155,10 @@ const NewsEvents = () => {
               in-house R&D and tech adaptability.
             </p>
           </div>
-        </div>
+        </Link>
 
         {/* News Item 3 */}
-        <div className="news-card-dynamic">
+        <Link to="/post/pioneering-next-frontier" className="news-card-dynamic" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
           <img
             src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600"
             alt="News 3"
@@ -188,10 +190,10 @@ const NewsEvents = () => {
               e-rickshaws to modern EV infrastructure.
             </p>
           </div>
-        </div>
+        </Link>
 
         {/* News Item 4 */}
-        <div className="news-card-dynamic">
+        <Link to="/post/solid-state-launch" className="news-card-dynamic" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
           <img
             src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=600"
             alt="News 4"
@@ -223,7 +225,7 @@ const NewsEvents = () => {
               to the global market.
             </p>
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   );

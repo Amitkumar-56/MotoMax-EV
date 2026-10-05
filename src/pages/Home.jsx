@@ -345,7 +345,7 @@ const Home = () => {
             className="hide-scrollbar"
             style={{
               display: "flex",
-              gap: "30px",
+              gap: "10px",
               overflowX: "auto",
               scrollBehavior: "smooth",
               padding: "10px 5px",
@@ -685,7 +685,7 @@ const Home = () => {
             gap: "30px",
           }}
         >
-          <div className="blog-card">
+          <Link to="/post/why-lithium-batteries-lose-capacity" className="blog-card" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
             <img
               src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=400"
               alt="Blog 1"
@@ -702,9 +702,9 @@ const Home = () => {
               </p>
               <div className="arrow-btn">➔</div>
             </div>
-          </div>
+          </Link>
 
-          <div className="blog-card">
+          <Link to="/post/hybrid-solar-inverter" className="blog-card" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
             <img
               src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&q=80&w=400"
               alt="Blog 2"
@@ -721,9 +721,9 @@ const Home = () => {
               </p>
               <div className="arrow-btn">➔</div>
             </div>
-          </div>
+          </Link>
 
-          <div className="blog-card">
+          <Link to="/post/increase-electric-scooter-resale" className="blog-card" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
             <img
               src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=400"
               alt="Blog 3"
@@ -739,7 +739,7 @@ const Home = () => {
               </p>
               <div className="arrow-btn">➔</div>
             </div>
-          </div>
+          </Link>
         </div>
       </section>
 
@@ -842,7 +842,7 @@ const Home = () => {
               </style>
 
               {/* News Item 1 */}
-              <div className="news-card-dynamic">
+              <Link to="/post/featured-in-battery-magazine" className="news-card-dynamic" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
                 <img
                   src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&q=80&w=600"
                   alt="News 1"
@@ -875,10 +875,10 @@ const Home = () => {
                     ecosystem.
                   </p>
                 </div>
-              </div>
+              </Link>
 
               {/* News Item 2 */}
-              <div className="news-card-dynamic">
+              <Link to="/post/future-proofing-india" className="news-card-dynamic" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
                 <img
                   src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=600"
                   alt="News 2"
@@ -910,10 +910,10 @@ const Home = () => {
                     in-house R&D and tech adaptability.
                   </p>
                 </div>
-              </div>
+              </Link>
 
               {/* News Item 3 */}
-              <div className="news-card-dynamic">
+              <Link to="/post/pioneering-next-frontier" className="news-card-dynamic" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
                 <img
                   src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600"
                   alt="News 3"
@@ -945,10 +945,10 @@ const Home = () => {
                     e-rickshaws to modern EV infrastructure.
                   </p>
                 </div>
-              </div>
+              </Link>
 
               {/* News Item 4 (for scrollability) */}
-              <div className="news-card-dynamic">
+              <Link to="/post/solid-state-launch" className="news-card-dynamic" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
                 <img
                   src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=600"
                   alt="News 4"
@@ -980,7 +980,7 @@ const Home = () => {
                     to the global market.
                   </p>
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
 

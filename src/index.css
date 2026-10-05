@@ -137,8 +137,7 @@ body {
 .product-card-light {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.04);
-  border-radius: 20px;
-  padding: 1.5rem;
+  padding: 0.5rem;
   text-align: center;
   position: relative;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -507,8 +506,15 @@ body {
 }
 
 @keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .mega-menu-container {
@@ -563,7 +569,7 @@ body {
   height: 45px;
   object-fit: contain;
   transition: transform 0.3s ease;
-  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
 }
 
 .mega-menu-item:hover img {
@@ -591,7 +597,7 @@ body {
 .mega-menu-sub {
   width: 280px;
   background: rgba(255, 255, 255, 0.6);
-  border-right: 1px solid rgba(0,0,0,0.05);
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   padding: 15px 0;

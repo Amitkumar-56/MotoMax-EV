@@ -11,6 +11,11 @@ import SolidStateBatteries from "./pages/SolidStateBatteries";
 import EVCharger from "./pages/EVCharger";
 import Inverter from "./pages/Inverter";
 import Team from "./pages/Team";
+import ProductDetail from "./pages/ProductDetail";
+import TwoWheeler from "./pages/TwoWheeler";
+import ThreeWheeler from "./pages/ThreeWheeler";
+import GolfCart from "./pages/GolfCart";
+import PostDetail from "./pages/PostDetail";
 
 import NewsEvents from "./pages/NewsEvents";
 import Blog from "./pages/Blog";
@@ -45,10 +50,19 @@ function AppContent() {
           <Route path="/products/inverter" element={<Inverter />} />
           <Route path="/team" element={<Team />} />
 
+          {/* Footer Products */}
+          <Route path="/products/2-wheeler" element={<TwoWheeler />} />
+          <Route path="/products/3-wheeler" element={<ThreeWheeler />} />
+          <Route path="/products/golf-cart" element={<GolfCart />} />
+
+          {/* Dynamic route for all other missing products */}
+          <Route path="/products/:id" element={<ProductDetail />} />
+
           <Route path="/news-events" element={<NewsEvents />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/post/:slug" element={<PostDetail />} />
           <Route path="/contact-us" element={<Contact />} />
-          
+
           {/* Admin Panel */}
           <Route path="/admin" element={<Admin />} />
         </Routes>

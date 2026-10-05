@@ -38,7 +38,7 @@ const Footer = () => {
           <ul className="footer-links">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/about-us">About Us</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/contact-us">Contact</Link></li>
             <li><Link to="/team">Management</Link></li>
             <li><Link to="/news-events">News & Events</Link></li>
             <li><Link to="/blog">Blog</Link></li>
@@ -49,11 +49,11 @@ const Footer = () => {
         <div className="footer-col" style={{ flex: "1 1 150px" }}>
           <h4>Our Products</h4>
           <ul className="footer-links">
-            <li><Link to="/products">2 Wheeler</Link></li>
-            <li><Link to="/products">3 Wheeler</Link></li>
-            <li><Link to="/products">Golf Cart</Link></li>
-            <li><Link to="/products">Solar Street Light</Link></li>
-            <li><Link to="/products">Solid State</Link></li>
+            <li><Link to="/products/2-wheeler">2 Wheeler</Link></li>
+            <li><Link to="/products/3-wheeler">3 Wheeler</Link></li>
+            <li><Link to="/products/golf-cart">Golf Cart</Link></li>
+            <li><Link to="/products/solar-street-light-storage">Solar Street Light</Link></li>
+            <li><Link to="/products/solid-state">Solid State</Link></li>
           </ul>
         </div>
 
@@ -61,7 +61,7 @@ const Footer = () => {
         <div className="footer-col" style={{ flex: "1 1 280px" }}>
           <div className="footer-cta">
             <h3>Let's energize our spaces with clean power</h3>
-            <Link to="/contact">
+            <Link to="/contact-us">
               <button className="btn-primary" style={{ padding: "12px 30px", fontSize: "0.9rem" }}>
                 ENQUIRE NOW
               </button>
@@ -74,7 +74,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="footer-bottom">
         <p>&copy; {new Date().getFullYear()} MotoMax EV. All rights reserved.</p>
       </div>
