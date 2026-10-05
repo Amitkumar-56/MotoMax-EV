@@ -18,8 +18,10 @@ const Home = () => {
   const productSliderRef = useRef(null);
 
   const scrollProducts = (direction) => {
-    if (productSliderRef.current) {
-      const scrollAmount = productSliderRef.current.clientWidth / 5;
+    if (productSliderRef.current && productSliderRef.current.children.length > 0) {
+      const cardWidth = productSliderRef.current.children[0].clientWidth;
+      // Calculate scroll amount (card width + 30px gap)
+      const scrollAmount = cardWidth + 30; 
       productSliderRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
@@ -39,14 +41,15 @@ const Home = () => {
 
     // Product Slider Auto-scroll Interval
     const productInterval = setInterval(() => {
-      if (productSliderRef.current) {
+      if (productSliderRef.current && productSliderRef.current.children.length > 0) {
         const { scrollLeft, scrollWidth, clientWidth } =
           productSliderRef.current;
         if (scrollLeft + clientWidth >= scrollWidth - 10) {
           // Snap back to start instantly without smooth scrolling
           productSliderRef.current.scrollTo({ left: 0, behavior: "auto" });
         } else {
-          const scrollAmount = clientWidth / 5;
+          const cardWidth = productSliderRef.current.children[0].clientWidth;
+          const scrollAmount = cardWidth + 30; // Card width + gap
           productSliderRef.current.scrollBy({
             left: scrollAmount,
             behavior: "smooth",
@@ -64,16 +67,7 @@ const Home = () => {
   return (
     <div className="responsive-page " style={{ background: "#fff" }}>
       {/* Unified Hero Slider */}
-      <header
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "85vh",
-          minHeight: "600px",
-          overflow: "hidden",
-          background: "#000",
-        }}
-      >
+      <header className="hero-section">
         {/* Slider Images/Videos */}
         {sliderItems.map((item, index) => (
           <div
@@ -94,6 +88,7 @@ const Home = () => {
                 autoPlay
                 muted
                 playsInline
+                webkit-playsinline="true"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 onEnded={() => setCurrentSlide((prev) => (prev + 1) % sliderItems.length)}
               >
@@ -140,46 +135,14 @@ const Home = () => {
               textAlign: "center"
             }}
           >
-            <h1
-              style={{
-                color: "#ffffff",
-                fontSize: "4.5rem",
-                fontWeight: 900,
-                textTransform: "uppercase",
-                textShadow: "2px 4px 15px rgba(0,0,0,0.8)",
-                margin: "0 0 10px 0",
-                maxWidth: "1100px",
-                lineHeight: "1.1"
-              }}
-            >
+            <h1 className="hero-title">
               {sliderItems[currentSlide].title}
             </h1>
-            <h2
-              style={{
-                color: "#fff",
-                fontSize: "1.8rem",
-                fontWeight: 400,
-                letterSpacing: "1px",
-                textShadow: "1px 2px 10px rgba(0,0,0,0.8)",
-                marginBottom: "40px"
-              }}
-            >
+            <h2 className="hero-subtitle">
               {sliderItems[currentSlide].subtitle}
             </h2>
             <button
-              style={{
-                background: "#ff9900",
-                color: "#fff",
-                padding: "15px 40px",
-                borderRadius: "30px",
-                border: "none",
-                fontSize: "1.2rem",
-                fontWeight: "bold",
-                cursor: "pointer",
-                pointerEvents: "auto",
-                boxShadow: "0 5px 15px rgba(255,153,0,0.4)",
-                transition: "transform 0.3s, background 0.3s"
-              }}
+              className="hero-btn"
               onMouseOver={(e) => e.target.style.background = "#e68a00"}
               onMouseOut={(e) => e.target.style.background = "#ff9900"}
             >
@@ -406,8 +369,16 @@ const Home = () => {
           </button>
 
           {/* Slider Container */}
+          <style>
+            {`
+              .hide-scrollbar::-webkit-scrollbar {
+                display: none;
+              }
+            `}
+          </style>
           <div
             ref={productSliderRef}
+            className="hide-scrollbar"
             style={{
               display: "flex",
               gap: "30px",
@@ -418,14 +389,6 @@ const Home = () => {
               scrollbarWidth: "none",
             }}
           >
-            <style>
-              {`
-                div::-webkit-scrollbar {
-                  display: none;
-                }
-              `}
-            </style>
-
             <div className="product-card-light product-slide-card">
               <div className="product-card-img-wrapper">
                 <img
