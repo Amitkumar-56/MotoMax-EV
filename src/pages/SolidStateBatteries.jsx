@@ -36,23 +36,21 @@ const SolidStateBatteries = () => {
         `}
       </style>
 
-      {/* 1. Hero Image (Drone over City) */}
-      <div
-        style={{
-          width: "100%",
-          height: "60vh",
-          minHeight: "400px",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <img
-          src="/assets/4.png"
-          alt="Drone flying over city at sunset"
-          style={{ width: "100%", height: "100%", objectFit: "contain" }}
-        />
+            {/* Premium Hero Section */}
+      <div className="premium-product-hero">
+        <div className="hero-particles"></div>
+        <div className="premium-hero-container">
+          <div className="premium-hero-text">
+            <span className="premium-badge">Next-Gen Tech</span>
+            <h1 className="premium-hero-title">Drone Lithium Battery</h1>
+            <p className="premium-hero-subtitle">Experience unmatched performance, reliability, and innovation with MotoMax EV's state-of-the-art drone lithium battery. Designed for maximum efficiency and power delivery.</p>
+          </div>
+          <div className="premium-hero-img-wrapper">
+            <img src="/assets/4.png" alt="Drone Lithium Battery" className="premium-hero-img" />
+          </div>
+        </div>
       </div>
-
+      
       {/* 2. Title Section & Battery Cluster */}
       <section style={{ padding: "80px 10% 40px", position: "relative" }}>
         <div

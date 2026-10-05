@@ -34,27 +34,21 @@ const EVCharger = () => {
         `}
       </style>
 
-      {/* 1. Hero Section */}
-      <div
-        style={{
-          width: "100%",
-          height: "80vh",
-          minHeight: "auto",
-          flexWrap: "wrap",
-          gap: "40px",
-          padding: "40px 0",
-          position: "relative",
-          overflow: "hidden",
-          background: "linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)",
-        }}
-      >
-        <img
-          src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=2000"
-          alt="EV Charger Background"
-          style={{ width: "100%", height: "100%", objectFit: "contain" }}
-        />
+            {/* Premium Hero Section */}
+      <div className="premium-product-hero">
+        <div className="hero-particles"></div>
+        <div className="premium-hero-container">
+          <div className="premium-hero-text">
+            <span className="premium-badge">Next-Gen Tech</span>
+            <h1 className="premium-hero-title">EV Charger</h1>
+            <p className="premium-hero-subtitle">Experience unmatched performance, reliability, and innovation with MotoMax EV's state-of-the-art ev charger. Designed for maximum efficiency and power delivery.</p>
+          </div>
+          <div className="premium-hero-img-wrapper">
+            <img src="/assets/5.png" alt="EV Charger" className="premium-hero-img" />
+          </div>
+        </div>
       </div>
-
+      
       {/* 2. Product Selector & Title Box */}
       <section style={{ padding: "80px 5%", textAlign: "center" }}>
         {/* Tab Buttons */}

@@ -38,109 +38,21 @@ const LithiumInverterBattery = () => {
         `}
       </style>
 
-      {/* 1. Hero Section (House with batteries) */}
-      <div
-        style={{
-          width: "100%",
-          height: "70vh",
-          minHeight: "500px",
-          position: "relative",
-          overflow: "hidden",
-          background: "transparent",
-        }}
-      >
-        <img
-          src="/assets/6.png"
-          alt="Modern House Background"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "contain",
-            opacity: 0.9,
-          }}
-        />
-
-        {/* Left Battery Overlapping */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-20px",
-            left: "15%",
-            zIndex: 2,
-          }}
-        >
-          <img
-            src="/assets/2.png"
-            alt="Powercube 1.4+"
-            style={{
-              width: "250px",
-              height: "350px",
-              objectFit: "contain",
-              borderRadius: "10px",
-              filter: "drop-shadow(10px 20px 30px rgba(0,0,0,0.4))",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              bottom: "-40px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              background: "var(--bg-main)",
-              padding: "10px 20px",
-              borderRadius: "8px",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-            }}
-          >
-            <span
-              style={{ fontWeight: 800, color: "var(--text-muted)", fontSize: "1.2rem" }}
-            >
-              Powercube <span style={{ color: "#ff6b35" }}>1.4+</span>
-            </span>
+            {/* Premium Hero Section */}
+      <div className="premium-product-hero">
+        <div className="hero-particles"></div>
+        <div className="premium-hero-container">
+          <div className="premium-hero-text">
+            <span className="premium-badge">Next-Gen Tech</span>
+            <h1 className="premium-hero-title">Inverter Lithium Battery</h1>
+            <p className="premium-hero-subtitle">Experience unmatched performance, reliability, and innovation with MotoMax EV's state-of-the-art inverter lithium battery. Designed for maximum efficiency and power delivery.</p>
           </div>
-        </div>
-
-        {/* Right Battery Overlapping */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-20px",
-            right: "15%",
-            zIndex: 2,
-          }}
-        >
-          <img
-            src="/assets/2.png"
-            alt="Powercube 2.7+"
-            style={{
-              width: "300px",
-              height: "420px",
-              objectFit: "contain",
-              borderRadius: "10px",
-              filter: "drop-shadow(-10px 20px 30px rgba(0,0,0,0.4))",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              bottom: "-40px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              background: "var(--bg-main)",
-              padding: "10px 20px",
-              borderRadius: "8px",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-            }}
-          >
-            <span
-              style={{ fontWeight: 800, color: "var(--text-muted)", fontSize: "1.2rem" }}
-            >
-              Powercube <span style={{ color: "#ff6b35" }}>2.7+</span>
-            </span>
+          <div className="premium-hero-img-wrapper">
+            <img src="/assets/2.png" alt="Inverter Lithium Battery" className="premium-hero-img" />
           </div>
         </div>
       </div>
-
+      
       {/* 2. Green Title Block & Description */}
       <section style={{ padding: "120px 10% 60px", position: "relative" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "50px" }}>

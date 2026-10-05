@@ -4,38 +4,21 @@ import { Link } from "react-router-dom";
 const ThreeWheeler = () => {
   return (
     <div className="responsive-page" style={{ background: "var(--bg-main)" }}>
-      {/* Hero Section */}
-      <section
-        style={{
-          padding: "80px 20px 40px",
-          textAlign: "center",
-          background: "linear-gradient(135deg, rgba(255,102,0,0.1) 0%, rgba(255,255,255,0) 100%)",
-        }}
-      >
-        <h1
-          style={{
-            fontSize: "3.5rem",
-            fontWeight: 900,
-            color: "var(--text-main)",
-            marginBottom: "20px",
-            textTransform: "uppercase"
-          }}
-        >
-          3 Wheeler Battery
-        </h1>
-        <p
-          style={{
-            fontSize: "1.2rem",
-            color: "var(--text-muted)",
-            maxWidth: "800px",
-            margin: "0 auto",
-            lineHeight: "1.6",
-          }}
-        >
-          Experience next-generation performance for commercial transport. MotoMax EV 3 Wheeler batteries are built to last under heavy loads and frequent usage.
-        </p>
-      </section>
-
+            {/* Premium Hero Section */}
+      <div className="premium-product-hero">
+        <div className="hero-particles"></div>
+        <div className="premium-hero-container">
+          <div className="premium-hero-text">
+            <span className="premium-badge">Next-Gen Tech</span>
+            <h1 className="premium-hero-title">3 Wheeler Battery</h1>
+            <p className="premium-hero-subtitle">Experience unmatched performance, reliability, and innovation with MotoMax EV's state-of-the-art 3 wheeler battery. Designed for maximum efficiency and power delivery.</p>
+          </div>
+          <div className="premium-hero-img-wrapper">
+            <img src="/assets/8.png" alt="3 Wheeler Battery" className="premium-hero-img" />
+          </div>
+        </div>
+      </div>
+      
       {/* Content Section */}
       <section
         style={{

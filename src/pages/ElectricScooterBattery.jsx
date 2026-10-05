@@ -34,63 +34,21 @@ const ElectricScooterBattery = () => {
         `}
       </style>
 
-      {/* 1. Hero Section */}
-      <div
-        style={{
-          width: "100%",
-          height: "80vh",
-          minHeight: "auto",
-          flexWrap: "wrap",
-          gap: "40px",
-          padding: "40px 0",
-          position: "relative",
-          overflow: "hidden",
-          background: "linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)",
-        }}
-      >
-        <img
-          src="/assets/8.png"
-          alt="Scooter Background"
-          style={{ width: "100%", height: "100%", objectFit: "contain" }}
-        />
-        {/* Mocking the two batteries on the left foreground */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-50px",
-            left: "10%",
-            display: "flex",
-            gap: "10px",
-            alignItems: "flex-end",
-            zIndex: 2,
-          }}
-        >
-          <img
-            src="/assets/1.png"
-            alt="Battery 1"
-            style={{
-              width: "220px",
-              height: "450px",
-              objectFit: "contain",
-              borderRadius: "15px",
-              filter: "drop-shadow(10px 20px 30px rgba(0,0,0,0.6))",
-            }}
-          />
-          <img
-            src="/assets/1.png"
-            alt="Battery 2"
-            style={{
-              width: "180px",
-              height: "380px",
-              objectFit: "contain",
-              borderRadius: "15px",
-              filter: "drop-shadow(10px 20px 30px rgba(0,0,0,0.6))",
-              marginLeft: "-40px",
-            }}
-          />
+            {/* Premium Hero Section */}
+      <div className="premium-product-hero">
+        <div className="hero-particles"></div>
+        <div className="premium-hero-container">
+          <div className="premium-hero-text">
+            <span className="premium-badge">Next-Gen Tech</span>
+            <h1 className="premium-hero-title">Automotive Lithium Battery</h1>
+            <p className="premium-hero-subtitle">Experience unmatched performance, reliability, and innovation with MotoMax EV's state-of-the-art automotive lithium battery. Designed for maximum efficiency and power delivery.</p>
+          </div>
+          <div className="premium-hero-img-wrapper">
+            <img src="/assets/1.png" alt="Automotive Lithium Battery" className="premium-hero-img" />
+          </div>
         </div>
       </div>
-
+      
       {/* 2. Product Selector & Title Box */}
       <section style={{ padding: "80px 5%", textAlign: "center" }}>
         {/* Tab Buttons */}
