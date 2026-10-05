@@ -156,7 +156,7 @@ const EVCharger = () => {
           </div>
           {/* Overlapping Image on Right */}
           <img
-            src="/assets/nav-automotive.jpg"
+            src="/assets/1.png"
             alt="Product Battery"
             style={{
               width: "250px",
@@ -439,7 +439,7 @@ const EVCharger = () => {
             {/* Center Image */}
             <div style={{ position: "relative", zIndex: 2 }}>
               <img
-                src="/assets/nav-automotive.jpg"
+                src="/assets/1.png"
                 alt="Specs Charger"
                 style={{
                   width: "280px",

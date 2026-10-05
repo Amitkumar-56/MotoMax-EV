@@ -7,11 +7,11 @@ const Home = () => {
       type: "video",
       src: "/assets/home-video.mp4",
     },
-    { type: "image", src: "/assets/slider-1.jpg", title: "INDIA'S LEADING ENERGY TECHNOLOGY COMPANY", subtitle: "Pioneering the EV Revolution Across the Globe" },
-    { type: "image", src: "/assets/slider-2.jpg", title: "ADVANCED LITHIUM BATTERY PACKS", subtitle: "Powering the Future of Mobility" },
-    { type: "image", src: "/assets/slider-3.jpg", title: "SMART ENERGY STORAGE SOLUTIONS", subtitle: "Reliable Backup for Homes & Industries" },
-    { type: "image", src: "/assets/slider-4.jpg", title: "HIGH PERFORMANCE EV CHARGERS", subtitle: "Fast, Safe, and Efficient Charging" },
-    { type: "image", src: "/assets/slider-5.jpg", title: "INNOVATING GREEN TECHNOLOGY", subtitle: "Building a Sustainable Tomorrow" },
+    { type: "image", src: "/assets/1.png", title: "INDIA'S LEADING ENERGY TECHNOLOGY COMPANY", subtitle: "Pioneering the EV Revolution Across the Globe" },
+    { type: "image", src: "/assets/2.png", title: "ADVANCED LITHIUM BATTERY PACKS", subtitle: "Powering the Future of Mobility" },
+    { type: "image", src: "/assets/3.png", title: "SMART ENERGY STORAGE SOLUTIONS", subtitle: "Reliable Backup for Homes & Industries" },
+    { type: "image", src: "/assets/4.png", title: "HIGH PERFORMANCE EV CHARGERS", subtitle: "Fast, Safe, and Efficient Charging" },
+    { type: "image", src: "/assets/5.png", title: "INNOVATING GREEN TECHNOLOGY", subtitle: "Building a Sustainable Tomorrow" },
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -419,9 +419,9 @@ const Home = () => {
                 overflow: hidden;
               }
               .card-icon-wrapper img {
-                width: 110px;
-                height: 110px;
-                border-radius: 50%;
+                width: 100%;
+                height: 100%;
+                border-radius: 8px;
                 object-fit: contain;
                 background: #fff;
                 border: 1px solid rgba(0,0,0,0.08);
@@ -468,42 +468,42 @@ const Home = () => {
             {[
               {
                 to: "/products/electric-scooter-battery",
-                img: "/assets/nav-automotive.jpg",
+                img: "/assets/1.png",
                 title: "Automotive Lithium Battery",
                 desc: "Reliable energy for every journey.",
                 blob: "#ffffff"
               },
               {
                 to: "/products/lithium-inverter-battery-home",
-                img: "/assets/inverter-battery.jpg",
+                img: "/assets/2.png",
                 title: "Inverter Lithium Battery",
                 desc: "Stable power, smarter living.",
                 blob: "#ffffff"
               },
               {
                 to: "/products/solar-street-light-storage",
-                img: "/assets/solar-battery-cluster.jpg",
+                img: "/assets/3.png",
                 title: "Lithium Battery Solar App.",
                 desc: "Clean energy for a brighter tomorrow.",
                 blob: "#ffffff"
               },
               {
                 to: "/products/solid-state",
-                img: "/assets/drone-single-battery.jpg",
+                img: "/assets/4.png",
                 title: "Drone Lithium Battery",
                 desc: "More flight time, more possibilities.",
                 blob: "#ffffff"
               },
               {
                 to: "/products/charger",
-                img: "/assets/nav-automotive.jpg",
+                img: "/assets/5.png",
                 title: "EV Charger",
                 desc: "Charge today, drive tomorrow.",
                 blob: "#ffffff"
               },
               {
                 to: "/products/inverter",
-                img: "/assets/inverter-hero-house.jpg",
+                img: "/assets/6.png",
                 title: "Inverter",
                 desc: "Efficient power for your home & business.",
                 blob: "#ffffff"
@@ -529,14 +529,14 @@ const Home = () => {
             {[
               {
                 to: "/products/electric-scooter-battery",
-                img: "/assets/nav-automotive.jpg",
+                img: "/assets/1.png",
                 title: "Automotive Lithium Battery",
                 desc: "Reliable energy for every journey.",
                 blob: "#ffffff"
               },
               {
                 to: "/products/lithium-inverter-battery-home",
-                img: "/assets/inverter-battery.jpg",
+                img: "/assets/2.png",
                 title: "Inverter Lithium Battery",
                 desc: "Stable power, smarter living.",
                 blob: "#ffffff"

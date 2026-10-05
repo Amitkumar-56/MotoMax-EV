@@ -4,55 +4,55 @@ const Products = () => {
   const allProducts = [
     {
       to: "/products/electric-scooter-battery",
-      img: "/assets/nav-automotive.jpg",
+      img: "/assets/1.png",
       title: "Automotive Lithium Battery",
       desc: "Reliable energy for every journey.",
     },
     {
       to: "/products/lithium-inverter-battery-home",
-      img: "/assets/inverter-battery.jpg",
+      img: "/assets/2.png",
       title: "Inverter Lithium Battery",
       desc: "Stable power, smarter living.",
     },
     {
       to: "/products/solar-street-light-storage",
-      img: "/assets/solar-battery-cluster.jpg",
+      img: "/assets/3.png",
       title: "Lithium Battery Solar App.",
       desc: "Clean energy for a brighter tomorrow.",
     },
     {
       to: "/products/solid-state",
-      img: "/assets/drone-single-battery.jpg",
+      img: "/assets/4.png",
       title: "Drone Lithium Battery",
       desc: "More flight time, more possibilities.",
     },
     {
       to: "/products/charger",
-      img: "/assets/nav-automotive.jpg", // fallback image or actual if different
+      img: "/assets/5.png", // fallback image or actual if different
       title: "EV Charger",
       desc: "Charge today, drive tomorrow.",
     },
     {
       to: "/products/inverter",
-      img: "/assets/inverter-hero-house.jpg",
+      img: "/assets/6.png",
       title: "Inverter",
       desc: "Efficient power for your home & business.",
     },
     {
       to: "/products/2-wheeler",
-      img: "/assets/nav-automotive.jpg",
+      img: "/assets/7.png",
       title: "2 Wheeler Battery",
       desc: "High performance for your daily commute.",
     },
     {
       to: "/products/3-wheeler",
-      img: "/assets/nav-automotive.jpg",
+      img: "/assets/8.png",
       title: "3 Wheeler Battery",
       desc: "Durable energy for commercial use.",
     },
     {
       to: "/products/golf-cart",
-      img: "/assets/nav-automotive.jpg",
+      img: "/assets/1.png", // Reusing 1.png
       title: "Golf Cart Battery",
       desc: "Long-lasting power for the greens.",
     }
@@ -68,15 +68,15 @@ const Products = () => {
           Explore our complete range of EV and energy solutions.
         </p>
 
-        <div style={{ 
-          display: "grid", 
-          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", 
-          gap: "30px" 
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+          gap: "30px"
         }}>
           {allProducts.map((prod, idx) => (
-            <Link 
-              key={idx} 
-              to={prod.to} 
+            <Link
+              key={idx}
+              to={prod.to}
               style={{
                 background: "#fff",
                 borderRadius: "20px",
@@ -115,19 +115,16 @@ const Products = () => {
                 overflow: "hidden",
                 background: "#f9f9f9"
               }}>
-                <img 
-                  src={prod.img} 
-                  alt={prod.title} 
+                <img
+                  src={prod.img}
+                  alt={prod.title}
                   style={{
-                    width: "140px",
-                    height: "140px",
-                    borderRadius: "50%",
-                    objectFit: "cover",
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "8px",
+                    objectFit: "contain",
                     background: "#fff",
-                    border: "1px solid rgba(0,0,0,0.08)",
-                    padding: "15px",
                     zIndex: 2,
-                    boxShadow: "0 4px 10px rgba(0,0,0,0.04)"
                   }}
                 />
               </div>
@@ -137,7 +134,7 @@ const Products = () => {
               <p style={{ fontSize: "0.95rem", color: "#666", textAlign: "center", flexGrow: 1, margin: 0 }}>
                 {prod.desc}
               </p>
-              <div 
+              <div
                 className="card-arrow-btn"
                 style={{
                   width: "40px",

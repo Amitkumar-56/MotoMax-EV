@@ -59,7 +59,7 @@ const ThreeWheeler = () => {
             }}
           >
             <img
-              src="/assets/scooter-hero.jpg"
+              src="/assets/8.png"
               alt="3 Wheeler Battery"
               style={{ width: "100%", height: "400px", objectFit: "cover" }}
             />

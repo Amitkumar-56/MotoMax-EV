@@ -47,7 +47,7 @@ const SolarStreetLightStorage = () => {
         }}
       >
         <img
-          src="/assets/solar-hero-bg.jpg"
+          src="/assets/3.png"
           alt="Solar Panels in Field"
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
@@ -111,7 +111,7 @@ const SolarStreetLightStorage = () => {
             }}
           >
             <img
-              src="/assets/solar-battery-cluster.jpg"
+              src="/assets/3.png"
               alt="Solar Batteries Cluster"
               style={{
                 width: "120%",
@@ -783,7 +783,7 @@ const SolarStreetLightStorage = () => {
               }}
             ></div>
             <img
-              src="/assets/solar-black-battery.jpg"
+              src="/assets/3.png"
               alt="Solar Black Battery"
               style={{
                 width: "400px",

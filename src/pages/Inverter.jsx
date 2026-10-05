@@ -156,7 +156,7 @@ const Inverter = () => {
           </div>
           {/* Overlapping Image on Right */}
           <img
-            src="/assets/inverter-battery.jpg"
+            src="/assets/2.png"
             alt="Inverter Unit"
             style={{
               width: "220px",
@@ -435,7 +435,7 @@ const Inverter = () => {
             {/* Center Image */}
             <div style={{ position: "relative", zIndex: 2 }}>
               <img
-                src="/assets/inverter-battery.jpg"
+                src="/assets/2.png"
                 alt="Specs Inverter"
                 style={{
                   width: "220px",

@@ -59,7 +59,7 @@ const GolfCart = () => {
             }}
           >
             <img
-              src="/assets/inverter-hero-house.jpg"
+              src="/assets/6.png"
               alt="Golf Cart Battery"
               style={{ width: "100%", height: "400px", objectFit: "cover" }}
             />

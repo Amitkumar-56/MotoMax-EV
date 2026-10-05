@@ -47,7 +47,7 @@ const SolidStateBatteries = () => {
         }}
       >
         <img
-          src="/assets/drone-hero-bg.jpg"
+          src="/assets/4.png"
           alt="Drone flying over city at sunset"
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
@@ -110,7 +110,7 @@ const SolidStateBatteries = () => {
             }}
           >
             <img
-              src="/assets/drone-battery-cluster.jpg"
+              src="/assets/4.png"
               alt="Drone Batteries Cluster"
               style={{
                 width: "120%",
@@ -521,7 +521,7 @@ const SolidStateBatteries = () => {
             }}
           >
             <img
-              src="/assets/drone-single-battery.jpg"
+              src="/assets/4.png"
               alt="Drone Battery Pack"
               style={{
                 width: "100%",

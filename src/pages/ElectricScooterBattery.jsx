@@ -49,7 +49,7 @@ const ElectricScooterBattery = () => {
         }}
       >
         <img
-          src="/assets/scooter-hero.jpg"
+          src="/assets/8.png"
           alt="Scooter Background"
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
@@ -66,7 +66,7 @@ const ElectricScooterBattery = () => {
           }}
         >
           <img
-            src="/assets/battery-product.jpg"
+            src="/assets/1.png"
             alt="Battery 1"
             style={{
               width: "220px",
@@ -77,7 +77,7 @@ const ElectricScooterBattery = () => {
             }}
           />
           <img
-            src="/assets/battery-product.jpg"
+            src="/assets/1.png"
             alt="Battery 2"
             style={{
               width: "180px",
@@ -205,7 +205,7 @@ const ElectricScooterBattery = () => {
           </div>
           {/* Overlapping Battery Image on Right */}
           <img
-            src="/assets/battery-product.jpg"
+            src="/assets/1.png"
             alt="Product Battery"
             style={{
               width: "220px",
@@ -860,7 +860,7 @@ const ElectricScooterBattery = () => {
             {/* Center Battery */}
             <div style={{ position: "relative", zIndex: 2 }}>
               <img
-                src="/assets/battery-product.jpg"
+                src="/assets/1.png"
                 alt="Specs Battery"
                 style={{
                   width: "280px",

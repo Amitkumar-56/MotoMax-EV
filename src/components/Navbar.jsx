@@ -99,7 +99,7 @@ const Navbar = () => {
                   onMouseEnter={() => setActiveMenu("automotive")}
                   onClick={() => setIsOpen(false)}
                 >
-                  <img src="/assets/nav-automotive.jpg" alt="Automotive" />
+                  <img src="/assets/1.png" alt="Automotive" />
                   <span>Automotive Lithium Battery</span>
                 </Link>
                 <Link
@@ -108,7 +108,7 @@ const Navbar = () => {
                   onMouseEnter={() => setActiveMenu("inverter")}
                   onClick={() => setIsOpen(false)}
                 >
-                  <img src="/assets/inverter-battery.jpg" alt="Inverter" />
+                  <img src="/assets/2.png" alt="Inverter" />
                   <span>Inverter Lithium Battery</span>
                 </Link>
                 <Link
@@ -117,7 +117,7 @@ const Navbar = () => {
                   onMouseEnter={() => setActiveMenu("solar")}
                   onClick={() => setIsOpen(false)}
                 >
-                  <img src="/assets/solar-battery-cluster.jpg" alt="Solar" />
+                  <img src="/assets/3.png" alt="Solar" />
                   <span>Lithium Battery Solar Application</span>
                 </Link>
                 <Link
@@ -126,7 +126,7 @@ const Navbar = () => {
                   onMouseEnter={() => setActiveMenu("drone")}
                   onClick={() => setIsOpen(false)}
                 >
-                  <img src="/assets/drone-single-battery.jpg" alt="Drone" />
+                  <img src="/assets/4.png" alt="Drone" />
                   <span>Drone Lithium Battery</span>
                 </Link>
                 <Link
@@ -135,7 +135,7 @@ const Navbar = () => {
                   onMouseEnter={() => setActiveMenu("charger")}
                   onClick={() => setIsOpen(false)}
                 >
-                  <img src="/assets/nav-automotive.jpg" alt="EV Charger" />
+                  <img src="/assets/5.png" alt="EV Charger" />
                   <span>EV Charger</span>
                 </Link>
                 <Link
@@ -145,7 +145,7 @@ const Navbar = () => {
                   onClick={() => setIsOpen(false)}
                 >
                   <img
-                    src="/assets/inverter-hero-house.jpg"
+                    src="/assets/6.png"
                     alt="Inverter Device"
                   />
                   <span>Inverter</span>

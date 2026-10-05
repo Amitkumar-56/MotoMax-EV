@@ -50,7 +50,7 @@ const LithiumInverterBattery = () => {
         }}
       >
         <img
-          src="/assets/inverter-hero-house.jpg"
+          src="/assets/6.png"
           alt="Modern House Background"
           style={{
             width: "100%",
@@ -70,7 +70,7 @@ const LithiumInverterBattery = () => {
           }}
         >
           <img
-            src="/assets/inverter-battery.jpg"
+            src="/assets/2.png"
             alt="Powercube 1.4+"
             style={{
               width: "250px",
@@ -110,7 +110,7 @@ const LithiumInverterBattery = () => {
           }}
         >
           <img
-            src="/assets/inverter-battery.jpg"
+            src="/assets/2.png"
             alt="Powercube 2.7+"
             style={{
               width: "300px",
@@ -191,7 +191,7 @@ const LithiumInverterBattery = () => {
               }}
             >
               <img
-                src="/assets/inverter-battery.jpg"
+                src="/assets/2.png"
                 alt="Battery Left"
                 style={{
                   width: "180px",
@@ -202,7 +202,7 @@ const LithiumInverterBattery = () => {
                 }}
               />
               <img
-                src="/assets/inverter-battery.jpg"
+                src="/assets/2.png"
                 alt="Battery Right"
                 style={{
                   width: "200px",
@@ -436,7 +436,7 @@ const LithiumInverterBattery = () => {
           {/* Center Battery */}
           <div style={{ width: "40%" }}>
             <img
-              src="/assets/inverter-battery.jpg"
+              src="/assets/2.png"
               alt="Inverter Battery Specs"
               style={{ width: "100%", maxWidth: "300px", objectFit: "cover" }}
             />

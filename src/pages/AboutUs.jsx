@@ -157,7 +157,7 @@ const AboutUs = () => {
           {/* E-Rickshaw Image */}
           <div style={{ flex: "1 1 500px" }}>
             <img
-              src="/assets/sustainable_ev_fleet.jpg"
+              src="/assets/5.png"
               alt="Electric Vehicle"
               style={{
                 width: "100%",

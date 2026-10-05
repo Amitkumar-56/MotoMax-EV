@@ -59,7 +59,7 @@ const TwoWheeler = () => {
             }}
           >
             <img
-              src="/assets/nav-automotive.jpg"
+              src="/assets/1.png"
               alt="2 Wheeler Battery"
               style={{ width: "100%", height: "400px", objectFit: "cover" }}
             />
