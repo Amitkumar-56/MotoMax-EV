@@ -10,7 +10,7 @@ const Inverter = () => {
   return (
     <div
       className="responsive-page"
-      style={{ background: "#fff", overflowX: "hidden" }}
+      style={{ background: "var(--bg-main)", overflowX: "hidden" }}
     >
       <style>
         {`
@@ -70,7 +70,7 @@ const Inverter = () => {
           <button
             style={{
               background: "#ff6600",
-              color: "#fff",
+              color: "var(--bg-main)",
               border: "none",
               padding: "10px 20px",
               borderRadius: "5px",
@@ -84,7 +84,7 @@ const Inverter = () => {
           <button
             style={{
               background: "#6c757d",
-              color: "#fff",
+              color: "var(--bg-main)",
               border: "none",
               padding: "10px 20px",
               borderRadius: "5px",
@@ -97,7 +97,7 @@ const Inverter = () => {
           <button
             style={{
               background: "#6c757d",
-              color: "#fff",
+              color: "var(--bg-main)",
               border: "none",
               padding: "10px 20px",
               borderRadius: "5px",
@@ -121,7 +121,7 @@ const Inverter = () => {
         >
           <div
             style={{
-              background: "#9cf0c4",
+              background: "var(--secondary)",
               borderRadius: "40px",
               padding: "60px 80px",
               width: "100%",
@@ -149,7 +149,7 @@ const Inverter = () => {
                 <br />
                 Inverter
               </h2>
-              <p style={{ fontSize: "1.2rem", color: "#333", fontWeight: 500 }}>
+              <p style={{ fontSize: "1.2rem", color: "var(--text-main)", fontWeight: 500 }}>
                 Uninterrupted Power Supply
               </p>
             </div>
@@ -177,7 +177,7 @@ const Inverter = () => {
           style={{
             maxWidth: "800px",
             margin: "60px auto 0",
-            color: "#555",
+            color: "var(--text-muted)",
             lineHeight: 1.8,
             fontSize: "0.95rem",
             textAlign: "left",
@@ -248,7 +248,7 @@ const Inverter = () => {
                 fontSize: "1.4rem",
                 fontWeight: 600,
                 marginBottom: "15px",
-                color: "#222",
+                color: "var(--text-main)",
                 lineHeight: 1.3,
               }}
             >
@@ -256,7 +256,7 @@ const Inverter = () => {
               <br />
               Wave
             </h3>
-            <p style={{ color: "#555", fontSize: "0.95rem", lineHeight: 1.6 }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.6 }}>
               Provides grid-quality power that is safe for sensitive electronics
               like laptops, TVs, and smart appliances.
             </p>
@@ -275,7 +275,7 @@ const Inverter = () => {
                 fontSize: "1.4rem",
                 fontWeight: 600,
                 marginBottom: "15px",
-                color: "#222",
+                color: "var(--text-main)",
                 lineHeight: 1.3,
               }}
             >
@@ -283,7 +283,7 @@ const Inverter = () => {
               <br />
               Technology
             </h3>
-            <p style={{ color: "#555", fontSize: "0.95rem", lineHeight: 1.6 }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.6 }}>
               Intelligent charging algorithms charge the connected batteries
               faster while preserving their lifespan.
             </p>
@@ -302,7 +302,7 @@ const Inverter = () => {
                 fontSize: "1.4rem",
                 fontWeight: 600,
                 marginBottom: "15px",
-                color: "#222",
+                color: "var(--text-main)",
                 lineHeight: 1.3,
               }}
             >
@@ -310,7 +310,7 @@ const Inverter = () => {
               <br />
               Mode
             </h3>
-            <p style={{ color: "#555", fontSize: "0.95rem", lineHeight: 1.6 }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.6 }}>
               Switchover times of less than 10ms ensure that computers and
               servers don't reboot during power cuts.
             </p>
@@ -329,7 +329,7 @@ const Inverter = () => {
                 fontSize: "1.4rem",
                 fontWeight: 600,
                 marginBottom: "15px",
-                color: "#222",
+                color: "var(--text-main)",
                 lineHeight: 1.3,
               }}
             >
@@ -337,7 +337,7 @@ const Inverter = () => {
               <br />
               Display
             </h3>
-            <p style={{ color: "#555", fontSize: "0.95rem", lineHeight: 1.6 }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.6 }}>
               User-friendly interactive LCD shows battery status, load
               percentage, and charging information at a glance.
             </p>
@@ -367,7 +367,7 @@ const Inverter = () => {
         >
           <h4
             style={{
-              color: "#f5f5f5",
+              color: "transparent",
               fontSize: "11vw",
               fontWeight: 900,
               whiteSpace: "nowrap",
@@ -410,12 +410,12 @@ const Inverter = () => {
           <div
             style={{
               display: "inline-block",
-              background: "#9cf0c4",
+              background: "var(--secondary)",
               padding: "15px 50px",
               borderRadius: "40px",
               fontSize: "1.8rem",
               fontWeight: 800,
-              color: "#111",
+              color: "var(--text-main)",
               marginBottom: "100px",
               boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
             }}
@@ -465,7 +465,7 @@ const Inverter = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",
@@ -490,7 +490,7 @@ const Inverter = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",
@@ -530,7 +530,7 @@ const Inverter = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",
@@ -555,7 +555,7 @@ const Inverter = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",

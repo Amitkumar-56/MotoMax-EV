@@ -3,345 +3,81 @@ import "../index.css";
 
 const Footer = () => {
   return (
-    <footer
-      style={{
-        background: "#0a0a0a",
-        color: "#fff",
-        paddingTop: "4rem",
-        overflow: "hidden",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "0 5%",
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "40px",
-          justifyContent: "space-between",
-          borderBottom: "1px solid #222",
-          paddingBottom: "3rem",
-        }}
-      >
+    <footer className="footer-container">
+      <div className="footer-content">
         {/* Column 1: Info */}
-        <div style={{ flex: "1 1 250px" }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "20px",
-            }}
-          >
+        <div className="footer-col" style={{ flex: "1 1 280px" }}>
+          <div style={{ display: "flex", alignItems: "center", marginBottom: "20px" }}>
             <img
               src="/logo.png"
               alt="MotoMax EV"
-              style={{ height: "40px" }}
+              style={{ height: "45px" }}
               onError={(e) => {
                 e.target.style.display = "none";
                 e.target.nextSibling.style.display = "block";
               }}
             />
-            <h2
-              style={{
-                display: "none",
-                color: "#fff",
-                margin: 0,
-                fontFamily: "Arial",
-                fontWeight: "900",
-              }}
-            >
+            <h2 className="footer-logo-text" style={{ display: "none" }}>
               MotoMax EV
             </h2>
           </div>
-          <p
-            style={{
-              fontSize: "0.85rem",
-              color: "#aaa",
-              marginBottom: "15px",
-              lineHeight: "1.6",
-            }}
-          >
-            A-53, Naraina Industrial Area Phase 1,
-            <br />
-            Naraina, Delhi-110028 (India)
-          </p>
-          <p
-            style={{ fontSize: "0.85rem", color: "#aaa", marginBottom: "10px" }}
-          >
-            📞 +91-11-48224444
-          </p>
-          <p
-            style={{ fontSize: "0.85rem", color: "#aaa", marginBottom: "10px" }}
-          >
-            ✉️ info@motomaxev.com
-          </p>
-          <p style={{ fontSize: "0.85rem", color: "#aaa" }}>
-            🌐 www.motomaxev.com
-          </p>
+          <div className="footer-contact-info">
+            <p>
+              📍 A-53, Naraina Industrial Area Phase 1,<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;Naraina, Delhi-110028 (India)
+            </p>
+            <p>📞 +91-11-48224444</p>
+            <p>✉️ info@motomaxev.com</p>
+            <p>🌐 www.motomaxev.com</p>
+          </div>
         </div>
 
         {/* Column 2: Useful Links */}
-        <div style={{ flex: "1 1 150px" }}>
-          <h4
-            style={{
-              fontSize: "1rem",
-              marginBottom: "20px",
-              color: "#fff",
-              fontWeight: "600",
-            }}
-          >
-            Useful Links
-          </h4>
-          <ul
-            style={{
-              listStyle: "none",
-              padding: 0,
-              display: "flex",
-              flexDirection: "column",
-              gap: "15px",
-            }}
-          >
-            <li>
-              <Link
-                to="/"
-                style={{
-                  color: "#aaa",
-                  textDecoration: "none",
-                  fontSize: "0.85rem",
-                  fontWeight: "500",
-                }}
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/about-us"
-                style={{
-                  color: "#aaa",
-                  textDecoration: "none",
-                  fontSize: "0.85rem",
-                  fontWeight: "500",
-                }}
-              >
-                About Us
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/contact"
-                style={{
-                  color: "#aaa",
-                  textDecoration: "none",
-                  fontSize: "0.85rem",
-                  fontWeight: "500",
-                }}
-              >
-                Contact
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/team"
-                style={{
-                  color: "#aaa",
-                  textDecoration: "none",
-                  fontSize: "0.85rem",
-                  fontWeight: "500",
-                }}
-              >
-                Management
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/news-events"
-                style={{
-                  color: "#aaa",
-                  textDecoration: "none",
-                  fontSize: "0.85rem",
-                  fontWeight: "500",
-                }}
-              >
-                News & Events
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/blog"
-                style={{
-                  color: "#aaa",
-                  textDecoration: "none",
-                  fontSize: "0.85rem",
-                  fontWeight: "500",
-                }}
-              >
-                Blog
-              </Link>
-            </li>
+        <div className="footer-col" style={{ flex: "1 1 150px" }}>
+          <h4>Useful Links</h4>
+          <ul className="footer-links">
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/about-us">About Us</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/team">Management</Link></li>
+            <li><Link to="/news-events">News & Events</Link></li>
+            <li><Link to="/blog">Blog</Link></li>
           </ul>
         </div>
 
         {/* Column 3: Our Products */}
-        <div style={{ flex: "1 1 150px" }}>
-          <h4
-            style={{
-              fontSize: "1rem",
-              marginBottom: "20px",
-              color: "#fff",
-              fontWeight: "600",
-            }}
-          >
-            Our Products
-          </h4>
-          <ul
-            style={{
-              listStyle: "none",
-              padding: 0,
-              display: "flex",
-              flexDirection: "column",
-              gap: "15px",
-            }}
-          >
-            <li>
-              <Link
-                to="/products"
-                style={{
-                  color: "#aaa",
-                  textDecoration: "none",
-                  fontSize: "0.85rem",
-                  fontWeight: "500",
-                }}
-              >
-                2 Wheeler
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/products"
-                style={{
-                  color: "#aaa",
-                  textDecoration: "none",
-                  fontSize: "0.85rem",
-                  fontWeight: "500",
-                }}
-              >
-                3 Wheeler
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/products"
-                style={{
-                  color: "#aaa",
-                  textDecoration: "none",
-                  fontSize: "0.85rem",
-                  fontWeight: "500",
-                }}
-              >
-                Golf Cart
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/products"
-                style={{
-                  color: "#aaa",
-                  textDecoration: "none",
-                  fontSize: "0.85rem",
-                  fontWeight: "500",
-                }}
-              >
-                Solar Street Light
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/products"
-                style={{
-                  color: "#aaa",
-                  textDecoration: "none",
-                  fontSize: "0.85rem",
-                  fontWeight: "500",
-                }}
-              >
-                Solid State
-              </Link>
-            </li>
+        <div className="footer-col" style={{ flex: "1 1 150px" }}>
+          <h4>Our Products</h4>
+          <ul className="footer-links">
+            <li><Link to="/products">2 Wheeler</Link></li>
+            <li><Link to="/products">3 Wheeler</Link></li>
+            <li><Link to="/products">Golf Cart</Link></li>
+            <li><Link to="/products">Solar Street Light</Link></li>
+            <li><Link to="/products">Solid State</Link></li>
           </ul>
         </div>
 
         {/* Column 4: CTA & Socials */}
-        <div style={{ flex: "1 1 200px" }}>
-          <h3
-            style={{
-              fontSize: "1.2rem",
-              fontWeight: 600,
-              marginBottom: "20px",
-              lineHeight: "1.5",
-              color: "#eee",
-            }}
-          >
-            Let's energize our spaces with clean power
-          </h3>
-          <Link to="/contact">
-            <button
-              style={{
-                background: "transparent",
-                border: "1px solid #fff",
-                color: "#fff",
-                padding: "10px 25px",
-                borderRadius: "30px",
-                cursor: "pointer",
-                marginBottom: "25px",
-                fontSize: "0.75rem",
-                fontWeight: "bold",
-                letterSpacing: "1px",
-              }}
-            >
-              ENQUIRE NOW
-            </button>
-          </Link>
-          <div style={{ display: "flex", gap: "15px" }}>
-            <div
-              style={{
-                width: "35px",
-                height: "35px",
-                borderRadius: "50%",
-                background: "#fff",
-                color: "#000",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                fontWeight: "bold",
-                cursor: "pointer",
-                fontSize: "1.2rem",
-              }}
-            >
-              f
-            </div>
-            <div
-              style={{
-                width: "35px",
-                height: "35px",
-                borderRadius: "50%",
-                background: "#fff",
-                color: "#000",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                fontWeight: "bold",
-                cursor: "pointer",
-                fontSize: "1rem",
-              }}
-            >
-              in
-            </div>
+        <div className="footer-col" style={{ flex: "1 1 280px" }}>
+          <div className="footer-cta">
+            <h3>Let's energize our spaces with clean power</h3>
+            <Link to="/contact">
+              <button className="btn-primary" style={{ padding: "12px 30px", fontSize: "0.9rem" }}>
+                ENQUIRE NOW
+              </button>
+            </Link>
+          </div>
+          <div className="social-icons-wrapper">
+            <a href="#" className="social-icon">f</a>
+            <a href="#" className="social-icon">in</a>
+            <a href="#" className="social-icon">𝕏</a>
           </div>
         </div>
       </div>
-
+      
+      <div className="footer-bottom">
+        <p>&copy; {new Date().getFullYear()} MotoMax EV. All rights reserved.</p>
+      </div>
     </footer>
   );
 };

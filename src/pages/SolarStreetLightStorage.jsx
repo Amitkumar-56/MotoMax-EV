@@ -5,7 +5,7 @@ const SolarStreetLightStorage = () => {
     <div
       className="responsive-page"
       style={{
-        background: "#fff",
+        background: "var(--bg-main)",
         overflowX: "hidden",
         paddingBottom: "100px",
       }}
@@ -68,7 +68,7 @@ const SolarStreetLightStorage = () => {
           <div style={{ position: "relative", width: "55%" }}>
             <div
               style={{
-                background: "#9cf0c4",
+                background: "var(--secondary)",
                 padding: "60px",
                 borderRadius: "20px",
                 transform: "skew(-5deg)",
@@ -80,7 +80,7 @@ const SolarStreetLightStorage = () => {
                   style={{
                     fontSize: "3rem",
                     fontWeight: 900,
-                    color: "#222",
+                    color: "var(--text-main)",
                     lineHeight: "1.2",
                     marginBottom: "20px",
                   }}
@@ -93,7 +93,7 @@ const SolarStreetLightStorage = () => {
                   Robots Battery
                 </h1>
                 <p
-                  style={{ fontSize: "1.2rem", color: "#333", fontWeight: 600 }}
+                  style={{ fontSize: "1.2rem", color: "var(--text-main)", fontWeight: 600 }}
                 >
                   Lithium iron Phosphate (LiFePO4) Battery
                 </p>
@@ -144,7 +144,7 @@ const SolarStreetLightStorage = () => {
       <section
         style={{
           padding: "60px 10%",
-          background: "#fff",
+          background: "var(--bg-main)",
           textAlign: "center",
           position: "relative",
         }}
@@ -211,7 +211,7 @@ const SolarStreetLightStorage = () => {
           {/* Card 1 */}
           <div
             style={{
-              background: "#f9f9fc",
+              background: "transparent",
               padding: "50px 30px",
               borderRadius: "10px",
               textAlign: "center",
@@ -228,14 +228,14 @@ const SolarStreetLightStorage = () => {
                 height="60"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#222"
+                stroke="var(--text-main)"
                 strokeWidth="1.5"
               >
                 <path d="M12 2a10 10 0 1 0 10 10H12V2z"></path>
                 <path d="M12 2v10l8.66 5"></path>
               </svg>
             </div>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, color: "#222" }}>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, color: "var(--text-main)" }}>
               Environmental
               <br />
               Friendly
@@ -245,7 +245,7 @@ const SolarStreetLightStorage = () => {
           {/* Card 2 */}
           <div
             style={{
-              background: "#f9f9fc",
+              background: "transparent",
               padding: "50px 30px",
               borderRadius: "10px",
               textAlign: "center",
@@ -262,13 +262,13 @@ const SolarStreetLightStorage = () => {
                 height="60"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#222"
+                stroke="var(--text-main)"
                 strokeWidth="1.5"
               >
                 <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
               </svg>
             </div>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, color: "#222" }}>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, color: "var(--text-main)" }}>
               Power Saving
             </h3>
           </div>
@@ -276,7 +276,7 @@ const SolarStreetLightStorage = () => {
           {/* Card 3 */}
           <div
             style={{
-              background: "#f9f9fc",
+              background: "transparent",
               padding: "50px 30px",
               borderRadius: "10px",
               textAlign: "center",
@@ -293,14 +293,14 @@ const SolarStreetLightStorage = () => {
                 height="60"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#222"
+                stroke="var(--text-main)"
                 strokeWidth="1.5"
               >
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
               </svg>
             </div>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, color: "#222" }}>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, color: "var(--text-main)" }}>
               No Maintenance
             </h3>
           </div>
@@ -308,7 +308,7 @@ const SolarStreetLightStorage = () => {
           {/* Card 4 */}
           <div
             style={{
-              background: "#f9f9fc",
+              background: "transparent",
               padding: "50px 30px",
               borderRadius: "10px",
               textAlign: "center",
@@ -325,7 +325,7 @@ const SolarStreetLightStorage = () => {
                 height="60"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#222"
+                stroke="var(--text-main)"
                 strokeWidth="1.5"
               >
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
@@ -335,7 +335,7 @@ const SolarStreetLightStorage = () => {
                 <path d="M13 13h4v4h-4z"></path>
               </svg>
             </div>
-            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, color: "#222" }}>
+            <h3 style={{ fontSize: "1.3rem", fontWeight: 700, color: "var(--text-main)" }}>
               Advanced BMS
               <br />
               Protection
@@ -423,7 +423,7 @@ const SolarStreetLightStorage = () => {
                 Capacity
               </h4>
               <p
-                style={{ color: "#555", fontWeight: 700, marginBottom: "5px" }}
+                style={{ color: "var(--text-muted)", fontWeight: 700, marginBottom: "5px" }}
               >
                 Voltage
               </p>
@@ -522,7 +522,7 @@ const SolarStreetLightStorage = () => {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#999",
+                  background: "var(--text-muted)",
                 }}
               ></div>
             </div>
@@ -539,7 +539,7 @@ const SolarStreetLightStorage = () => {
                 Watt Hours
               </h4>
               <p
-                style={{ color: "#555", fontWeight: 700, marginBottom: "5px" }}
+                style={{ color: "var(--text-muted)", fontWeight: 700, marginBottom: "5px" }}
               >
                 Continuous Charge Current (Max)
               </p>
@@ -637,7 +637,7 @@ const SolarStreetLightStorage = () => {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#999",
+                  background: "var(--text-muted)",
                 }}
               ></div>
             </div>
@@ -656,7 +656,7 @@ const SolarStreetLightStorage = () => {
                 current (max)
               </h4>
               <p
-                style={{ color: "#555", fontWeight: 700, marginBottom: "5px" }}
+                style={{ color: "var(--text-muted)", fontWeight: 700, marginBottom: "5px" }}
               >
                 Cell type
               </p>
@@ -758,7 +758,7 @@ const SolarStreetLightStorage = () => {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#999",
+                  background: "var(--text-muted)",
                 }}
               ></div>
             </div>
@@ -777,7 +777,7 @@ const SolarStreetLightStorage = () => {
             <div
               style={{
                 width: "1px",
-                background: "#ccc",
+                background: "var(--border-light)",
                 height: "300px",
                 marginBottom: "20px",
               }}
@@ -818,7 +818,7 @@ const SolarStreetLightStorage = () => {
                 charge voltage
               </h4>
               <p
-                style={{ color: "#555", fontWeight: 700, marginBottom: "5px" }}
+                style={{ color: "var(--text-muted)", fontWeight: 700, marginBottom: "5px" }}
               >
                 Float voltage
               </p>
@@ -915,7 +915,7 @@ const SolarStreetLightStorage = () => {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#999",
+                  background: "var(--text-muted)",
                 }}
               ></div>
             </div>
@@ -934,7 +934,7 @@ const SolarStreetLightStorage = () => {
                 Temperature
               </h4>
               <p
-                style={{ color: "#555", fontWeight: 700, marginBottom: "5px" }}
+                style={{ color: "var(--text-muted)", fontWeight: 700, marginBottom: "5px" }}
               >
                 E13 Marking
               </p>
@@ -1028,7 +1028,7 @@ const SolarStreetLightStorage = () => {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#999",
+                  background: "var(--text-muted)",
                 }}
               ></div>
             </div>
@@ -1045,7 +1045,7 @@ const SolarStreetLightStorage = () => {
                 Dimensions
               </h4>
               <p
-                style={{ color: "#555", fontWeight: 700, marginBottom: "5px" }}
+                style={{ color: "var(--text-muted)", fontWeight: 700, marginBottom: "5px" }}
               >
                 E13 Marking
               </p>
@@ -1143,7 +1143,7 @@ const SolarStreetLightStorage = () => {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#999",
+                  background: "var(--text-muted)",
                 }}
               ></div>
             </div>

@@ -11,7 +11,7 @@ import SolidStateBatteries from "./pages/SolidStateBatteries";
 import EVCharger from "./pages/EVCharger";
 import Inverter from "./pages/Inverter";
 import Team from "./pages/Team";
-import InvestorRelations from "./pages/InvestorRelations";
+
 import NewsEvents from "./pages/NewsEvents";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
@@ -44,7 +44,7 @@ function AppContent() {
           <Route path="/products/charger" element={<EVCharger />} />
           <Route path="/products/inverter" element={<Inverter />} />
           <Route path="/team" element={<Team />} />
-          <Route path="/investor-relations" element={<InvestorRelations />} />
+
           <Route path="/news-events" element={<NewsEvents />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact-us" element={<Contact />} />

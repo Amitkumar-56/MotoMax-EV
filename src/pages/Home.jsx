@@ -218,7 +218,7 @@ const Home = () => {
             <p
               style={{
                 fontSize: "1.4rem",
-                color: "#555",
+                color: "var(--text-muted)",
                 lineHeight: "1.6",
                 marginBottom: "30px",
               }}
@@ -232,7 +232,7 @@ const Home = () => {
                 background: "var(--secondary)",
                 padding: "2rem",
                 borderRadius: "30px 0 30px 30px",
-                color: "#111",
+                color: "var(--text-main)",
                 lineHeight: "1.6",
               }}
             >
@@ -298,7 +298,7 @@ const Home = () => {
               top: "40%",
               transform: "translateY(-50%)",
               zIndex: 10,
-              background: "#fff",
+              background: "var(--bg-main)",
               border: "1px solid #ccc",
               borderRadius: "50%",
               width: "40px",
@@ -319,7 +319,7 @@ const Home = () => {
               top: "40%",
               transform: "translateY(-50%)",
               zIndex: 10,
-              background: "#fff",
+              background: "var(--bg-main)",
               border: "1px solid #ccc",
               borderRadius: "50%",
               width: "40px",

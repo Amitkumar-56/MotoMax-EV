@@ -19,7 +19,7 @@ const Contact = () => {
 
   const btnStyle = {
     backgroundColor: "#0047ff",
-    color: "#fff",
+    color: "var(--bg-main)",
     border: "none",
     padding: "12px 30px",
     borderRadius: "25px",
@@ -34,7 +34,7 @@ const Contact = () => {
   return (
     <div
       className="responsive-page"
-      style={{ backgroundColor: "#fff", paddingBottom: "0" }}
+      style={{ backgroundColor: "var(--bg-main)", paddingBottom: "0" }}
     >
       <style>
         {`
@@ -69,7 +69,7 @@ const Contact = () => {
             style={{
               fontSize: "3rem",
               fontWeight: 900,
-              color: "#111",
+              color: "var(--text-main)",
               lineHeight: "1.1",
               marginBottom: "40px",
             }}
@@ -83,7 +83,7 @@ const Contact = () => {
             style={{
               fontSize: "1.2rem",
               fontWeight: 600,
-              color: "#111",
+              color: "var(--text-main)",
               marginBottom: "15px",
             }}
           >
@@ -98,7 +98,7 @@ const Contact = () => {
               marginBottom: "30px",
             }}
           >
-            <strong style={{ color: "#111" }}>MotoMax EV Limited</strong>
+            <strong style={{ color: "var(--text-main)" }}>MotoMax EV Limited</strong>
             <br />
             (Formerly known as MotoMax EV Private
             <br />
@@ -119,9 +119,9 @@ const Contact = () => {
             <div
               style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}
             >
-              <span style={{ fontWeight: "bold", color: "#111" }}>📍</span>
+              <span style={{ fontWeight: "bold", color: "var(--text-main)" }}>📍</span>
               <div>
-                <strong style={{ color: "#111" }}>Registered Office:</strong>
+                <strong style={{ color: "var(--text-main)" }}>Registered Office:</strong>
                 <br />
                 A-53, Naraina Industrial Area
                 <br />
@@ -129,11 +129,11 @@ const Contact = () => {
               </div>
             </div>
             <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-              <span style={{ fontWeight: "bold", color: "#111" }}>📞</span>
+              <span style={{ fontWeight: "bold", color: "var(--text-main)" }}>📞</span>
               <span>91-11-48022444</span>
             </div>
             <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-              <span style={{ fontWeight: "bold", color: "#111" }}>✉️</span>
+              <span style={{ fontWeight: "bold", color: "var(--text-main)" }}>✉️</span>
               <span>info@motomaxev.com</span>
             </div>
           </div>
@@ -289,7 +289,7 @@ const Contact = () => {
             style={{
               fontSize: "3rem",
               fontWeight: 900,
-              color: "#111",
+              color: "var(--text-main)",
               lineHeight: "1.2",
               position: "relative",
               zIndex: 1,

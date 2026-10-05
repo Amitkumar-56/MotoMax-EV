@@ -11,7 +11,7 @@ const LithiumInverterBattery = () => {
     <div
       className="responsive-page"
       style={{
-        background: "#fff",
+        background: "var(--bg-main)",
         overflowX: "hidden",
         paddingBottom: "100px",
       }}
@@ -46,7 +46,7 @@ const LithiumInverterBattery = () => {
           minHeight: "500px",
           position: "relative",
           overflow: "hidden",
-          background: "#f5f5f5",
+          background: "transparent",
         }}
       >
         <img
@@ -86,14 +86,14 @@ const LithiumInverterBattery = () => {
               bottom: "-40px",
               left: "50%",
               transform: "translateX(-50%)",
-              background: "#fff",
+              background: "var(--bg-main)",
               padding: "10px 20px",
               borderRadius: "8px",
               boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
             }}
           >
             <span
-              style={{ fontWeight: 800, color: "#444", fontSize: "1.2rem" }}
+              style={{ fontWeight: 800, color: "var(--text-muted)", fontSize: "1.2rem" }}
             >
               Powercube <span style={{ color: "#ff6b35" }}>1.4+</span>
             </span>
@@ -126,14 +126,14 @@ const LithiumInverterBattery = () => {
               bottom: "-40px",
               left: "50%",
               transform: "translateX(-50%)",
-              background: "#fff",
+              background: "var(--bg-main)",
               padding: "10px 20px",
               borderRadius: "8px",
               boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
             }}
           >
             <span
-              style={{ fontWeight: 800, color: "#444", fontSize: "1.2rem" }}
+              style={{ fontWeight: 800, color: "var(--text-muted)", fontSize: "1.2rem" }}
             >
               Powercube <span style={{ color: "#ff6b35" }}>2.7+</span>
             </span>
@@ -147,7 +147,7 @@ const LithiumInverterBattery = () => {
           <div style={{ position: "relative", maxWidth: "800px" }}>
             <div
               style={{
-                background: "#9cf0c4",
+                background: "var(--secondary)",
                 padding: "60px 80px",
                 borderRadius: "20px",
                 transform: "skew(-5deg)",
@@ -159,7 +159,7 @@ const LithiumInverterBattery = () => {
                   style={{
                     fontSize: "3.5rem",
                     fontWeight: 900,
-                    color: "#222",
+                    color: "var(--text-main)",
                     lineHeight: "1.1",
                     marginBottom: "20px",
                   }}
@@ -171,7 +171,7 @@ const LithiumInverterBattery = () => {
                   for Inverter
                 </h1>
                 <p
-                  style={{ fontSize: "1.2rem", color: "#333", fontWeight: 600 }}
+                  style={{ fontSize: "1.2rem", color: "var(--text-main)", fontWeight: 600 }}
                 >
                   Powercube 1.4+ | Powercube 2.7+
                 </p>
@@ -237,7 +237,7 @@ const LithiumInverterBattery = () => {
       </section>
 
       {/* 3. Best Inverter Battery for Home */}
-      <section style={{ padding: "40px 10%", background: "#fff" }}>
+      <section style={{ padding: "40px 10%", background: "var(--bg-main)" }}>
         <h2
           style={{
             fontSize: "3rem",
@@ -248,7 +248,7 @@ const LithiumInverterBattery = () => {
         >
           Best Inverter Battery for Home
         </h2>
-        <p style={{ fontSize: "1.1rem", color: "#555", lineHeight: "1.8" }}>
+        <p style={{ fontSize: "1.1rem", color: "var(--text-muted)", lineHeight: "1.8" }}>
           Choosing the best inverter battery for home depends on factors such as
           backup time, charging speed and battery life. Lithium batteries are
           becoming the preferred option because they provide higher energy
@@ -302,13 +302,13 @@ const LithiumInverterBattery = () => {
 
         <div
           style={{
-            background: "#9cf0c4",
+            background: "var(--secondary)",
             display: "inline-block",
             padding: "15px 50px",
             borderRadius: "15px",
             fontWeight: 800,
             fontSize: "1.8rem",
-            color: "#111",
+            color: "var(--text-main)",
             marginBottom: "80px",
             position: "relative",
             zIndex: 1,
@@ -341,13 +341,13 @@ const LithiumInverterBattery = () => {
           >
             <div style={{ position: "relative" }}>
               <h4
-                style={{ color: "#555", fontWeight: 700, fontSize: "0.9rem" }}
+                style={{ color: "var(--text-muted)", fontWeight: 700, fontSize: "0.9rem" }}
               >
                 Type
                 <br />
                 <span style={{ color: "#d38b6a" }}>TK12100</span>
               </h4>
-              <p style={{ color: "#999" }}>12.8V/105Ah</p>
+              <p style={{ color: "var(--text-muted)" }}>12.8V/105Ah</p>
               <div
                 style={{
                   position: "absolute",
@@ -365,19 +365,19 @@ const LithiumInverterBattery = () => {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#999",
+                  background: "var(--text-muted)",
                 }}
               ></div>
             </div>
             <div style={{ position: "relative" }}>
               <h4
-                style={{ color: "#555", fontWeight: 700, fontSize: "0.9rem" }}
+                style={{ color: "var(--text-muted)", fontWeight: 700, fontSize: "0.9rem" }}
               >
                 Rated Voltage
                 <br />
                 <span style={{ color: "#d38b6a" }}>TK12100</span>
               </h4>
-              <p style={{ color: "#999" }}>12.8V</p>
+              <p style={{ color: "var(--text-muted)" }}>12.8V</p>
               <div
                 style={{
                   position: "absolute",
@@ -395,13 +395,13 @@ const LithiumInverterBattery = () => {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#999",
+                  background: "var(--text-muted)",
                 }}
               ></div>
             </div>
             <div style={{ position: "relative" }}>
               <h4
-                style={{ color: "#555", fontWeight: 700, fontSize: "0.9rem" }}
+                style={{ color: "var(--text-muted)", fontWeight: 700, fontSize: "0.9rem" }}
               >
                 Rated Capacity
                 <br />
@@ -409,7 +409,7 @@ const LithiumInverterBattery = () => {
                 <br />
                 <span style={{ color: "#d38b6a" }}>TK12100</span>
               </h4>
-              <p style={{ color: "#999" }}>105Ah</p>
+              <p style={{ color: "var(--text-muted)" }}>105Ah</p>
               <div
                 style={{
                   position: "absolute",
@@ -427,7 +427,7 @@ const LithiumInverterBattery = () => {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#999",
+                  background: "var(--text-muted)",
                 }}
               ></div>
             </div>
@@ -468,17 +468,17 @@ const LithiumInverterBattery = () => {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#999",
+                  background: "var(--text-muted)",
                 }}
               ></div>
               <h4
-                style={{ color: "#555", fontWeight: 700, fontSize: "0.9rem" }}
+                style={{ color: "var(--text-muted)", fontWeight: 700, fontSize: "0.9rem" }}
               >
                 Type
                 <br />
                 <span style={{ color: "#d38b6a" }}>TK25100</span>
               </h4>
-              <p style={{ color: "#999" }}>25.6V/105Ah</p>
+              <p style={{ color: "var(--text-muted)" }}>25.6V/105Ah</p>
             </div>
             <div style={{ position: "relative", paddingLeft: "60px" }}>
               <div
@@ -496,17 +496,17 @@ const LithiumInverterBattery = () => {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#999",
+                  background: "var(--text-muted)",
                 }}
               ></div>
               <h4
-                style={{ color: "#555", fontWeight: 700, fontSize: "0.9rem" }}
+                style={{ color: "var(--text-muted)", fontWeight: 700, fontSize: "0.9rem" }}
               >
                 Rated Voltage
                 <br />
                 <span style={{ color: "#d38b6a" }}>TK25100</span>
               </h4>
-              <p style={{ color: "#999" }}>25.6V</p>
+              <p style={{ color: "var(--text-muted)" }}>25.6V</p>
             </div>
             <div style={{ position: "relative", paddingLeft: "60px" }}>
               <div
@@ -524,11 +524,11 @@ const LithiumInverterBattery = () => {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#999",
+                  background: "var(--text-muted)",
                 }}
               ></div>
               <h4
-                style={{ color: "#555", fontWeight: 700, fontSize: "0.9rem" }}
+                style={{ color: "var(--text-muted)", fontWeight: 700, fontSize: "0.9rem" }}
               >
                 Rated Capacity
                 <br />
@@ -536,7 +536,7 @@ const LithiumInverterBattery = () => {
                 <br />
                 <span style={{ color: "#d38b6a" }}>TK25100</span>
               </h4>
-              <p style={{ color: "#999" }}>105Ah</p>
+              <p style={{ color: "var(--text-muted)" }}>105Ah</p>
             </div>
           </div>
         </div>
@@ -546,7 +546,7 @@ const LithiumInverterBattery = () => {
       <section
         style={{
           padding: "80px 10%",
-          background: "#fff",
+          background: "var(--bg-main)",
           textAlign: "center",
           position: "relative",
         }}
@@ -632,7 +632,7 @@ const LithiumInverterBattery = () => {
                 height="50"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#333"
+                stroke="var(--text-main)"
                 strokeWidth="1.5"
               >
                 <path d="M12 2L2 12h3v8h14v-8h3L12 2z"></path>
@@ -645,7 +645,7 @@ const LithiumInverterBattery = () => {
               style={{
                 fontSize: "1.3rem",
                 fontWeight: 700,
-                color: "#222",
+                color: "var(--text-main)",
                 marginBottom: "15px",
               }}
             >
@@ -677,7 +677,7 @@ const LithiumInverterBattery = () => {
                 height="50"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#333"
+                stroke="var(--text-main)"
                 strokeWidth="1.5"
               >
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
@@ -688,7 +688,7 @@ const LithiumInverterBattery = () => {
               style={{
                 fontSize: "1.3rem",
                 fontWeight: 700,
-                color: "#222",
+                color: "var(--text-main)",
                 marginBottom: "15px",
               }}
             >
@@ -720,7 +720,7 @@ const LithiumInverterBattery = () => {
                 height="50"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#333"
+                stroke="var(--text-main)"
                 strokeWidth="1.5"
               >
                 <rect x="2" y="7" width="20" height="10" rx="2" ry="2"></rect>
@@ -734,7 +734,7 @@ const LithiumInverterBattery = () => {
               style={{
                 fontSize: "1.3rem",
                 fontWeight: 700,
-                color: "#222",
+                color: "var(--text-main)",
                 marginBottom: "15px",
               }}
             >
@@ -765,7 +765,7 @@ const LithiumInverterBattery = () => {
                 height="50"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#333"
+                stroke="var(--text-main)"
                 strokeWidth="1.5"
               >
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
@@ -779,7 +779,7 @@ const LithiumInverterBattery = () => {
               style={{
                 fontSize: "1.3rem",
                 fontWeight: 700,
-                color: "#222",
+                color: "var(--text-main)",
                 marginBottom: "15px",
               }}
             >
@@ -798,7 +798,7 @@ const LithiumInverterBattery = () => {
 
       {/* 6. Mechanical Characteristics */}
       <section
-        style={{ padding: "80px 5%", textAlign: "center", background: "#fff" }}
+        style={{ padding: "80px 5%", textAlign: "center", background: "var(--bg-main)" }}
       >
         <div
           style={{ maxWidth: "900px", margin: "0 auto", position: "relative" }}
@@ -810,7 +810,7 @@ const LithiumInverterBattery = () => {
               top: "30px",
               bottom: "0",
               width: "1px",
-              background: "#ccc",
+              background: "var(--border-light)",
               transform: "translateX(-50%)",
               zIndex: 0,
             }}
@@ -827,7 +827,7 @@ const LithiumInverterBattery = () => {
                 borderRadius: "10px",
                 fontWeight: 800,
                 fontSize: "1.6rem",
-                color: "#111",
+                color: "var(--text-main)",
                 letterSpacing: "1px",
               }}
             >
@@ -857,7 +857,7 @@ const LithiumInverterBattery = () => {
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -890,14 +890,14 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -925,14 +925,14 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -960,14 +960,14 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -998,7 +998,7 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
@@ -1019,7 +1019,7 @@ const LithiumInverterBattery = () => {
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1052,14 +1052,14 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1087,14 +1087,14 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1122,14 +1122,14 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1160,7 +1160,7 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
@@ -1172,7 +1172,7 @@ const LithiumInverterBattery = () => {
 
       {/* 7. Electrical Characteristics */}
       <section
-        style={{ padding: "40px 5%", textAlign: "center", background: "#fff" }}
+        style={{ padding: "40px 5%", textAlign: "center", background: "var(--bg-main)" }}
       >
         <div
           style={{ maxWidth: "900px", margin: "0 auto", position: "relative" }}
@@ -1184,7 +1184,7 @@ const LithiumInverterBattery = () => {
               top: "30px",
               bottom: "0",
               width: "1px",
-              background: "#ccc",
+              background: "var(--border-light)",
               transform: "translateX(-50%)",
               zIndex: 0,
             }}
@@ -1201,7 +1201,7 @@ const LithiumInverterBattery = () => {
                 borderRadius: "10px",
                 fontWeight: 800,
                 fontSize: "1.6rem",
-                color: "#111",
+                color: "var(--text-main)",
                 letterSpacing: "1px",
               }}
             >
@@ -1231,7 +1231,7 @@ const LithiumInverterBattery = () => {
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1264,14 +1264,14 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1301,14 +1301,14 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1336,14 +1336,14 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1374,7 +1374,7 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
@@ -1395,7 +1395,7 @@ const LithiumInverterBattery = () => {
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1428,14 +1428,14 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1463,14 +1463,14 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1498,14 +1498,14 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1533,14 +1533,14 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1573,7 +1573,7 @@ const LithiumInverterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
@@ -1587,7 +1587,7 @@ const LithiumInverterBattery = () => {
       <section
         style={{
           padding: "80px 5%",
-          background: "#fff",
+          background: "var(--bg-main)",
           paddingBottom: "120px",
         }}
       >
@@ -1598,7 +1598,7 @@ const LithiumInverterBattery = () => {
             style={{
               fontSize: "2.5rem",
               fontWeight: 400,
-              color: "#222",
+              color: "var(--text-main)",
               marginBottom: "10px",
             }}
           >
@@ -1634,13 +1634,13 @@ const LithiumInverterBattery = () => {
                   gap: "30px",
                   alignItems: "center",
                   cursor: "pointer",
-                  background: openFaq === 1 ? "#f9f9f9" : "#fff",
+                  background: openFaq === 1 ? "#f9f9f9" : "var(--bg-main)",
                   transition: "all 0.2s",
                 }}
               >
                 <span
                   style={{
-                    color: "#444",
+                    color: "var(--text-muted)",
                     fontSize: "1.05rem",
                     fontWeight: openFaq === 1 ? "600" : "400",
                   }}
@@ -1699,13 +1699,13 @@ const LithiumInverterBattery = () => {
                   gap: "30px",
                   alignItems: "center",
                   cursor: "pointer",
-                  background: openFaq === 2 ? "#f9f9f9" : "#fff",
+                  background: openFaq === 2 ? "#f9f9f9" : "var(--bg-main)",
                   transition: "all 0.2s",
                 }}
               >
                 <span
                   style={{
-                    color: "#444",
+                    color: "var(--text-muted)",
                     fontSize: "1.05rem",
                     fontWeight: openFaq === 2 ? "600" : "400",
                   }}
@@ -1764,13 +1764,13 @@ const LithiumInverterBattery = () => {
                   gap: "30px",
                   alignItems: "center",
                   cursor: "pointer",
-                  background: openFaq === 3 ? "#f9f9f9" : "#fff",
+                  background: openFaq === 3 ? "#f9f9f9" : "var(--bg-main)",
                   transition: "all 0.2s",
                 }}
               >
                 <span
                   style={{
-                    color: "#444",
+                    color: "var(--text-muted)",
                     fontSize: "1.05rem",
                     fontWeight: openFaq === 3 ? "600" : "400",
                   }}
@@ -1829,13 +1829,13 @@ const LithiumInverterBattery = () => {
                   gap: "30px",
                   alignItems: "center",
                   cursor: "pointer",
-                  background: openFaq === 4 ? "#f9f9f9" : "#fff",
+                  background: openFaq === 4 ? "#f9f9f9" : "var(--bg-main)",
                   transition: "all 0.2s",
                 }}
               >
                 <span
                   style={{
-                    color: "#444",
+                    color: "var(--text-muted)",
                     fontSize: "1.05rem",
                     fontWeight: openFaq === 4 ? "600" : "400",
                   }}

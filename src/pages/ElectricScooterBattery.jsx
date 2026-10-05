@@ -10,7 +10,7 @@ const ElectricScooterBattery = () => {
   return (
     <div
       className="responsive-page"
-      style={{ background: "#fff", overflowX: "hidden" }}
+      style={{ background: "var(--bg-main)", overflowX: "hidden" }}
     >
       <style>
         {`
@@ -106,7 +106,7 @@ const ElectricScooterBattery = () => {
           <button
             style={{
               background: "#ff6600",
-              color: "#fff",
+              color: "var(--bg-main)",
               border: "none",
               padding: "10px 20px",
               borderRadius: "5px",
@@ -120,7 +120,7 @@ const ElectricScooterBattery = () => {
           <button
             style={{
               background: "#6c757d",
-              color: "#fff",
+              color: "var(--bg-main)",
               border: "none",
               padding: "10px 20px",
               borderRadius: "5px",
@@ -133,7 +133,7 @@ const ElectricScooterBattery = () => {
           <button
             style={{
               background: "#6c757d",
-              color: "#fff",
+              color: "var(--bg-main)",
               border: "none",
               padding: "10px 20px",
               borderRadius: "5px",
@@ -146,7 +146,7 @@ const ElectricScooterBattery = () => {
           <button
             style={{
               background: "#6c757d",
-              color: "#fff",
+              color: "var(--bg-main)",
               border: "none",
               padding: "10px 20px",
               borderRadius: "5px",
@@ -170,7 +170,7 @@ const ElectricScooterBattery = () => {
         >
           <div
             style={{
-              background: "#9cf0c4",
+              background: "var(--secondary)",
               borderRadius: "40px",
               padding: "60px 80px",
               width: "100%",
@@ -198,7 +198,7 @@ const ElectricScooterBattery = () => {
                 <br />
                 Lithium Battery
               </h2>
-              <p style={{ fontSize: "1.2rem", color: "#333", fontWeight: 500 }}>
+              <p style={{ fontSize: "1.2rem", color: "var(--text-main)", fontWeight: 500 }}>
                 51V 45Ah (2.3kWh)
               </p>
             </div>
@@ -226,7 +226,7 @@ const ElectricScooterBattery = () => {
           style={{
             maxWidth: "800px",
             margin: "60px auto 0",
-            color: "#555",
+            color: "var(--text-muted)",
             lineHeight: 1.8,
             fontSize: "0.95rem",
             textAlign: "left",
@@ -305,7 +305,7 @@ const ElectricScooterBattery = () => {
               height="60"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#222"
+              stroke="var(--text-main)"
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -320,7 +320,7 @@ const ElectricScooterBattery = () => {
                 fontSize: "1.4rem",
                 fontWeight: 600,
                 marginBottom: "15px",
-                color: "#222",
+                color: "var(--text-main)",
                 lineHeight: 1.3,
               }}
             >
@@ -328,7 +328,7 @@ const ElectricScooterBattery = () => {
               <br />
               Over-discharge
             </h3>
-            <p style={{ color: "#555", fontSize: "0.95rem", lineHeight: 1.6 }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.6 }}>
               The smart battery management system protects the electric scooter
               battery from over-charging and deep discharge, improving battery
               safety and extending battery life.
@@ -349,7 +349,7 @@ const ElectricScooterBattery = () => {
               height="60"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#222"
+              stroke="var(--text-main)"
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -363,7 +363,7 @@ const ElectricScooterBattery = () => {
                 fontSize: "1.4rem",
                 fontWeight: 600,
                 marginBottom: "15px",
-                color: "#222",
+                color: "var(--text-main)",
                 lineHeight: 1.3,
               }}
             >
@@ -371,7 +371,7 @@ const ElectricScooterBattery = () => {
               <br />
               <br />
             </h3>
-            <p style={{ color: "#555", fontSize: "0.95rem", lineHeight: 1.6 }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.6 }}>
               The e scooter battery is designed with built-in protection to
               prevent damage caused by electrical faults, ensuring safe
               operation during daily use.
@@ -392,7 +392,7 @@ const ElectricScooterBattery = () => {
               height="60"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#222"
+              stroke="var(--text-main)"
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -405,7 +405,7 @@ const ElectricScooterBattery = () => {
                 fontSize: "1.4rem",
                 fontWeight: 600,
                 marginBottom: "15px",
-                color: "#222",
+                color: "var(--text-main)",
                 lineHeight: 1.3,
               }}
             >
@@ -413,7 +413,7 @@ const ElectricScooterBattery = () => {
               <br />
               Stability
             </h3>
-            <p style={{ color: "#555", fontSize: "0.95rem", lineHeight: 1.6 }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.6 }}>
               This e scooter lithium battery can operate efficiently across
               varying temperature conditions while maintaining stable
               performance.
@@ -434,7 +434,7 @@ const ElectricScooterBattery = () => {
               height="60"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#222"
+              stroke="var(--text-main)"
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -451,14 +451,14 @@ const ElectricScooterBattery = () => {
                 fontSize: "1.4rem",
                 fontWeight: 600,
                 marginBottom: "15px",
-                color: "#222",
+                color: "var(--text-main)",
                 lineHeight: 1.3,
               }}
             >
               Impact &<br />
               Vibration
             </h3>
-            <p style={{ color: "#555", fontSize: "0.95rem", lineHeight: 1.6 }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.6 }}>
               The 2 wheeler lithium battery is engineered to withstand vibration
               and shocks commonly experienced in electric scooters and rough
               road conditions.
@@ -485,7 +485,7 @@ const ElectricScooterBattery = () => {
           </h2>
           <p
             style={{
-              color: "#555",
+              color: "var(--text-muted)",
               lineHeight: 1.7,
               marginBottom: "60px",
               fontSize: "1rem",
@@ -520,7 +520,7 @@ const ElectricScooterBattery = () => {
             >
               <li
                 style={{
-                  color: "#444",
+                  color: "var(--text-muted)",
                   fontSize: "1.05rem",
                   position: "relative",
                   paddingLeft: "20px",
@@ -534,7 +534,7 @@ const ElectricScooterBattery = () => {
                     transform: "translateY(-50%)",
                     fontSize: "1.5rem",
                     lineHeight: 0,
-                    color: "#333",
+                    color: "var(--text-main)",
                   }}
                 >
                   •
@@ -543,7 +543,7 @@ const ElectricScooterBattery = () => {
               </li>
               <li
                 style={{
-                  color: "#444",
+                  color: "var(--text-muted)",
                   fontSize: "1.05rem",
                   position: "relative",
                   paddingLeft: "20px",
@@ -557,7 +557,7 @@ const ElectricScooterBattery = () => {
                     transform: "translateY(-50%)",
                     fontSize: "1.5rem",
                     lineHeight: 0,
-                    color: "#333",
+                    color: "var(--text-main)",
                   }}
                 >
                   •
@@ -566,7 +566,7 @@ const ElectricScooterBattery = () => {
               </li>
               <li
                 style={{
-                  color: "#444",
+                  color: "var(--text-muted)",
                   fontSize: "1.05rem",
                   position: "relative",
                   paddingLeft: "20px",
@@ -580,7 +580,7 @@ const ElectricScooterBattery = () => {
                     transform: "translateY(-50%)",
                     fontSize: "1.5rem",
                     lineHeight: 0,
-                    color: "#333",
+                    color: "var(--text-main)",
                   }}
                 >
                   •
@@ -589,7 +589,7 @@ const ElectricScooterBattery = () => {
               </li>
               <li
                 style={{
-                  color: "#444",
+                  color: "var(--text-muted)",
                   fontSize: "1.05rem",
                   position: "relative",
                   paddingLeft: "20px",
@@ -603,7 +603,7 @@ const ElectricScooterBattery = () => {
                     transform: "translateY(-50%)",
                     fontSize: "1.5rem",
                     lineHeight: 0,
-                    color: "#333",
+                    color: "var(--text-main)",
                   }}
                 >
                   •
@@ -612,7 +612,7 @@ const ElectricScooterBattery = () => {
               </li>
               <li
                 style={{
-                  color: "#444",
+                  color: "var(--text-muted)",
                   fontSize: "1.05rem",
                   position: "relative",
                   paddingLeft: "20px",
@@ -626,7 +626,7 @@ const ElectricScooterBattery = () => {
                     transform: "translateY(-50%)",
                     fontSize: "1.5rem",
                     lineHeight: 0,
-                    color: "#333",
+                    color: "var(--text-main)",
                   }}
                 >
                   •
@@ -649,7 +649,7 @@ const ElectricScooterBattery = () => {
             >
               <li
                 style={{
-                  color: "#444",
+                  color: "var(--text-muted)",
                   fontSize: "1.05rem",
                   position: "relative",
                   paddingRight: "20px",
@@ -664,7 +664,7 @@ const ElectricScooterBattery = () => {
                     transform: "translateY(-50%)",
                     fontSize: "1.5rem",
                     lineHeight: 0,
-                    color: "#333",
+                    color: "var(--text-main)",
                   }}
                 >
                   •
@@ -672,7 +672,7 @@ const ElectricScooterBattery = () => {
               </li>
               <li
                 style={{
-                  color: "#444",
+                  color: "var(--text-muted)",
                   fontSize: "1.05rem",
                   position: "relative",
                   paddingRight: "20px",
@@ -687,7 +687,7 @@ const ElectricScooterBattery = () => {
                     transform: "translateY(-50%)",
                     fontSize: "1.5rem",
                     lineHeight: 0,
-                    color: "#333",
+                    color: "var(--text-main)",
                   }}
                 >
                   •
@@ -695,7 +695,7 @@ const ElectricScooterBattery = () => {
               </li>
               <li
                 style={{
-                  color: "#444",
+                  color: "var(--text-muted)",
                   fontSize: "1.05rem",
                   position: "relative",
                   paddingRight: "20px",
@@ -710,7 +710,7 @@ const ElectricScooterBattery = () => {
                     transform: "translateY(-50%)",
                     fontSize: "1.5rem",
                     lineHeight: 0,
-                    color: "#333",
+                    color: "var(--text-main)",
                   }}
                 >
                   •
@@ -718,7 +718,7 @@ const ElectricScooterBattery = () => {
               </li>
               <li
                 style={{
-                  color: "#444",
+                  color: "var(--text-muted)",
                   fontSize: "1.05rem",
                   position: "relative",
                   paddingRight: "20px",
@@ -733,7 +733,7 @@ const ElectricScooterBattery = () => {
                     transform: "translateY(-50%)",
                     fontSize: "1.5rem",
                     lineHeight: 0,
-                    color: "#333",
+                    color: "var(--text-main)",
                   }}
                 >
                   •
@@ -741,7 +741,7 @@ const ElectricScooterBattery = () => {
               </li>
               <li
                 style={{
-                  color: "#444",
+                  color: "var(--text-muted)",
                   fontSize: "1.05rem",
                   position: "relative",
                   paddingRight: "20px",
@@ -756,7 +756,7 @@ const ElectricScooterBattery = () => {
                     transform: "translateY(-50%)",
                     fontSize: "1.5rem",
                     lineHeight: 0,
-                    color: "#333",
+                    color: "var(--text-main)",
                   }}
                 >
                   •
@@ -789,7 +789,7 @@ const ElectricScooterBattery = () => {
         >
           <h4
             style={{
-              color: "#f5f5f5",
+              color: "transparent",
               fontSize: "11vw",
               fontWeight: 900,
               whiteSpace: "nowrap",
@@ -832,12 +832,12 @@ const ElectricScooterBattery = () => {
           <div
             style={{
               display: "inline-block",
-              background: "#9cf0c4",
+              background: "var(--secondary)",
               padding: "15px 50px",
               borderRadius: "40px",
               fontSize: "1.8rem",
               fontWeight: 800,
-              color: "#111",
+              color: "var(--text-main)",
               marginBottom: "100px",
               boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
             }}
@@ -890,7 +890,7 @@ const ElectricScooterBattery = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",
@@ -917,7 +917,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                       marginRight: "-3px",
                     }}
                   ></div>
@@ -928,7 +928,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                     }}
                   ></div>
                 </div>
@@ -937,7 +937,7 @@ const ElectricScooterBattery = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",
@@ -963,7 +963,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                       marginRight: "-3px",
                     }}
                   ></div>
@@ -974,7 +974,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                     }}
                   ></div>
                 </div>
@@ -983,7 +983,7 @@ const ElectricScooterBattery = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",
@@ -1009,7 +1009,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                       marginRight: "-3px",
                     }}
                   ></div>
@@ -1020,7 +1020,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                     }}
                   ></div>
                 </div>
@@ -1029,7 +1029,7 @@ const ElectricScooterBattery = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",
@@ -1055,7 +1055,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                       marginRight: "-3px",
                     }}
                   ></div>
@@ -1066,7 +1066,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                     }}
                   ></div>
                 </div>
@@ -1075,7 +1075,7 @@ const ElectricScooterBattery = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",
@@ -1101,7 +1101,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                       marginRight: "-3px",
                     }}
                   ></div>
@@ -1112,7 +1112,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                     }}
                   ></div>
                 </div>
@@ -1138,7 +1138,7 @@ const ElectricScooterBattery = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",
@@ -1166,7 +1166,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                     }}
                   ></div>
                   <div
@@ -1176,7 +1176,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                     }}
                   ></div>
                 </div>
@@ -1185,7 +1185,7 @@ const ElectricScooterBattery = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",
@@ -1213,7 +1213,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                     }}
                   ></div>
                   <div
@@ -1223,7 +1223,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                     }}
                   ></div>
                 </div>
@@ -1232,7 +1232,7 @@ const ElectricScooterBattery = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",
@@ -1260,7 +1260,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                     }}
                   ></div>
                   <div
@@ -1270,7 +1270,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                     }}
                   ></div>
                 </div>
@@ -1279,7 +1279,7 @@ const ElectricScooterBattery = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",
@@ -1307,7 +1307,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                     }}
                   ></div>
                   <div
@@ -1317,7 +1317,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#ccc",
+                      background: "var(--border-light)",
                     }}
                   ></div>
                 </div>
@@ -1329,7 +1329,7 @@ const ElectricScooterBattery = () => {
 
       {/* 6. Mechanical and Electrical Characteristics Tree */}
       <section
-        style={{ padding: "80px 5%", textAlign: "center", background: "#fff" }}
+        style={{ padding: "80px 5%", textAlign: "center", background: "var(--bg-main)" }}
       >
         <div
           style={{ maxWidth: "800px", margin: "0 auto", position: "relative" }}
@@ -1342,7 +1342,7 @@ const ElectricScooterBattery = () => {
               top: "30px",
               bottom: "0",
               width: "1px",
-              background: "#ccc",
+              background: "var(--border-light)",
               transform: "translateX(-50%)",
               zIndex: 0,
             }}
@@ -1360,7 +1360,7 @@ const ElectricScooterBattery = () => {
                 borderRadius: "10px",
                 fontWeight: 800,
                 fontSize: "1.4rem",
-                color: "#111",
+                color: "var(--text-main)",
                 letterSpacing: "1px",
               }}
             >
@@ -1391,7 +1391,7 @@ const ElectricScooterBattery = () => {
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1420,14 +1420,14 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1456,7 +1456,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
@@ -1478,7 +1478,7 @@ const ElectricScooterBattery = () => {
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1507,14 +1507,14 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1543,7 +1543,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
@@ -1568,7 +1568,7 @@ const ElectricScooterBattery = () => {
                 borderRadius: "10px",
                 fontWeight: 800,
                 fontSize: "1.4rem",
-                color: "#111",
+                color: "var(--text-main)",
                 letterSpacing: "1px",
               }}
             >
@@ -1599,7 +1599,7 @@ const ElectricScooterBattery = () => {
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1628,14 +1628,14 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1661,14 +1661,14 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1697,7 +1697,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
@@ -1719,7 +1719,7 @@ const ElectricScooterBattery = () => {
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1748,14 +1748,14 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
                   <h4
                     style={{
-                      color: "#555",
+                      color: "var(--text-muted)",
                       fontSize: "0.9rem",
                       fontWeight: 600,
                       marginBottom: "3px",
@@ -1788,7 +1788,7 @@ const ElectricScooterBattery = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
@@ -1802,7 +1802,7 @@ const ElectricScooterBattery = () => {
       <section
         style={{
           padding: "80px 5%",
-          background: "#fff",
+          background: "var(--bg-main)",
           paddingBottom: "120px",
         }}
       >
@@ -1813,7 +1813,7 @@ const ElectricScooterBattery = () => {
             style={{
               fontSize: "2.5rem",
               fontWeight: 400,
-              color: "#222",
+              color: "var(--text-main)",
               marginBottom: "10px",
             }}
           >
@@ -1850,13 +1850,13 @@ const ElectricScooterBattery = () => {
                   gap: "30px",
                   alignItems: "center",
                   cursor: "pointer",
-                  background: openFaq === 1 ? "#f9f9f9" : "#fff",
+                  background: openFaq === 1 ? "#f9f9f9" : "var(--bg-main)",
                   transition: "all 0.2s",
                 }}
               >
                 <span
                   style={{
-                    color: "#444",
+                    color: "var(--text-muted)",
                     fontSize: "1.05rem",
                     fontWeight: openFaq === 1 ? "600" : "400",
                   }}
@@ -1916,13 +1916,13 @@ const ElectricScooterBattery = () => {
                   gap: "30px",
                   alignItems: "center",
                   cursor: "pointer",
-                  background: openFaq === 2 ? "#f9f9f9" : "#fff",
+                  background: openFaq === 2 ? "#f9f9f9" : "var(--bg-main)",
                   transition: "all 0.2s",
                 }}
               >
                 <span
                   style={{
-                    color: "#444",
+                    color: "var(--text-muted)",
                     fontSize: "1.05rem",
                     fontWeight: openFaq === 2 ? "600" : "400",
                   }}
@@ -1982,13 +1982,13 @@ const ElectricScooterBattery = () => {
                   gap: "30px",
                   alignItems: "center",
                   cursor: "pointer",
-                  background: openFaq === 3 ? "#f9f9f9" : "#fff",
+                  background: openFaq === 3 ? "#f9f9f9" : "var(--bg-main)",
                   transition: "all 0.2s",
                 }}
               >
                 <span
                   style={{
-                    color: "#444",
+                    color: "var(--text-muted)",
                     fontSize: "1.05rem",
                     fontWeight: openFaq === 3 ? "600" : "400",
                   }}
@@ -2049,13 +2049,13 @@ const ElectricScooterBattery = () => {
                   gap: "30px",
                   alignItems: "center",
                   cursor: "pointer",
-                  background: openFaq === 4 ? "#f9f9f9" : "#fff",
+                  background: openFaq === 4 ? "#f9f9f9" : "var(--bg-main)",
                   transition: "all 0.2s",
                 }}
               >
                 <span
                   style={{
-                    color: "#444",
+                    color: "var(--text-muted)",
                     fontSize: "1.05rem",
                     fontWeight: openFaq === 4 ? "600" : "400",
                   }}

@@ -5,7 +5,7 @@ const SolidStateBatteries = () => {
     <div
       className="responsive-page"
       style={{
-        background: "#fff",
+        background: "var(--bg-main)",
         overflowX: "hidden",
         paddingBottom: "100px",
       }}
@@ -68,7 +68,7 @@ const SolidStateBatteries = () => {
           <div style={{ position: "relative", width: "55%" }}>
             <div
               style={{
-                background: "#9cf0c4",
+                background: "var(--secondary)",
                 padding: "60px",
                 borderRadius: "20px",
                 transform: "skew(-5deg)",
@@ -80,7 +80,7 @@ const SolidStateBatteries = () => {
                   style={{
                     fontSize: "3.5rem",
                     fontWeight: 900,
-                    color: "#222",
+                    color: "var(--text-main)",
                     lineHeight: "1.2",
                     marginBottom: "20px",
                   }}
@@ -92,7 +92,7 @@ const SolidStateBatteries = () => {
                   Batteries
                 </h1>
                 <p
-                  style={{ fontSize: "1.4rem", color: "#333", fontWeight: 600 }}
+                  style={{ fontSize: "1.4rem", color: "var(--text-main)", fontWeight: 600 }}
                 >
                   14.8V - 44.4V to 4.2AH - 30AH
                 </p>
@@ -143,7 +143,7 @@ const SolidStateBatteries = () => {
       <section
         style={{
           padding: "60px 10%",
-          background: "#fff",
+          background: "var(--bg-main)",
           textAlign: "center",
           position: "relative",
         }}
@@ -210,7 +210,7 @@ const SolidStateBatteries = () => {
           {/* Card 1 */}
           <div
             style={{
-              background: "#f9f9fc",
+              background: "transparent",
               padding: "50px 30px",
               borderRadius: "10px",
               textAlign: "left",
@@ -226,7 +226,7 @@ const SolidStateBatteries = () => {
                 height="70"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#333"
+                stroke="var(--text-main)"
                 strokeWidth="1.5"
               >
                 <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
@@ -236,7 +236,7 @@ const SolidStateBatteries = () => {
               style={{
                 fontSize: "1.4rem",
                 fontWeight: 700,
-                color: "#222",
+                color: "var(--text-main)",
                 lineHeight: "1.3",
               }}
             >
@@ -249,7 +249,7 @@ const SolidStateBatteries = () => {
           {/* Card 2 */}
           <div
             style={{
-              background: "#f9f9fc",
+              background: "transparent",
               padding: "50px 30px",
               borderRadius: "10px",
               textAlign: "left",
@@ -265,7 +265,7 @@ const SolidStateBatteries = () => {
                 height="70"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#333"
+                stroke="var(--text-main)"
                 strokeWidth="1.5"
               >
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
@@ -276,7 +276,7 @@ const SolidStateBatteries = () => {
               style={{
                 fontSize: "1.4rem",
                 fontWeight: 700,
-                color: "#222",
+                color: "var(--text-main)",
                 lineHeight: "1.3",
               }}
             >
@@ -288,7 +288,7 @@ const SolidStateBatteries = () => {
           {/* Card 3 */}
           <div
             style={{
-              background: "#f9f9fc",
+              background: "transparent",
               padding: "50px 30px",
               borderRadius: "10px",
               textAlign: "left",
@@ -304,7 +304,7 @@ const SolidStateBatteries = () => {
                 height="70"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#333"
+                stroke="var(--text-main)"
                 strokeWidth="1.5"
               >
                 <circle cx="12" cy="12" r="3"></circle>
@@ -315,7 +315,7 @@ const SolidStateBatteries = () => {
               style={{
                 fontSize: "1.4rem",
                 fontWeight: 700,
-                color: "#222",
+                color: "var(--text-main)",
                 lineHeight: "1.3",
               }}
             >
@@ -328,7 +328,7 @@ const SolidStateBatteries = () => {
           {/* Card 4 */}
           <div
             style={{
-              background: "#f9f9fc",
+              background: "transparent",
               padding: "50px 30px",
               borderRadius: "10px",
               textAlign: "left",
@@ -344,7 +344,7 @@ const SolidStateBatteries = () => {
                 height="70"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#333"
+                stroke="var(--text-main)"
                 strokeWidth="1.5"
               >
                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
@@ -354,7 +354,7 @@ const SolidStateBatteries = () => {
               style={{
                 fontSize: "1.4rem",
                 fontWeight: 700,
-                color: "#222",
+                color: "var(--text-main)",
                 lineHeight: "1.3",
               }}
             >
@@ -466,7 +466,7 @@ const SolidStateBatteries = () => {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#999",
+                  background: "var(--text-muted)",
                 }}
               ></div>
             </div>
@@ -504,7 +504,7 @@ const SolidStateBatteries = () => {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#999",
+                  background: "var(--text-muted)",
                 }}
               ></div>
             </div>
@@ -534,7 +534,7 @@ const SolidStateBatteries = () => {
             <div
               style={{
                 width: "1px",
-                background: "#ccc",
+                background: "var(--border-light)",
                 height: "150px",
                 marginTop: "20px",
               }}
@@ -569,7 +569,7 @@ const SolidStateBatteries = () => {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#999",
+                  background: "var(--text-muted)",
                 }}
               ></div>
               <h4
@@ -611,7 +611,7 @@ const SolidStateBatteries = () => {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#999",
+                  background: "var(--text-muted)",
                 }}
               ></div>
               <h4
@@ -647,7 +647,7 @@ const SolidStateBatteries = () => {
         style={{
           padding: "0px 5% 100px",
           textAlign: "center",
-          background: "#fff",
+          background: "var(--bg-main)",
         }}
       >
         <div
@@ -660,7 +660,7 @@ const SolidStateBatteries = () => {
               top: "-250px",
               bottom: "0",
               width: "1px",
-              background: "#ccc",
+              background: "var(--border-light)",
               transform: "translateX(-50%)",
               zIndex: 0,
             }}
@@ -677,7 +677,7 @@ const SolidStateBatteries = () => {
                 borderRadius: "15px",
                 fontWeight: 800,
                 fontSize: "2rem",
-                color: "#111",
+                color: "var(--text-main)",
                 letterSpacing: "1px",
               }}
             >
@@ -742,7 +742,7 @@ const SolidStateBatteries = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
@@ -784,7 +784,7 @@ const SolidStateBatteries = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
@@ -846,7 +846,7 @@ const SolidStateBatteries = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>
@@ -886,7 +886,7 @@ const SolidStateBatteries = () => {
                       width: "6px",
                       height: "6px",
                       borderRadius: "50%",
-                      background: "#999",
+                      background: "var(--text-muted)",
                     }}
                   ></div>
                 </div>

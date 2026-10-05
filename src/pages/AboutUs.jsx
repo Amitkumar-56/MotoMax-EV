@@ -3,7 +3,7 @@ import "../index.css";
 
 const AboutUs = () => {
   return (
-    <div className="responsive-page" style={{ background: "#fff" }}>
+    <div className="responsive-page" style={{ background: "var(--bg-main)" }}>
       <style>
         {`
           @media (max-width: 768px) {
@@ -70,7 +70,7 @@ const AboutUs = () => {
           <div style={{ flex: "1 1 400px" }}>
             <p
               style={{
-                color: "#555",
+                color: "var(--text-muted)",
                 fontSize: "0.95rem",
                 lineHeight: "1.6",
                 marginBottom: "30px",
@@ -86,8 +86,8 @@ const AboutUs = () => {
             </p>
             <button
               style={{
-                background: "#777",
-                color: "#fff",
+                background: "var(--text-muted)",
+                color: "var(--bg-main)",
                 border: "none",
                 padding: "10px 25px",
                 borderRadius: "30px",
@@ -103,7 +103,7 @@ const AboutUs = () => {
                   display: "inline-block",
                   width: "20px",
                   height: "20px",
-                  background: "#fff",
+                  background: "var(--bg-main)",
                   borderRadius: "50%",
                 }}
               ></span>{" "}
@@ -176,7 +176,7 @@ const AboutUs = () => {
           >
             <h4
               style={{
-                color: "#f5f5f5",
+                color: "transparent",
                 fontSize: "clamp(3rem, 10vw, 5rem)",
                 fontWeight: 900,
                 position: "absolute",
@@ -205,7 +205,7 @@ const AboutUs = () => {
             </h2>
             <p
               style={{
-                color: "#555",
+                color: "var(--text-muted)",
                 fontSize: "0.9rem",
                 lineHeight: "1.6",
                 marginBottom: "15px",
@@ -220,7 +220,7 @@ const AboutUs = () => {
             </p>
             <p
               style={{
-                color: "#555",
+                color: "var(--text-muted)",
                 fontSize: "0.9rem",
                 lineHeight: "1.6",
                 marginBottom: "40px",
@@ -238,7 +238,7 @@ const AboutUs = () => {
               <div>
                 <p
                   style={{
-                    color: "#999",
+                    color: "var(--text-muted)",
                     fontSize: "0.8rem",
                     marginBottom: "5px",
                   }}
@@ -254,14 +254,14 @@ const AboutUs = () => {
                 >
                   300,000
                 </h3>
-                <p style={{ color: "#777", fontSize: "0.85rem" }}>
+                <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
                   electric two-wheelers
                 </p>
               </div>
               <div>
                 <p
                   style={{
-                    color: "#999",
+                    color: "var(--text-muted)",
                     fontSize: "0.8rem",
                     marginBottom: "5px",
                   }}
@@ -277,7 +277,7 @@ const AboutUs = () => {
                 >
                   250,000
                 </h3>
-                <p style={{ color: "#777", fontSize: "0.85rem" }}>
+                <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
                   e-rickshaws
                 </p>
               </div>
@@ -324,7 +324,7 @@ const AboutUs = () => {
                 margin: "0 auto 20px",
               }}
             ></div>
-            <p style={{ color: "#555", fontSize: "0.9rem", lineHeight: "1.5" }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: "1.5" }}>
               BIS-certified and AIS-156
               <br />
               compliant batteries
@@ -340,7 +340,7 @@ const AboutUs = () => {
                 margin: "0 auto 20px",
               }}
             ></div>
-            <p style={{ color: "#555", fontSize: "0.9rem", lineHeight: "1.5" }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: "1.5" }}>
               Advanced Battery
               <br />
               Management Systems (BMS)
@@ -360,7 +360,7 @@ const AboutUs = () => {
                 margin: "0 auto 20px",
               }}
             ></div>
-            <p style={{ color: "#555", fontSize: "0.9rem", lineHeight: "1.5" }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: "1.5" }}>
               IP67-rated chargers for rugged
               <br />& reliable operation
             </p>
@@ -375,7 +375,7 @@ const AboutUs = () => {
                 margin: "0 auto 20px",
               }}
             ></div>
-            <p style={{ color: "#555", fontSize: "0.9rem", lineHeight: "1.5" }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: "1.5" }}>
               Rigorous quality control
               <br />
               protocols at every step of
@@ -402,7 +402,7 @@ const AboutUs = () => {
             bottom: "50px",
             left: "50%",
             transform: "translateX(-50%)",
-            background: "#fff",
+            background: "var(--bg-main)",
             width: "80%",
             maxWidth: "900px",
             padding: "40px",
@@ -424,7 +424,7 @@ const AboutUs = () => {
           >
             Our strength lies in our people and infrastructure
           </p>
-          <p style={{ color: "#555", fontSize: "0.85rem", lineHeight: "1.6" }}>
+          <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", lineHeight: "1.6" }}>
             MotoMax EV employs approximately 800 people, a number set to grow to
             1,000 with the commissioning of its new plant. The company maintains
             a sharp focus on R&D and Quality Control, with over 40 professionals
@@ -538,7 +538,7 @@ const AboutUs = () => {
             textAlign: "left",
             maxWidth: "1200px",
             margin: "0 auto 20px",
-            color: "#111",
+            color: "var(--text-main)",
           }}
         >
           Together, let's drive the change
@@ -551,7 +551,7 @@ const AboutUs = () => {
             fontWeight: 400,
             textAlign: "center",
             marginBottom: "60px",
-            color: "#333",
+            color: "var(--text-main)",
           }}
         >
           Enabling India's Net Zero Mission
@@ -589,7 +589,7 @@ const AboutUs = () => {
             <div style={{ flex: "1 1 500px" }}>
               <p
                 style={{
-                  color: "#444",
+                  color: "var(--text-muted)",
                   fontSize: "0.95rem",
                   lineHeight: 1.7,
                   marginBottom: "20px",
@@ -599,7 +599,7 @@ const AboutUs = () => {
                 clean, affordable, and inclusive mobility.
               </p>
               <p
-                style={{ color: "#444", fontSize: "0.95rem", lineHeight: 1.7 }}
+                style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.7 }}
               >
                 The company actively supports Government of India's mission of
                 an Net Zero India by enabling a robust EV supply chain from the
@@ -638,13 +638,13 @@ const AboutUs = () => {
                   fontSize: "2rem",
                   fontWeight: 400,
                   marginBottom: "20px",
-                  color: "#111",
+                  color: "var(--text-main)",
                 }}
               >
                 Looking Ahead
               </h3>
               <p
-                style={{ color: "#444", fontSize: "0.95rem", lineHeight: 1.7 }}
+                style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.7 }}
               >
                 MotoMax EV is now expanding into new markets with growing EV and
                 renewable energy demand. Backed by state-of-the-art

@@ -54,7 +54,7 @@ const Team = () => {
   return (
     <div
       className="responsive-page"
-      style={{ backgroundColor: "#fff", paddingBottom: "80px" }}
+      style={{ backgroundColor: "var(--bg-main)", paddingBottom: "80px" }}
     >
       <style>
         {`
@@ -99,7 +99,7 @@ const Team = () => {
             style={{
               fontSize: "2.8rem",
               fontWeight: 800,
-              color: "#111",
+              color: "var(--text-main)",
               marginBottom: "20px",
             }}
           >
@@ -156,7 +156,7 @@ const Team = () => {
               style={{
                 fontSize: "2.2rem",
                 fontWeight: 800,
-                color: "#111",
+                color: "var(--text-main)",
                 marginBottom: "5px",
               }}
             >
@@ -165,7 +165,7 @@ const Team = () => {
             <h3
               style={{
                 fontSize: "1.2rem",
-                color: "#444",
+                color: "var(--text-muted)",
                 fontWeight: 600,
                 marginBottom: "20px",
               }}
@@ -225,7 +225,7 @@ const Team = () => {
                   style={{
                     fontSize: "1.5rem",
                     fontWeight: 800,
-                    color: "#111",
+                    color: "var(--text-main)",
                     marginBottom: "5px",
                   }}
                 >
@@ -234,7 +234,7 @@ const Team = () => {
                 <h4
                   style={{
                     fontSize: "1.05rem",
-                    color: "#444",
+                    color: "var(--text-muted)",
                     fontWeight: 600,
                     marginBottom: "15px",
                   }}

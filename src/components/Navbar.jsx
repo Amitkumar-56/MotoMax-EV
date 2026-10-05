@@ -7,7 +7,6 @@ const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState("solar");
   const [activeSubMenu, setActiveSubMenu] = useState("industrial");
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
-  const [investorOpen, setInvestorOpen] = useState(false);
 
   const navRef = useRef(null);
 
@@ -16,7 +15,6 @@ const Navbar = () => {
       if (navRef.current && !navRef.current.contains(event.target)) {
         setIsOpen(false);
         setMegaMenuOpen(false);
-        setInvestorOpen(false);
       }
     };
 
@@ -185,12 +183,35 @@ const Navbar = () => {
                   </div>
 
                   <div className="mega-menu-details">
+                    {activeSubMenu === "solar-street" && (
+                      <div className="mega-menu-details-grid">
+                        <Link to="/products">Solar Bot 1</Link>
+                        <Link to="/products">Solar Bot 2</Link>
+                        <Link to="/products">Street Light Base</Link>
+                        <Link to="/products">Street Light Pro</Link>
+                      </div>
+                    )}
+                    {activeSubMenu === "home" && (
+                      <div className="mega-menu-details-grid">
+                        <Link to="/products">Home Inverter 1kW</Link>
+                        <Link to="/products">Home Inverter 2kW</Link>
+                        <Link to="/products">PowerWall Basic</Link>
+                        <Link to="/products">PowerWall Pro</Link>
+                      </div>
+                    )}
+                    {activeSubMenu === "office" && (
+                      <div className="mega-menu-details-grid">
+                        <Link to="/products">Office UPS 500VA</Link>
+                        <Link to="/products">Office UPS 1000VA</Link>
+                        <Link to="/products">Server Rack Battery</Link>
+                      </div>
+                    )}
                     {activeSubMenu === "industrial" && (
-                      <div style={{ maxWidth: "300px" }}>
-                        <a href="#">TKESS-261</a>
-                        <a href="#">TKESS-418</a>
-                        <a href="#">5 MWH</a>
-                        <a href="#">Mobile Maintenance BESS</a>
+                      <div className="mega-menu-details-grid">
+                        <Link to="/products">TKESS-261</Link>
+                        <Link to="/products">TKESS-418</Link>
+                        <Link to="/products">5 MWH</Link>
+                        <Link to="/products">Mobile Maintenance BESS</Link>
                       </div>
                     )}
                   </div>
@@ -235,34 +256,7 @@ const Navbar = () => {
             Team
           </Link>
         </li>
-        <li className={`dropdown-light ${investorOpen ? "mobile-active" : ""}`}>
-          <Link
-            to="#"
-            className="dropbtn-light"
-            onClick={(e) => {
-              if (window.innerWidth <= 900) {
-                e.preventDefault();
-                setInvestorOpen(!investorOpen);
-              }
-            }}
-          >
-            Investor Relations ▾
-          </Link>
-          <div className="dropdown-content-light">
-            <Link
-              to="/investor-relations/financials"
-              onClick={() => setIsOpen(false)}
-            >
-              Financials
-            </Link>
-            <Link
-              to="/investor-relations/policies"
-              onClick={() => setIsOpen(false)}
-            >
-              Policies
-            </Link>
-          </div>
-        </li>
+
         <li>
           <Link to="/news-events" onClick={() => setIsOpen(false)}>
             News & Events

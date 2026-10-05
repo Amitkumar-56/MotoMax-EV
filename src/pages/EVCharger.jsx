@@ -10,7 +10,7 @@ const EVCharger = () => {
   return (
     <div
       className="responsive-page"
-      style={{ background: "#fff", overflowX: "hidden" }}
+      style={{ background: "var(--bg-main)", overflowX: "hidden" }}
     >
       <style>
         {`
@@ -70,7 +70,7 @@ const EVCharger = () => {
           <button
             style={{
               background: "#ff6600",
-              color: "#fff",
+              color: "var(--bg-main)",
               border: "none",
               padding: "10px 20px",
               borderRadius: "5px",
@@ -84,7 +84,7 @@ const EVCharger = () => {
           <button
             style={{
               background: "#6c757d",
-              color: "#fff",
+              color: "var(--bg-main)",
               border: "none",
               padding: "10px 20px",
               borderRadius: "5px",
@@ -97,7 +97,7 @@ const EVCharger = () => {
           <button
             style={{
               background: "#6c757d",
-              color: "#fff",
+              color: "var(--bg-main)",
               border: "none",
               padding: "10px 20px",
               borderRadius: "5px",
@@ -121,7 +121,7 @@ const EVCharger = () => {
         >
           <div
             style={{
-              background: "#9cf0c4",
+              background: "var(--secondary)",
               borderRadius: "40px",
               padding: "60px 80px",
               width: "100%",
@@ -149,7 +149,7 @@ const EVCharger = () => {
                 <br />
                 Charger
               </h2>
-              <p style={{ fontSize: "1.2rem", color: "#333", fontWeight: 500 }}>
+              <p style={{ fontSize: "1.2rem", color: "var(--text-main)", fontWeight: 500 }}>
                 High-Speed & Reliable
               </p>
             </div>
@@ -177,7 +177,7 @@ const EVCharger = () => {
           style={{
             maxWidth: "800px",
             margin: "60px auto 0",
-            color: "#555",
+            color: "var(--text-muted)",
             lineHeight: 1.8,
             fontSize: "0.95rem",
             textAlign: "left",
@@ -249,7 +249,7 @@ const EVCharger = () => {
                 fontSize: "1.4rem",
                 fontWeight: 600,
                 marginBottom: "15px",
-                color: "#222",
+                color: "var(--text-main)",
                 lineHeight: 1.3,
               }}
             >
@@ -257,7 +257,7 @@ const EVCharger = () => {
               <br />
               Protection
             </h3>
-            <p style={{ color: "#555", fontSize: "0.95rem", lineHeight: 1.6 }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.6 }}>
               Automatically shuts down power delivery if grid voltage exceeds
               safe operating limits to protect the vehicle.
             </p>
@@ -276,7 +276,7 @@ const EVCharger = () => {
                 fontSize: "1.4rem",
                 fontWeight: 600,
                 marginBottom: "15px",
-                color: "#222",
+                color: "var(--text-main)",
                 lineHeight: 1.3,
               }}
             >
@@ -284,7 +284,7 @@ const EVCharger = () => {
               <br />
               Protection
             </h3>
-            <p style={{ color: "#555", fontSize: "0.95rem", lineHeight: 1.6 }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.6 }}>
               Built-in safety relays instantly break the circuit in the event of
               an electrical short, preventing damage and fire hazards.
             </p>
@@ -303,7 +303,7 @@ const EVCharger = () => {
                 fontSize: "1.4rem",
                 fontWeight: 600,
                 marginBottom: "15px",
-                color: "#222",
+                color: "var(--text-main)",
                 lineHeight: 1.3,
               }}
             >
@@ -311,7 +311,7 @@ const EVCharger = () => {
               <br />
               Control
             </h3>
-            <p style={{ color: "#555", fontSize: "0.95rem", lineHeight: 1.6 }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.6 }}>
               Active thermal monitoring throttles charging speeds if
               temperatures rise too high, keeping the charger and battery safe.
             </p>
@@ -330,7 +330,7 @@ const EVCharger = () => {
                 fontSize: "1.4rem",
                 fontWeight: 600,
                 marginBottom: "15px",
-                color: "#222",
+                color: "var(--text-main)",
                 lineHeight: 1.3,
               }}
             >
@@ -338,7 +338,7 @@ const EVCharger = () => {
               <br />
               Resistant (IP65)
             </h3>
-            <p style={{ color: "#555", fontSize: "0.95rem", lineHeight: 1.6 }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.6 }}>
               Designed for outdoor use, the charger housing is fully protected
               against dust, rain, and extreme weather conditions.
             </p>
@@ -368,7 +368,7 @@ const EVCharger = () => {
         >
           <h4
             style={{
-              color: "#f5f5f5",
+              color: "transparent",
               fontSize: "11vw",
               fontWeight: 900,
               whiteSpace: "nowrap",
@@ -411,12 +411,12 @@ const EVCharger = () => {
           <div
             style={{
               display: "inline-block",
-              background: "#9cf0c4",
+              background: "var(--secondary)",
               padding: "15px 50px",
               borderRadius: "40px",
               fontSize: "1.8rem",
               fontWeight: 800,
-              color: "#111",
+              color: "var(--text-main)",
               marginBottom: "100px",
               boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
             }}
@@ -469,7 +469,7 @@ const EVCharger = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",
@@ -492,7 +492,7 @@ const EVCharger = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",
@@ -532,7 +532,7 @@ const EVCharger = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",
@@ -555,7 +555,7 @@ const EVCharger = () => {
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
-                    color: "#777",
+                    color: "var(--text-muted)",
                     fontSize: "0.9rem",
                     fontWeight: 600,
                     marginBottom: "3px",
