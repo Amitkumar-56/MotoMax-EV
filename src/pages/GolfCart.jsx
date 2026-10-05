@@ -61,7 +61,7 @@ const GolfCart = () => {
             <img
               src="/assets/6.png"
               alt="Golf Cart Battery"
-              style={{ width: "100%", height: "400px", objectFit: "cover" }}
+              style={{ width: "100%", height: "400px", objectFit: "contain" }}
             />
           </div>
         </div>

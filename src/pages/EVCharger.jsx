@@ -45,13 +45,13 @@ const EVCharger = () => {
           padding: "40px 0",
           position: "relative",
           overflow: "hidden",
-          background: "#e0e0e0",
+          background: "linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)",
         }}
       >
         <img
           src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=2000"
           alt="EV Charger Background"
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
         />
       </div>
 
@@ -161,7 +161,7 @@ const EVCharger = () => {
             style={{
               width: "250px",
               height: "250px",
-              objectFit: "cover",
+              objectFit: "contain",
               borderRadius: "15px",
               position: "absolute",
               right: "10%",
@@ -444,7 +444,7 @@ const EVCharger = () => {
                 style={{
                   width: "280px",
                   height: "280px",
-                  objectFit: "cover",
+                  objectFit: "contain",
                   borderRadius: "15px",
                   filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.3))",
                 }}

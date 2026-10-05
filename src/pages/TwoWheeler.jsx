@@ -61,7 +61,7 @@ const TwoWheeler = () => {
             <img
               src="/assets/1.png"
               alt="2 Wheeler Battery"
-              style={{ width: "100%", height: "400px", objectFit: "cover" }}
+              style={{ width: "100%", height: "400px", objectFit: "contain" }}
             />
           </div>
         </div>

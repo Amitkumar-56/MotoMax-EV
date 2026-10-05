@@ -45,13 +45,13 @@ const ElectricScooterBattery = () => {
           padding: "40px 0",
           position: "relative",
           overflow: "hidden",
-          background: "#e0e0e0",
+          background: "linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)",
         }}
       >
         <img
           src="/assets/8.png"
           alt="Scooter Background"
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
         />
         {/* Mocking the two batteries on the left foreground */}
         <div
@@ -71,7 +71,7 @@ const ElectricScooterBattery = () => {
             style={{
               width: "220px",
               height: "450px",
-              objectFit: "cover",
+              objectFit: "contain",
               borderRadius: "15px",
               filter: "drop-shadow(10px 20px 30px rgba(0,0,0,0.6))",
             }}
@@ -82,7 +82,7 @@ const ElectricScooterBattery = () => {
             style={{
               width: "180px",
               height: "380px",
-              objectFit: "cover",
+              objectFit: "contain",
               borderRadius: "15px",
               filter: "drop-shadow(10px 20px 30px rgba(0,0,0,0.6))",
               marginLeft: "-40px",
@@ -210,7 +210,7 @@ const ElectricScooterBattery = () => {
             style={{
               width: "220px",
               height: "480px",
-              objectFit: "cover",
+              objectFit: "contain",
               borderRadius: "15px",
               position: "absolute",
               right: "10%",
@@ -865,7 +865,7 @@ const ElectricScooterBattery = () => {
                 style={{
                   width: "280px",
                   height: "480px",
-                  objectFit: "cover",
+                  objectFit: "contain",
                   borderRadius: "15px",
                   filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.3))",
                 }}

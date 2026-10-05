@@ -456,7 +456,7 @@ const Admin = () => {
                         <tr key={p.id}>
                           <td>
                             <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                              <img src={p.image} alt="" style={{ width: "40px", height: "40px", borderRadius: "8px", objectFit: "cover" }} />
+                              <img src={p.image} alt="" style={{ width: "40px", height: "40px", borderRadius: "8px", objectFit: "contain" }} />
                               <div><div style={{ fontWeight: 600, color: "#1e293b" }}>{p.name}</div><div style={{ fontSize: "0.8rem", color: "#64748b" }}>{p.range}</div></div>
                             </div>
                           </td>

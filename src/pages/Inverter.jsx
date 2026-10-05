@@ -45,13 +45,13 @@ const Inverter = () => {
           padding: "40px 0",
           position: "relative",
           overflow: "hidden",
-          background: "#e0e0e0",
+          background: "linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)",
         }}
       >
         <img
           src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=2000"
           alt="Home Inverter Background"
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
         />
       </div>
 
@@ -161,7 +161,7 @@ const Inverter = () => {
             style={{
               width: "220px",
               height: "350px",
-              objectFit: "cover",
+              objectFit: "contain",
               borderRadius: "15px",
               position: "absolute",
               right: "10%",
@@ -440,7 +440,7 @@ const Inverter = () => {
                 style={{
                   width: "220px",
                   height: "350px",
-                  objectFit: "cover",
+                  objectFit: "contain",
                   borderRadius: "15px",
                   filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.3))",
                 }}

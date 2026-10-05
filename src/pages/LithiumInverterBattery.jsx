@@ -55,7 +55,7 @@ const LithiumInverterBattery = () => {
           style={{
             width: "100%",
             height: "100%",
-            objectFit: "cover",
+            objectFit: "contain",
             opacity: 0.9,
           }}
         />
@@ -75,7 +75,7 @@ const LithiumInverterBattery = () => {
             style={{
               width: "250px",
               height: "350px",
-              objectFit: "cover",
+              objectFit: "contain",
               borderRadius: "10px",
               filter: "drop-shadow(10px 20px 30px rgba(0,0,0,0.4))",
             }}
@@ -115,7 +115,7 @@ const LithiumInverterBattery = () => {
             style={{
               width: "300px",
               height: "420px",
-              objectFit: "cover",
+              objectFit: "contain",
               borderRadius: "10px",
               filter: "drop-shadow(-10px 20px 30px rgba(0,0,0,0.4))",
             }}
@@ -196,7 +196,7 @@ const LithiumInverterBattery = () => {
                 style={{
                   width: "180px",
                   height: "280px",
-                  objectFit: "cover",
+                  objectFit: "contain",
                   borderRadius: "10px",
                   boxShadow: "0 15px 30px rgba(0,0,0,0.2)",
                 }}
@@ -207,7 +207,7 @@ const LithiumInverterBattery = () => {
                 style={{
                   width: "200px",
                   height: "300px",
-                  objectFit: "cover",
+                  objectFit: "contain",
                   borderRadius: "10px",
                   boxShadow: "0 15px 30px rgba(0,0,0,0.2)",
                 }}
@@ -438,7 +438,7 @@ const LithiumInverterBattery = () => {
             <img
               src="/assets/2.png"
               alt="Inverter Battery Specs"
-              style={{ width: "100%", maxWidth: "300px", objectFit: "cover" }}
+              style={{ width: "100%", maxWidth: "300px", objectFit: "contain" }}
             />
           </div>
 

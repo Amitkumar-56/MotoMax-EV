@@ -82,7 +82,7 @@ const Team = () => {
         <img
           src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=2000"
           alt="Team Meeting"
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
         />
       </div>
 
@@ -212,7 +212,7 @@ const Team = () => {
                     width: "100%",
                     maxWidth: "300px",
                     height: "300px",
-                    objectFit: "cover",
+                    objectFit: "contain",
                     borderRadius: "15px",
                     border: "1px solid #eee",
                     boxShadow: "0 10px 25px rgba(0,0,0,0.05)",

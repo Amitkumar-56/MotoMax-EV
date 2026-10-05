@@ -30,7 +30,7 @@ const AboutUs = () => {
         <img
           src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1600"
           alt="Team Meeting"
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
         />
       </div>
 
@@ -393,7 +393,7 @@ const AboutUs = () => {
         <img
           src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1600"
           alt="Factory Floor"
-          style={{ width: "100%", height: "500px", objectFit: "cover" }}
+          style={{ width: "100%", height: "500px", objectFit: "contain" }}
         />
 
         <div

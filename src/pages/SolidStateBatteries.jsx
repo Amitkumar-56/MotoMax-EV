@@ -49,7 +49,7 @@ const SolidStateBatteries = () => {
         <img
           src="/assets/4.png"
           alt="Drone flying over city at sunset"
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
         />
       </div>
 
