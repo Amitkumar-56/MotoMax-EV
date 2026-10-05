@@ -15,17 +15,35 @@ const Home = () => {
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStartX, setTouchStartX] = useState(0);
+  const [touchEndX, setTouchEndX] = useState(0);
   const productSliderRef = useRef(null);
 
   const scrollProducts = (direction) => {
     if (productSliderRef.current && productSliderRef.current.children.length > 0) {
       const cardWidth = productSliderRef.current.children[0].clientWidth;
-      // Calculate scroll amount (card width + 30px gap)
       const scrollAmount = cardWidth + 30; 
       productSliderRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
       });
+    }
+  };
+
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX - touchEndX > 50) {
+      setCurrentSlide((prev) => (prev + 1) % sliderItems.length);
+    }
+    if (touchStartX - touchEndX < -50) {
+      setCurrentSlide((prev) => (prev === 0 ? sliderItems.length - 1 : prev - 1));
     }
   };
 
@@ -67,7 +85,12 @@ const Home = () => {
   return (
     <div className="responsive-page" style={{ background: "var(--bg-main)" }}>
       {/* Unified Hero Slider */}
-      <header className="hero-section">
+      <header 
+        className="hero-section"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         {/* Slider Images/Videos */}
         {sliderItems.map((item, index) => (
           <div
@@ -142,76 +165,17 @@ const Home = () => {
               {sliderItems[currentSlide].subtitle}
             </h2>
             <button
-              className="hero-btn"
-              onMouseOver={(e) => e.target.style.background = "#e68a00"}
-              onMouseOut={(e) => e.target.style.background = "#ff9900"}
+              className="hero-btn pulse-btn"
+              style={{ pointerEvents: "auto" }}
+              onClick={() => {
+                document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               Explore More &rarr;
             </button>
           </div>
         )}
 
-        {/* Navigation Arrows */}
-        <div
-          onClick={() =>
-            setCurrentSlide((prev) =>
-              prev === 0 ? sliderItems.length - 1 : prev - 1,
-            )
-          }
-          style={{
-            position: "absolute",
-            left: "30px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            zIndex: 2,
-            color: "#fff",
-            fontSize: "1.5rem",
-            cursor: "pointer",
-            userSelect: "none",
-            width: "50px",
-            height: "50px",
-            background: "rgba(255,255,255,0.2)",
-            border: "2px solid rgba(255,255,255,0.5)",
-            borderRadius: "50%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            transition: "background 0.3s"
-          }}
-          onMouseOver={(e) => e.target.style.background = "rgba(255,255,255,0.4)"}
-          onMouseOut={(e) => e.target.style.background = "rgba(255,255,255,0.2)"}
-        >
-          &#10094;
-        </div>
-        <div
-          onClick={() =>
-            setCurrentSlide((prev) => (prev + 1) % sliderItems.length)
-          }
-          style={{
-            position: "absolute",
-            right: "30px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            zIndex: 2,
-            color: "#fff",
-            fontSize: "1.5rem",
-            cursor: "pointer",
-            userSelect: "none",
-            width: "50px",
-            height: "50px",
-            background: "rgba(255,255,255,0.2)",
-            border: "2px solid rgba(255,255,255,0.5)",
-            borderRadius: "50%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            transition: "background 0.3s"
-          }}
-          onMouseOver={(e) => e.target.style.background = "rgba(255,255,255,0.4)"}
-          onMouseOut={(e) => e.target.style.background = "rgba(255,255,255,0.2)"}
-        >
-          &#10095;
-        </div>
       </header>
 
       {/* Intro Section */}
@@ -315,7 +279,7 @@ const Home = () => {
       </section>
 
       {/* Products Section */}
-      <section className="section-padding text-center">
+      <section id="products-section" className="section-padding text-center">
         <h2 className="section-title text-7xl" >Products</h2>
 
         <div

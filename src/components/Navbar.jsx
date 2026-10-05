@@ -17,9 +17,9 @@ const Navbar = () => {
           <img
             src="/Icon.png"
             alt="MotoMax EV Logo"
-            style={{ 
-              height: "45px", 
-              width: "auto", 
+            style={{
+              height: "45px",
+              width: "auto",
               objectFit: "contain",
               borderRadius: "5px"
             }}
@@ -44,7 +44,7 @@ const Navbar = () => {
       <div
         className="menu-icon"
         onClick={() => setIsOpen(!isOpen)}
-        style={{ color: "#333" }}
+        style={{ color: "#ffffffff" }}
       >
         ☰
       </div>
