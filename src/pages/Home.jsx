@@ -312,7 +312,7 @@ const Home = () => {
           <h2 style={{ fontSize: "3rem", fontWeight: 900, color: "#1a1a1a", marginBottom: "15px" }}>
             Powering a Cleaner, <span style={{ color: "var(--primary)" }}>Greener</span> Tomorrow
           </h2>
-          <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", maxWidth: "700px", margin: "0 auto 50px", lineHeight: 1.6 }}>
+          <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", maxWidth: "700px", margin: "0 auto 0", lineHeight: 1.6 }}>
             Explore our wide range of innovative EV and energy solutions designed for a sustainable and smarter future.
           </p>
         </div>
@@ -419,11 +419,16 @@ const Home = () => {
                 overflow: hidden;
               }
               .card-icon-wrapper img {
-                max-height: 90%;
-                max-width: 90%;
+                width: 110px;
+                height: 110px;
+                border-radius: 50%;
                 object-fit: contain;
+                background: #fff;
+                border: 1px solid rgba(0,0,0,0.08);
+                padding: 15px;
                 z-index: 2;
-                transition: transform 0.4s ease;
+                transition: transform 0.4s ease, box-shadow 0.4s ease;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.04);
               }
               .attractive-card:hover .card-icon-wrapper img {
                 transform: scale(1.1);

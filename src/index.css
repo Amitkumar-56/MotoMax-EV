@@ -566,10 +566,15 @@ body {
 }
 
 .mega-menu-item img {
-  height: 45px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
   object-fit: contain;
-  transition: transform 0.3s ease;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  background: #fff;
+  padding: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .mega-menu-item:hover img {

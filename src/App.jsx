@@ -21,6 +21,7 @@ import NewsEvents from "./pages/NewsEvents";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
+import Products from "./pages/Products";
 
 import "./index.css";
 
@@ -57,6 +58,8 @@ function AppContent() {
 
           {/* Dynamic route for all other missing products */}
           <Route path="/products/:id" element={<ProductDetail />} />
+          
+          <Route path="/products" element={<Products />} />
 
           <Route path="/news-events" element={<NewsEvents />} />
           <Route path="/blog" element={<Blog />} />
