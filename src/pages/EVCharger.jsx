@@ -64,7 +64,7 @@ const EVCharger = () => {
             justifyContent: "center",
             gap: "10px",
             flexWrap: "wrap",
-            marginBottom: "40px",
+            marginBottom: "80px",
           }}
         >
           <button

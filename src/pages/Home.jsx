@@ -278,56 +278,107 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Products Section */}
-      <section id="products-section" className="section-padding text-center">
-        <h2 className="section-title text-7xl" >Products</h2>
+            {/* Products Section Redesign */}
+      <section
+        id="products-section"
+        style={{
+          padding: "80px 20px",
+          background: "#ffffff",
+          textAlign: "center",
+          position: "relative",
+          overflow: "hidden"
+        }}
+      >
+        {/* Decorative background elements */}
+        <div style={{ position: "absolute", top: "10%", left: "5%", opacity: 0.1, zIndex: 0 }}>
+          <svg width="60" height="60" viewBox="0 0 60 60" fill="var(--primary)">
+            <circle cx="5" cy="5" r="2"/><circle cx="20" cy="5" r="2"/><circle cx="35" cy="5" r="2"/>
+            <circle cx="5" cy="20" r="2"/><circle cx="20" cy="20" r="2"/><circle cx="35" cy="20" r="2"/>
+            <circle cx="5" cy="35" r="2"/><circle cx="20" cy="35" r="2"/><circle cx="35" cy="35" r="2"/>
+          </svg>
+        </div>
+        <div style={{ position: "absolute", top: "20%", right: "5%", opacity: 0.05, zIndex: 0 }}>
+          <svg width="120" height="120" viewBox="0 0 24 24" fill="var(--primary)">
+            <path d="M17 8C8 10 5 16 5 22C11 22 17 15 17 8ZM12 12C9 14 7 17 6 19C7 18 9 15 12 12Z"/>
+          </svg>
+        </div>
+
+        <div style={{ position: "relative", zIndex: 1 }}>
+          <h4 style={{ color: "var(--primary)", textTransform: "uppercase", fontSize: "1rem", letterSpacing: "2px", fontWeight: 700, marginBottom: "15px", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
+            <span style={{ width: "40px", height: "2px", background: "rgba(255,102,0,0.3)" }}></span>
+            OUR PRODUCTS
+            <span style={{ width: "40px", height: "2px", background: "rgba(255,102,0,0.3)" }}></span>
+          </h4>
+          <h2 style={{ fontSize: "3rem", fontWeight: 900, color: "#1a1a1a", marginBottom: "15px" }}>
+            Powering a Cleaner, <span style={{ color: "var(--primary)" }}>Greener</span> Tomorrow
+          </h2>
+          <p style={{ color: "var(--text-muted)", fontSize: "1.1rem", maxWidth: "700px", margin: "0 auto 50px", lineHeight: 1.6 }}>
+            Explore our wide range of innovative EV and energy solutions designed for a sustainable and smarter future.
+          </p>
+        </div>
 
         <div
           style={{
             position: "relative",
-            maxWidth: "1200px",
-            margin: "10px auto 0",
+            maxWidth: "1350px",
+            margin: "0 auto",
+            padding: "0 50px"
           }}
         >
-          {/* Navigation Arrows */}
+          {/* Left Arrow */}
           <button
             onClick={() => scrollProducts("left")}
             style={{
               position: "absolute",
-              left: "-20px",
-              top: "40%",
+              left: "0",
+              top: "45%",
               transform: "translateY(-50%)",
               zIndex: 10,
-              background: "var(--bg-main)",
-              border: "1px solid #ccc",
+              background: "#fff",
+              border: "1px solid rgba(0,0,0,0.05)",
               borderRadius: "50%",
-              width: "40px",
-              height: "40px",
+              width: "50px",
+              height: "50px",
               fontSize: "1.5rem",
               cursor: "pointer",
-              boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+              boxShadow: "0 4px 15px rgba(0,0,0,0.05)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#333",
+              transition: "all 0.3s"
             }}
+            onMouseOver={(e) => { e.currentTarget.style.background = "var(--primary)"; e.currentTarget.style.color = "#fff"; }}
+            onMouseOut={(e) => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.color = "#333"; }}
           >
             &#8249;
           </button>
 
+          {/* Right Arrow */}
           <button
             onClick={() => scrollProducts("right")}
             style={{
               position: "absolute",
-              right: "-20px",
-              top: "40%",
+              right: "0",
+              top: "45%",
               transform: "translateY(-50%)",
               zIndex: 10,
-              background: "var(--bg-main)",
-              border: "1px solid #ccc",
+              background: "#fff",
+              border: "1px solid rgba(0,0,0,0.05)",
               borderRadius: "50%",
-              width: "40px",
-              height: "40px",
+              width: "50px",
+              height: "50px",
               fontSize: "1.5rem",
               cursor: "pointer",
-              boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+              boxShadow: "0 4px 15px rgba(0,0,0,0.05)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#333",
+              transition: "all 0.3s"
             }}
+            onMouseOver={(e) => { e.currentTarget.style.background = "var(--primary)"; e.currentTarget.style.color = "#fff"; }}
+            onMouseOut={(e) => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.color = "#333"; }}
           >
             &#8250;
           </button>
@@ -335,273 +386,199 @@ const Home = () => {
           {/* Slider Container */}
           <style>
             {`
-              .hide-scrollbar::-webkit-scrollbar {
-                display: none;
+              .hide-scrollbar::-webkit-scrollbar { display: none; }
+              .attractive-card {
+                background: #fff;
+                border-radius: 20px;
+                padding: 25px 20px;
+                min-width: 260px;
+                max-width: 260px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+                transition: transform 0.4s ease, box-shadow 0.4s ease;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-decoration: none;
+                color: inherit;
+                border: 1px solid rgba(0,0,0,0.02);
+                margin: 15px 5px;
+              }
+              .attractive-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 40px rgba(255,102,0,0.1);
+              }
+              .card-icon-wrapper {
+                width: 100%;
+                height: 140px;
+                border-radius: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 20px;
+                position: relative;
+                overflow: hidden;
+              }
+              .card-icon-wrapper img {
+                max-height: 90%;
+                max-width: 90%;
+                object-fit: contain;
+                z-index: 2;
+                transition: transform 0.4s ease;
+              }
+              .attractive-card:hover .card-icon-wrapper img {
+                transform: scale(1.1);
+              }
+              .card-arrow-btn {
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                background: rgba(255,102,0,0.1);
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 15px;
+                transition: all 0.3s ease;
+              }
+              .attractive-card:hover .card-arrow-btn {
+                background: var(--primary);
+                color: #fff;
               }
             `}
           </style>
+          
           <div
             ref={productSliderRef}
             className="hide-scrollbar"
             style={{
               display: "flex",
-              gap: "10px",
+              gap: "20px",
               overflowX: "auto",
               scrollBehavior: "smooth",
-              padding: "10px 5px",
+              padding: "10px",
               msOverflowStyle: "none",
               scrollbarWidth: "none",
             }}
           >
-            <Link to="/products/electric-scooter-battery" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
-              <div className="product-card-img-wrapper">
-                <img
-                  src="/assets/nav-automotive.jpg"
-                  alt="Automotive Lithium Battery"
-                  style={{ borderRadius: "10px" }}
-                />
-              </div>
-              <h3 style={{ fontSize: "0.9rem" }}>AUTOMOTIVE LITHIUM BATTERY</h3>
-              <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
-                Engineered for electric mobility, including scooters and bikes.
-              </p>
-              <span
-                className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
-              >
-                View More
-              </span>
-            </Link>
-
-            <Link to="/products/lithium-inverter-battery-home" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
-              <div className="product-card-img-wrapper">
-                <img
-                  src="/assets/inverter-battery.jpg"
-                  alt="Inverter Lithium Battery"
-                  style={{ borderRadius: "10px" }}
-                />
-              </div>
-              <h3 style={{ fontSize: "0.9rem" }}>INVERTER LITHIUM BATTERY</h3>
-              <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
-                Reliable power backup solutions for homes and small offices.
-              </p>
-              <span
-                className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
-              >
-                View More
-              </span>
-            </Link>
-
-            <Link to="/products/solar-street-light-storage" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
-              <div className="product-card-img-wrapper">
-                <img
-                  src="/assets/solar-battery-cluster.jpg"
-                  alt="Solar Application"
-                  style={{ borderRadius: "10px" }}
-                />
-              </div>
-              <h3 style={{ fontSize: "0.9rem" }}>
-                LITHIUM BATTERY SOLAR APPLICATION
-              </h3>
-              <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
-                Smart energy storage for solar installations and street lights.
-              </p>
-              <span
-                className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
-              >
-                View More
-              </span>
-            </Link>
-
-            <Link to="/products/solid-state" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
-              <div className="product-card-img-wrapper">
-                <img
-                  src="/assets/drone-single-battery.jpg"
-                  alt="Drone Lithium Battery"
-                  style={{ borderRadius: "10px" }}
-                />
-              </div>
-              <h3 style={{ fontSize: "0.9rem" }}>DRONE LITHIUM BATTERY</h3>
-              <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
-                Lightweight, high-capacity batteries engineered for advanced
-                drones.
-              </p>
-              <span
-                className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
-              >
-                View More
-              </span>
-            </Link>
-
-            <Link to="/products/charger" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
-              <div className="product-card-img-wrapper">
-                <img
-                  src="/assets/nav-automotive.jpg"
-                  alt="EV Charger"
-                  style={{ borderRadius: "10px" }}
-                />
-              </div>
-              <h3 style={{ fontSize: "0.9rem" }}>EV CHARGER</h3>
-              <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
-                Fast and reliable chargers for all types of electric vehicles.
-              </p>
-              <span
-                className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
-              >
-                View More
-              </span>
-            </Link>
-
-            <Link to="/products/inverter" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
-              <div className="product-card-img-wrapper">
-                <img
-                  src="/assets/inverter-hero-house.jpg"
-                  alt="Inverter"
-                  style={{ borderRadius: "10px" }}
-                />
-              </div>
-              <h3 style={{ fontSize: "0.9rem" }}>INVERTER</h3>
-              <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
-                Sleek, durable device with flexible connectivity and easy
-                installation.
-              </p>
-              <span
-                className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
-              >
-                View More
-              </span>
-            </Link>
-
-            {/* Duplicated for endless slider effect */}
-            <Link to="/products/electric-scooter-battery" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
-              <div className="product-card-img-wrapper">
-                <img
-                  src="/assets/nav-automotive.jpg"
-                  alt="Automotive Lithium Battery"
-                  style={{ borderRadius: "10px" }}
-                />
-              </div>
-              <h3 style={{ fontSize: "0.9rem" }}>AUTOMOTIVE LITHIUM BATTERY</h3>
-              <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
-                Engineered for electric mobility, including scooters and bikes.
-              </p>
-              <span
-                className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
-              >
-                View More
-              </span>
-            </Link>
-
-            <Link to="/products/lithium-inverter-battery-home" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
-              <div className="product-card-img-wrapper">
-                <img
-                  src="/assets/inverter-battery.jpg"
-                  alt="Inverter Lithium Battery"
-                  style={{ borderRadius: "10px" }}
-                />
-              </div>
-              <h3 style={{ fontSize: "0.9rem" }}>INVERTER LITHIUM BATTERY</h3>
-              <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
-                Reliable power backup solutions for homes and small offices.
-              </p>
-              <span
-                className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
-              >
-                View More
-              </span>
-            </Link>
-
-            <Link to="/products/solar-street-light-storage" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
-              <div className="product-card-img-wrapper">
-                <img
-                  src="/assets/solar-battery-cluster.jpg"
-                  alt="Solar Application"
-                  style={{ borderRadius: "10px" }}
-                />
-              </div>
-              <h3 style={{ fontSize: "0.9rem" }}>
-                LITHIUM BATTERY SOLAR APPLICATION
-              </h3>
-              <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
-                Smart energy storage for solar installations and street lights.
-              </p>
-              <span
-                className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
-              >
-                View More
-              </span>
-            </Link>
-
-            <Link to="/products/solid-state" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
-              <div className="product-card-img-wrapper">
-                <img
-                  src="/assets/drone-single-battery.jpg"
-                  alt="Drone Lithium Battery"
-                  style={{ borderRadius: "10px" }}
-                />
-              </div>
-              <h3 style={{ fontSize: "0.9rem" }}>DRONE LITHIUM BATTERY</h3>
-              <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
-                Lightweight, high-capacity batteries engineered for advanced
-                drones.
-              </p>
-              <span
-                className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
-              >
-                View More
-              </span>
-            </Link>
-
-            <Link to="/products/charger" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
-              <div className="product-card-img-wrapper">
-                <img
-                  src="/assets/nav-automotive.jpg"
-                  alt="EV Charger"
-                  style={{ borderRadius: "10px" }}
-                />
-              </div>
-              <h3 style={{ fontSize: "0.9rem" }}>EV CHARGER</h3>
-              <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
-                Fast and reliable chargers for all types of electric vehicles.
-              </p>
-              <span
-                className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
-              >
-                View More
-              </span>
-            </Link>
-
-            <Link to="/products/inverter" className="product-card-light product-slide-card" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', flexDirection: 'column' }}>
-              <div className="product-card-img-wrapper">
-                <img
-                  src="/assets/inverter-hero-house.jpg"
-                  alt="Inverter"
-                  style={{ borderRadius: "10px" }}
-                />
-              </div>
-              <h3 style={{ fontSize: "0.9rem" }}>INVERTER</h3>
-              <p style={{ flexGrow: 1, fontSize: "0.8rem" }}>
-                Sleek, durable device with flexible connectivity and easy
-                installation.
-              </p>
-              <span
-                className="view-more-btn"
-                style={{ padding: "8px 15px", fontSize: "0.8rem", display: "inline-block", marginTop: "auto", textAlign: "center" }}
-              >
-                View More
-              </span>
-            </Link>
+            {[
+              {
+                to: "/products/electric-scooter-battery",
+                img: "/assets/nav-automotive.jpg",
+                title: "Automotive Lithium Battery",
+                desc: "Reliable energy for every journey.",
+                blob: "#ffffff"
+              },
+              {
+                to: "/products/lithium-inverter-battery-home",
+                img: "/assets/inverter-battery.jpg",
+                title: "Inverter Lithium Battery",
+                desc: "Stable power, smarter living.",
+                blob: "#ffffff"
+              },
+              {
+                to: "/products/solar-street-light-storage",
+                img: "/assets/solar-battery-cluster.jpg",
+                title: "Lithium Battery Solar App.",
+                desc: "Clean energy for a brighter tomorrow.",
+                blob: "#ffffff"
+              },
+              {
+                to: "/products/solid-state",
+                img: "/assets/drone-single-battery.jpg",
+                title: "Drone Lithium Battery",
+                desc: "More flight time, more possibilities.",
+                blob: "#ffffff"
+              },
+              {
+                to: "/products/charger",
+                img: "/assets/nav-automotive.jpg",
+                title: "EV Charger",
+                desc: "Charge today, drive tomorrow.",
+                blob: "#ffffff"
+              },
+              {
+                to: "/products/inverter",
+                img: "/assets/inverter-hero-house.jpg",
+                title: "Inverter",
+                desc: "Efficient power for your home & business.",
+                blob: "#ffffff"
+              }
+            ].map((prod, idx) => (
+              <Link key={idx} to={prod.to} className="attractive-card">
+                <div className="card-icon-wrapper" style={{ background: prod.blob }}>
+                  <img src={prod.img} alt={prod.title} />
+                </div>
+                <h3 style={{ fontSize: "1.05rem", fontWeight: 800, color: "#1a1a1a", marginBottom: "8px", lineHeight: 1.3, minHeight: "44px" }}>
+                  {prod.title}
+                </h3>
+                <p style={{ fontSize: "0.85rem", color: "#666", flexGrow: 1, margin: 0, minHeight: "40px" }}>
+                  {prod.desc}
+                </p>
+                <div className="card-arrow-btn">
+                  &#8594;
+                </div>
+              </Link>
+            ))}
+            
+            {/* Duplicates for endless scroll illusion */}
+            {[
+              {
+                to: "/products/electric-scooter-battery",
+                img: "/assets/nav-automotive.jpg",
+                title: "Automotive Lithium Battery",
+                desc: "Reliable energy for every journey.",
+                blob: "#ffffff"
+              },
+              {
+                to: "/products/lithium-inverter-battery-home",
+                img: "/assets/inverter-battery.jpg",
+                title: "Inverter Lithium Battery",
+                desc: "Stable power, smarter living.",
+                blob: "#ffffff"
+              }
+            ].map((prod, idx) => (
+              <Link key={`dup-${idx}`} to={prod.to} className="attractive-card">
+                <div className="card-icon-wrapper" style={{ background: prod.blob }}>
+                  <img src={prod.img} alt={prod.title} />
+                </div>
+                <h3 style={{ fontSize: "1.05rem", fontWeight: 800, color: "#1a1a1a", marginBottom: "8px", lineHeight: 1.3, minHeight: "44px" }}>
+                  {prod.title}
+                </h3>
+                <p style={{ fontSize: "0.85rem", color: "#666", flexGrow: 1, margin: 0, minHeight: "40px" }}>
+                  {prod.desc}
+                </p>
+                <div className="card-arrow-btn">
+                  &#8594;
+                </div>
+              </Link>
+            ))}
           </div>
+        </div>
+
+        {/* View All Products Button */}
+        <div style={{ marginTop: "40px", display: "flex", justifyContent: "center", alignItems: "center", gap: "15px" }}>
+          <span style={{ width: "30px", height: "2px", background: "rgba(255,102,0,0.3)" }}></span>
+          <Link
+            to="/products"
+            style={{
+              background: "var(--primary)",
+              color: "#fff",
+              padding: "15px 35px",
+              borderRadius: "30px",
+              fontWeight: 800,
+              textDecoration: "none",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "10px",
+              boxShadow: "0 10px 20px rgba(255,102,0,0.2)",
+              transition: "transform 0.3s ease"
+            }}
+            onMouseOver={(e) => e.currentTarget.style.transform = "translateY(-3px)"}
+            onMouseOut={(e) => e.currentTarget.style.transform = "translateY(0)"}
+          >
+            View All Products <span>&#8594;</span>
+          </Link>
+          <span style={{ width: "30px", height: "2px", background: "rgba(255,102,0,0.3)" }}></span>
         </div>
       </section>
 

@@ -111,13 +111,15 @@ const Navbar = () => {
                   <img src="/assets/inverter-battery.jpg" alt="Inverter" />
                   <span>Inverter Lithium Battery</span>
                 </Link>
-                <div
-                  className={`mega-menu-item ${activeMenu === "solar" ? "active" : ""}`}
+                <Link
+                  to="/products/solar-street-light-storage"
+                  className="mega-menu-item"
                   onMouseEnter={() => setActiveMenu("solar")}
+                  onClick={() => setIsOpen(false)}
                 >
                   <img src="/assets/solar-battery-cluster.jpg" alt="Solar" />
                   <span>Lithium Battery Solar Application</span>
-                </div>
+                </Link>
                 <Link
                   to="/products/solid-state"
                   className="mega-menu-item"
@@ -150,73 +152,7 @@ const Navbar = () => {
                 </Link>
               </div>
 
-              {/* Bottom Details (Only for Solar currently based on screenshot) */}
-              {activeMenu === "solar" && (
-                <div className="mega-menu-bottom">
-                  <div className="mega-menu-sub">
-                    <Link
-                      to="/products/solar-street-light-storage"
-                      className={`mega-menu-sub-item ${activeSubMenu === "solar-street" ? "active" : ""}`}
-                      onMouseEnter={() => setActiveSubMenu("solar-street")}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Solar Street Light & Robots Battery
-                    </Link>
-                    <div
-                      className={`mega-menu-sub-item ${activeSubMenu === "home" ? "active" : ""}`}
-                      onMouseEnter={() => setActiveSubMenu("home")}
-                    >
-                      Home
-                    </div>
-                    <div
-                      className={`mega-menu-sub-item ${activeSubMenu === "office" ? "active" : ""}`}
-                      onMouseEnter={() => setActiveSubMenu("office")}
-                    >
-                      Small Office
-                    </div>
-                    <div
-                      className={`mega-menu-sub-item ${activeSubMenu === "industrial" ? "active" : ""}`}
-                      onMouseEnter={() => setActiveSubMenu("industrial")}
-                    >
-                      Industrial BESS
-                    </div>
-                  </div>
 
-                  <div className="mega-menu-details">
-                    {activeSubMenu === "solar-street" && (
-                      <div className="mega-menu-details-grid">
-                        <Link to="/products">Solar Bot 1</Link>
-                        <Link to="/products">Solar Bot 2</Link>
-                        <Link to="/products">Street Light Base</Link>
-                        <Link to="/products">Street Light Pro</Link>
-                      </div>
-                    )}
-                    {activeSubMenu === "home" && (
-                      <div className="mega-menu-details-grid">
-                        <Link to="/products">Home Inverter 1kW</Link>
-                        <Link to="/products">Home Inverter 2kW</Link>
-                        <Link to="/products">PowerWall Basic</Link>
-                        <Link to="/products">PowerWall Pro</Link>
-                      </div>
-                    )}
-                    {activeSubMenu === "office" && (
-                      <div className="mega-menu-details-grid">
-                        <Link to="/products">Office UPS 500VA</Link>
-                        <Link to="/products">Office UPS 1000VA</Link>
-                        <Link to="/products">Server Rack Battery</Link>
-                      </div>
-                    )}
-                    {activeSubMenu === "industrial" && (
-                      <div className="mega-menu-details-grid">
-                        <Link to="/products">TKESS-261</Link>
-                        <Link to="/products">TKESS-418</Link>
-                        <Link to="/products">5 MWH</Link>
-                        <Link to="/products">Mobile Maintenance BESS</Link>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
 
