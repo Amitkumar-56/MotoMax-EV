@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   const sliderItems = [
-    { type: "image", src: "/assets/slider-1.jpg" },
-    { type: "image", src: "/assets/slider-2.jpg" },
-    { type: "image", src: "/assets/slider-3.jpg" },
-    { type: "image", src: "/assets/slider-4.jpg" },
-    { type: "image", src: "/assets/slider-5.jpg" },
+    { type: "image", src: "/assets/slider-1.jpg", title: "INDIA'S LEADING ENERGY TECHNOLOGY COMPANY", subtitle: "Pioneering the EV Revolution Across the Globe" },
+    { type: "image", src: "/assets/slider-2.jpg", title: "ADVANCED LITHIUM BATTERY PACKS", subtitle: "Powering the Future of Mobility" },
+    { type: "image", src: "/assets/slider-3.jpg", title: "SMART ENERGY STORAGE SOLUTIONS", subtitle: "Reliable Backup for Homes & Industries" },
+    { type: "image", src: "/assets/slider-4.jpg", title: "HIGH PERFORMANCE EV CHARGERS", subtitle: "Fast, Safe, and Efficient Charging" },
+    { type: "image", src: "/assets/slider-5.jpg", title: "INNOVATING GREEN TECHNOLOGY", subtitle: "Building a Sustainable Tomorrow" },
     {
       type: "video",
-      src: "https://cdn.pixabay.com/video/2022/10/24/136262-764047648_large.mp4",
+      src: "/assets/home-video.mp4",
     },
   ];
 
@@ -28,10 +28,14 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // Hero Slider Interval
-    const heroInterval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % sliderItems.length);
-    }, 6000);
+    let heroTimeout;
+    
+    // Auto scroll logic for hero (only if not a video)
+    if (sliderItems[currentSlide].type !== "video") {
+      heroTimeout = setTimeout(() => {
+        setCurrentSlide((prev) => (prev + 1) % sliderItems.length);
+      }, 3000);
+    }
 
     // Product Slider Auto-scroll Interval
     const productInterval = setInterval(() => {
@@ -52,10 +56,10 @@ const Home = () => {
     }, 4000);
 
     return () => {
-      clearInterval(heroInterval);
+      clearTimeout(heroTimeout);
       clearInterval(productInterval);
     };
-  }, []);
+  }, [currentSlide]);
 
   return (
     <div className="responsive-page " style={{ background: "#fff" }}>
@@ -64,18 +68,13 @@ const Home = () => {
         style={{
           position: "relative",
           width: "100%",
-          height: "80vh",
-          minHeight: "auto",
-          flexWrap: "wrap",
-          gap: "40px",
-          padding: "40px 0",
+          height: "85vh",
+          minHeight: "600px",
           overflow: "hidden",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
           background: "#000",
         }}
       >
+        {/* Slider Images/Videos */}
         {sliderItems.map((item, index) => (
           <div
             key={index}
@@ -85,65 +84,21 @@ const Home = () => {
               left: 0,
               width: "100%",
               height: "100%",
-              opacity: index === currentSlide ? 1 : 0,
-              transition: "opacity 1s",
+              transform: `translateX(${(index - currentSlide) * 100}%)`,
+              transition: "transform 0.8s cubic-bezier(0.45, 0, 0.15, 1)",
               zIndex: 0,
             }}
           >
             {item.type === "video" ? (
-              <div
-                style={{ width: "100%", height: "100%", position: "relative" }}
+              <video
+                autoPlay
+                muted
+                playsInline
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                onEnded={() => setCurrentSlide((prev) => (prev + 1) % sliderItems.length)}
               >
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                >
-                  <source src={item.src} type="video/mp4" />
-                </video>
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    background: "rgba(0,0,0,0.5)",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    zIndex: 1,
-                  }}
-                >
-                  <h1
-                    style={{
-                      color: "#ff6600",
-                      fontSize: "6rem",
-                      fontWeight: 900,
-                      textTransform: "uppercase",
-                      textShadow: "2px 4px 15px rgba(0,0,0,0.8)",
-                      margin: 0,
-                      letterSpacing: "4px",
-                    }}
-                  >
-                    MOTOMAX EV
-                  </h1>
-                  <h2
-                    style={{
-                      color: "#fff",
-                      fontSize: "2.5rem",
-                      fontWeight: 300,
-                      letterSpacing: "2px",
-                      textShadow: "1px 2px 10px rgba(0,0,0,0.8)",
-                    }}
-                  >
-                    Powering the Future of Mobility
-                  </h2>
-                </div>
-              </div>
+                <source src={item.src} type="video/mp4" />
+              </video>
             ) : (
               <img
                 src={item.src}
@@ -151,8 +106,88 @@ const Home = () => {
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             )}
+
+            {/* Dark overlay for better text readability */}
+            {item.type !== "video" && (
+              <div style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                background: "rgba(0,0,0,0.4)"
+              }}></div>
+            )}
           </div>
         ))}
+
+        {/* Dynamic Text Overlay */}
+        {sliderItems[currentSlide].type !== "video" && (
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 1,
+              pointerEvents: "none",
+              padding: "0 20px",
+              textAlign: "center"
+            }}
+          >
+            <h1
+              style={{
+                color: "#ffffff",
+                fontSize: "4.5rem",
+                fontWeight: 900,
+                textTransform: "uppercase",
+                textShadow: "2px 4px 15px rgba(0,0,0,0.8)",
+                margin: "0 0 10px 0",
+                maxWidth: "1100px",
+                lineHeight: "1.1"
+              }}
+            >
+              {sliderItems[currentSlide].title}
+            </h1>
+            <h2
+              style={{
+                color: "#fff",
+                fontSize: "1.8rem",
+                fontWeight: 400,
+                letterSpacing: "1px",
+                textShadow: "1px 2px 10px rgba(0,0,0,0.8)",
+                marginBottom: "40px"
+              }}
+            >
+              {sliderItems[currentSlide].subtitle}
+            </h2>
+            <button
+              style={{
+                background: "#ff9900",
+                color: "#fff",
+                padding: "15px 40px",
+                borderRadius: "30px",
+                border: "none",
+                fontSize: "1.2rem",
+                fontWeight: "bold",
+                cursor: "pointer",
+                pointerEvents: "auto",
+                boxShadow: "0 5px 15px rgba(255,153,0,0.4)",
+                transition: "transform 0.3s, background 0.3s"
+              }}
+              onMouseOver={(e) => e.target.style.background = "#e68a00"}
+              onMouseOut={(e) => e.target.style.background = "#ff9900"}
+            >
+              Explore More &rarr;
+            </button>
+          </div>
+        )}
+
         {/* Navigation Arrows */}
         <div
           onClick={() =>
@@ -162,15 +197,28 @@ const Home = () => {
           }
           style={{
             position: "absolute",
-            left: "20px",
+            left: "30px",
+            top: "50%",
+            transform: "translateY(-50%)",
             zIndex: 2,
             color: "#fff",
-            fontSize: "3rem",
+            fontSize: "1.5rem",
             cursor: "pointer",
             userSelect: "none",
+            width: "50px",
+            height: "50px",
+            background: "rgba(255,255,255,0.2)",
+            border: "2px solid rgba(255,255,255,0.5)",
+            borderRadius: "50%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            transition: "background 0.3s"
           }}
+          onMouseOver={(e) => e.target.style.background = "rgba(255,255,255,0.4)"}
+          onMouseOut={(e) => e.target.style.background = "rgba(255,255,255,0.2)"}
         >
-          ⟨
+          &#10094;
         </div>
         <div
           onClick={() =>
@@ -178,15 +226,28 @@ const Home = () => {
           }
           style={{
             position: "absolute",
-            right: "20px",
+            right: "30px",
+            top: "50%",
+            transform: "translateY(-50%)",
             zIndex: 2,
             color: "#fff",
-            fontSize: "3rem",
+            fontSize: "1.5rem",
             cursor: "pointer",
             userSelect: "none",
+            width: "50px",
+            height: "50px",
+            background: "rgba(255,255,255,0.2)",
+            border: "2px solid rgba(255,255,255,0.5)",
+            borderRadius: "50%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            transition: "background 0.3s"
           }}
+          onMouseOver={(e) => e.target.style.background = "rgba(255,255,255,0.4)"}
+          onMouseOut={(e) => e.target.style.background = "rgba(255,255,255,0.2)"}
         >
-          ⟩
+          &#10095;
         </div>
       </header>
 
@@ -212,7 +273,7 @@ const Home = () => {
       <section className="section-padding" style={{ paddingTop: "0" }}>
         <h2
           className="section-title text-center"
-          style={{ marginBottom: "3rem" }}
+          style={{ marginBottom: "1rem" }}
         >
           Who We Are
         </h2>
@@ -292,13 +353,13 @@ const Home = () => {
 
       {/* Products Section */}
       <section className="section-padding text-center">
-        <h2 className="section-title">Products</h2>
+        <h2 className="section-title text-7xl" >Products</h2>
 
         <div
           style={{
             position: "relative",
             maxWidth: "1200px",
-            margin: "60px auto 0",
+            margin: "10px auto 0",
           }}
         >
           {/* Navigation Arrows */}
@@ -1008,7 +1069,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div style={{ marginTop: "40px" }}>
+          <div style={{ marginTop: "40px", marginBottom: "30px" }}>
             <Link
               to="/news-events"
               className="btn-primary"
@@ -1016,6 +1077,7 @@ const Home = () => {
                 padding: "15px 40px",
                 fontSize: "1.1rem",
                 borderRadius: "30px",
+                display: "inline-block"
               }}
             >
               View All Events

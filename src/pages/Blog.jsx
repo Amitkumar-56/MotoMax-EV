@@ -63,10 +63,53 @@ const Blog = () => {
     >
       <style>
         {`
+          .blog-card {
+            border: 1px solid #f3f4f6;
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+          .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 102, 0, 0.15);
+          }
+          
+          .read-more-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #1f2937;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+          }
+          .blog-card:hover .read-more-btn {
+            background: #ff6600;
+          }
+
           @media (max-width: 768px) {
-            h1 { font-size: 2.2rem !important; margin-bottom: 30px !important; }
-            div[style*="flex: 0 0 350px"] { flex: 1 1 100% !important; width: 100% !important; }
-            div[style*="flex: 1 1 700px"] { flex: 1 1 100% !important; width: 100% !important; }
+            .responsive-page { padding: 30px 15px !important; }
+            h1 { font-size: 2rem !important; margin-bottom: 20px !important; }
+            
+            /* Fix layout width issues and reduce gaps */
+            .blog-layout { flex-direction: column !important; gap: 25px !important; }
+            .blog-grid-container { flex: 1 1 100% !important; width: 100% !important; }
+            .blog-sidebar { flex: 1 1 100% !important; width: 100% !important; gap: 20px !important; }
+            
+            /* Make cards fit perfectly on phone */
+            .blog-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+            
+            .card-content { padding: 20px !important; }
+            .card-title { font-size: 1.1rem !important; }
           }
         `}
       </style>
@@ -82,7 +125,7 @@ const Blog = () => {
         Blog
       </h1>
 
-      <div
+      <div className="blog-layout"
         style={{
           display: "flex",
           flexWrap: "wrap",
@@ -91,34 +134,29 @@ const Blog = () => {
         }}
       >
         {/* Main Blog Grid */}
-        <div
+        <div className="blog-grid-container"
           style={{
             flex: "1 1 700px",
+          }}
+        >
+          <div className="blog-grid" style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
             gap: "30px",
-          }}
-        >
+          }}>
           {blogPosts.map((post, index) => (
             <div
               key={index}
-              style={{
-                border: "1px solid #f3f4f6",
-                borderRadius: "15px",
-                overflow: "hidden",
-                backgroundColor: "#fff",
-                boxShadow: "0 10px 20px rgba(0,0,0,0.05)",
-                display: "flex",
-                flexDirection: "column",
-                position: "relative",
-              }}
+              className="blog-card"
             >
               {/* Image with MotoMax EV Watermark */}
-              <div style={{ position: "relative", height: "220px" }}>
+              <div style={{ position: "relative", height: "220px", overflow: "hidden" }}>
                 <img
                   src={post.img}
                   alt={post.title}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }}
+                  onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                  onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                 />
                 {/* Simulated Watermark */}
                 <div
@@ -127,21 +165,21 @@ const Blog = () => {
                     top: "15px",
                     left: "50%",
                     transform: "translateX(-50%)",
-                    background: "rgba(255, 255, 255, 0.9)",
-                    padding: "5px 15px",
+                    background: "rgba(255, 255, 255, 0.95)",
+                    padding: "6px 16px",
                     borderRadius: "20px",
                     color: "#ff6600",
                     fontWeight: "bold",
-                    fontSize: "0.8rem",
+                    fontSize: "0.75rem",
                     letterSpacing: "1px",
-                    boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
+                    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
                   }}
                 >
                   MOTOMAX EV
                 </div>
               </div>
 
-              <div
+              <div className="card-content"
                 style={{
                   padding: "25px",
                   flexGrow: 1,
@@ -149,7 +187,7 @@ const Blog = () => {
                   flexDirection: "column",
                 }}
               >
-                <h3
+                <h3 className="card-title"
                   style={{
                     fontSize: "1.2rem",
                     fontWeight: 700,
@@ -177,30 +215,18 @@ const Blog = () => {
                     marginTop: "20px",
                   }}
                 >
-                  <div
-                    style={{
-                      width: "35px",
-                      height: "35px",
-                      borderRadius: "50%",
-                      background: "#1f2937",
-                      color: "#fff",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      fontSize: "1.2rem",
-                      cursor: "pointer",
-                    }}
-                  >
+                  <div className="read-more-btn">
                     ➔
                   </div>
                 </div>
               </div>
             </div>
           ))}
+          </div>
         </div>
 
         {/* Right Sidebar */}
-        <div
+        <div className="blog-sidebar"
           style={{
             flex: "0 0 350px",
             display: "flex",
