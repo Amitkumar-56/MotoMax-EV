@@ -19,6 +19,7 @@ const SolarStreetLightStorage = () => {
             div[style*="padding: 60px"] { padding: 30px 20px !important; }
             div[style*="padding: 60px 80px"] { padding: 30px !important; display: flex !important; flex-direction: column !important; }
             img[style*="right: 10%"] { position: relative !important; right: 0 !important; top: 0 !important; margin: 20px auto 0 !important; width: 150px !important; height: auto !important; }
+            div[style*="right: -35%"] { position: relative !important; right: auto !important; top: auto !important; transform: none !important; justify-content: center !important; margin-top: 40px !important; }
             ul[style*="45%"] { flex: 1 1 100% !important; text-align: left !important; padding-right: 0 !important; }
             div[style*="paddingLeft: 50px"] { padding-left: 0 !important; }
             div[style*="borderTop"] { display: none !important; }
