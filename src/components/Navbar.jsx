@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../index.css";
 
 const Navbar = () => {
@@ -9,8 +9,25 @@ const Navbar = () => {
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [investorOpen, setInvestorOpen] = useState(false);
 
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setIsOpen(false);
+        setMegaMenuOpen(false);
+        setInvestorOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <nav className="navbar-light">
+    <nav className="navbar-light" ref={navRef}>
       <div className="logo">
         <Link to="/" style={{ display: "flex", alignItems: "center" }}>
           {/* Default to the logo provided by user or text fallback */}
