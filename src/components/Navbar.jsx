@@ -15,16 +15,13 @@ const Navbar = () => {
         <Link to="/" style={{ display: "flex", alignItems: "center" }}>
           {/* Default to the logo provided by user or text fallback */}
           <img
-            src="/logo.png"
-            alt="Logo"
+            src="/Icon.png"
+            alt="MotoMax EV Logo"
             style={{ 
               height: "45px", 
-              width: "45px", 
-              borderRadius: "50%", 
-              border: "2px solid #ff6600", 
-              objectFit: "cover",
-              padding: "2px",
-              background: "#fff"
+              width: "auto", 
+              objectFit: "contain",
+              borderRadius: "5px"
             }}
             onError={(e) => {
               e.target.style.display = "none";
@@ -34,7 +31,7 @@ const Navbar = () => {
           <h2
             style={{
               display: "none",
-              color: "#ff6600",
+              color: "var(--primary)",
               margin: 0,
               fontWeight: 900,
             }}
