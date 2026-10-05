@@ -61,7 +61,7 @@ const Navbar = () => {
       <div
         className="menu-icon"
         onClick={() => setIsOpen(!isOpen)}
-        style={{ color: "#ffffffff" }}
+        style={{ color: "#000000ff" }}
       >
         ☰
       </div>
