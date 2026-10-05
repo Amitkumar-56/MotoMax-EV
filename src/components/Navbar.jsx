@@ -260,14 +260,26 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/contact-us" onClick={() => setIsOpen(false)}>
-            Contact
+          <Link
+            to="/contact-us"
+            className="pulse-btn"
+            style={{
+              background: "var(--primary)",
+              color: "#000",
+              padding: "10px 20px",
+              borderRadius: "30px",
+              fontWeight: "bold",
+              textShadow: "none"
+            }}
+            onClick={() => setIsOpen(false)}
+          >
+            Enquire Now
           </Link>
         </li>
         <li>
           <Link
             to="/admin"
-            style={{ color: "#ff6600", fontWeight: "bold" }}
+            style={{ color: "var(--primary)", fontWeight: "bold" }}
             onClick={() => setIsOpen(false)}
           >
             Admin Panel

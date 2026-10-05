@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   const sliderItems = [
+    {
+      type: "video",
+      src: "/assets/home-video.mp4",
+    },
     { type: "image", src: "/assets/slider-1.jpg", title: "INDIA'S LEADING ENERGY TECHNOLOGY COMPANY", subtitle: "Pioneering the EV Revolution Across the Globe" },
     { type: "image", src: "/assets/slider-2.jpg", title: "ADVANCED LITHIUM BATTERY PACKS", subtitle: "Powering the Future of Mobility" },
     { type: "image", src: "/assets/slider-3.jpg", title: "SMART ENERGY STORAGE SOLUTIONS", subtitle: "Reliable Backup for Homes & Industries" },
     { type: "image", src: "/assets/slider-4.jpg", title: "HIGH PERFORMANCE EV CHARGERS", subtitle: "Fast, Safe, and Efficient Charging" },
     { type: "image", src: "/assets/slider-5.jpg", title: "INNOVATING GREEN TECHNOLOGY", subtitle: "Building a Sustainable Tomorrow" },
-    {
-      type: "video",
-      src: "/assets/home-video.mp4",
-    },
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -65,7 +65,7 @@ const Home = () => {
   }, [currentSlide]);
 
   return (
-    <div className="responsive-page " style={{ background: "#fff" }}>
+    <div className="responsive-page" style={{ background: "var(--bg-main)" }}>
       {/* Unified Hero Slider */}
       <header className="hero-section">
         {/* Slider Images/Videos */}
@@ -795,7 +795,7 @@ const Home = () => {
       <section
         className="section-padding"
         style={{
-          background: "#f4f7f6",
+          background: "var(--bg-main)",
           position: "relative",
           overflow: "hidden",
         }}
@@ -808,14 +808,14 @@ const Home = () => {
             style={{
               fontSize: "3.5rem",
               fontWeight: 900,
-              color: "#111",
+              color: "var(--text-main)",
               marginBottom: "10px",
             }}
           >
             News & Events
           </h2>
           <p
-            style={{ color: "#666", fontSize: "1.1rem", marginBottom: "50px" }}
+            style={{ color: "var(--text-muted)", fontSize: "1.1rem", marginBottom: "50px" }}
           >
             Stay updated with the latest happenings at MotoMax EV
           </p>
