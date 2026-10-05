@@ -19,6 +19,10 @@ const ElectricScooterBattery = () => {
             div[style*="max-width: 60%"], div[style*="maxWidth: 60%"] { max-width: 100% !important; }
             div[style*="padding: 60px 80px"] { padding: 30px !important; display: flex !important; flex-direction: column !important; }
             img[style*="right: 10%"] { position: relative !important; right: 0 !important; top: 0 !important; margin: 20px auto 0 !important; width: 150px !important; height: auto !important; }
+            div[style*="right: -35%"] { position: relative !important; right: auto !important; top: auto !important; transform: none !important; justify-content: center !important; margin-top: 40px !important; }
+            div[style*="width: 30%"], div[style*="width: 40%"] { width: 100% !important; text-align: center !important; }
+            div[style*="gap: 50px"] { flex-direction: column !important; gap: 20px !important; }
+            div[style*="borderBottom"], div[style*="height: 6px"] { display: none !important; }
             div[style*="width: 30%"], div[style*="width: 40%"] { width: 100% !important; text-align: center !important; }
             div[style*="gap: 50px"] { flex-direction: column !important; gap: 20px !important; }
             div[style*="borderBottom"], div[style*="height: 6px"] { display: none !important; }
