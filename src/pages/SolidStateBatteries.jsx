@@ -14,11 +14,11 @@ const SolidStateBatteries = () => {
         {`
           @media (max-width: 768px) {
             h2[style*="4rem"] { font-size: 2.2rem !important; }
-            div[style*="max-width: 60%"], div[style*="maxWidth: 60%"] { max-width: 100% !important; }
+            div[style*="max-width: 60%"], div[style*="maxWidth: 60%"] { max-width: 100% !important; text-align: center !important; margin: 0 auto !important; }
             div[style*="width: 55%"] { width: 100% !important; }
             div[style*="padding: 60px"] { padding: 30px 20px !important; }
-            div[style*="padding: 60px 80px"] { padding: 30px !important; display: flex !important; flex-direction: column !important; }
-            img[style*="right: 10%"] { position: relative !important; right: 0 !important; top: 0 !important; margin: 20px auto 0 !important; width: 150px !important; height: auto !important; }
+            div[style*="padding: 60px 80px"] { padding: 40px 20px !important; display: flex !important; flex-direction: column !important; align-items: center !important; }
+            img[style*="right: 10%"] { position: relative !important; right: 0 !important; top: 0 !important; margin: 30px auto 0 !important; width: 90% !important; max-width: 350px !important; height: auto !important; display: block !important; }
             div[style*="right: -35%"] { position: relative !important; right: auto !important; top: auto !important; transform: none !important; justify-content: center !important; margin-top: 40px !important; }
             ul[style*="45%"] { flex: 1 1 100% !important; text-align: left !important; padding-right: 0 !important; }
             div[style*="paddingLeft: 50px"] { padding-left: 0 !important; }
@@ -420,7 +420,7 @@ const SolidStateBatteries = () => {
             zIndex: 1,
             maxWidth: "1200px",
             margin: "0 auto",
-          }}
+          }} className="specs-wrapper product-specs-container"
         >
           {/* Left Specs */}
           <div
@@ -431,7 +431,7 @@ const SolidStateBatteries = () => {
               textAlign: "left",
               width: "35%",
             }}
-          >
+           className="product-specs-col">
             <div style={{ position: "relative" }}>
               <h4
                 style={{
@@ -455,7 +455,7 @@ const SolidStateBatteries = () => {
                   top: "20px",
                   width: "15%",
                   borderBottom: "1px solid #999",
-                }}
+                }} className="specs-deco"
               ></div>
               <div
                 style={{
@@ -466,7 +466,7 @@ const SolidStateBatteries = () => {
                   height: "6px",
                   borderRadius: "50%",
                   background: "var(--text-muted)",
-                }}
+                }} className="specs-deco"
               ></div>
             </div>
 
@@ -493,7 +493,7 @@ const SolidStateBatteries = () => {
                   top: "20px",
                   width: "15%",
                   borderBottom: "1px solid #999",
-                }}
+                }} className="specs-deco"
               ></div>
               <div
                 style={{
@@ -504,7 +504,7 @@ const SolidStateBatteries = () => {
                   height: "6px",
                   borderRadius: "50%",
                   background: "var(--text-muted)",
-                }}
+                }} className="specs-deco"
               ></div>
             </div>
           </div>
@@ -518,7 +518,7 @@ const SolidStateBatteries = () => {
               alignItems: "center",
               position: "relative",
             }}
-          >
+           className="product-specs-img-col">
             <img
               src="/assets/4.png"
               alt="Drone Battery Pack"
@@ -549,7 +549,7 @@ const SolidStateBatteries = () => {
               textAlign: "left",
               width: "35%",
             }}
-          >
+           className="product-specs-col">
             <div style={{ position: "relative", paddingLeft: "50px" }}>
               <div
                 style={{
@@ -558,7 +558,7 @@ const SolidStateBatteries = () => {
                   top: "20px",
                   width: "25%",
                   borderBottom: "1px solid #999",
-                }}
+                }} className="specs-deco"
               ></div>
               <div
                 style={{
@@ -569,7 +569,7 @@ const SolidStateBatteries = () => {
                   height: "6px",
                   borderRadius: "50%",
                   background: "var(--text-muted)",
-                }}
+                }} className="specs-deco"
               ></div>
               <h4
                 style={{
@@ -600,7 +600,7 @@ const SolidStateBatteries = () => {
                   top: "20px",
                   width: "25%",
                   borderBottom: "1px solid #999",
-                }}
+                }} className="specs-deco"
               ></div>
               <div
                 style={{
@@ -611,7 +611,7 @@ const SolidStateBatteries = () => {
                   height: "6px",
                   borderRadius: "50%",
                   background: "var(--text-muted)",
-                }}
+                }} className="specs-deco"
               ></div>
               <h4
                 style={{
@@ -731,7 +731,7 @@ const SolidStateBatteries = () => {
                       borderRight: "1px solid #999",
                       borderTopRightRadius: "10px",
                       height: "80px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -742,7 +742,7 @@ const SolidStateBatteries = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -773,7 +773,7 @@ const SolidStateBatteries = () => {
                       borderRight: "1px solid #999",
                       borderBottomRightRadius: "10px",
                       height: "80px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -784,7 +784,7 @@ const SolidStateBatteries = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>
@@ -835,7 +835,7 @@ const SolidStateBatteries = () => {
                       borderLeft: "1px solid #999",
                       borderTopLeftRadius: "10px",
                       height: "180px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -846,7 +846,7 @@ const SolidStateBatteries = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative", marginTop: "20px" }}>
@@ -875,7 +875,7 @@ const SolidStateBatteries = () => {
                       borderLeft: "1px solid #999",
                       borderBottomLeftRadius: "10px",
                       height: "80px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -886,7 +886,7 @@ const SolidStateBatteries = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>

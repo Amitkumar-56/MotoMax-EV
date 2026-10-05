@@ -17,8 +17,8 @@ const ElectricScooterBattery = () => {
           @media (max-width: 768px) {
             h2[style*="4rem"] { font-size: 2.2rem !important; }
             div[style*="max-width: 60%"], div[style*="maxWidth: 60%"] { max-width: 100% !important; }
-            div[style*="padding: 60px 80px"] { padding: 30px !important; display: flex !important; flex-direction: column !important; }
-            img[style*="right: 10%"] { position: relative !important; right: 0 !important; top: 0 !important; margin: 20px auto 0 !important; width: 150px !important; height: auto !important; }
+            div[style*="padding: 60px 80px"] { padding: 40px 20px !important; display: flex !important; flex-direction: column !important; align-items: center !important; }
+            img[style*="right: 10%"] { position: relative !important; right: 0 !important; top: 0 !important; margin: 30px auto 0 !important; width: 90% !important; max-width: 350px !important; height: auto !important; display: block !important; }
             div[style*="right: -35%"] { position: relative !important; right: auto !important; top: auto !important; transform: none !important; justify-content: center !important; margin-top: 40px !important; }
             div[style*="width: 30%"], div[style*="width: 40%"] { width: 100% !important; text-align: center !important; }
             div[style*="gap: 50px"] { flex-direction: column !important; gap: 20px !important; }
@@ -124,7 +124,7 @@ const ElectricScooterBattery = () => {
         </div>
 
         {/* Mint Green Box */}
-        <div
+        <div className="product-mint-wrapper"
           style={{
             maxWidth: "900px",
             margin: "0 auto",
@@ -133,9 +133,7 @@ const ElectricScooterBattery = () => {
             justifyContent: "center",
           }}
         >
-          <div
-            style={{
-              background: "var(--secondary)",
+          <div className="product-mint-box" style={{ background: "var(--secondary)",
               borderRadius: "40px",
               padding: "60px 80px",
               width: "100%",
@@ -147,7 +145,7 @@ const ElectricScooterBattery = () => {
               minHeight: "350px",
             }}
           >
-            <div style={{ maxWidth: "60%" }}>
+            <div className="product-mint-text" style={{ maxWidth: "60%" }}>
               <h2
                 style={{
                   fontSize: "4rem",
@@ -169,7 +167,7 @@ const ElectricScooterBattery = () => {
             </div>
           </div>
           {/* Overlapping Battery Image on Right */}
-          <img
+          <img className="product-mint-img" 
             src="/assets/1.png"
             alt="Product Battery"
             style={{
@@ -851,7 +849,7 @@ const ElectricScooterBattery = () => {
                 maxWidth: "100%",
                 zIndex: 3,
               }}
-            >
+             className="product-specs-col">
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
@@ -875,7 +873,7 @@ const ElectricScooterBattery = () => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "flex-end",
-                  }}
+                  }} className="specs-deco"
                 >
                   <div
                     style={{
@@ -894,7 +892,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--border-light)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>
@@ -921,7 +919,7 @@ const ElectricScooterBattery = () => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "flex-end",
-                  }}
+                  }} className="specs-deco"
                 >
                   <div
                     style={{
@@ -940,7 +938,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--border-light)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>
@@ -967,7 +965,7 @@ const ElectricScooterBattery = () => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "flex-end",
-                  }}
+                  }} className="specs-deco"
                 >
                   <div
                     style={{
@@ -986,7 +984,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--border-light)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>
@@ -1013,7 +1011,7 @@ const ElectricScooterBattery = () => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "flex-end",
-                  }}
+                  }} className="specs-deco"
                 >
                   <div
                     style={{
@@ -1032,7 +1030,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--border-light)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>
@@ -1059,7 +1057,7 @@ const ElectricScooterBattery = () => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "flex-end",
-                  }}
+                  }} className="specs-deco"
                 >
                   <div
                     style={{
@@ -1078,7 +1076,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--border-light)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>
@@ -1099,7 +1097,7 @@ const ElectricScooterBattery = () => {
                 zIndex: 3,
                 paddingLeft: "50px",
               }}
-            >
+             className="product-specs-col">
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
@@ -1122,7 +1120,7 @@ const ElectricScooterBattery = () => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "flex-start",
-                  }}
+                  }} className="specs-deco"
                 >
                   <div
                     style={{
@@ -1132,7 +1130,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--border-light)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1142,7 +1140,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--border-light)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>
@@ -1169,7 +1167,7 @@ const ElectricScooterBattery = () => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "flex-start",
-                  }}
+                  }} className="specs-deco"
                 >
                   <div
                     style={{
@@ -1179,7 +1177,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--border-light)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1189,7 +1187,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--border-light)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>
@@ -1216,7 +1214,7 @@ const ElectricScooterBattery = () => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "flex-start",
-                  }}
+                  }} className="specs-deco"
                 >
                   <div
                     style={{
@@ -1226,7 +1224,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--border-light)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1236,7 +1234,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--border-light)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>
@@ -1263,7 +1261,7 @@ const ElectricScooterBattery = () => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "flex-start",
-                  }}
+                  }} className="specs-deco"
                 >
                   <div
                     style={{
@@ -1273,7 +1271,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--border-light)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1283,7 +1281,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--border-light)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>
@@ -1375,7 +1373,7 @@ const ElectricScooterBattery = () => {
                       borderRight: "1px solid #999",
                       borderTopRightRadius: "10px",
                       height: "30px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1386,7 +1384,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -1411,7 +1409,7 @@ const ElectricScooterBattery = () => {
                       borderRight: "1px solid #999",
                       borderBottomRightRadius: "10px",
                       height: "30px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1422,7 +1420,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>
@@ -1462,7 +1460,7 @@ const ElectricScooterBattery = () => {
                       borderLeft: "1px solid #999",
                       borderTopLeftRadius: "10px",
                       height: "30px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1473,7 +1471,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -1498,7 +1496,7 @@ const ElectricScooterBattery = () => {
                       borderLeft: "1px solid #999",
                       borderBottomLeftRadius: "10px",
                       height: "30px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1509,7 +1507,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>
@@ -1583,7 +1581,7 @@ const ElectricScooterBattery = () => {
                       borderRight: "1px solid #999",
                       borderTopRightRadius: "10px",
                       height: "55px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1594,7 +1592,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -1616,7 +1614,7 @@ const ElectricScooterBattery = () => {
                       top: "15px",
                       width: "30%",
                       borderTop: "1px solid #999",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1627,7 +1625,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -1652,7 +1650,7 @@ const ElectricScooterBattery = () => {
                       borderRight: "1px solid #999",
                       borderBottomRightRadius: "10px",
                       height: "55px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1663,7 +1661,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>
@@ -1703,7 +1701,7 @@ const ElectricScooterBattery = () => {
                       borderLeft: "1px solid #999",
                       borderTopLeftRadius: "10px",
                       height: "30px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1714,7 +1712,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -1743,7 +1741,7 @@ const ElectricScooterBattery = () => {
                       borderLeft: "1px solid #999",
                       borderBottomLeftRadius: "10px",
                       height: "30px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1754,7 +1752,7 @@ const ElectricScooterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>

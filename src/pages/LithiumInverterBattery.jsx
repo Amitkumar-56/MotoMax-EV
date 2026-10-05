@@ -21,8 +21,8 @@ const LithiumInverterBattery = () => {
           @media (max-width: 768px) {
             h2[style*="4rem"] { font-size: 2.2rem !important; }
             div[style*="max-width: 60%"], div[style*="maxWidth: 60%"] { max-width: 100% !important; }
-            div[style*="padding: 60px 80px"] { padding: 30px !important; display: flex !important; flex-direction: column !important; }
-            img[style*="right: 10%"] { position: relative !important; right: 0 !important; top: 0 !important; margin: 20px auto 0 !important; width: 150px !important; height: auto !important; }
+            div[style*="padding: 60px 80px"] { padding: 40px 20px !important; display: flex !important; flex-direction: column !important; align-items: center !important; }
+            img[style*="right: 10%"] { position: relative !important; right: 0 !important; top: 0 !important; margin: 30px auto 0 !important; width: 90% !important; max-width: 350px !important; height: auto !important; display: block !important; }
             div[style*="right: -35%"] { position: relative !important; right: auto !important; top: auto !important; transform: none !important; justify-content: center !important; margin-top: 40px !important; }
             div[style*="width: 30%"], div[style*="width: 40%"] { width: 100% !important; text-align: center !important; }
             div[style*="gap: 50px"] { flex-direction: column !important; gap: 20px !important; }
@@ -61,9 +61,7 @@ const LithiumInverterBattery = () => {
       <section style={{ padding: "120px 10% 60px", position: "relative" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "50px" }}>
           <div style={{ position: "relative", maxWidth: "800px" }}>
-            <div
-              style={{
-                background: "var(--secondary)",
+            <div className="product-mint-box" style={{ background: "var(--secondary)",
                 padding: "60px 80px",
                 borderRadius: "20px",
                 transform: "skew(-5deg)",
@@ -216,9 +214,7 @@ const LithiumInverterBattery = () => {
           </span>
         </div>
 
-        <div
-          style={{
-            background: "var(--secondary)",
+        <div className="product-mint-box" style={{ background: "var(--secondary)",
             display: "inline-block",
             padding: "15px 50px",
             borderRadius: "15px",
@@ -233,7 +229,7 @@ const LithiumInverterBattery = () => {
           Technical Specifications
         </div>
 
-        <div
+        <div className="product-specs-container"
           style={{
             display: "flex",
             justifyContent: "center",
@@ -254,7 +250,7 @@ const LithiumInverterBattery = () => {
               textAlign: "left",
               width: "30%",
             }}
-          >
+           className="product-specs-col">
             <div style={{ position: "relative" }}>
               <h4
                 style={{ color: "var(--text-muted)", fontWeight: 700, fontSize: "0.9rem" }}
@@ -271,7 +267,7 @@ const LithiumInverterBattery = () => {
                   top: "20px",
                   width: "60px",
                   borderBottom: "1px solid #999",
-                }}
+                }} className="specs-deco"
               ></div>
               <div
                 style={{
@@ -282,7 +278,7 @@ const LithiumInverterBattery = () => {
                   height: "6px",
                   borderRadius: "50%",
                   background: "var(--text-muted)",
-                }}
+                }} className="specs-deco"
               ></div>
             </div>
             <div style={{ position: "relative" }}>
@@ -301,7 +297,7 @@ const LithiumInverterBattery = () => {
                   top: "20px",
                   width: "60px",
                   borderBottom: "1px solid #999",
-                }}
+                }} className="specs-deco"
               ></div>
               <div
                 style={{
@@ -312,7 +308,7 @@ const LithiumInverterBattery = () => {
                   height: "6px",
                   borderRadius: "50%",
                   background: "var(--text-muted)",
-                }}
+                }} className="specs-deco"
               ></div>
             </div>
             <div style={{ position: "relative" }}>
@@ -333,7 +329,7 @@ const LithiumInverterBattery = () => {
                   top: "30px",
                   width: "60px",
                   borderBottom: "1px solid #999",
-                }}
+                }} className="specs-deco"
               ></div>
               <div
                 style={{
@@ -344,7 +340,7 @@ const LithiumInverterBattery = () => {
                   height: "6px",
                   borderRadius: "50%",
                   background: "var(--text-muted)",
-                }}
+                }} className="specs-deco"
               ></div>
             </div>
           </div>
@@ -367,7 +363,7 @@ const LithiumInverterBattery = () => {
               textAlign: "left",
               width: "30%",
             }}
-          >
+           className="product-specs-col">
             <div style={{ position: "relative", paddingLeft: "60px" }}>
               <div
                 style={{
@@ -796,7 +792,7 @@ const LithiumInverterBattery = () => {
                       borderRight: "1px solid #999",
                       borderTopRightRadius: "10px",
                       height: "30px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -807,7 +803,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -831,7 +827,7 @@ const LithiumInverterBattery = () => {
                       top: "20px",
                       width: "20%",
                       borderTop: "1px solid #999",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -842,7 +838,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -866,7 +862,7 @@ const LithiumInverterBattery = () => {
                       top: "20px",
                       width: "20%",
                       borderTop: "1px solid #999",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -877,7 +873,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -904,7 +900,7 @@ const LithiumInverterBattery = () => {
                       borderRight: "1px solid #999",
                       borderBottomRightRadius: "10px",
                       height: "30px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -915,7 +911,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>
@@ -958,7 +954,7 @@ const LithiumInverterBattery = () => {
                       borderLeft: "1px solid #999",
                       borderTopLeftRadius: "10px",
                       height: "30px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -969,7 +965,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -993,7 +989,7 @@ const LithiumInverterBattery = () => {
                       top: "20px",
                       width: "20%",
                       borderTop: "1px solid #999",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1004,7 +1000,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -1028,7 +1024,7 @@ const LithiumInverterBattery = () => {
                       top: "20px",
                       width: "20%",
                       borderTop: "1px solid #999",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1039,7 +1035,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -1066,7 +1062,7 @@ const LithiumInverterBattery = () => {
                       borderLeft: "1px solid #999",
                       borderBottomLeftRadius: "10px",
                       height: "30px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1077,7 +1073,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>
@@ -1170,7 +1166,7 @@ const LithiumInverterBattery = () => {
                       borderRight: "1px solid #999",
                       borderTopRightRadius: "10px",
                       height: "30px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1181,7 +1177,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -1207,7 +1203,7 @@ const LithiumInverterBattery = () => {
                       top: "20px",
                       width: "20%",
                       borderTop: "1px solid #999",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1218,7 +1214,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -1242,7 +1238,7 @@ const LithiumInverterBattery = () => {
                       top: "20px",
                       width: "20%",
                       borderTop: "1px solid #999",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1253,7 +1249,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -1280,7 +1276,7 @@ const LithiumInverterBattery = () => {
                       borderRight: "1px solid #999",
                       borderBottomRightRadius: "10px",
                       height: "30px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1291,7 +1287,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>
@@ -1334,7 +1330,7 @@ const LithiumInverterBattery = () => {
                       borderLeft: "1px solid #999",
                       borderTopLeftRadius: "10px",
                       height: "30px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1345,7 +1341,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -1369,7 +1365,7 @@ const LithiumInverterBattery = () => {
                       top: "20px",
                       width: "20%",
                       borderTop: "1px solid #999",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1380,7 +1376,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -1404,7 +1400,7 @@ const LithiumInverterBattery = () => {
                       top: "20px",
                       width: "20%",
                       borderTop: "1px solid #999",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1415,7 +1411,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -1439,7 +1435,7 @@ const LithiumInverterBattery = () => {
                       top: "20px",
                       width: "20%",
                       borderTop: "1px solid #999",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1450,7 +1446,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
                 <div style={{ position: "relative" }}>
@@ -1479,7 +1475,7 @@ const LithiumInverterBattery = () => {
                       borderLeft: "1px solid #999",
                       borderBottomLeftRadius: "10px",
                       height: "45px",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                   <div
                     style={{
@@ -1490,7 +1486,7 @@ const LithiumInverterBattery = () => {
                       height: "6px",
                       borderRadius: "50%",
                       background: "var(--text-muted)",
-                    }}
+                    }} className="specs-deco"
                   ></div>
                 </div>
               </div>

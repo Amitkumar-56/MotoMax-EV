@@ -17,8 +17,8 @@ const EVCharger = () => {
           @media (max-width: 768px) {
             h2[style*="4rem"] { font-size: 2.2rem !important; }
             div[style*="max-width: 60%"], div[style*="maxWidth: 60%"] { max-width: 100% !important; }
-            div[style*="padding: 60px 80px"] { padding: 30px !important; display: flex !important; flex-direction: column !important; }
-            img[style*="right: 10%"] { position: relative !important; right: 0 !important; top: 0 !important; margin: 20px auto 0 !important; width: 150px !important; height: auto !important; }
+            div[style*="padding: 60px 80px"] { padding: 40px 20px !important; display: flex !important; flex-direction: column !important; align-items: center !important; }
+            img[style*="right: 10%"] { position: relative !important; right: 0 !important; top: 0 !important; margin: 30px auto 0 !important; width: 90% !important; max-width: 350px !important; height: auto !important; display: block !important; }
             div[style*="right: -35%"] { position: relative !important; right: auto !important; top: auto !important; transform: none !important; justify-content: center !important; margin-top: 40px !important; }
             div[style*="width: 30%"], div[style*="width: 40%"] { width: 100% !important; text-align: center !important; }
             div[style*="gap: 50px"] { flex-direction: column !important; gap: 20px !important; }
@@ -108,7 +108,7 @@ const EVCharger = () => {
         </div>
 
         {/* Mint Green Box */}
-        <div
+        <div className="product-mint-wrapper"
           style={{
             maxWidth: "900px",
             margin: "0 auto",
@@ -117,9 +117,7 @@ const EVCharger = () => {
             justifyContent: "center",
           }}
         >
-          <div
-            style={{
-              background: "var(--secondary)",
+          <div className="product-mint-box" style={{ background: "var(--secondary)",
               borderRadius: "40px",
               padding: "60px 80px",
               width: "100%",
@@ -131,7 +129,7 @@ const EVCharger = () => {
               minHeight: "350px",
             }}
           >
-            <div style={{ maxWidth: "60%" }}>
+            <div className="product-mint-text" style={{ maxWidth: "60%" }}>
               <h2
                 style={{
                   fontSize: "4rem",
@@ -153,7 +151,7 @@ const EVCharger = () => {
             </div>
           </div>
           {/* Overlapping Image on Right */}
-          <img
+          <img className="product-mint-img" 
             src="/assets/1.png"
             alt="Product Battery"
             style={{
@@ -463,7 +461,7 @@ const EVCharger = () => {
                 maxWidth: "100%",
                 zIndex: 3,
               }}
-            >
+             className="product-specs-col">
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
@@ -483,7 +481,7 @@ const EVCharger = () => {
                     top: "15px",
                     width: "70px",
                     borderTop: "2px solid #ccc",
-                  }}
+                  }} className="specs-deco"
                 ></div>
               </div>
 
@@ -506,7 +504,7 @@ const EVCharger = () => {
                     top: "15px",
                     width: "70px",
                     borderTop: "2px solid #ccc",
-                  }}
+                  }} className="specs-deco"
                 ></div>
               </div>
             </div>
@@ -526,7 +524,7 @@ const EVCharger = () => {
                 zIndex: 3,
                 paddingLeft: "50px",
               }}
-            >
+             className="product-specs-col">
               <div style={{ position: "relative" }}>
                 <h4
                   style={{
@@ -546,7 +544,7 @@ const EVCharger = () => {
                     top: "15px",
                     width: "40px",
                     borderTop: "2px solid #ccc",
-                  }}
+                  }} className="specs-deco"
                 ></div>
               </div>
 
@@ -571,7 +569,7 @@ const EVCharger = () => {
                     top: "15px",
                     width: "40px",
                     borderTop: "2px solid #ccc",
-                  }}
+                  }} className="specs-deco"
                 ></div>
               </div>
             </div>
