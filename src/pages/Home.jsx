@@ -582,73 +582,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Industries We Serve Section */}
-      <section className="section-padding">
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "50px",
-            alignItems: "center",
-            maxWidth: "1100px",
-            margin: "0 auto",
-          }}
-        >
-          <div style={{ flex: "1 1 400px" }}>
-            <h4
-              style={{
-                color: "#e0e0e0",
-                fontSize: "3rem",
-                fontWeight: 900,
-                textTransform: "uppercase",
-                marginBottom: "-20px",
-                zIndex: -1,
-                position: "relative",
-              }}
-            >
-              Industries We Serve
-            </h4>
-            <h2
-              className="section-title"
-              style={{ fontSize: "3rem", marginBottom: "20px" }}
-            >
-              Residential
-            </h2>
-            <p
-              style={{
-                color: "var(--text-muted)",
-                fontSize: "1.1rem",
-                lineHeight: "1.6",
-              }}
-            >
-              Smart energy storage and backup battery solutions for homes and
-              small industries - ensuring uninterrupted power, efficiency, and a
-              greener future.
-            </p>
-          </div>
 
-          <div style={{ flex: "1 1 500px" }}>
-            <div
-              style={{
-                background: "#aae5f5",
-                borderRadius: "30px",
-                padding: "40px",
-                position: "relative",
-              }}
-            >
-              <img
-                src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&q=80&w=600"
-                alt="Residential Solar"
-                style={{
-                  width: "100%",
-                  borderRadius: "15px",
-                  filter: "drop-shadow(0 10px 15px rgba(0,0,0,0.2))",
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Latest From Blog Section */}
       <section className="section-padding text-center">
