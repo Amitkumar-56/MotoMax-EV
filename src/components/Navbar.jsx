@@ -9,7 +9,18 @@ const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState("");
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [products, setProducts] = useState([]);
-  const [cartCount, setCartCount] = useState(0);
+  const [cartCount, setCartCount] = useState(() => {
+    try {
+      const uStr = localStorage.getItem("authUser");
+      if (!uStr) {
+        const guestCart = JSON.parse(localStorage.getItem("guestCart") || "[]");
+        return Array.isArray(guestCart) ? guestCart.reduce((sum, item) => sum + (item.quantity || 1), 0) : 0;
+      }
+    } catch {
+      return 0;
+    }
+    return 0;
+  });
   const location = useLocation();
   const [showEnquiryModal, setShowEnquiryModal] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
@@ -49,20 +60,39 @@ const Navbar = () => {
     const fetchCartCount = () => {
       const uStr = localStorage.getItem("authUser");
       if (uStr) {
-        const u = JSON.parse(uStr);
-        fetch(`${API_BASE}/cart.php?user_id=${u.id}`)
-          .then(res => res.json())
-          .then(data => {
-            if (Array.isArray(data)) setCartCount(data.length);
-          })
-          .catch(err => console.error(err));
-      } else {
         try {
-          const guestCart = JSON.parse(localStorage.getItem("guestCart") || "[]");
-          setCartCount(Array.isArray(guestCart) ? guestCart.length : 0);
-        } catch {
+          const u = JSON.parse(uStr);
+          if (u && u.id) {
+            fetch(`${API_BASE}/cart.php?user_id=${u.id}`)
+              .then(res => res.json())
+              .then(data => {
+                if (Array.isArray(data)) {
+                  const total = data.reduce((sum, item) => sum + (parseInt(item.quantity, 10) || 1), 0);
+                  setCartCount(total);
+                }
+              })
+              .catch(err => console.error(err));
+            return;
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      // Guest cart
+      try {
+        const guestCart = JSON.parse(localStorage.getItem("guestCart") || "[]");
+        if (Array.isArray(guestCart)) {
+          const total = guestCart.reduce((sum, item) => {
+            const qty = typeof item === 'object' ? (parseInt(item.quantity, 10) || 1) : 1;
+            return sum + qty;
+          }, 0);
+          setCartCount(total);
+        } else {
           setCartCount(0);
         }
+      } catch {
+        setCartCount(0);
       }
     };
 

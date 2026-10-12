@@ -38,9 +38,9 @@ function AppContent() {
   }, [location.pathname]);
 
   return (
-    <div className="app-container">
-      {/* Show Navbar on all pages */}
-      <Navbar />
+    <div className={`app-container ${isAdminRoute ? "admin-mode-container" : ""}`} style={isAdminRoute ? { paddingTop: 0 } : {}}>
+      {/* Hide Navbar on Admin pages */}
+      {!isAdminRoute && <Navbar />}
       <CartSuccessModal />
 
       <main className="main-content">
