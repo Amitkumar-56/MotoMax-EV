@@ -20,12 +20,12 @@ const CartSuccessModal = () => {
     return () => window.removeEventListener("cartSuccess", handleCartSuccess);
   }, []);
 
-  // Auto close after 3 seconds
+  // Auto close after 2 seconds
   useEffect(() => {
     if (!isOpen) return;
     const timer = setTimeout(() => {
       setIsOpen(false);
-    }, 2800);
+    }, 2000);
     return () => clearTimeout(timer);
   }, [isOpen]);
 
@@ -40,7 +40,7 @@ const CartSuccessModal = () => {
         left: 0,
         width: "100vw",
         height: "100vh",
-        backgroundColor: "rgba(0, 0, 0, 0.45)",
+        backgroundColor: "rgba(0, 0, 0, 0.4)",
         backdropFilter: "blur(4px)",
         display: "flex",
         alignItems: "center",
@@ -53,9 +53,9 @@ const CartSuccessModal = () => {
         onClick={(e) => e.stopPropagation()}
         style={{
           background: "#ffffff",
-          borderRadius: "20px",
-          padding: "32px 28px",
-          maxWidth: "380px",
+          borderRadius: "18px",
+          padding: "28px 24px",
+          maxWidth: "340px",
           width: "100%",
           textAlign: "center",
           boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
@@ -85,86 +85,35 @@ const CartSuccessModal = () => {
         {/* Checkmark icon */}
         <div
           style={{
-            width: "68px",
-            height: "68px",
+            width: "60px",
+            height: "60px",
             borderRadius: "50%",
-            background: "linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%)",
-            color: "#16a34a",
-            fontSize: "2.4rem",
+            background: "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)",
+            color: "#ffffff",
+            fontSize: "2rem",
             fontWeight: "bold",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             margin: "0 auto 16px auto",
-            boxShadow: "0 10px 20px rgba(22, 163, 74, 0.18)"
+            boxShadow: "0 10px 20px rgba(34, 197, 94, 0.25)"
           }}
         >
           ✓
         </div>
 
-        {/* Title */}
+        {/* Message */}
         <h3
           style={{
-            fontSize: "1.35rem",
+            fontSize: "1.2rem",
             fontWeight: "700",
             color: "#0f172a",
-            marginBottom: "8px"
-          }}
-        >
-          Added to Cart!
-        </h3>
-
-        {/* Message */}
-        <p
-          style={{
-            fontSize: "0.95rem",
-            color: "#475569",
-            marginBottom: "24px",
-            lineHeight: "1.5"
+            margin: 0,
+            lineHeight: "1.4"
           }}
         >
           {message}
-        </p>
-
-        {/* Action Buttons */}
-        <div style={{ display: "flex", gap: "10px" }}>
-          <button
-            onClick={() => setIsOpen(false)}
-            style={{
-              flex: 1,
-              padding: "11px 16px",
-              borderRadius: "10px",
-              border: "1px solid #cbd5e1",
-              background: "#f8fafc",
-              color: "#334155",
-              fontWeight: "600",
-              fontSize: "0.9rem",
-              cursor: "pointer"
-            }}
-          >
-            Continue
-          </button>
-          <button
-            onClick={() => {
-              setIsOpen(false);
-              navigate("/dashboard?tab=cart");
-            }}
-            style={{
-              flex: 1,
-              padding: "11px 16px",
-              borderRadius: "10px",
-              border: "none",
-              background: "var(--primary, #fea603)",
-              color: "#ffffff",
-              fontWeight: "700",
-              fontSize: "0.9rem",
-              cursor: "pointer",
-              boxShadow: "0 4px 12px rgba(254, 166, 3, 0.35)"
-            }}
-          >
-            Go to Cart 🛒
-          </button>
-        </div>
+        </h3>
       </div>
 
       <style>{`

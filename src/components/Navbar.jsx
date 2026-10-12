@@ -242,10 +242,15 @@ const Navbar = () => {
               </button>
             </li>
             <li className="hide-on-desktop">
-              <Link to="/dashboard?tab=cart" onClick={() => setIsOpen(false)} style={{ position: "relative" }}>
-                🛒 Cart
+              <Link to="/dashboard?tab=cart" onClick={() => setIsOpen(false)} style={{ display: "flex", alignItems: "center", gap: "8px", position: "relative" }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span>Cart</span>
                 {cartCount > 0 && (
-                  <span style={{ position: "absolute", top: "-5px", right: "20px", background: "red", color: "white", borderRadius: "50%", padding: "2px 6px", fontSize: "0.75rem", fontWeight: "bold" }}>
+                  <span style={{ background: "#ef4444", color: "#fff", borderRadius: "10px", padding: "1px 7px", fontSize: "0.75rem", fontWeight: "bold", marginLeft: "4px" }}>
                     {cartCount}
                   </span>
                 )}
@@ -288,10 +293,63 @@ const Navbar = () => {
                   </button>
                 </li>
                 <li>
-                  <Link to="/dashboard?tab=cart" onClick={() => setIsOpen(false)} style={{ position: "relative", paddingRight: "10px", textDecoration: "none", color: "#333", fontWeight: "600" }}>
-                    🛒
+                  <Link
+                    to="/dashboard?tab=cart"
+                    onClick={() => setIsOpen(false)}
+                    aria-label="Shopping Cart"
+                    style={{
+                      position: "relative",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%",
+                      background: "#f8fafc",
+                      border: "1px solid #e2e8f0",
+                      textDecoration: "none",
+                      color: "#1e293b",
+                      transition: "all 0.25s ease"
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = "#fff";
+                      e.currentTarget.style.borderColor = "var(--primary)";
+                      e.currentTarget.style.boxShadow = "0 4px 12px rgba(254, 166, 3, 0.2)";
+                      e.currentTarget.style.transform = "translateY(-1px)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = "#f8fafc";
+                      e.currentTarget.style.borderColor = "#e2e8f0";
+                      e.currentTarget.style.boxShadow = "none";
+                      e.currentTarget.style.transform = "none";
+                    }}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="9" cy="21" r="1"></circle>
+                      <circle cx="20" cy="21" r="1"></circle>
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
                     {cartCount > 0 && (
-                      <span style={{ position: "absolute", top: "-5px", right: "-5px", background: "red", color: "white", borderRadius: "50%", padding: "2px 6px", fontSize: "0.75rem", fontWeight: "bold" }}>
+                      <span
+                        style={{
+                          position: "absolute",
+                          top: "-4px",
+                          right: "-4px",
+                          background: "#ef4444",
+                          color: "#fff",
+                          borderRadius: "10px",
+                          minWidth: "18px",
+                          height: "18px",
+                          padding: "0 5px",
+                          fontSize: "0.7rem",
+                          fontWeight: 700,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          boxShadow: "0 2px 6px rgba(239, 68, 68, 0.4)",
+                          border: "2px solid #fff"
+                        }}
+                      >
                         {cartCount}
                       </span>
                     )}

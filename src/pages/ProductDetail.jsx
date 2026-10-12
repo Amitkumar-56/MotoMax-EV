@@ -213,15 +213,26 @@ const ProductDetail = () => {
               style={{
                 background: "var(--primary)",
                 color: "#fff",
-                padding: "15px 35px",
+                padding: "14px 34px",
                 borderRadius: "30px",
                 fontWeight: "bold",
-                fontSize: "1.1rem",
+                fontSize: "1.05rem",
                 border: "none",
-                cursor: "pointer"
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "10px",
+                boxShadow: "0 6px 18px rgba(254, 166, 3, 0.4)",
+                transition: "transform 0.2s ease"
               }}
             >
-              🛒 Add to Cart
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              </svg>
+              <span>Add to Cart</span>
             </button>
 
             <button
