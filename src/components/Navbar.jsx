@@ -57,7 +57,12 @@ const Navbar = () => {
           })
           .catch(err => console.error(err));
       } else {
-        setCartCount(0);
+        try {
+          const guestCart = JSON.parse(localStorage.getItem("guestCart") || "[]");
+          setCartCount(Array.isArray(guestCart) ? guestCart.length : 0);
+        } catch {
+          setCartCount(0);
+        }
       }
     };
 

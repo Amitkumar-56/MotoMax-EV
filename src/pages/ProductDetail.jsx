@@ -33,8 +33,30 @@ const ProductDetail = () => {
     
     const userStr = localStorage.getItem("authUser");
     if (!userStr) {
-      alert("Please login first to add items to your cart or wishlist!");
-      window.location.href = "/dashboard?tab=" + (actionType === 'cart' ? "cart" : "wishlist");
+      if (actionType === 'cart') {
+        try {
+          let guestCart = JSON.parse(localStorage.getItem("guestCart") || "[]");
+          const existingItem = guestCart.find(item => (typeof item === 'object' ? item.product_id === productId : item === productId));
+          if (existingItem) {
+            if (typeof existingItem === 'object') {
+              existingItem.quantity = (existingItem.quantity || 1) + 1;
+            }
+            localStorage.setItem("guestCart", JSON.stringify(guestCart));
+            window.dispatchEvent(new Event('cartUpdated'));
+            alert("Cart updated successfully! ✅");
+          } else {
+            guestCart.push({ product_id: productId, quantity: 1 });
+            localStorage.setItem("guestCart", JSON.stringify(guestCart));
+            window.dispatchEvent(new Event('cartUpdated'));
+            alert("Product added to cart successfully! ✅");
+          }
+        } catch (err) {
+          console.error(err);
+        }
+        return;
+      }
+      alert("Please login first to add items to your wishlist!");
+      window.location.href = "/dashboard?tab=wishlist";
       return;
     }
     
