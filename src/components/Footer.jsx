@@ -1,6 +1,36 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const [footerData, setFooterData] = useState({
+    logo_url: "/Icon.png",
+    company_name: "MotoMax EV",
+    address: "A-53, Naraina Industrial Area Phase-1,\nNaraina, Delhi-110028 (India)",
+    phone: "+91-11-48224444",
+    email: "info@motomaxev.com",
+    website: "www.motomaxev.com",
+    cta_title: "Let's energize\nour spaces with\nclean power",
+    cta_btn_text: "ENQUIRE NOW",
+    cta_btn_link: "/contact-us",
+    facebook_url: "#",
+    instagram_url: "#",
+    linkedin_url: "#"
+  });
+
+  useEffect(() => {
+    fetch("http://localhost/assinment/php-backend/api/footer.php")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.status === "success" && data.data) {
+          setFooterData((prev) => ({
+            ...prev,
+            ...data.data
+          }));
+        }
+      })
+      .catch((err) => console.error("Error fetching footer settings:", err));
+  }, []);
+
   return (
     <footer style={{ backgroundColor: "#0f0f0f", color: "#ffffff", padding: "60px 5% 40px", fontFamily: "'Inter', sans-serif" }}>
       <style>
@@ -121,27 +151,36 @@ const Footer = () => {
       <div className="footer-grid">
         {/* Column 1 */}
         <div className="footer-col footer-contact">
-          <img src="/Icon.png" alt="MotoMax EV" style={{ height: "60px", marginBottom: "25px" }} onError={(e) => e.target.style.display='none'} />
-          <h2 style={{ color: "#fff", marginBottom: "20px", display: "none" }} className="fallback-logo-text">MotoMax EV</h2>
+          <img
+            src={footerData.logo_url || "/Icon.png"}
+            alt={footerData.company_name || "MotoMax EV"}
+            style={{ height: "60px", marginBottom: "25px", objectFit: "contain" }}
+            onError={(e) => {
+              e.target.style.display = "none";
+            }}
+          />
+          <h2 style={{ color: "#fff", marginBottom: "20px", display: "none" }} className="fallback-logo-text">
+            {footerData.company_name || "MotoMax EV"}
+          </h2>
           <p>
             <span className="icon">📍</span>
-            <span>A-53, Naraina Industrial Area Phase-1,<br />Naraina, Delhi-110028 (India)</span>
+            <span style={{ whiteSpace: "pre-line" }}>{footerData.address || "A-53, Naraina Industrial Area Phase-1,\nNaraina, Delhi-110028 (India)"}</span>
           </p>
           <p>
             <span className="icon">📞</span>
-            <span>+91-11-48224444</span>
+            <span>{footerData.phone || "+91-11-48224444"}</span>
           </p>
           <p>
             <span className="icon">✉️</span>
-            <span>info@motomaxev.com</span>
+            <span>{footerData.email || "info@motomaxev.com"}</span>
           </p>
           <p>
             <span className="icon">🌐</span>
-            <span>www.motomaxev.com</span>
+            <span>{footerData.website || "www.motomaxev.com"}</span>
           </p>
         </div>
 
-        {/* Column 2 */}
+        {/* Column 2 - Useful Links (original static links) */}
         <div className="footer-col">
           <h4>Useful Links</h4>
           <ul className="footer-links">
@@ -154,7 +193,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Column 3 */}
+        {/* Column 3 - Our Products (original static links) */}
         <div className="footer-col">
           <h4>Our Products</h4>
           <ul className="footer-links">
@@ -169,18 +208,17 @@ const Footer = () => {
 
         {/* Column 4 */}
         <div className="footer-col footer-cta">
-          <h3>Let's energize<br/>our spaces with<br/>clean power</h3>
-          <Link to="/contact-us">
-            <button className="enquire-btn">ENQUIRE NOW</button>
+          <h3 style={{ whiteSpace: "pre-line" }}>{footerData.cta_title || "Let's energize\nour spaces with\nclean power"}</h3>
+          <Link to={footerData.cta_btn_link || "/contact-us"}>
+            <button className="enquire-btn">{footerData.cta_btn_text || "ENQUIRE NOW"}</button>
           </Link>
           <div className="social-icons">
-            <a href="#" className="social-circle">f</a>
-            <a href="#" className="social-circle" style={{fontSize: "0.8rem"}}>📷</a>
-            <a href="#" className="social-circle">in</a>
+            <a href={footerData.facebook_url || "#"} className="social-circle">f</a>
+            <a href={footerData.instagram_url || "#"} className="social-circle" style={{ fontSize: "0.8rem" }}>📷</a>
+            <a href={footerData.linkedin_url || "#"} className="social-circle">in</a>
           </div>
         </div>
       </div>
-      
     </footer>
   );
 };

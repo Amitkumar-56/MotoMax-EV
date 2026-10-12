@@ -4,18 +4,54 @@ import "../index.css";
 
 const API_BASE = "http://localhost/assinment/php-backend/api";
 
+const defaultAbout = {
+  hero_badge: "⚡ Pioneering Green Mobility Since 2004",
+  hero_title: "Powering a Greener Tomorrow",
+  hero_subtitle: "India's premier manufacturer of high-reliability lithium-ion batteries and advanced EV charging ecosystems.",
+  hero_image: "/assets/slider-3.jpg",
+  story_tag: "Our Heritage",
+  story_title: "Driving India's Electric Revolution",
+  story_para1: "MotoMax EV is one of India's earliest pioneers and most trusted names in the energy storage and electric mobility space. Established in 2004, the company has consistently led the transition towards sustainable transportation, emerging as India's leading manufacturer of lithium-ion batteries.",
+  story_para2: "From heavy-duty commercial e-rickshaws to next-gen electric two-wheelers, our battery architectures are built from ground up to deliver uncompromising range, thermal safety, and extended lifecycles.",
+  story_image: "/assets/slider-1.jpg",
+  story_badge_number: "20+ Years",
+  story_badge_text: "Clean Tech Innovation",
+  founder_quote: "Our vision is to build an energy-independent India powered by smart, clean, and reliable mobility.",
+  founder_name: "— Mr. Samrath Jit Singh, Founder & CEO",
+  stat1_number: "300,000+",
+  stat1_label: "Electric 2-Wheelers Powered",
+  stat2_number: "250,000+",
+  stat2_label: "E-Rickshaws on the Road",
+  stat3_number: "800+",
+  stat3_label: "Dedicated Professionals",
+  stat4_number: "100%",
+  stat4_label: "AIS-156 & BIS Certified",
+  infra_tag: "Manufacturing Excellence",
+  infra_title: "World-Class Infrastructure & People",
+  infra_desc: "Our state-of-the-art automated manufacturing plants are backed by dedicated testing laboratories and rapid customer service hubs.",
+  infra_image: "/assets/slider-2.jpg",
+  infra_f1_title: "800+ Team Strength",
+  infra_f1_text: "Expanding to 1,000+ members with our upcoming gigawatt-scale assembly facility.",
+  infra_f2_title: "Dedicated R&D Center",
+  infra_f2_text: "Over 40 elite engineers focusing solely on advanced battery chemistries and power electronics.",
+  infra_f3_title: "Pan-India Service Network",
+  infra_f3_text: "160+ service engineers ensuring on-ground product support, quick turnaround, and OEM confidence.",
+  cta_title: "Together, Let's Drive India's Net-Zero Future",
+  cta_text: "Partner with MotoMax EV for industry-leading lithium battery solutions, OEM integrations, and nationwide distribution."
+};
+
 const AboutUs = () => {
-  const [coverImage, setCoverImage] = useState("/assets/slider-3.jpg");
+  const [about, setAbout] = useState(defaultAbout);
 
   useEffect(() => {
-    fetch(`${API_BASE}/settings.php`)
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.data && data.data.aboutImage) {
-          setCoverImage(data.data.aboutImage);
+    fetch(`${API_BASE}/about.php`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.status === "success" && data.data) {
+          setAbout((prev) => ({ ...prev, ...data.data }));
         }
       })
-      .catch(() => {});
+      .catch((err) => console.error("Could not fetch about settings:", err));
   }, []);
 
   return (
@@ -503,18 +539,17 @@ const AboutUs = () => {
 
       {/* 1. Hero Banner */}
       <section className="about-hero">
-        <img src={coverImage} alt="MotoMax EV Facility" className="about-hero-bg" onError={(e) => { e.currentTarget.src = "/assets/slider-3.jpg"; }} />
+        <img src={about.hero_image || "/assets/slider-3.jpg"} alt="MotoMax EV Facility" className="about-hero-bg" onError={(e) => { e.currentTarget.src = "/assets/slider-3.jpg"; }} />
         <div className="about-hero-gradient" />
         <div className="about-hero-content">
           <div className="about-hero-badge">
-            <span>⚡</span>
-            <span>Pioneering Green Mobility Since 2004</span>
+            <span>{about.hero_badge}</span>
           </div>
           <h1 className="about-hero-title">
-            Powering a <span>Greener Tomorrow</span>
+            {about.hero_title}
           </h1>
           <p className="about-hero-subtitle">
-            India's premier manufacturer of high-reliability lithium-ion batteries and advanced EV charging ecosystems.
+            {about.hero_subtitle}
           </p>
         </div>
       </section>
@@ -524,28 +559,22 @@ const AboutUs = () => {
         <div className="about-container">
           <div className="story-grid">
             <div className="story-card">
-              <img src="/assets/slider-1.jpg" alt="MotoMax Innovation" onError={(e) => { e.currentTarget.src = "/assets/5.png"; }} />
+              <img src={about.story_image || "/assets/slider-1.jpg"} alt="MotoMax Innovation" onError={(e) => { e.currentTarget.src = "/assets/5.png"; }} />
               <div className="story-badge-floating">
-                <h4>20+ Years</h4>
-                <p>Clean Tech Innovation</p>
+                <h4>{about.story_badge_number}</h4>
+                <p>{about.story_badge_text}</p>
               </div>
             </div>
 
             <div className="story-text">
-              <span className="section-tag">Our Heritage</span>
-              <h3>Driving India's Electric Revolution</h3>
-              <p>
-                MotoMax EV is one of India's earliest pioneers and most trusted names in the energy storage and electric mobility space. Established in 2004, the company has consistently led the transition towards sustainable transportation, emerging as India's leading manufacturer of lithium-ion batteries.
-              </p>
-              <p>
-                From heavy-duty commercial e-rickshaws to next-gen electric two-wheelers, our battery architectures are built from ground up to deliver uncompromising range, thermal safety, and extended lifecycles.
-              </p>
+              <span className="section-tag">{about.story_tag}</span>
+              <h3>{about.story_title}</h3>
+              <p>{about.story_para1}</p>
+              <p>{about.story_para2}</p>
 
               <div className="story-leader-box">
-                <p>
-                  "Our vision is to build an energy-independent India powered by smart, clean, and reliable mobility."
-                </p>
-                <span>— Mr. Samrath Jit Singh, Founder & CEO</span>
+                <p>"{about.founder_quote}"</p>
+                <span>{about.founder_name}</span>
               </div>
             </div>
           </div>
@@ -566,26 +595,26 @@ const AboutUs = () => {
           <div className="impact-grid">
             <div className="impact-stat-card">
               <div className="impact-stat-icon">🛵</div>
-              <h3 className="impact-stat-number">300,000+</h3>
-              <p className="impact-stat-label">Electric 2-Wheelers Powered</p>
+              <h3 className="impact-stat-number">{about.stat1_number}</h3>
+              <p className="impact-stat-label">{about.stat1_label}</p>
             </div>
 
             <div className="impact-stat-card">
               <div className="impact-stat-icon">🛺</div>
-              <h3 className="impact-stat-number">250,000+</h3>
-              <p className="impact-stat-label">E-Rickshaws on the Road</p>
+              <h3 className="impact-stat-number">{about.stat2_number}</h3>
+              <p className="impact-stat-label">{about.stat2_label}</p>
             </div>
 
             <div className="impact-stat-card">
               <div className="impact-stat-icon">👥</div>
-              <h3 className="impact-stat-number">800+</h3>
-              <p className="impact-stat-label">Dedicated Professionals</p>
+              <h3 className="impact-stat-number">{about.stat3_number}</h3>
+              <p className="impact-stat-label">{about.stat3_label}</p>
             </div>
 
             <div className="impact-stat-card">
               <div className="impact-stat-icon">🛡️</div>
-              <h3 className="impact-stat-number">100%</h3>
-              <p className="impact-stat-label">AIS-156 & BIS Certified</p>
+              <h3 className="impact-stat-number">{about.stat4_number}</h3>
+              <p className="impact-stat-label">{about.stat4_label}</p>
             </div>
           </div>
         </div>
@@ -643,41 +672,39 @@ const AboutUs = () => {
         <div className="about-container">
           <div className="infra-split">
             <div>
-              <span className="section-tag">Manufacturing Excellence</span>
-              <h2 className="section-heading">World-Class Infrastructure & People</h2>
-              <p className="section-desc">
-                Our state-of-the-art automated manufacturing plants are backed by dedicated testing laboratories and rapid customer service hubs.
-              </p>
+              <span className="section-tag">{about.infra_tag}</span>
+              <h2 className="section-heading">{about.infra_title}</h2>
+              <p className="section-desc">{about.infra_desc}</p>
 
               <div className="infra-features">
                 <div className="infra-feature-item">
                   <div className="infra-feature-icon">✓</div>
                   <div className="infra-feature-text">
-                    <h5>800+ Team Strength</h5>
-                    <p>Expanding to 1,000+ members with our upcoming gigawatt-scale assembly facility.</p>
+                    <h5>{about.infra_f1_title}</h5>
+                    <p>{about.infra_f1_text}</p>
                   </div>
                 </div>
 
                 <div className="infra-feature-item">
                   <div className="infra-feature-icon">✓</div>
                   <div className="infra-feature-text">
-                    <h5>Dedicated R&D Center</h5>
-                    <p>Over 40 elite engineers focusing solely on advanced battery chemistries and power electronics.</p>
+                    <h5>{about.infra_f2_title}</h5>
+                    <p>{about.infra_f2_text}</p>
                   </div>
                 </div>
 
                 <div className="infra-feature-item">
                   <div className="infra-feature-icon">✓</div>
                   <div className="infra-feature-text">
-                    <h5>Pan-India Service Network</h5>
-                    <p>160+ service engineers ensuring on-ground product support, quick turnaround, and OEM confidence.</p>
+                    <h5>{about.infra_f3_title}</h5>
+                    <p>{about.infra_f3_text}</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="infra-image-wrap">
-              <img src="/assets/slider-2.jpg" alt="MotoMax R&D Testing Lab" onError={(e) => { e.currentTarget.src = "/assets/slider-4.jpg"; }} />
+              <img src={about.infra_image || "/assets/slider-2.jpg"} alt="MotoMax R&D Testing Lab" onError={(e) => { e.currentTarget.src = "/assets/slider-4.jpg"; }} />
             </div>
           </div>
         </div>
@@ -725,10 +752,8 @@ const AboutUs = () => {
       {/* 7. Call To Action Banner */}
       <div className="about-container">
         <div className="about-cta-section">
-          <h2 className="about-cta-title">Together, Let's Drive India's Net-Zero Future</h2>
-          <p className="about-cta-text">
-            Partner with MotoMax EV for industry-leading lithium battery solutions, OEM integrations, and nationwide distribution.
-          </p>
+          <h2 className="about-cta-title">{about.cta_title}</h2>
+          <p className="about-cta-text">{about.cta_text}</p>
           <div className="about-cta-btns">
             <Link to="/products" className="btn-cta-gold">
               Explore Our Products →
