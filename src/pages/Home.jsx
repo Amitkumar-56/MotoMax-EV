@@ -1,28 +1,62 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
+const API_BASE = "http://localhost/assinment/php-backend/api";
+
 const Home = () => {
-  const sliderItems = [
-    {
-      type: "video",
-      src: "/assets/home-video.mp4",
-    },
+  const defaultSlider = [
+    { type: "video", src: "/assets/home-video.mp4" },
     { type: "image", src: "/assets/1.png", title: "INDIA'S LEADING ENERGY TECHNOLOGY COMPANY", subtitle: "Pioneering the EV Revolution Across the Globe" },
-    { type: "image", src: "/assets/2.png", title: "ADVANCED LITHIUM BATTERY PACKS", subtitle: "Powering the Future of Mobility" },
-    { type: "image", src: "/assets/3.png", title: "SMART ENERGY STORAGE SOLUTIONS", subtitle: "Reliable Backup for Homes & Industries" },
-    { type: "image", src: "/assets/4.png", title: "HIGH PERFORMANCE EV CHARGERS", subtitle: "Fast, Safe, and Efficient Charging" },
-    { type: "image", src: "/assets/5.png", title: "INNOVATING GREEN TECHNOLOGY", subtitle: "Building a Sustainable Tomorrow" },
+    { type: "image", src: "/assets/2.png", title: "ADVANCED LITHIUM BATTERY PACKS", subtitle: "Powering the Future of Mobility" }
   ];
+
+  const [sliderItems, setSliderItems] = useState(defaultSlider);
+  const [products, setProducts] = useState([]);
+  const [blogs, setBlogs] = useState([]);
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
   const [touchEndX, setTouchEndX] = useState(0);
+  const [wishlistedItems, setWishlistedItems] = useState({});
   const productSliderRef = useRef(null);
+
+  const handleAction = (e, productId, actionType, redirect = false) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const userStr = localStorage.getItem("authUser");
+    if (!userStr) {
+      alert("Please login first to add items to your cart!");
+      window.location.href = "/dashboard?tab=" + (actionType === 'cart' ? "cart" : "wishlist");
+      return;
+    }
+
+    const user = JSON.parse(userStr);
+    const endpoint = actionType === 'cart' ? 'cart.php' : 'wishlist.php';
+
+    fetch(`${API_BASE}/${endpoint}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user_id: user.id, product_id: productId })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (redirect) {
+          window.location.href = "/dashboard?tab=cart";
+        } else {
+          alert(data.message);
+          if (actionType === 'cart') {
+            window.dispatchEvent(new Event('cartUpdated'));
+          }
+        }
+      })
+      .catch(err => console.error(err));
+  };
 
   const scrollProducts = (direction) => {
     if (productSliderRef.current && productSliderRef.current.children.length > 0) {
       const cardWidth = productSliderRef.current.children[0].clientWidth;
-      const scrollAmount = cardWidth + 30; 
+      const scrollAmount = cardWidth + 30;
       productSliderRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
@@ -48,10 +82,37 @@ const Home = () => {
   };
 
   useEffect(() => {
+    // Fetch live products
+    fetch(`${API_BASE}/products.php`)
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.length > 0) setProducts(data);
+      });
+
+    // Fetch live blogs
+    fetch(`${API_BASE}/blogs.php`)
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.length > 0) setBlogs(data.slice(0, 3));
+      });
+
+    // Fetch settings for slider
+    fetch(`${API_BASE}/settings.php`)
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.data && data.data.homepage_slider) {
+          try {
+            setSliderItems(JSON.parse(data.data.homepage_slider));
+          } catch (e) { }
+        }
+      });
+  }, []);
+
+  useEffect(() => {
     let heroTimeout;
-    
+
     // Auto scroll logic for hero (only if not a video)
-    if (sliderItems[currentSlide].type !== "video") {
+    if (sliderItems[currentSlide] && sliderItems[currentSlide].type !== "video") {
       heroTimeout = setTimeout(() => {
         setCurrentSlide((prev) => (prev + 1) % sliderItems.length);
       }, 3000);
@@ -85,7 +146,7 @@ const Home = () => {
   return (
     <div className="responsive-page" style={{ background: "var(--bg-main)" }}>
       {/* Unified Hero Slider */}
-      <header 
+      <header
         className="hero-section"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -140,7 +201,7 @@ const Home = () => {
         ))}
 
         {/* Dynamic Text Overlay */}
-        {sliderItems[currentSlide].type !== "video" && (
+        {sliderItems[currentSlide] && sliderItems[currentSlide].type !== "video" && (
           <div
             style={{
               position: "absolute",
@@ -162,7 +223,7 @@ const Home = () => {
               {sliderItems[currentSlide].title}
             </h1>
             <h2 className="hero-subtitle">
-              {sliderItems[currentSlide].subtitle}
+              {sliderItems[currentSlide] ? sliderItems[currentSlide].subtitle : ""}
             </h2>
             <button
               className="hero-btn pulse-btn"
@@ -278,7 +339,7 @@ const Home = () => {
         </div>
       </section>
 
-            {/* Products Section Redesign */}
+      {/* Products Section Redesign */}
       <section
         id="products-section"
         style={{
@@ -292,22 +353,22 @@ const Home = () => {
         {/* Decorative background elements */}
         <div style={{ position: "absolute", top: "10%", left: "5%", opacity: 0.1, zIndex: 0 }}>
           <svg width="60" height="60" viewBox="0 0 60 60" fill="var(--primary)">
-            <circle cx="5" cy="5" r="2"/><circle cx="20" cy="5" r="2"/><circle cx="35" cy="5" r="2"/>
-            <circle cx="5" cy="20" r="2"/><circle cx="20" cy="20" r="2"/><circle cx="35" cy="20" r="2"/>
-            <circle cx="5" cy="35" r="2"/><circle cx="20" cy="35" r="2"/><circle cx="35" cy="35" r="2"/>
+            <circle cx="5" cy="5" r="2" /><circle cx="20" cy="5" r="2" /><circle cx="35" cy="5" r="2" />
+            <circle cx="5" cy="20" r="2" /><circle cx="20" cy="20" r="2" /><circle cx="35" cy="20" r="2" />
+            <circle cx="5" cy="35" r="2" /><circle cx="20" cy="35" r="2" /><circle cx="35" cy="35" r="2" />
           </svg>
         </div>
         <div style={{ position: "absolute", top: "20%", right: "5%", opacity: 0.05, zIndex: 0 }}>
           <svg width="120" height="120" viewBox="0 0 24 24" fill="var(--primary)">
-            <path d="M17 8C8 10 5 16 5 22C11 22 17 15 17 8ZM12 12C9 14 7 17 6 19C7 18 9 15 12 12Z"/>
+            <path d="M17 8C8 10 5 16 5 22C11 22 17 15 17 8ZM12 12C9 14 7 17 6 19C7 18 9 15 12 12Z" />
           </svg>
         </div>
 
         <div style={{ position: "relative", zIndex: 1 }}>
           <h4 style={{ color: "var(--primary)", textTransform: "uppercase", fontSize: "1rem", letterSpacing: "2px", fontWeight: 700, marginBottom: "15px", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
-            <span style={{ width: "40px", height: "2px", background: "rgba(255,102,0,0.3)" }}></span>
+            <span style={{ width: "40px", height: "2px", background: "rgba(254,166,3,0.3)" }}></span>
             OUR PRODUCTS
-            <span style={{ width: "40px", height: "2px", background: "rgba(255,102,0,0.3)" }}></span>
+            <span style={{ width: "40px", height: "2px", background: "rgba(254,166,3,0.3)" }}></span>
           </h4>
           <h2 style={{ fontSize: "3rem", fontWeight: 900, color: "#1a1a1a", marginBottom: "15px" }}>
             Powering a Cleaner, <span style={{ color: "var(--primary)" }}>Greener</span> Tomorrow
@@ -318,15 +379,16 @@ const Home = () => {
         </div>
 
         <div
+          className="slider-wrapper"
           style={{
             position: "relative",
             maxWidth: "1350px",
-            margin: "0 auto",
-            padding: "0 50px"
+            margin: "0 auto"
           }}
         >
           {/* Left Arrow */}
           <button
+            className="slider-arrow slider-arrow-left"
             onClick={() => scrollProducts("left")}
             style={{
               position: "absolute",
@@ -356,6 +418,7 @@ const Home = () => {
 
           {/* Right Arrow */}
           <button
+            className="slider-arrow slider-arrow-right"
             onClick={() => scrollProducts("right")}
             style={{
               position: "absolute",
@@ -402,10 +465,35 @@ const Home = () => {
                 color: inherit;
                 border: 1px solid rgba(0,0,0,0.02);
                 margin: 15px 5px;
+                flex-shrink: 0;
+              }
+              .slider-wrapper {
+                padding: 0 50px;
+              }
+              @media (max-width: 768px) {
+                .slider-wrapper {
+                  padding: 0 35px;
+                }
+                .attractive-card {
+                  min-width: 240px;
+                  max-width: 240px;
+                  padding: 15px;
+                }
+                .slider-arrow {
+                  width: 35px !important;
+                  height: 35px !important;
+                  font-size: 1.2rem !important;
+                }
+                .slider-arrow-left {
+                  left: -5px !important;
+                }
+                .slider-arrow-right {
+                  right: -5px !important;
+                }
               }
               .attractive-card:hover {
                 transform: translateY(-10px);
-                box-shadow: 0 15px 40px rgba(255,102,0,0.1);
+                box-shadow: 0 15px 40px rgba(254,166,3,0.1);
               }
               .card-icon-wrapper {
                 width: 100%;
@@ -421,14 +509,11 @@ const Home = () => {
               .card-icon-wrapper img {
                 width: 100%;
                 height: 100%;
-                border-radius: 8px;
-                object-fit: contain;
+                border-radius: 15px;
+                object-fit: cover;
                 background: #fff;
-                border: 1px solid rgba(0,0,0,0.08);
-                padding: 15px;
                 z-index: 2;
                 transition: transform 0.4s ease, box-shadow 0.4s ease;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.04);
               }
               .attractive-card:hover .card-icon-wrapper img {
                 transform: scale(1.1);
@@ -437,7 +522,7 @@ const Home = () => {
                 width: 35px;
                 height: 35px;
                 border-radius: 50%;
-                background: rgba(255,102,0,0.1);
+                background: rgba(254,166,3,0.1);
                 color: var(--primary);
                 display: flex;
                 align-items: center;
@@ -451,7 +536,7 @@ const Home = () => {
               }
             `}
           </style>
-          
+
           <div
             ref={productSliderRef}
             className="hide-scrollbar"
@@ -465,95 +550,56 @@ const Home = () => {
               scrollbarWidth: "none",
             }}
           >
-            {[
-              {
-                to: "/products/electric-scooter-battery",
-                img: "/assets/1.png",
-                title: "Automotive Lithium Battery",
-                desc: "Reliable energy for every journey.",
-                blob: "#ffffff"
-              },
-              {
-                to: "/products/lithium-inverter-battery-home",
-                img: "/assets/2.png",
-                title: "Inverter Lithium Battery",
-                desc: "Stable power, smarter living.",
-                blob: "#ffffff"
-              },
-              {
-                to: "/products/solar-street-light-storage",
-                img: "/assets/3.png",
-                title: "Lithium Battery Solar App.",
-                desc: "Clean energy for a brighter tomorrow.",
-                blob: "#ffffff"
-              },
-              {
-                to: "/products/solid-state",
-                img: "/assets/4.png",
-                title: "Drone Lithium Battery",
-                desc: "More flight time, more possibilities.",
-                blob: "#ffffff"
-              },
-              {
-                to: "/products/charger",
-                img: "/assets/5.png",
-                title: "EV Charger",
-                desc: "Charge today, drive tomorrow.",
-                blob: "#ffffff"
-              },
-              {
-                to: "/products/inverter",
-                img: "/assets/6.png",
-                title: "Inverter",
-                desc: "Efficient power for your home & business.",
-                blob: "#ffffff"
-              }
-            ].map((prod, idx) => (
-              <Link key={idx} to={prod.to} className="attractive-card">
-                <div className="card-icon-wrapper" style={{ background: prod.blob }}>
-                  <img src={prod.img} alt={prod.title} />
+            {products.map((prod, idx) => (
+              <Link key={idx} to={`/products/${prod.id}`} className="attractive-card">
+                <div className="card-icon-wrapper" style={{ position: 'relative' }}>
+                  <button 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setWishlistedItems(prev => ({ ...prev, [prod.id]: true }));
+                      handleAction(e, prod.id, 'wishlist');
+                    }}
+                    style={{
+                      position: 'absolute',
+                      top: '10px',
+                      right: '10px',
+                      background: 'white',
+                      border: 'none',
+                      borderRadius: '50%',
+                      width: '30px',
+                      height: '30px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      zIndex: 10,
+                      boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
+                      color: wishlistedItems[prod.id] ? '#ef4444' : '#ccc',
+                      fontSize: '1.2rem',
+                      transition: 'color 0.3s'
+                    }}
+                  >
+                    ❤
+                  </button>
+                  <img src={prod.image || "https://images.unsplash.com/photo-1593941707882-a5bba14938c7"} alt={prod.name} />
                 </div>
-                <h3 style={{ fontSize: "1.05rem", fontWeight: 800, color: "#1a1a1a", marginBottom: "8px", lineHeight: 1.3, minHeight: "44px" }}>
-                  {prod.title}
+                <h3 style={{ fontSize: "1.05rem", fontWeight: 800, color: "#1a1a1a", marginBottom: "4px", lineHeight: 1.3, minHeight: "22px" }}>
+                  {prod.name}
                 </h3>
-                <p style={{ fontSize: "0.85rem", color: "#666", flexGrow: 1, margin: 0, minHeight: "40px" }}>
-                  {prod.desc}
+                <h4 style={{ fontSize: "1.1rem", color: "#FEA603", marginBottom: "8px", marginTop: "0" }}>
+                  ₹{prod.price}
+                </h4>
+                <p style={{ fontSize: "0.85rem", color: "#666", flexGrow: 1, margin: 0, minHeight: "20px" }}>
+                  {prod.range}
                 </p>
-                <div className="card-arrow-btn">
-                  &#8594;
-                </div>
-              </Link>
-            ))}
-            
-            {/* Duplicates for endless scroll illusion */}
-            {[
-              {
-                to: "/products/electric-scooter-battery",
-                img: "/assets/1.png",
-                title: "Automotive Lithium Battery",
-                desc: "Reliable energy for every journey.",
-                blob: "#ffffff"
-              },
-              {
-                to: "/products/lithium-inverter-battery-home",
-                img: "/assets/2.png",
-                title: "Inverter Lithium Battery",
-                desc: "Stable power, smarter living.",
-                blob: "#ffffff"
-              }
-            ].map((prod, idx) => (
-              <Link key={`dup-${idx}`} to={prod.to} className="attractive-card">
-                <div className="card-icon-wrapper" style={{ background: prod.blob }}>
-                  <img src={prod.img} alt={prod.title} />
-                </div>
-                <h3 style={{ fontSize: "1.05rem", fontWeight: 800, color: "#1a1a1a", marginBottom: "8px", lineHeight: 1.3, minHeight: "44px" }}>
-                  {prod.title}
-                </h3>
-                <p style={{ fontSize: "0.85rem", color: "#666", flexGrow: 1, margin: 0, minHeight: "40px" }}>
-                  {prod.desc}
-                </p>
-                <div className="card-arrow-btn">
-                  &#8594;
+                <div style={{ display: 'flex', gap: '5px', marginTop: '10px', width: '100%' }}>
+                  <button
+                    onClick={(e) => handleAction(e, prod.id, 'cart', false)}
+                    style={{ flex: 1, padding: '8px 5px', background: 'var(--primary)', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem' }}
+                  >
+                    🛒 Add to Cart
+                  </button>
                 </div>
               </Link>
             ))}
@@ -562,7 +608,7 @@ const Home = () => {
 
         {/* View All Products Button */}
         <div style={{ marginTop: "40px", display: "flex", justifyContent: "center", alignItems: "center", gap: "15px" }}>
-          <span style={{ width: "30px", height: "2px", background: "rgba(255,102,0,0.3)" }}></span>
+          <span style={{ width: "30px", height: "2px", background: "rgba(254,166,3,0.3)" }}></span>
           <Link
             to="/products"
             style={{
@@ -575,7 +621,7 @@ const Home = () => {
               display: "inline-flex",
               alignItems: "center",
               gap: "10px",
-              boxShadow: "0 10px 20px rgba(255,102,0,0.2)",
+              boxShadow: "0 10px 20px rgba(254,166,3,0.2)",
               transition: "transform 0.3s ease"
             }}
             onMouseOver={(e) => e.currentTarget.style.transform = "translateY(-3px)"}
@@ -583,7 +629,7 @@ const Home = () => {
           >
             View All Products <span>&#8594;</span>
           </Link>
-          <span style={{ width: "30px", height: "2px", background: "rgba(255,102,0,0.3)" }}></span>
+          <span style={{ width: "30px", height: "2px", background: "rgba(254,166,3,0.3)" }}></span>
         </div>
       </section>
 
@@ -601,61 +647,16 @@ const Home = () => {
             gap: "30px",
           }}
         >
-          <Link to="/post/why-lithium-batteries-lose-capacity" className="blog-card" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
-            <img
-              src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=400"
-              alt="Blog 1"
-            />
-            <div className="blog-content">
-              <h3>
-                Why Lithium Batteries for home Lose Capacity Over Time: Causes &
-                Prevention
-              </h3>
-              <p>
-                Lithium batteries have become an increasingly popular choice for
-                residential energy storage because they offer high energy
-                density, long service...
-              </p>
-              <div className="arrow-btn">➔</div>
-            </div>
-          </Link>
-
-          <Link to="/post/hybrid-solar-inverter" className="blog-card" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
-            <img
-              src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&q=80&w=400"
-              alt="Blog 2"
-            />
-            <div className="blog-content">
-              <h3>
-                Hybrid Solar Inverter and Lithium Battery: How They Work
-                Together
-              </h3>
-              <p>
-                Solar energy is no longer just about generating electricity
-                during the day. As electricity demand rises and power
-                reliability becomes...
-              </p>
-              <div className="arrow-btn">➔</div>
-            </div>
-          </Link>
-
-          <Link to="/post/increase-electric-scooter-resale" className="blog-card" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
-            <img
-              src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&q=80&w=400"
-              alt="Blog 3"
-            />
-            <div className="blog-content">
-              <h3>
-                Can a Battery Increase Your Electric Scooter Resale Value?
-              </h3>
-              <p>
-                Buying an electric scooter is no longer just about saving money
-                on fuel. Today, it is also about making a smart investment in
-                green mobility...
-              </p>
-              <div className="arrow-btn">➔</div>
-            </div>
-          </Link>
+          {blogs.map(blog => (
+            <Link key={blog.id} to={`/post/${blog.id}`} className="blog-card" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
+              <img src={blog.image_url || "https://images.unsplash.com/photo-1593941707882-a5bba14938c7"} alt={blog.title} />
+              <div className="blog-content">
+                <h3>{blog.title}</h3>
+                <p>{blog.content.substring(0, 100)}...</p>
+                <div className="arrow-btn">➔</div>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 

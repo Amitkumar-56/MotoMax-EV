@@ -112,6 +112,9 @@ const Footer = () => {
             .footer-grid {
               grid-template-columns: 1fr;
             }
+            footer {
+              padding-bottom: 80px !important;
+            }
           }
         `}
       </style>

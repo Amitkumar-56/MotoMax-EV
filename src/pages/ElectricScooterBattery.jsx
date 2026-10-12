@@ -70,7 +70,7 @@ const ElectricScooterBattery = () => {
         >
           <button
             style={{
-              background: "#ff6600",
+              background: "#FEA603",
               color: "var(--bg-main)",
               border: "none",
               padding: "10px 20px",

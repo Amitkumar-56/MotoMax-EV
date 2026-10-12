@@ -22,6 +22,13 @@ body {
   background-color: var(--bg-main);
   color: var(--text-main);
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+html {
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 .responsive-page {
@@ -43,9 +50,11 @@ body {
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1000;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
 }
 
 .nav-links-light {
@@ -369,11 +378,12 @@ body {
     width: 100%;
     background: var(--bg-main);
     flex-direction: column;
-    padding: 2rem 0;
+    padding: 10px 0;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
     transition: left 0.3s;
     height: calc(100vh - 70px);
     overflow-y: auto;
+    justify-content: flex-start !important;
   }
 
   .nav-links-light.active {
@@ -718,13 +728,13 @@ body {
 @media (max-width: 768px) {
 
   /* Typography Scaling for Mobile */
-  h1[style*="6rem"] {
+  .hero-title, h1[style*="6rem"] {
     font-size: 2.5rem !important;
     letter-spacing: 2px !important;
   }
 
-  h2[style*="2.5rem"] {
-    font-size: 1.5rem !important;
+  .hero-subtitle, h2[style*="2.5rem"] {
+    font-size: 1.2rem !important;
     letter-spacing: 1px !important;
   }
 
@@ -798,12 +808,16 @@ body {
 @media (max-width: 480px) {
 
   /* Extra Small Devices */
-  h1[style*="6rem"] {
+  .hero-title, h1[style*="6rem"] {
     font-size: 2rem !important;
   }
 
+  .hero-subtitle {
+    font-size: 1rem !important;
+  }
+
   .section-title {
-    font-size: 2.5rem !important;
+    font-size: 1.8rem !important;
   }
 
   .view-more-btn {
@@ -1485,3 +1499,12 @@ body {
     display: none !important;
   }
 }
+
+.app-container { padding-top: 75px; }
+
+
+.hero-title { font-size: 5rem; font-weight: 900; color: #fff; margin-bottom: 10px; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+.hero-subtitle { font-size: 1.8rem; color: #f1f5f9; font-weight: 500; margin-bottom: 30px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+
+@media (max-width: 900px) { .hide-on-mobile { display: none !important; } }
+@media (min-width: 901px) { .hide-on-desktop { display: none !important; } }

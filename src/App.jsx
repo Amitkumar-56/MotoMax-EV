@@ -19,9 +19,11 @@ import PostDetail from "./pages/PostDetail";
 
 import NewsEvents from "./pages/NewsEvents";
 import Blog from "./pages/Blog";
+import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
 import Products from "./pages/Products";
+import UserDashboard from "./pages/UserDashboard";
 
 import "./index.css";
 
@@ -36,8 +38,8 @@ function AppContent() {
 
   return (
     <div className="app-container">
-      {/* Hide Navbar on Admin pages */}
-      {!isAdminRoute && <Navbar />}
+      {/* Show Navbar on all pages */}
+      <Navbar />
 
       <main className="main-content">
         <Routes>
@@ -63,11 +65,15 @@ function AppContent() {
 
           <Route path="/news-events" element={<NewsEvents />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/gallery" element={<Gallery />} />
           <Route path="/post/:slug" element={<PostDetail />} />
           <Route path="/contact-us" element={<Contact />} />
 
           {/* Admin Panel */}
           <Route path="/admin" element={<Admin />} />
+          
+          {/* User Dashboard */}
+          <Route path="/dashboard" element={<UserDashboard />} />
         </Routes>
       </main>
 

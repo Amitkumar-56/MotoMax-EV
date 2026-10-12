@@ -1,18 +1,33 @@
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+
+const API_BASE = "http://localhost/assinment/php-backend/api";
 
 const PostDetail = () => {
   const { slug } = useParams();
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Format the slug into a readable title (e.g., "why-lithium-batteries" -> "Why Lithium Batteries")
-  const formatTitle = (str) => {
-    if (!str) return "Post Title";
-    return str
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  };
+  useEffect(() => {
+    fetch(`${API_BASE}/blogs.php?id=${slug}`)
+      .then(res => res.json())
+      .then(data => {
+        setPost(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, [slug]);
 
-  const title = formatTitle(slug);
+  if (loading) {
+    return <div style={{padding: "100px", textAlign: "center"}}><h2>Loading Article...</h2></div>;
+  }
+
+  if (!post || !post.title) {
+    return <div style={{padding: "100px", textAlign: "center"}}><h2>Article Not Found</h2></div>;
+  }
+
+  const title = post.title;
 
   return (
     <div className="responsive-page" style={{ background: "var(--bg-main)", minHeight: "100vh" }}>
@@ -21,7 +36,7 @@ const PostDetail = () => {
         style={{
           padding: "80px 20px 40px",
           textAlign: "center",
-          background: "linear-gradient(135deg, rgba(255,102,0,0.1) 0%, rgba(255,255,255,0) 100%)",
+          background: "linear-gradient(135deg, rgba(254,166,3,0.1) 0%, rgba(255,255,255,0) 100%)",
         }}
       >
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
@@ -37,7 +52,7 @@ const PostDetail = () => {
               marginBottom: "20px",
             }}
           >
-            Article
+            {post.category || "Article"}
           </span>
           <h1
             style={{
@@ -56,7 +71,7 @@ const PostDetail = () => {
               fontSize: "1.1rem",
             }}
           >
-            Published on MotoMax EV Insights
+            Published on {post.created_at ? new Date(post.created_at).toLocaleDateString() : "MotoMax EV Insights"}
           </p>
         </div>
       </section>
@@ -70,7 +85,7 @@ const PostDetail = () => {
         }}
       >
         <img
-          src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=1200"
+          src={post.image_url || "https://images.unsplash.com/photo-1593941707882-a5bba14938c7"}
           alt={title}
           style={{
             width: "100%",
@@ -92,21 +107,9 @@ const PostDetail = () => {
             gap: "20px",
           }}
         >
-          <p>
-            Welcome to the detailed view of our latest article. This post covers the essential details regarding <strong>{title}</strong>. As the electric vehicle and energy storage markets continue to evolve, staying updated with the latest technological advancements is crucial for both businesses and consumers.
-          </p>
-          <p>
-            Lithium-ion batteries have revolutionized the way we store and consume energy. From powering 2-wheelers and 3-wheelers to supporting massive industrial grids and solar setups, the demand for efficient, safe, and long-lasting energy storage is higher than ever.
-          </p>
-          <h3 style={{ color: "var(--text-main)", fontSize: "1.8rem", marginTop: "20px" }}>Key Takeaways</h3>
-          <ul style={{ paddingLeft: "20px", display: "flex", flexDirection: "column", gap: "10px" }}>
-            <li>Advanced thermal management ensures safety and longevity.</li>
-            <li>High energy density means more power in less space.</li>
-            <li>Eco-friendly design supports a greener future.</li>
-          </ul>
-          <p>
-            At MotoMax EV, we are committed to pushing the boundaries of what is possible. Stay tuned for more updates and insights from our team of experts.
-          </p>
+          <div style={{whiteSpace: "pre-wrap"}}>
+            <ReactMarkdown>{post.content}</ReactMarkdown>
+          </div>
         </div>
 
         <div style={{ marginTop: "60px", textAlign: "center" }}>

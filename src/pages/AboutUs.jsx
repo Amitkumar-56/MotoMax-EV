@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../index.css";
 
+const API_BASE = "http://localhost/assinment/php-backend/api";
+
 const AboutUs = () => {
+  const [coverImage, setCoverImage] = useState("https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1600");
+
+  useEffect(() => {
+    fetch(`${API_BASE}/settings.php`)
+      .then(res => res.json())
+      .then(data => {
+        if(data && data.data && data.data.aboutImage) {
+          setCoverImage(data.data.aboutImage);
+        }
+      });
+  }, []);
+
   return (
     <div className="responsive-page" style={{ background: "var(--bg-main)" }}>
       <style>
@@ -28,7 +42,7 @@ const AboutUs = () => {
         style={{ width: "100%", height: "500px", overflow: "hidden" }}
       >
         <img
-          src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1600"
+          src={coverImage}
           alt="Team Meeting"
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
