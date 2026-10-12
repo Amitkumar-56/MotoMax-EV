@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import CartSuccessModal from "./components/CartSuccessModal";
 import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
 import ElectricScooterBattery from "./pages/ElectricScooterBattery";
@@ -40,6 +41,7 @@ function AppContent() {
     <div className="app-container">
       {/* Show Navbar on all pages */}
       <Navbar />
+      <CartSuccessModal />
 
       <main className="main-content">
         <Routes>

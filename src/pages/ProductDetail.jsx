@@ -43,12 +43,12 @@ const ProductDetail = () => {
             }
             localStorage.setItem("guestCart", JSON.stringify(guestCart));
             window.dispatchEvent(new Event('cartUpdated'));
-            alert("Cart updated successfully! ✅");
+            window.dispatchEvent(new CustomEvent('cartSuccess', { detail: { message: "Cart quantity updated successfully!" } }));
           } else {
             guestCart.push({ product_id: productId, quantity: 1 });
             localStorage.setItem("guestCart", JSON.stringify(guestCart));
             window.dispatchEvent(new Event('cartUpdated'));
-            alert("Product added to cart successfully! ✅");
+            window.dispatchEvent(new CustomEvent('cartSuccess', { detail: { message: "Product added to cart successfully!" } }));
           }
         } catch (err) {
           console.error(err);
@@ -73,9 +73,11 @@ const ProductDetail = () => {
       if (redirect) {
         window.location.href = "/dashboard?tab=cart";
       } else {
-        alert(data.message);
         if (actionType === 'cart') {
+          window.dispatchEvent(new CustomEvent('cartSuccess', { detail: { message: data.message || "Product added to cart successfully!" } }));
           window.dispatchEvent(new Event('cartUpdated'));
+        } else {
+          alert(data.message);
         }
       }
     })

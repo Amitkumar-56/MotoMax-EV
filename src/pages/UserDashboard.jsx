@@ -21,6 +21,10 @@ const UserDashboard = () => {
 
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [formData, setFormData] = useState({ name: "", email: "", password: "" });
+  const [showPassword, setShowPassword] = useState(false);
+  const [authError, setAuthError] = useState("");
+  const [authSuccessMsg, setAuthSuccessMsg] = useState("");
+  const [authLoading, setAuthLoading] = useState(false);
 
   const urlParams = new URLSearchParams(location.search);
   const initialTab = urlParams.get('tab') || "overview";
@@ -71,6 +75,9 @@ const UserDashboard = () => {
 
   const handleAuth = (e) => {
     e.preventDefault();
+    setAuthError("");
+    setAuthSuccessMsg("");
+    setAuthLoading(true);
     const action = isLoginMode ? "login" : "register";
 
     fetch(`${API_BASE}/auth.php?action=${action}`, {
@@ -80,10 +87,10 @@ const UserDashboard = () => {
     })
       .then(res => res.json())
       .then(data => {
+        setAuthLoading(false);
         if (data.status === "success") {
           if (isLoginMode) {
             if (data.user.role === 'admin') {
-              // Admin shouldn't log in here usually, but if they do, redirect to admin
               localStorage.setItem("adminLoggedIn", "true");
               navigate("/admin");
             } else {
@@ -92,12 +99,17 @@ const UserDashboard = () => {
               window.dispatchEvent(new Event("authUpdated"));
             }
           } else {
-            alert("Registration successful! Please login.");
+            setAuthSuccessMsg("Account created successfully! Please sign in.");
             setIsLoginMode(true);
+            setFormData({ name: "", email: formData.email, password: "" });
           }
         } else {
-          alert(data.message);
+          setAuthError(data.message || "Authentication failed. Please check your credentials.");
         }
+      })
+      .catch(err => {
+        setAuthLoading(false);
+        setAuthError("Unable to connect to the server. Please check your internet connection.");
       });
   };
 
@@ -109,75 +121,509 @@ const UserDashboard = () => {
 
   if (!user) {
     return (
-      <div style={{ minHeight: "100vh", position: "relative", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-        {/* Background Image & Overlay */}
-        <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", backgroundImage: "url('https://images.unsplash.com/photo-1593941707882-a5bba14938c7')", backgroundSize: "cover", backgroundPosition: "center", filter: "brightness(0.6) blur(3px)", zIndex: -2 }}></div>
-        <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", background: "linear-gradient(135deg, rgba(254,166,3,0.3) 0%, rgba(0,0,0,0.7) 100%)", zIndex: -1 }}></div>
-
+      <div className="login-screen-wrapper">
         <style>
           {`
-            .glass-auth-card {
-              background: rgba(255, 255, 255, 0.9);
-              backdrop-filter: blur(25px);
-              border-radius: 30px;
-              padding: 50px;
+            .login-screen-wrapper {
+              min-height: 100vh;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background: #070a12;
+              padding: 24px 16px;
+              position: relative;
+              font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+              overflow-x: hidden;
+            }
+            .login-mesh-bg {
+              position: absolute;
+              inset: 0;
+              background: 
+                radial-gradient(circle at 15% 20%, rgba(254, 166, 3, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 85% 80%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.06) 0%, transparent 60%);
+              pointer-events: none;
+            }
+            .login-grid-overlay {
+              position: absolute;
+              inset: 0;
+              background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+              background-size: 40px 40px;
+              pointer-events: none;
+            }
+            .login-container-card {
+              display: flex;
               width: 100%;
-              max-width: 450px;
-              box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-              border: 1px solid rgba(255,255,255,0.4);
-              margin: 20px;
-              animation: fadeInUp 0.6s ease-out;
+              max-width: 1120px;
+              min-height: 680px;
+              background: rgba(15, 23, 42, 0.85);
+              border-radius: 28px;
+              border: 1px solid rgba(255, 255, 255, 0.1);
+              backdrop-filter: blur(20px);
+              overflow: hidden;
+              box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8), 0 0 40px rgba(254, 166, 3, 0.1);
+              z-index: 2;
             }
-            @keyframes fadeInUp {
-              from { opacity: 0; transform: translateY(30px); }
-              to { opacity: 1; transform: translateY(0); }
+            /* Left Brand Side - Pure Full Image (50% Equal Half) */
+            .login-brand-panel {
+              flex: 1 1 50%;
+              width: 50%;
+              max-width: 50%;
+              padding: 0;
+              margin: 0;
+              position: relative;
+              overflow: hidden;
+              background: #090e17;
+              display: flex;
+              border-right: 1px solid rgba(255, 255, 255, 0.08);
             }
-            .glass-input {
-              width: 100%; padding: 16px 20px; border-radius: 14px;
-              border: 1px solid rgba(0,0,0,0.1); margin-bottom: 20px; font-size: 1.05rem;
-              background: #fff; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-              transition: all 0.3s ease; color: #333;
+            .login-brand-full-img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              display: block;
+              transition: transform 0.6s ease;
             }
-            .glass-input:focus {
-              border-color: #FEA603; outline: none; box-shadow: 0 0 0 4px rgba(254,166,3,0.15);
+            .login-brand-panel:hover .login-brand-full-img {
+              transform: scale(1.03);
             }
-            .glass-btn {
-              width: 100%; background: #FEA603; color: #fff; padding: 16px; border-radius: 14px;
-              border: none; font-size: 1.15rem; font-weight: 800; cursor: pointer;
-              transition: all 0.3s; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px;
+            /* Right Form Side (50% Equal Half) */
+            .login-form-panel {
+              flex: 1 1 50%;
+              width: 50%;
+              max-width: 50%;
+              background: #ffffff;
+              padding: 44px 50px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              box-sizing: border-box;
             }
-            .glass-btn:hover {
-              background: #e65c00; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(254,166,3,0.4);
+            .auth-tab-switch {
+              display: flex;
+              background: #f1f5f9;
+              padding: 4px;
+              border-radius: 14px;
+              margin-bottom: 24px;
             }
-            .glass-switch {
-              text-align: center; margin-top: 25px; color: #666; font-size: 1rem; cursor: pointer;
+            .auth-tab-btn {
+              flex: 1;
+              padding: 11px 0;
+              border: none;
+              background: transparent;
+              font-size: 0.95rem;
+              font-weight: 700;
+              color: #64748b;
+              border-radius: 10px;
+              cursor: pointer;
+              transition: all 0.25s ease;
             }
-            .glass-switch span { color: #FEA603; font-weight: 800; text-decoration: none; transition: color 0.3s; }
-            .glass-switch span:hover { color: #cc5200; text-decoration: underline; }
+            .auth-tab-btn.active {
+              background: #ffffff;
+              color: #0f172a;
+              box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            }
+            .social-auth-btn {
+              width: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 12px;
+              padding: 12px 16px;
+              border: 1.5px solid #e2e8f0;
+              border-radius: 12px;
+              background: #ffffff;
+              color: #1e293b;
+              font-size: 0.92rem;
+              font-weight: 600;
+              cursor: pointer;
+              transition: all 0.2s ease;
+            }
+            .social-auth-btn:hover {
+              background: #f8fafc;
+              border-color: #cbd5e1;
+              transform: translateY(-1px);
+            }
+            .auth-divider {
+              display: flex;
+              align-items: center;
+              margin: 20px 0;
+              color: #94a3b8;
+              font-size: 0.8rem;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+            }
+            .auth-divider::before, .auth-divider::after {
+              content: '';
+              flex: 1;
+              height: 1px;
+              background: #e2e8f0;
+            }
+            .auth-divider span {
+              padding: 0 12px;
+            }
+            .form-input-group {
+              margin-bottom: 16px;
+            }
+            .form-input-label {
+              display: block;
+              font-size: 0.84rem;
+              font-weight: 600;
+              color: #334155;
+              margin-bottom: 6px;
+            }
+            .form-input-wrapper {
+              position: relative;
+              display: flex;
+              align-items: center;
+            }
+            .form-input-icon {
+              position: absolute;
+              left: 14px;
+              font-size: 1.05rem;
+              color: #94a3b8;
+              pointer-events: none;
+            }
+            .modern-auth-input {
+              width: 100%;
+              padding: 13px 14px 13px 44px;
+              font-size: 0.95rem;
+              color: #0f172a;
+              background: #f8fafc;
+              border: 1.5px solid #e2e8f0;
+              border-radius: 12px;
+              transition: all 0.2s ease;
+              box-sizing: border-box;
+            }
+            .modern-auth-input:focus {
+              outline: none;
+              background: #ffffff;
+              border-color: #fea603;
+              box-shadow: 0 0 0 4px rgba(254, 166, 3, 0.15);
+            }
+            .pw-toggle-btn {
+              position: absolute;
+              right: 12px;
+              background: none;
+              border: none;
+              cursor: pointer;
+              font-size: 1.1rem;
+              color: #94a3b8;
+              padding: 4px;
+            }
+            .submit-auth-btn {
+              width: 100%;
+              padding: 14px;
+              background: linear-gradient(135deg, #fea603 0%, #f59e0b 50%, #e65c00 100%);
+              color: #ffffff;
+              border: none;
+              border-radius: 12px;
+              font-size: 1.02rem;
+              font-weight: 700;
+              letter-spacing: 0.3px;
+              cursor: pointer;
+              box-shadow: 0 8px 22px rgba(254, 166, 3, 0.35);
+              transition: all 0.25s ease;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 8px;
+              margin-top: 14px;
+            }
+            .submit-auth-btn:hover:not(:disabled) {
+              transform: translateY(-2px);
+              box-shadow: 0 12px 28px rgba(254, 166, 3, 0.45);
+            }
+            .submit-auth-btn:disabled {
+              opacity: 0.7;
+              cursor: not-allowed;
+            }
+            .auth-back-link {
+              display: inline-flex;
+              align-items: center;
+              gap: 6px;
+              color: #64748b;
+              font-size: 0.85rem;
+              font-weight: 600;
+              text-decoration: none;
+              transition: color 0.2s;
+            }
+            .auth-back-link:hover {
+              color: #fea603;
+            }
+            @media (max-width: 960px) {
+              .login-container-card {
+                flex-direction: column;
+                max-width: 500px;
+              }
+              .login-brand-panel {
+                flex: none;
+                width: 100%;
+                max-width: 100%;
+                height: 250px;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+              }
+              .login-form-panel {
+                flex: none;
+                width: 100%;
+                max-width: 100%;
+                padding: 32px 24px;
+              }
+            }
           `}
         </style>
 
-        <div className="glass-auth-card">
-          <div style={{ textAlign: "center", marginBottom: "35px" }}>
-            <div style={{ display: "inline-block", padding: "15px", background: "rgba(254,166,3,0.1)", borderRadius: "20px", marginBottom: "15px" }}>
-              <span style={{ fontSize: "2.5rem" }}>⚡</span>
-            </div>
-            <h2 style={{ fontSize: "2.2rem", fontWeight: 900, color: "#111", margin: "0 0 5px 0" }}>{isLoginMode ? "Welcome Back" : "Join MotoMax"}</h2>
-            <p style={{ color: "#666", fontSize: "1.05rem", margin: 0 }}>Access your personalized EV portal</p>
+        {/* Ambient Decorative Background */}
+        <div className="login-mesh-bg"></div>
+        <div className="login-grid-overlay"></div>
+
+        <div className="login-container-card">
+          {/* Left / Pure Full Image Side */}
+          <div className="login-brand-panel">
+            <img
+              src="/assets/login-hero.jpg"
+              alt="MotoMax EV Mobility"
+              className="login-brand-full-img"
+              onError={(e) => {
+                e.target.src = "/assets/slider-1.jpg";
+              }}
+            />
           </div>
 
-          <form onSubmit={handleAuth}>
-            {!isLoginMode && (
-              <input type="text" className="glass-input" placeholder="Your Full Name" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} required />
+          {/* Right / Authentication Form Side */}
+          <div className="login-form-panel">
+            <div style={{ marginBottom: "20px" }}>
+              <a href="/" className="auth-back-link">
+                ← Return to Store
+              </a>
+            </div>
+
+            {/* Segmented Switcher */}
+            <div className="auth-tab-switch">
+              <button
+                type="button"
+                className={`auth-tab-btn ${isLoginMode ? "active" : ""}`}
+                onClick={() => {
+                  setIsLoginMode(true);
+                  setAuthError("");
+                  setAuthSuccessMsg("");
+                }}
+              >
+                Sign In
+              </button>
+              <button
+                type="button"
+                className={`auth-tab-btn ${!isLoginMode ? "active" : ""}`}
+                onClick={() => {
+                  setIsLoginMode(false);
+                  setAuthError("");
+                  setAuthSuccessMsg("");
+                }}
+              >
+                Create Account
+              </button>
+            </div>
+
+            <div style={{ marginBottom: "20px" }}>
+              <h2 style={{ fontSize: "1.65rem", fontWeight: 800, color: "#0f172a", margin: "0 0 5px 0", letterSpacing: "-0.5px" }}>
+                {isLoginMode ? "Welcome Back" : "Create Member Account"}
+              </h2>
+              <p style={{ color: "#64748b", fontSize: "0.88rem", margin: 0 }}>
+                {isLoginMode
+                  ? "Sign in to track orders, manage addresses & checkout faster."
+                  : "Join MotoMax today for instant access to member-only pricing."}
+              </p>
+            </div>
+
+            {/* GOOGLE SIGN IN BUTTON */}
+            <button
+              type="button"
+              className="social-auth-btn"
+              onClick={() => {
+                setAuthError("Google One-Tap is running in demo mode. Please enter email & password below.");
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/>
+                <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.97 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+              </svg>
+              <span>Continue with Google</span>
+            </button>
+
+            <div className="auth-divider">
+              <span>or continue with email</span>
+            </div>
+
+            {/* Inline Error Banner */}
+            {authError && (
+              <div
+                style={{
+                  background: "#fef2f2",
+                  border: "1px solid #fecaca",
+                  color: "#b91c1c",
+                  padding: "11px 14px",
+                  borderRadius: "10px",
+                  fontSize: "0.85rem",
+                  marginBottom: "16px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px"
+                }}
+              >
+                <span>⚠️</span>
+                <span>{authError}</span>
+              </div>
             )}
-            <input type="email" className="glass-input" placeholder="Email Address" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} required />
-            <input type="password" className="glass-input" placeholder="Password" value={formData.password} onChange={e => setFormData({ ...formData, password: e.target.value })} required />
 
-            <button type="submit" className="glass-btn">{isLoginMode ? "Sign In" : "Register"}</button>
-          </form>
+            {/* Inline Success Banner */}
+            {authSuccessMsg && (
+              <div
+                style={{
+                  background: "#f0fdf4",
+                  border: "1px solid #bbf7d0",
+                  color: "#15803d",
+                  padding: "11px 14px",
+                  borderRadius: "10px",
+                  fontSize: "0.85rem",
+                  marginBottom: "16px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px"
+                }}
+              >
+                <span>✓</span>
+                <span>{authSuccessMsg}</span>
+              </div>
+            )}
 
-          <div className="glass-switch" onClick={() => setIsLoginMode(!isLoginMode)}>
-            {isLoginMode ? <>Don't have an account? <span>Sign up</span></> : <>Already have an account? <span>Sign in</span></>}
+            <form onSubmit={handleAuth}>
+              {!isLoginMode && (
+                <div className="form-input-group">
+                  <label className="form-input-label">Full Name</label>
+                  <div className="form-input-wrapper">
+                    <span className="form-input-icon">👤</span>
+                    <input
+                      type="text"
+                      className="modern-auth-input"
+                      placeholder="e.g. Rahul Sharma"
+                      value={formData.name}
+                      onChange={e => setFormData({ ...formData, name: e.target.value })}
+                      required
+                    />
+                  </div>
+                </div>
+              )}
+
+              <div className="form-input-group">
+                <label className="form-input-label">Email Address</label>
+                <div className="form-input-wrapper">
+                  <span className="form-input-icon">✉️</span>
+                  <input
+                    type="email"
+                    className="modern-auth-input"
+                    placeholder="name@example.com"
+                    value={formData.email}
+                    onChange={e => setFormData({ ...formData, email: e.target.value })}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="form-input-group">
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
+                  <label className="form-input-label" style={{ margin: 0 }}>Password</label>
+                  {isLoginMode && (
+                    <span
+                      onClick={() => alert("Please contact MotoMax Support at support@motomax.com or call our hotline for password reset.")}
+                      style={{ fontSize: "0.78rem", color: "#fea603", fontWeight: 600, cursor: "pointer" }}
+                    >
+                      Forgot password?
+                    </span>
+                  )}
+                </div>
+                <div className="form-input-wrapper">
+                  <span className="form-input-icon">🔒</span>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    className="modern-auth-input"
+                    placeholder="••••••••"
+                    value={formData.password}
+                    onChange={e => setFormData({ ...formData, password: e.target.value })}
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="pw-toggle-btn"
+                    onClick={() => setShowPassword(!showPassword)}
+                    title={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? "🙈" : "👁️"}
+                  </button>
+                </div>
+              </div>
+
+              {isLoginMode && (
+                <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "18px" }}>
+                  <input type="checkbox" id="rememberMe" style={{ accentColor: "#fea603", cursor: "pointer" }} defaultChecked />
+                  <label htmlFor="rememberMe" style={{ fontSize: "0.82rem", color: "#64748b", cursor: "pointer" }}>
+                    Remember me on this device
+                  </label>
+                </div>
+              )}
+
+              <button type="submit" className="submit-auth-btn" disabled={authLoading}>
+                {authLoading ? (
+                  <span>Authenticating...</span>
+                ) : (
+                  <>
+                    <span>{isLoginMode ? "Sign In to MotoMax Portal" : "Complete Registration"}</span>
+                    <span>→</span>
+                  </>
+                )}
+              </button>
+            </form>
+
+            <div style={{ textAlign: "center", marginTop: "20px", fontSize: "0.88rem", color: "#64748b" }}>
+              {isLoginMode ? (
+                <>
+                  Don't have an account?{" "}
+                  <span
+                    onClick={() => {
+                      setIsLoginMode(false);
+                      setAuthError("");
+                      setAuthSuccessMsg("");
+                    }}
+                    style={{ color: "#fea603", fontWeight: 700, cursor: "pointer", textDecoration: "underline" }}
+                  >
+                    Sign up now
+                  </span>
+                </>
+              ) : (
+                <>
+                  Already registered?{" "}
+                  <span
+                    onClick={() => {
+                      setIsLoginMode(true);
+                      setAuthError("");
+                      setAuthSuccessMsg("");
+                    }}
+                    style={{ color: "#fea603", fontWeight: 700, cursor: "pointer", textDecoration: "underline" }}
+                  >
+                    Sign in here
+                  </span>
+                </>
+              )}
+            </div>
+
+            <div style={{ marginTop: "18px", paddingTop: "14px", borderTop: "1px solid #f1f5f9", display: "flex", justifyContent: "center", alignItems: "center", gap: "6px", color: "#94a3b8", fontSize: "0.72rem" }}>
+              <span>🔒 256-Bit SSL Encrypted</span>
+              <span>•</span>
+              <span>100% Data Privacy</span>
+            </div>
           </div>
         </div>
       </div>

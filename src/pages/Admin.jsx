@@ -76,6 +76,9 @@ const Admin = () => {
   const [profile, setProfile] = useState({ name: "", email: "", password: "" });
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
+  const [showAdminPassword, setShowAdminPassword] = useState(false);
+  const [adminLoading, setAdminLoading] = useState(false);
 
   const fetchProfile = () => {
     fetch(`${API_BASE}/profile.php`)
@@ -214,6 +217,8 @@ const Admin = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    setLoginError("");
+    setAdminLoading(true);
     fetch(`${API_BASE}/auth.php?action=login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -221,12 +226,17 @@ const Admin = () => {
     })
     .then(res => res.json())
     .then(data => {
+      setAdminLoading(false);
       if (data.status === "success") {
         setIsLoggedIn(true);
         localStorage.setItem("adminLoggedIn", "true");
       } else {
-        alert(data.message || "Invalid credentials");
+        setLoginError(data.message || "Invalid administrative credentials.");
       }
+    })
+    .catch(() => {
+      setAdminLoading(false);
+      setLoginError("Server connection error. Please verify backend is running.");
     });
   };
 
@@ -340,139 +350,326 @@ const Admin = () => {
 
   if (!isLoggedIn) {
     return (
-      <div className="premium-login-wrap">
-        <style>
-          {`
-            .premium-login-wrap {
-              min-height: 100vh;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              background: url('https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=1920') no-repeat center center/cover;
-              position: relative;
-              padding: 20px;
-              font-family: 'Inter', sans-serif;
-            }
-            .premium-login-wrap::before {
-              content: '';
-              position: absolute;
-              top: 0; left: 0; width: 100%; height: 100%;
-              background: rgba(15, 23, 42, 0.7);
-              backdrop-filter: blur(8px);
-              -webkit-backdrop-filter: blur(8px);
-            }
-            .premium-login-card {
-              position: relative;
-              background: rgba(255, 255, 255, 0.1);
-              padding: 50px 40px;
-              border-radius: 24px;
-              box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-              width: 100%;
-              max-width: 420px;
-              text-align: center;
-              backdrop-filter: blur(16px);
-              -webkit-backdrop-filter: blur(16px);
-              border: 1px solid rgba(255, 255, 255, 0.2);
-              color: #fff;
-              animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-            @keyframes slideUp {
-              from { opacity: 0; transform: translateY(40px); }
-              to { opacity: 1; transform: translateY(0); }
-            }
-            .premium-login-card h2 {
-              font-size: 2rem;
-              font-weight: 800;
-              margin-bottom: 10px;
-              letter-spacing: -0.5px;
-            }
-            .premium-login-card p {
-              color: rgba(255, 255, 255, 0.7);
-              margin-bottom: 30px;
-              font-size: 0.95rem;
-            }
-            .premium-input-group {
-              text-align: left;
-              margin-bottom: 20px;
-            }
-            .premium-input-group label {
-              display: block;
-              font-size: 0.85rem;
-              font-weight: 600;
-              margin-bottom: 8px;
-              color: rgba(255, 255, 255, 0.9);
-              text-transform: uppercase;
-              letter-spacing: 0.5px;
-            }
-            .premium-input {
-              width: 100%;
-              padding: 14px 16px;
-              border: 1px solid rgba(255, 255, 255, 0.2);
-              background: rgba(0, 0, 0, 0.2);
-              border-radius: 12px;
-              box-sizing: border-box;
-              color: #fff;
-              font-size: 1rem;
-              transition: all 0.3s ease;
-            }
-            .premium-input:focus {
-              outline: none;
-              border-color: #FEA603;
-              background: rgba(0, 0, 0, 0.4);
-              box-shadow: 0 0 15px rgba(255, 102, 0, 0.3);
-            }
-            .premium-input::placeholder {
-              color: rgba(255, 255, 255, 0.4);
-            }
-            .premium-btn {
-              width: 100%;
-              padding: 16px;
-              background: linear-gradient(135deg, #FEA603 0%, #ff8c00 100%);
-              color: white;
-              border: none;
-              border-radius: 12px;
-              font-size: 1.05rem;
-              font-weight: 700;
-              cursor: pointer;
-              transition: all 0.3s ease;
-              box-shadow: 0 10px 20px rgba(255, 102, 0, 0.3);
-              margin-top: 10px;
-            }
-            .premium-btn:hover {
-              transform: translateY(-2px);
-              box-shadow: 0 15px 25px rgba(255, 102, 0, 0.4);
-            }
-            .logo-placeholder {
-              width: 60px;
-              height: 60px;
-              background: #FEA603;
-              border-radius: 16px;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              font-size: 1.8rem;
-              font-weight: 900;
-              color: #fff;
-              margin: 0 auto 20px;
-              box-shadow: 0 10px 20px rgba(255, 102, 0, 0.3);
-            }
-          `}
-        </style>
-        <div className="premium-login-card">
-          <div className="logo-placeholder">M</div>
-          <h2>Welcome Back</h2>
-          <p>Sign in to MotoMax Admin Portal</p>
-          <form onSubmit={handleLogin}>
-            <div className="premium-input-group">
-              <label>Email Address</label>
-              <input className="premium-input" type="email" placeholder="admin@test.com" value={loginEmail} onChange={e=>setLoginEmail(e.target.value)} required />
+      <div className="admin-auth-root">
+        <style>{`
+          .admin-auth-root {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 50% 20%, #1e293b 0%, #0b0f19 80%);
+            padding: 24px;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            position: relative;
+            overflow: hidden;
+          }
+          .admin-auth-root::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(254, 166, 3, 0.12) 0%, transparent 70%);
+            top: -150px;
+            right: -150px;
+            border-radius: 50%;
+            pointer-events: none;
+          }
+          .admin-auth-root::after {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+            bottom: -150px;
+            left: -100px;
+            border-radius: 50%;
+            pointer-events: none;
+          }
+          .admin-auth-card {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 440px;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(254, 166, 3, 0.15);
+            animation: cardAppear 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          @keyframes cardAppear {
+            from { opacity: 0; transform: translateY(25px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+          }
+          .admin-auth-hero {
+            position: relative;
+            width: 100%;
+            height: 170px;
+            overflow: hidden;
+          }
+          .admin-auth-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(0.88);
+            transition: transform 0.8s ease;
+          }
+          .admin-auth-card:hover .admin-auth-hero img {
+            transform: scale(1.04);
+          }
+          .admin-auth-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(15, 23, 42, 0.85) 75%, #0f172a 100%);
+          }
+          .admin-auth-badge {
+            position: absolute;
+            top: 16px;
+            left: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 14px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(254, 166, 3, 0.4);
+            border-radius: 20px;
+            color: #FEA603;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+          }
+          .admin-auth-badge-dot {
+            width: 7px;
+            height: 7px;
+            background: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #22c55e;
+          }
+          .admin-auth-body {
+            padding: 24px 32px 32px;
+          }
+          .admin-auth-header {
+            text-align: center;
+            margin-bottom: 22px;
+          }
+          .admin-auth-logo-badge {
+            width: 48px;
+            height: 48px;
+            margin: -48px auto 14px;
+            background: #0f172a;
+            border: 2px solid #FEA603;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(254, 166, 3, 0.35);
+            position: relative;
+            z-index: 3;
+          }
+          .admin-auth-logo-badge img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+          }
+          .admin-auth-title {
+            color: #ffffff;
+            font-size: 1.45rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin: 0;
+          }
+          .admin-auth-error {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            color: #fca5a5;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+          }
+          .admin-field-group {
+            margin-bottom: 18px;
+          }
+          .admin-field-label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #94a3b8;
+            margin-bottom: 7px;
+          }
+          .admin-field-input-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+          }
+          .admin-field-icon {
+            position: absolute;
+            left: 14px;
+            color: #64748b;
+            font-size: 0.95rem;
+            pointer-events: none;
+          }
+          .admin-field-input {
+            width: 100%;
+            box-sizing: border-box;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            padding: 12px 14px 12px 42px;
+            border-radius: 12px;
+            font-size: 0.92rem;
+            transition: all 0.25s ease;
+          }
+          .admin-field-input:focus {
+            outline: none;
+            border-color: #FEA603;
+            background: rgba(30, 41, 59, 0.95);
+            box-shadow: 0 0 0 3px rgba(254, 166, 3, 0.2);
+          }
+          .admin-field-input::placeholder {
+            color: #475569;
+          }
+          .admin-toggle-pwd {
+            position: absolute;
+            right: 12px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 0.95rem;
+            cursor: pointer;
+            padding: 4px;
+          }
+          .admin-toggle-pwd:hover {
+            color: #FEA603;
+          }
+          .admin-submit-btn {
+            width: 100%;
+            padding: 13px;
+            margin-top: 8px;
+            background: linear-gradient(135deg, #FEA603 0%, #e65100 100%);
+            border: none;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 0.98rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 10px 25px rgba(254, 166, 3, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+          }
+          .admin-submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(254, 166, 3, 0.45);
+          }
+          .admin-submit-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+          }
+          .admin-back-link {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.84rem;
+            font-weight: 500;
+            transition: color 0.2s;
+          }
+          .admin-back-link:hover {
+            color: #FEA603;
+          }
+        `}</style>
+
+        <div className="admin-auth-card">
+          <div className="admin-auth-hero">
+            <img src="/assets/slider-2.jpg" alt="MotoMax Control Center" />
+            <div className="admin-auth-hero-overlay" />
+            <div className="admin-auth-badge">
+              <span className="admin-auth-badge-dot"></span>
+              Admin Portal
             </div>
-            <div className="premium-input-group">
-              <label>Password</label>
-              <input className="premium-input" type="password" placeholder="••••••••" value={loginPassword} onChange={e=>setLoginPassword(e.target.value)} required />
+          </div>
+
+          <div className="admin-auth-body">
+            <div className="admin-auth-header">
+              <div className="admin-auth-logo-badge">
+                <img src="/Icon.png" alt="MotoMax" onError={(e)=>{ e.currentTarget.style.display='none'; }} />
+              </div>
+              <h2 className="admin-auth-title">Admin Login</h2>
             </div>
-            <button className="premium-btn" type="submit">Access Dashboard</button>
-          </form>
+
+            {loginError && (
+              <div className="admin-auth-error">
+                <span>⚠️</span>
+                <span>{loginError}</span>
+              </div>
+            )}
+
+            <form onSubmit={handleLogin}>
+              <div className="admin-field-group">
+                <label className="admin-field-label">Email</label>
+                <div className="admin-field-input-box">
+                  <span className="admin-field-icon">✉️</span>
+                  <input
+                    className="admin-field-input"
+                    type="email"
+                    placeholder="admin@test.com"
+                    value={loginEmail}
+                    onChange={(e) => setLoginEmail(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="admin-field-group">
+                <label className="admin-field-label">Password</label>
+                <div className="admin-field-input-box">
+                  <span className="admin-field-icon">🔒</span>
+                  <input
+                    className="admin-field-input"
+                    type={showAdminPassword ? "text" : "password"}
+                    placeholder="••••••••"
+                    value={loginPassword}
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="admin-toggle-pwd"
+                    onClick={() => setShowAdminPassword(!showAdminPassword)}
+                    title={showAdminPassword ? "Hide password" : "Show password"}
+                  >
+                    {showAdminPassword ? "👁️" : "👁️‍🗨️"}
+                  </button>
+                </div>
+              </div>
+
+              <button className="admin-submit-btn" type="submit" disabled={adminLoading}>
+                {adminLoading ? "Authenticating..." : "Login to Dashboard →"}
+              </button>
+
+              <a href="/" className="admin-back-link">
+                ← Return to Store
+              </a>
+            </form>
+          </div>
         </div>
       </div>
     );
