@@ -1,675 +1,744 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../index.css";
 
 const API_BASE = "http://localhost/assinment/php-backend/api";
 
 const AboutUs = () => {
-  const [coverImage, setCoverImage] = useState("https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1600");
+  const [coverImage, setCoverImage] = useState("/assets/slider-3.jpg");
 
   useEffect(() => {
     fetch(`${API_BASE}/settings.php`)
       .then(res => res.json())
       .then(data => {
-        if(data && data.data && data.data.aboutImage) {
+        if (data && data.data && data.data.aboutImage) {
           setCoverImage(data.data.aboutImage);
         }
-      });
+      })
+      .catch(() => {});
   }, []);
 
   return (
-    <div className="responsive-page" style={{ background: "var(--bg-main)" }}>
-      <style>
-        {`
-          @media (max-width: 768px) {
-            .hero-container { height: 300px !important; }
-            .section-title { font-size: 2rem !important; }
-            h4[style*="5rem"] { font-size: 3rem !important; top: -40px !important; left: 0 !important; white-space: normal !important; width: 100%; word-break: break-word; }
-            h2[style*="3rem"] { font-size: 2.2rem !important; }
-            h2[style*="2.5rem"] { font-size: 2rem !important; }
-            div[style*="flex: 1 1 500px"], div[style*="flex: 1 1 400px"], div[style*="flex: 1 1 350px"], div[style*="flex: 2 1 600px"] {
-              flex: 1 1 100% !important;
-            }
-            .section-padding { padding: 3rem 5% !important; }
-            div[style*="flex-direction: row-reverse"] { flex-direction: column !important; }
-            img[style*="height: 500px"] { height: 300px !important; }
+    <div className="about-page-root">
+      <style>{`
+        .about-page-root {
+          background: #ffffff;
+          color: #0f172a;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          overflow-x: hidden;
+        }
+
+        /* Hero Banner */
+        .about-hero {
+          position: relative;
+          min-height: 480px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #090e17;
+          overflow: hidden;
+        }
+        .about-hero-bg {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0.42;
+          filter: scale(1.02);
+          transition: transform 8s ease;
+        }
+        .about-hero:hover .about-hero-bg {
+          transform: scale(1.06);
+        }
+        .about-hero-gradient {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(9, 14, 23, 0.7) 0%, rgba(9, 14, 23, 0.9) 100%);
+        }
+        .about-hero-content {
+          position: relative;
+          z-index: 2;
+          text-align: center;
+          max-width: 900px;
+          padding: 80px 24px;
+        }
+        .about-hero-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 6px 18px;
+          border-radius: 30px;
+          background: rgba(254, 166, 3, 0.15);
+          border: 1px solid rgba(254, 166, 3, 0.4);
+          color: #FEA603;
+          font-size: 0.85rem;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          margin-bottom: 20px;
+        }
+        .about-hero-title {
+          font-size: clamp(2.3rem, 5vw, 3.8rem);
+          font-weight: 900;
+          line-height: 1.15;
+          color: #ffffff;
+          letter-spacing: -1px;
+          margin: 0 0 20px 0;
+        }
+        .about-hero-title span {
+          background: linear-gradient(135deg, #FEA603 0%, #ff8c00 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        .about-hero-subtitle {
+          color: #cbd5e1;
+          font-size: 1.15rem;
+          line-height: 1.6;
+          max-width: 720px;
+          margin: 0 auto;
+        }
+
+        /* Container helper */
+        .about-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 24px;
+        }
+
+        /* Section wrapper */
+        .about-section {
+          padding: 90px 0;
+        }
+        .about-section-alt {
+          background: #f8fafc;
+        }
+
+        /* Section Header */
+        .section-header-center {
+          text-align: center;
+          max-width: 760px;
+          margin: 0 auto 55px;
+        }
+        .section-tag {
+          color: #FEA603;
+          font-weight: 800;
+          font-size: 0.82rem;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          margin-bottom: 10px;
+          display: inline-block;
+        }
+        .section-heading {
+          font-size: clamp(2rem, 3.5vw, 2.75rem);
+          font-weight: 800;
+          color: #0f172a;
+          line-height: 1.25;
+          letter-spacing: -0.5px;
+          margin: 0 0 16px 0;
+        }
+        .section-desc {
+          color: #64748b;
+          font-size: 1.05rem;
+          line-height: 1.65;
+          margin: 0;
+        }
+
+        /* Story Section (Grid) */
+        .story-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          align-items: center;
+        }
+        .story-card {
+          position: relative;
+          border-radius: 24px;
+          overflow: hidden;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+          border: 1px solid #e2e8f0;
+        }
+        .story-card img {
+          width: 100%;
+          height: 100%;
+          min-height: 420px;
+          object-fit: cover;
+          display: block;
+        }
+        .story-badge-floating {
+          position: absolute;
+          bottom: 24px;
+          left: 24px;
+          background: rgba(15, 23, 42, 0.88);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(254, 166, 3, 0.3);
+          border-radius: 16px;
+          padding: 18px 24px;
+          color: #ffffff;
+        }
+        .story-badge-floating h4 {
+          font-size: 1.8rem;
+          font-weight: 900;
+          color: #FEA603;
+          margin: 0;
+          line-height: 1;
+        }
+        .story-badge-floating p {
+          font-size: 0.82rem;
+          color: #cbd5e1;
+          margin: 6px 0 0 0;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.8px;
+        }
+
+        .story-text h3 {
+          font-size: 1.85rem;
+          font-weight: 800;
+          color: #0f172a;
+          margin: 0 0 18px 0;
+          line-height: 1.3;
+        }
+        .story-text p {
+          color: #475569;
+          font-size: 1rem;
+          line-height: 1.75;
+          margin-bottom: 20px;
+        }
+        .story-leader-box {
+          margin-top: 28px;
+          padding: 20px 24px;
+          background: #f1f5f9;
+          border-left: 4px solid #FEA603;
+          border-radius: 0 14px 14px 0;
+        }
+        .story-leader-box p {
+          font-style: italic;
+          color: #334155;
+          margin: 0 0 8px 0;
+          font-size: 0.95rem;
+        }
+        .story-leader-box span {
+          font-weight: 700;
+          color: #0f172a;
+          font-size: 0.9rem;
+        }
+
+        /* Stat Counter Cards */
+        .impact-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 24px;
+          margin-top: 50px;
+        }
+        .impact-stat-card {
+          background: #ffffff;
+          padding: 32px 24px;
+          border-radius: 20px;
+          border: 1px solid #e2e8f0;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+          text-align: center;
+          transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .impact-stat-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 20px 35px rgba(254, 166, 3, 0.12);
+          border-color: rgba(254, 166, 3, 0.4);
+        }
+        .impact-stat-icon {
+          width: 52px;
+          height: 52px;
+          margin: 0 auto 16px;
+          border-radius: 14px;
+          background: rgba(254, 166, 3, 0.12);
+          color: #FEA603;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5rem;
+        }
+        .impact-stat-number {
+          font-size: 2.2rem;
+          font-weight: 900;
+          color: #0f172a;
+          margin: 0 0 6px 0;
+          letter-spacing: -0.5px;
+        }
+        .impact-stat-label {
+          color: #64748b;
+          font-size: 0.9rem;
+          font-weight: 600;
+          margin: 0;
+        }
+
+        /* Quality Pillars (4 Cards) */
+        .pillars-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          gap: 24px;
+        }
+        .pillar-card {
+          background: #ffffff;
+          padding: 36px 28px;
+          border-radius: 20px;
+          border: 1px solid #e2e8f0;
+          transition: all 0.3s ease;
+          position: relative;
+        }
+        .pillar-card:hover {
+          transform: translateY(-4px);
+          border-color: #FEA603;
+          box-shadow: 0 16px 32px rgba(0, 0, 0, 0.06);
+        }
+        .pillar-num {
+          font-size: 1.8rem;
+          font-weight: 900;
+          color: rgba(254, 166, 3, 0.3);
+          margin-bottom: 14px;
+        }
+        .pillar-title {
+          font-size: 1.25rem;
+          font-weight: 800;
+          color: #0f172a;
+          margin: 0 0 12px 0;
+        }
+        .pillar-text {
+          color: #64748b;
+          font-size: 0.92rem;
+          line-height: 1.6;
+          margin: 0;
+        }
+
+        /* Infrastructure Split */
+        .infra-split {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 50px;
+          align-items: center;
+        }
+        .infra-image-wrap {
+          border-radius: 24px;
+          overflow: hidden;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .infra-image-wrap img {
+          width: 100%;
+          height: 100%;
+          min-height: 380px;
+          object-fit: cover;
+          display: block;
+        }
+        .infra-features {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          margin-top: 24px;
+        }
+        .infra-feature-item {
+          display: flex;
+          gap: 16px;
+          align-items: flex-start;
+        }
+        .infra-feature-icon {
+          width: 36px;
+          height: 36px;
+          border-radius: 10px;
+          background: #ecfdf5;
+          color: #16a34a;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 800;
+          flex-shrink: 0;
+        }
+        .infra-feature-text h5 {
+          font-size: 1.05rem;
+          font-weight: 700;
+          color: #0f172a;
+          margin: 0 0 4px 0;
+        }
+        .infra-feature-text p {
+          color: #64748b;
+          font-size: 0.9rem;
+          margin: 0;
+          line-height: 1.5;
+        }
+
+        /* Beyond Mobility Cards */
+        .beyond-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+        }
+        .beyond-card {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 20px;
+          padding: 32px 24px;
+          text-align: center;
+          transition: all 0.3s ease;
+        }
+        .beyond-card:hover {
+          border-color: #FEA603;
+          transform: translateY(-4px);
+          box-shadow: 0 14px 28px rgba(0, 0, 0, 0.06);
+        }
+        .beyond-icon {
+          font-size: 2.2rem;
+          margin-bottom: 14px;
+        }
+        .beyond-title {
+          font-size: 1.2rem;
+          font-weight: 800;
+          color: #0f172a;
+          margin: 0 0 8px 0;
+        }
+        .beyond-text {
+          color: #64748b;
+          font-size: 0.9rem;
+          line-height: 1.55;
+          margin: 0;
+        }
+
+        /* CTA Banner */
+        .about-cta-section {
+          background: linear-gradient(135deg, #090e17 0%, #1e293b 100%);
+          border-radius: 30px;
+          padding: 60px 40px;
+          text-align: center;
+          color: #ffffff;
+          position: relative;
+          overflow: hidden;
+          margin-bottom: 80px;
+        }
+        .about-cta-section::before {
+          content: '';
+          position: absolute;
+          top: -100px;
+          right: -100px;
+          width: 300px;
+          height: 300px;
+          background: radial-gradient(circle, rgba(254, 166, 3, 0.25) 0%, transparent 70%);
+          border-radius: 50%;
+        }
+        .about-cta-title {
+          font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+          font-weight: 900;
+          margin: 0 0 16px 0;
+          letter-spacing: -0.5px;
+        }
+        .about-cta-text {
+          color: #cbd5e1;
+          font-size: 1.05rem;
+          max-width: 650px;
+          margin: 0 auto 30px;
+          line-height: 1.6;
+        }
+        .about-cta-btns {
+          display: flex;
+          gap: 16px;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+        .btn-cta-gold {
+          background: linear-gradient(135deg, #FEA603 0%, #ff8c00 100%);
+          color: #ffffff;
+          font-weight: 700;
+          padding: 14px 34px;
+          border-radius: 30px;
+          text-decoration: none;
+          font-size: 0.95rem;
+          box-shadow: 0 10px 25px rgba(254, 166, 3, 0.35);
+          transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-cta-gold:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 14px 30px rgba(254, 166, 3, 0.5);
+        }
+        .btn-cta-outline {
+          background: transparent;
+          color: #ffffff;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          font-weight: 700;
+          padding: 14px 32px;
+          border-radius: 30px;
+          text-decoration: none;
+          font-size: 0.95rem;
+          transition: background 0.2s, border-color 0.2s;
+        }
+        .btn-cta-outline:hover {
+          background: rgba(255, 255, 255, 0.1);
+          border-color: #ffffff;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+          .story-grid, .infra-split {
+            grid-template-columns: 1fr;
+            gap: 40px;
           }
-        `}
-      </style>
+          .impact-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          .beyond-grid {
+            grid-template-columns: 1fr;
+          }
+          .story-card img {
+            min-height: 320px;
+          }
+        }
+        @media (max-width: 640px) {
+          .impact-grid {
+            grid-template-columns: 1fr;
+          }
+          .about-section {
+            padding: 60px 0;
+          }
+          .about-cta-section {
+            padding: 40px 20px;
+            border-radius: 20px;
+          }
+        }
+      `}</style>
 
-      {/* 1. Hero Image */}
-      <div
-        className="hero-container"
-        style={{ width: "100%", height: "500px", overflow: "hidden" }}
-      >
-        <img
-          src={coverImage}
-          alt="Team Meeting"
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        />
+      {/* 1. Hero Banner */}
+      <section className="about-hero">
+        <img src={coverImage} alt="MotoMax EV Facility" className="about-hero-bg" onError={(e) => { e.currentTarget.src = "/assets/slider-3.jpg"; }} />
+        <div className="about-hero-gradient" />
+        <div className="about-hero-content">
+          <div className="about-hero-badge">
+            <span>⚡</span>
+            <span>Pioneering Green Mobility Since 2004</span>
+          </div>
+          <h1 className="about-hero-title">
+            Powering a <span>Greener Tomorrow</span>
+          </h1>
+          <p className="about-hero-subtitle">
+            India's premier manufacturer of high-reliability lithium-ion batteries and advanced EV charging ecosystems.
+          </p>
+        </div>
+      </section>
+
+      {/* 2. Our Legacy & Founder */}
+      <section className="about-section">
+        <div className="about-container">
+          <div className="story-grid">
+            <div className="story-card">
+              <img src="/assets/slider-1.jpg" alt="MotoMax Innovation" onError={(e) => { e.currentTarget.src = "/assets/5.png"; }} />
+              <div className="story-badge-floating">
+                <h4>20+ Years</h4>
+                <p>Clean Tech Innovation</p>
+              </div>
+            </div>
+
+            <div className="story-text">
+              <span className="section-tag">Our Heritage</span>
+              <h3>Driving India's Electric Revolution</h3>
+              <p>
+                MotoMax EV is one of India's earliest pioneers and most trusted names in the energy storage and electric mobility space. Established in 2004, the company has consistently led the transition towards sustainable transportation, emerging as India's leading manufacturer of lithium-ion batteries.
+              </p>
+              <p>
+                From heavy-duty commercial e-rickshaws to next-gen electric two-wheelers, our battery architectures are built from ground up to deliver uncompromising range, thermal safety, and extended lifecycles.
+              </p>
+
+              <div className="story-leader-box">
+                <p>
+                  "Our vision is to build an energy-independent India powered by smart, clean, and reliable mobility."
+                </p>
+                <span>— Mr. Samrath Jit Singh, Founder & CEO</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Proven Impact Metrics */}
+      <section className="about-section about-section-alt">
+        <div className="about-container">
+          <div className="section-header-center">
+            <span className="section-tag">Proven Track Record</span>
+            <h2 className="section-heading">Our Nationwide Impact</h2>
+            <p className="section-desc">
+              Reliable energy storage trusted by top OEMs, commercial fleet operators, and over half a million daily drivers.
+            </p>
+          </div>
+
+          <div className="impact-grid">
+            <div className="impact-stat-card">
+              <div className="impact-stat-icon">🛵</div>
+              <h3 className="impact-stat-number">300,000+</h3>
+              <p className="impact-stat-label">Electric 2-Wheelers Powered</p>
+            </div>
+
+            <div className="impact-stat-card">
+              <div className="impact-stat-icon">🛺</div>
+              <h3 className="impact-stat-number">250,000+</h3>
+              <p className="impact-stat-label">E-Rickshaws on the Road</p>
+            </div>
+
+            <div className="impact-stat-card">
+              <div className="impact-stat-icon">👥</div>
+              <h3 className="impact-stat-number">800+</h3>
+              <p className="impact-stat-label">Dedicated Professionals</p>
+            </div>
+
+            <div className="impact-stat-card">
+              <div className="impact-stat-icon">🛡️</div>
+              <h3 className="impact-stat-number">100%</h3>
+              <p className="impact-stat-label">AIS-156 & BIS Certified</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Built on Quality & Engineering */}
+      <section className="about-section">
+        <div className="about-container">
+          <div className="section-header-center">
+            <span className="section-tag">Engineering Standard</span>
+            <h2 className="section-heading">Built on Quality & Innovation</h2>
+            <p className="section-desc">
+              Every MotoMax EV battery and charger is engineered with uncompromising safety benchmarks for Indian climates.
+            </p>
+          </div>
+
+          <div className="pillars-grid">
+            <div className="pillar-card">
+              <div className="pillar-num">01</div>
+              <h3 className="pillar-title">AIS-156 & BIS Certified</h3>
+              <p className="pillar-text">
+                All battery packs comply with stringent Indian safety norms, rigorous thermal runaways, and vibration standards.
+              </p>
+            </div>
+
+            <div className="pillar-card">
+              <div className="pillar-num">02</div>
+              <h3 className="pillar-title">Intelligent Smart BMS</h3>
+              <p className="pillar-text">
+                Proprietary active thermal monitoring, cell balancing, overcharge protection, and real-time state-of-health tracking.
+              </p>
+            </div>
+
+            <div className="pillar-card">
+              <div className="pillar-num">03</div>
+              <h3 className="pillar-title">IP67 Weather Resistance</h3>
+              <p className="pillar-text">
+                Dust-proof and water-resistant casing engineered to endure harsh monsoon downpours, summer heatwaves, and rough roads.
+              </p>
+            </div>
+
+            <div className="pillar-card">
+              <div className="pillar-num">04</div>
+              <h3 className="pillar-title">Automated Cell Grading</h3>
+              <p className="pillar-text">
+                100% laser-tested internal resistance and cell sorting ensure consistent battery chemistry and 2,500+ charge cycles.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Infrastructure & Team */}
+      <section className="about-section about-section-alt">
+        <div className="about-container">
+          <div className="infra-split">
+            <div>
+              <span className="section-tag">Manufacturing Excellence</span>
+              <h2 className="section-heading">World-Class Infrastructure & People</h2>
+              <p className="section-desc">
+                Our state-of-the-art automated manufacturing plants are backed by dedicated testing laboratories and rapid customer service hubs.
+              </p>
+
+              <div className="infra-features">
+                <div className="infra-feature-item">
+                  <div className="infra-feature-icon">✓</div>
+                  <div className="infra-feature-text">
+                    <h5>800+ Team Strength</h5>
+                    <p>Expanding to 1,000+ members with our upcoming gigawatt-scale assembly facility.</p>
+                  </div>
+                </div>
+
+                <div className="infra-feature-item">
+                  <div className="infra-feature-icon">✓</div>
+                  <div className="infra-feature-text">
+                    <h5>Dedicated R&D Center</h5>
+                    <p>Over 40 elite engineers focusing solely on advanced battery chemistries and power electronics.</p>
+                  </div>
+                </div>
+
+                <div className="infra-feature-item">
+                  <div className="infra-feature-icon">✓</div>
+                  <div className="infra-feature-text">
+                    <h5>Pan-India Service Network</h5>
+                    <p>160+ service engineers ensuring on-ground product support, quick turnaround, and OEM confidence.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="infra-image-wrap">
+              <img src="/assets/slider-2.jpg" alt="MotoMax R&D Testing Lab" onError={(e) => { e.currentTarget.src = "/assets/slider-4.jpg"; }} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Beyond Mobility (Energy Storage) */}
+      <section className="about-section">
+        <div className="about-container">
+          <div className="section-header-center">
+            <span className="section-tag">Diversified Clean Tech</span>
+            <h2 className="section-heading">Beyond Mobility: Energy Storage</h2>
+            <p className="section-desc">
+              Delivering full-spectrum renewable solutions to power telecom towers, industrial microgrids, and residential solar setups.
+            </p>
+          </div>
+
+          <div className="beyond-grid">
+            <div className="beyond-card">
+              <div className="beyond-icon">📡</div>
+              <h3 className="beyond-title">Telecom Infrastructure</h3>
+              <p className="beyond-text">
+                High-cycle lithium battery backups ensuring 99.99% continuous uptime for remote telecom towers.
+              </p>
+            </div>
+
+            <div className="beyond-card">
+              <div className="beyond-icon">⚡</div>
+              <h3 className="beyond-title">Grid-Scale Storage</h3>
+              <p className="beyond-text">
+                Modular BESS containers designed for commercial solar plants, frequency regulation, and peak shaving.
+              </p>
+            </div>
+
+            <div className="beyond-card">
+              <div className="beyond-icon">🏠</div>
+              <h3 className="beyond-title">Residential Solar</h3>
+              <p className="beyond-text">
+                Compact, elegant wall-mounted home energy storage systems for uninterrupted green power.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Call To Action Banner */}
+      <div className="about-container">
+        <div className="about-cta-section">
+          <h2 className="about-cta-title">Together, Let's Drive India's Net-Zero Future</h2>
+          <p className="about-cta-text">
+            Partner with MotoMax EV for industry-leading lithium battery solutions, OEM integrations, and nationwide distribution.
+          </p>
+          <div className="about-cta-btns">
+            <Link to="/products" className="btn-cta-gold">
+              Explore Our Products →
+            </Link>
+            <Link to="/contact-us" className="btn-cta-outline">
+              Partner With Us
+            </Link>
+          </div>
+        </div>
       </div>
-
-      {/* 2. Powering a Greener Tomorrow */}
-      <section className="section-padding text-center">
-        <h1 className="section-title" style={{ fontSize: "2.5rem" }}>
-          Powering a Greener
-          <br />
-          Tomorrow
-        </h1>
-        <p
-          className="section-subtitle"
-          style={{
-            maxWidth: "800px",
-            margin: "1rem auto 4rem",
-            fontSize: "0.95rem",
-          }}
-        >
-          MotoMax EV is one of India's earliest pioneers and most trusted names
-          in the energy storage and electric mobility space. Established in
-          2004, the company has consistently led the transition towards
-          sustainable transportation, emerging as India's leading manufacturer
-          of lithium-ion batteries.
-        </p>
-
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "50px",
-            alignItems: "center",
-            maxWidth: "1000px",
-            margin: "0 auto",
-            textAlign: "left",
-          }}
-        >
-          <div style={{ flex: "1 1 400px" }}>
-            <p
-              style={{
-                color: "var(--text-muted)",
-                fontSize: "0.95rem",
-                lineHeight: "1.6",
-                marginBottom: "30px",
-              }}
-            >
-              Under the guidance of{" "}
-              <strong>Mr. Samrath Jit Singh, Founder and CEO</strong>, MotoMax
-              EV has built a legacy of over two decades in clean tech
-              innovation. His vision of creating an inclusive and greener future
-              continues to inspire MotoMax EV's mission of powering smarter
-              cities, cleaner transportation, and energy independence, one
-              battery at a time.
-            </p>
-            <button
-              style={{
-                background: "var(--text-muted)",
-                color: "var(--bg-main)",
-                border: "none",
-                padding: "10px 25px",
-                borderRadius: "30px",
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-                cursor: "pointer",
-                fontWeight: "bold",
-              }}
-            >
-              <span
-                style={{
-                  display: "inline-block",
-                  width: "20px",
-                  height: "20px",
-                  background: "var(--bg-main)",
-                  borderRadius: "50%",
-                }}
-              ></span>{" "}
-              Read More
-            </button>
-          </div>
-
-          <div
-            style={{
-              flex: "1 1 350px",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <div
-              style={{
-                background: "#fcefe3",
-                borderRadius: "30px",
-                padding: "0 20px",
-                display: "inline-block",
-              }}
-            >
-              <img
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400"
-                alt="CEO"
-                style={{
-                  width: "100%",
-                  maxWidth: "300px",
-                  display: "block",
-                  borderRadius: "30px",
-                  filter: "drop-shadow(0 10px 15px rgba(0,0,0,0.1))",
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Our Impact */}
-      <section className="section-padding" style={{ paddingTop: "0" }}>
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "40px",
-            alignItems: "center",
-            maxWidth: "1200px",
-            margin: "0 auto",
-          }}
-        >
-          {/* E-Rickshaw Image */}
-          <div style={{ flex: "1 1 500px" }}>
-            <img
-              src="/assets/5.png"
-              alt="Electric Vehicle"
-              style={{
-                width: "100%",
-                filter: "drop-shadow(0 10px 20px rgba(0,0,0,0.2))",
-                borderRadius: "15px",
-              }}
-            />
-          </div>
-
-          <div
-            style={{
-              flex: "1 1 500px",
-              position: "relative",
-              textAlign: "left",
-            }}
-          >
-            <h4
-              style={{
-                color: "transparent",
-                fontSize: "clamp(3rem, 10vw, 5rem)",
-                fontWeight: 900,
-                position: "absolute",
-                top: "-50px",
-                left: "-10px",
-                zIndex: 0,
-                whiteSpace: "normal",
-                wordBreak: "break-word",
-                width: "100%",
-              }}
-            >
-              Our Impact
-            </h4>
-            <h2
-              className="section-title"
-              style={{
-                position: "relative",
-                zIndex: 1,
-                fontSize: "2.5rem",
-                marginBottom: "30px",
-              }}
-            >
-              Our
-              <br />
-              Impact
-            </h2>
-            <p
-              style={{
-                color: "var(--text-muted)",
-                fontSize: "0.9rem",
-                lineHeight: "1.6",
-                marginBottom: "15px",
-                position: "relative",
-                zIndex: 1,
-              }}
-            >
-              At the heart of MotoMax EV's success is its{" "}
-              <strong>Li-EV battery series</strong>, engineered for durability,
-              safety, and top-tier performance across diverse Indian terrains.
-              These advanced battery packs currently power
-            </p>
-            <p
-              style={{
-                color: "var(--text-muted)",
-                fontSize: "0.9rem",
-                lineHeight: "1.6",
-                marginBottom: "40px",
-                position: "relative",
-                zIndex: 1,
-              }}
-            >
-              helping electrify India's streets from last-mile delivery fleets
-              to everyday commuters and premium EV users. The company's
-              IP67-rated EV chargers offer unmatched reliability and weather
-              resistance, trusted by top OEMs and fleet operators nationwide.
-            </p>
-
-            <div style={{ display: "flex", gap: "60px" }}>
-              <div>
-                <p
-                  style={{
-                    color: "var(--text-muted)",
-                    fontSize: "0.8rem",
-                    marginBottom: "5px",
-                  }}
-                >
-                  More than
-                </p>
-                <h3
-                  style={{
-                    color: "#5be8c0",
-                    fontSize: "2.2rem",
-                    fontWeight: 800,
-                  }}
-                >
-                  300,000
-                </h3>
-                <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
-                  electric two-wheelers
-                </p>
-              </div>
-              <div>
-                <p
-                  style={{
-                    color: "var(--text-muted)",
-                    fontSize: "0.8rem",
-                    marginBottom: "5px",
-                  }}
-                >
-                  Over
-                </p>
-                <h3
-                  style={{
-                    color: "#ffb997",
-                    fontSize: "2.2rem",
-                    fontWeight: 800,
-                  }}
-                >
-                  250,000
-                </h3>
-                <p style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>
-                  e-rickshaws
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Built on Quality and Innovation */}
-      <section className="section-padding text-center">
-        <h2 className="section-title">
-          Built on Quality and
-          <br />
-          Innovation
-        </h2>
-        <p
-          className="section-subtitle"
-          style={{
-            maxWidth: "700px",
-            margin: "1rem auto 4rem",
-            fontSize: "0.95rem",
-          }}
-        >
-          Every MotoMax EV product reflects our uncompromising focus on
-          performance, safety, and quality
-        </p>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: "30px",
-            maxWidth: "1000px",
-            margin: "0 auto",
-            textAlign: "center",
-          }}
-        >
-          <div>
-            <div
-              style={{
-                width: "40px",
-                height: "3px",
-                background: "#5be8c0",
-                margin: "0 auto 20px",
-              }}
-            ></div>
-            <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: "1.5" }}>
-              BIS-certified and AIS-156
-              <br />
-              compliant batteries
-            </p>
-          </div>
-
-          <div>
-            <div
-              style={{
-                width: "40px",
-                height: "3px",
-                background: "#ffb997",
-                margin: "0 auto 20px",
-              }}
-            ></div>
-            <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: "1.5" }}>
-              Advanced Battery
-              <br />
-              Management Systems (BMS)
-              <br />
-              for thermal stability & extended
-              <br />
-              lifecycle
-            </p>
-          </div>
-
-          <div>
-            <div
-              style={{
-                width: "40px",
-                height: "3px",
-                background: "#5be8c0",
-                margin: "0 auto 20px",
-              }}
-            ></div>
-            <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: "1.5" }}>
-              IP67-rated chargers for rugged
-              <br />& reliable operation
-            </p>
-          </div>
-
-          <div>
-            <div
-              style={{
-                width: "40px",
-                height: "3px",
-                background: "#ffb997",
-                margin: "0 auto 20px",
-              }}
-            ></div>
-            <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: "1.5" }}>
-              Rigorous quality control
-              <br />
-              protocols at every step of
-              <br />
-              production
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Our People & Infrastructure */}
-      <section
-        style={{ position: "relative", width: "100%", paddingBottom: "100px" }}
-      >
-        <img
-          src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1600"
-          alt="Factory Floor"
-          style={{ width: "100%", height: "500px", objectFit: "contain" }}
-        />
-
-        <div
-          style={{
-            position: "absolute",
-            bottom: "50px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            background: "var(--bg-main)",
-            width: "80%",
-            maxWidth: "900px",
-            padding: "40px",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-            textAlign: "left",
-          }}
-        >
-          <h2
-            style={{
-              fontSize: "1.8rem",
-              fontWeight: 800,
-              marginBottom: "10px",
-            }}
-          >
-            Our People & Infrastructure
-          </h2>
-          <p
-            style={{ color: "#888", fontSize: "0.85rem", marginBottom: "20px" }}
-          >
-            Our strength lies in our people and infrastructure
-          </p>
-          <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", lineHeight: "1.6" }}>
-            MotoMax EV employs approximately 800 people, a number set to grow to
-            1,000 with the commissioning of its new plant. The company maintains
-            a sharp focus on R&D and Quality Control, with over 40 professionals
-            dedicated to these functions. Its nationwide Service team,
-            comprising more than 160 members, ensures consistent product support
-            and customer satisfaction across India.
-          </p>
-        </div>
-      </section>
-
-      {/* 6. Beyond Mobility */}
-      <section className="section-padding">
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "40px",
-            alignItems: "center",
-            maxWidth: "1200px",
-            margin: "0 auto 60px",
-          }}
-        >
-          <div style={{ flex: "1 1 300px" }}>
-            <h2
-              style={{
-                fontSize: "3rem",
-                fontWeight: 900,
-                marginBottom: "20px",
-                lineHeight: 1.1,
-              }}
-            >
-              Beyond
-              <br />
-              Mobility
-            </h2>
-            <p style={{ color: "#666", fontSize: "1.1rem" }}>
-              MotoMax EV's diverse product portfolio also supports
-            </p>
-          </div>
-          <div
-            style={{
-              flex: "2 1 600px",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <img
-              src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&q=80&w=800"
-              alt="Energy Storage Unit"
-              style={{
-                width: "100%",
-                maxWidth: "700px",
-                filter: "drop-shadow(0 15px 25px rgba(0,0,0,0.15))",
-                borderRadius: "10px",
-              }}
-            />
-          </div>
-        </div>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: "30px",
-            maxWidth: "1000px",
-            margin: "0 auto 40px",
-            textAlign: "center",
-          }}
-        >
-          <h3 style={{ fontSize: "1.2rem", fontWeight: 800 }}>
-            Telecom
-            <br />
-            Infrastructure
-          </h3>
-          <h3 style={{ fontSize: "1.2rem", fontWeight: 800 }}>
-            Grid-Scale Energy
-            <br />
-            Storage
-          </h3>
-          <h3 style={{ fontSize: "1.2rem", fontWeight: 800 }}>
-            Residential Solar
-            <br />
-            Energy Systems
-          </h3>
-        </div>
-
-        <p
-          style={{
-            textAlign: "center",
-            color: "#666",
-            maxWidth: "700px",
-            margin: "0 auto",
-            fontSize: "1rem",
-            lineHeight: 1.6,
-          }}
-        >
-          This positions us as a full-spectrum clean energy solutions provider,
-          empowering industries, homes, and communities.
-        </p>
-      </section>
-
-      {/* 7. Together, let's drive the change */}
-      <section
-        className="section-padding"
-        style={{ background: "#fcfcfc", borderTop: "1px solid #eee" }}
-      >
-        <h2
-          style={{
-            fontSize: "2.5rem",
-            fontWeight: 800,
-            textAlign: "left",
-            maxWidth: "1200px",
-            margin: "0 auto 20px",
-            color: "var(--text-main)",
-          }}
-        >
-          Together, let's drive the change
-          <br />
-          toward a cleaner tomorrow.
-        </h2>
-        <h3
-          style={{
-            fontSize: "1.8rem",
-            fontWeight: 400,
-            textAlign: "center",
-            marginBottom: "60px",
-            color: "var(--text-main)",
-          }}
-        >
-          Enabling India's Net Zero Mission
-        </h3>
-
-        <div
-          style={{
-            maxWidth: "1200px",
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: "column",
-            gap: "80px",
-          }}
-        >
-          {/* Row 1 */}
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "50px",
-              alignItems: "center",
-            }}
-          >
-            <div style={{ flex: "1 1 400px" }}>
-              <img
-                src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&q=80&w=600"
-                alt="Net Zero Plant"
-                style={{
-                  width: "100%",
-                  borderRadius: "10px",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.05)",
-                }}
-              />
-            </div>
-            <div style={{ flex: "1 1 500px" }}>
-              <p
-                style={{
-                  color: "var(--text-muted)",
-                  fontSize: "0.95rem",
-                  lineHeight: 1.7,
-                  marginBottom: "20px",
-                }}
-              >
-                MotoMax EV is a catalyst for change in India's journey toward
-                clean, affordable, and inclusive mobility.
-              </p>
-              <p
-                style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.7 }}
-              >
-                The company actively supports Government of India's mission of
-                an Net Zero India by enabling a robust EV supply chain from the
-                ground up. Whether it's powering an e-rickshaw owner earning
-                their daily livelihood or supporting the electrification needs
-                of large OEMs and fleet operators, MotoMax EV is helping
-                democratise access to sustainable mobility.
-              </p>
-            </div>
-          </div>
-
-          {/* Row 2 */}
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "50px",
-              alignItems: "center",
-              flexDirection: "row-reverse",
-            }}
-          >
-            <div style={{ flex: "1 1 400px" }}>
-              <img
-                src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&q=80&w=600"
-                alt="Looking Ahead Eye"
-                style={{
-                  width: "100%",
-                  borderRadius: "10px",
-                  boxShadow: "0 10px 20px rgba(0,0,0,0.05)",
-                }}
-              />
-            </div>
-            <div style={{ flex: "1 1 500px" }}>
-              <h3
-                style={{
-                  fontSize: "2rem",
-                  fontWeight: 400,
-                  marginBottom: "20px",
-                  color: "var(--text-main)",
-                }}
-              >
-                Looking Ahead
-              </h3>
-              <p
-                style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.7 }}
-              >
-                MotoMax EV is now expanding into new markets with growing EV and
-                renewable energy demand. Backed by state-of-the-art
-                manufacturing, a dedicated R&D center, and a vision-driven
-                leadership, the company is scaling its impact globally while
-                staying rooted in innovation and sustainability.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };
