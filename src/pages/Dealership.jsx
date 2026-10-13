@@ -101,8 +101,76 @@ const Dealership = () => {
 
   return (
     <div className="dealership-page-root" style={{ background: "#f8fafc", minHeight: "100vh", fontFamily: "'Inter', sans-serif" }}>
+      <style>
+        {`
+          .dealership-hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+            gap: 16px;
+            max-width: 950px;
+          }
+          .dealership-split-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+            gap: 40px;
+            align-items: start;
+          }
+          .dealership-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+          }
+          .dealership-gst-row {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 16px;
+          }
+          .dealership-card-padding {
+            padding: 36px;
+          }
+          .dealership-form-padding {
+            padding: 40px;
+          }
+
+          @media (max-width: 768px) {
+            .dealership-hero-section {
+              padding: 85px 16px 50px !important;
+            }
+            .dealership-main-section {
+              margin: 35px auto 60px !important;
+              padding: 0 14px !important;
+            }
+            .dealership-split-grid {
+              grid-template-columns: 1fr !important;
+              gap: 24px !important;
+            }
+            .dealership-hero-metrics {
+              grid-template-columns: 1fr !important;
+              gap: 12px !important;
+            }
+            .dealership-form-row {
+              grid-template-columns: 1fr !important;
+              gap: 14px !important;
+            }
+            .dealership-gst-row {
+              grid-template-columns: 1fr !important;
+              gap: 14px !important;
+            }
+            .dealership-card-padding {
+              padding: 22px 16px !important;
+              border-radius: 18px !important;
+            }
+            .dealership-form-padding {
+              padding: 24px 16px !important;
+              border-radius: 18px !important;
+            }
+          }
+        `}
+      </style>
+
       {/* 1. HERO SECTION */}
       <section
+        className="dealership-hero-section"
         style={{
           position: "relative",
           background: "linear-gradient(135deg, #090e17 0%, #111827 50%, #1e293b 100%)",
@@ -176,14 +244,7 @@ const Dealership = () => {
           </p>
 
           {/* Quick highlight metrics */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-              gap: "16px",
-              maxWidth: "950px"
-            }}
-          >
+          <div className="dealership-hero-metrics">
             {[
               { icon: "💰", title: "High ROI Margins", desc: "Up to 18-24% dealership returns" },
               { icon: "🛵", title: "EV & Battery Ecosystem", desc: "Smart Scooties & Lithium Packs" },
@@ -200,7 +261,8 @@ const Dealership = () => {
                   padding: "18px 20px",
                   display: "flex",
                   alignItems: "center",
-                  gap: "14px"
+                  gap: "14px",
+                  boxSizing: "border-box"
                 }}
               >
                 <span style={{ fontSize: "2rem" }}>{item.icon}</span>
@@ -215,12 +277,12 @@ const Dealership = () => {
       </section>
 
       {/* 2. APPLICATION FORM & VALUE PROPOSITION SPLIT */}
-      <section style={{ maxWidth: "1200px", margin: "55px auto 85px", padding: "0 20px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))", gap: "40px", alignItems: "start" }}>
+      <section className="dealership-main-section" style={{ maxWidth: "1200px", margin: "55px auto 85px", padding: "0 20px", boxSizing: "border-box" }}>
+        <div className="dealership-split-grid">
           
           {/* Left Column: What We Provide + Direct Contact */}
-          <div>
-            <div style={{ background: "#fff", borderRadius: "24px", padding: "36px", border: "1px solid #e2e8f0", boxShadow: "0 8px 30px rgba(0,0,0,0.03)", marginBottom: "30px" }}>
+          <div style={{ width: "100%", boxSizing: "border-box" }}>
+            <div className="dealership-card-padding" style={{ background: "#fff", borderRadius: "24px", border: "1px solid #e2e8f0", boxShadow: "0 8px 30px rgba(0,0,0,0.03)", marginBottom: "30px", boxSizing: "border-box", width: "100%" }}>
               <h3 style={{ fontSize: "1.5rem", fontWeight: 800, color: "#0f172a", marginBottom: "16px" }}>
                 🤝 What We Provide to Our Dealership Partners
               </h3>
@@ -289,13 +351,15 @@ const Dealership = () => {
           {/* Right Column: Clean Dealership Application Form */}
           <div
             id="apply-form"
+            className="dealership-form-padding"
             style={{
               background: "#fff",
               borderRadius: "24px",
-              padding: "40px",
               border: "1px solid #e2e8f0",
               boxShadow: "0 15px 40px rgba(0, 0, 0, 0.06)",
-              position: "relative"
+              position: "relative",
+              boxSizing: "border-box",
+              width: "100%"
             }}
           >
             <div style={{ borderBottom: "2px solid #f1f5f9", paddingBottom: "20px", marginBottom: "26px" }}>
@@ -381,7 +445,7 @@ const Dealership = () => {
 
                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                   {/* Owner / Applicant Name & Contact Number */}
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                  <div className="dealership-form-row">
                     <div>
                       <label style={{ display: "block", fontSize: "0.88rem", fontWeight: 700, color: "#334155", marginBottom: "6px" }}>
                         Owner / Applicant Name <span style={{ color: "#ef4444" }}>*</span>
@@ -429,8 +493,8 @@ const Dealership = () => {
                   </div>
 
                   {/* GST Registered & GST Number */}
-                  <div style={{ background: "#f8fafc", padding: "18px", borderRadius: "14px", border: "1px solid #e2e8f0" }}>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: "16px" }}>
+                  <div style={{ background: "#f8fafc", padding: "18px", borderRadius: "14px", border: "1px solid #e2e8f0", boxSizing: "border-box", width: "100%" }}>
+                    <div className="dealership-gst-row">
                       <div>
                         <label style={{ display: "block", fontSize: "0.88rem", fontWeight: 700, color: "#334155", marginBottom: "6px" }}>
                           GST Registered? <span style={{ color: "#ef4444" }}>*</span>
@@ -484,7 +548,7 @@ const Dealership = () => {
                   </div>
 
                   {/* State & City */}
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                  <div className="dealership-form-row">
                     <div>
                       <label style={{ display: "block", fontSize: "0.88rem", fontWeight: 700, color: "#334155", marginBottom: "6px" }}>
                         State / Region <span style={{ color: "#ef4444" }}>*</span>

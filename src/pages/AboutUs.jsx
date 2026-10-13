@@ -706,7 +706,18 @@ const AboutUs = () => {
             grid-template-columns: 1fr;
           }
           .about-section {
-            padding: 60px 0;
+            padding: 50px 0;
+          }
+          .about-container {
+            padding: 0 16px;
+          }
+          .pillars-grid {
+            grid-template-columns: 1fr !important;
+            gap: 18px !important;
+          }
+          .pillar-card {
+            padding: 24px 18px !important;
+            border-radius: 18px !important;
           }
           .about-cta-section {
             padding: 40px 20px;
@@ -770,15 +781,17 @@ const AboutUs = () => {
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: "28px", marginTop: "35px" }}>
+          <div className="pillars-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))", gap: "24px", marginTop: "35px", width: "100%", boxSizing: "border-box" }}>
             {/* Division 1: Lithium Batteries */}
-            <div style={{
+            <div className="pillar-card" style={{
               background: "#ffffff",
               border: "2px solid #e2e8f0",
               borderRadius: "24px",
               padding: "36px 30px",
               boxShadow: "0 10px 30px rgba(0,0,0,0.04)",
               position: "relative",
+              boxSizing: "border-box",
+              width: "100%",
               transition: "transform 0.3s ease, border-color 0.3s ease",
             }}
             onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#FEA603"; e.currentTarget.style.transform = "translateY(-4px)"; }}
@@ -813,13 +826,15 @@ const AboutUs = () => {
             </div>
 
             {/* Division 2: Electric Scooty */}
-            <div style={{
+            <div className="pillar-card" style={{
               background: "#ffffff",
               border: "2px solid #e2e8f0",
               borderRadius: "24px",
               padding: "36px 30px",
               boxShadow: "0 10px 30px rgba(0,0,0,0.04)",
               position: "relative",
+              boxSizing: "border-box",
+              width: "100%",
               transition: "transform 0.3s ease, border-color 0.3s ease",
             }}
             onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#10b981"; e.currentTarget.style.transform = "translateY(-4px)"; }}

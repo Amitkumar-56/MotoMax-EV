@@ -497,17 +497,28 @@ const Admin = () => {
     e.preventDefault();
     setLoginError("");
     setAdminLoading(true);
-    fetch(`${API_BASE}/auth.php?action=login`, {
+    fetch(`${API_BASE}/auth.php?action=admin_login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: loginEmail, password: loginPassword })
+      body: JSON.stringify({ 
+        email: loginEmail, 
+        password: loginPassword,
+        expected_role: "admin"
+      })
     })
     .then(res => res.json())
     .then(data => {
       setAdminLoading(false);
       if (data.status === "success") {
+        if (data.user && data.user.role !== 'admin') {
+          setLoginError("Access Denied: Is account ka role '" + data.user.role + "' hai. Admin portal me sirf 'admin' role wale hi login kar sakte hain.");
+          return;
+        }
         setIsLoggedIn(true);
         localStorage.setItem("adminLoggedIn", "true");
+        if (data.user) {
+          localStorage.setItem("adminUser", JSON.stringify(data.user));
+        }
       } else {
         setLoginError(data.message || "Invalid administrative credentials.");
       }
@@ -881,14 +892,54 @@ const Admin = () => {
             )}
 
             <form onSubmit={handleLogin}>
+              {/* Credentials hint for administrator */}
+              <div style={{
+                background: "rgba(254, 166, 3, 0.08)",
+                border: "1px dashed rgba(254, 166, 3, 0.4)",
+                borderRadius: "10px",
+                padding: "10px 14px",
+                marginBottom: "18px",
+                fontSize: "0.82rem",
+                color: "#475569",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "10px"
+              }}>
+                <div>
+                  <span style={{ fontWeight: 700, color: "#0f172a" }}>Admin Credentials:</span><br />
+                  <code>admin@motomax.com</code> (or <code>admin</code>) &bull; Pass: <code>admin123</code>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLoginEmail("admin@motomax.com");
+                    setLoginPassword("admin123");
+                  }}
+                  style={{
+                    background: "#FEA603",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "6px",
+                    padding: "5px 10px",
+                    fontSize: "0.75rem",
+                    fontWeight: 700,
+                    cursor: "pointer",
+                    whiteSpace: "nowrap"
+                  }}
+                >
+                  Fill Admin
+                </button>
+              </div>
+
               <div className="admin-field-group">
-                <label className="admin-field-label">Email</label>
+                <label className="admin-field-label">Email or Admin Username</label>
                 <div className="admin-field-input-box">
                   <span className="admin-field-icon">✉️</span>
                   <input
                     className="admin-field-input"
-                    type="email"
-                    placeholder="admin@test.com"
+                    type="text"
+                    placeholder="admin@motomax.com or admin"
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
                     required
@@ -1037,7 +1088,7 @@ const Admin = () => {
           <div className={`menu-item ${activeTab === "footer" ? "active" : ""}`} onClick={() => { setActiveTab("footer"); setIsSidebarOpen(false); }}>Footer Settings</div>
           <div className={`menu-item ${activeTab === "profile" ? "active" : ""}`} onClick={() => { setActiveTab("profile"); setIsSidebarOpen(false); }}>My Profile</div>
         </div>
-        <button style={{ margin: "auto 20px 20px", padding: "12px", background: "rgba(255,0,0,0.1)", color: "#ef4444", border: "1px solid rgba(255,0,0,0.2)", borderRadius: "10px", cursor: "pointer", fontWeight: "700"}} onClick={() => { setIsLoggedIn(false); localStorage.removeItem("adminLoggedIn"); }}>Log Out</button>
+        <button style={{ margin: "auto 20px 20px", padding: "12px", background: "rgba(255,0,0,0.1)", color: "#ef4444", border: "1px solid rgba(255,0,0,0.2)", borderRadius: "10px", cursor: "pointer", fontWeight: "700"}} onClick={() => { setIsLoggedIn(false); localStorage.removeItem("adminLoggedIn"); localStorage.removeItem("adminUser"); }}>Log Out</button>
       </aside>
 
       <main className="admin-main">

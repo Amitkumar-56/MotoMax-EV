@@ -146,22 +146,60 @@ const Navbar = () => {
             </Link>
           </div>
 
+          {/* Backdrop overlay for mobile */}
+          {isOpen && (
+            <div
+              className="hide-on-desktop"
+              onClick={() => setIsOpen(false)}
+              style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "100vw",
+                height: "100vh",
+                background: "rgba(0, 0, 0, 0.45)",
+                backdropFilter: "blur(4px)",
+                WebkitBackdropFilter: "blur(4px)",
+                zIndex: 9999
+              }}
+            />
+          )}
+
           <ul className={`nav-links-light ${isOpen ? "active" : ""}`}>
-            <li className="hide-on-desktop mobile-menu-header" style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 20px', borderBottom: '1px solid rgba(0,0,0,0.05)', marginBottom: '10px' }}>
-              <img src="/Icon.png" alt="MotoMax EV" style={{ height: "40px", objectFit: "contain" }} onError={(e) => { e.target.style.display = 'none' }} />
-              <button onClick={() => setIsOpen(false)} style={{ background: "none", border: "none", fontSize: "1.5rem", cursor: "pointer", color: "#333", padding: "5px" }}>✖</button>
+            <li className="hide-on-desktop mobile-menu-header" style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px', borderBottom: '1px solid #e2e8f0', background: '#f8fafc' }}>
+              <img src="/Icon.png" alt="MotoMax EV" style={{ height: "36px", objectFit: "contain" }} onError={(e) => { e.target.style.display = 'none' }} />
+              <button 
+                onClick={() => setIsOpen(false)} 
+                aria-label="Close Menu"
+                style={{ 
+                  background: "#ffffff", 
+                  border: "1px solid #e2e8f0", 
+                  borderRadius: "50%",
+                  width: "36px",
+                  height: "36px",
+                  fontSize: "1.2rem", 
+                  cursor: "pointer", 
+                  color: "#475569", 
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.06)"
+                }}
+              >
+                ✕
+              </button>
             </li>
-            <li>
+            <li className="mobile-nav-item">
               <Link to="/" onClick={() => setIsOpen(false)}>
                 Home
               </Link>
             </li>
-            <li>
+            <li className="mobile-nav-item">
               <Link to="/about-us" onClick={() => setIsOpen(false)}>
                 About Us
               </Link>
             </li>
-            <li className={`dropdown-mega ${megaMenuOpen ? "mobile-active" : ""}`}>
+            <li className={`dropdown-mega mobile-nav-item ${megaMenuOpen ? "mobile-active" : ""}`}>
               <Link
                 to="#"
                 className="dropbtn-light"
@@ -171,8 +209,10 @@ const Navbar = () => {
                     setMegaMenuOpen(!megaMenuOpen);
                   }
                 }}
+                style={{ justifyContent: "space-between" }}
               >
-                Products ▾
+                <span>Products</span>
+                <span style={{ fontSize: "0.85rem", transform: megaMenuOpen ? "rotate(180deg)" : "none", transition: "transform 0.25s" }}>▼</span>
               </Link>
               {/* Desktop Mega Menu */}
               <div className="dropdown-content-mega desktop-mega-menu">
@@ -208,7 +248,9 @@ const Navbar = () => {
 
               {/* Mobile Text-Based Products Menu */}
               <div className="dropdown-content-mega mobile-products-menu">
-                <Link to="/products" onClick={() => setIsOpen(false)}>All Products ▾</Link>
+                <Link to="/products" onClick={() => setIsOpen(false)}>
+                  All Products
+                </Link>
                 {(categoriesData.length > 0 ? categoriesData : [
                   { name: "2-Wheeler", link: "/products?category=2-Wheeler" },
                   { name: "3-Wheeler", link: "/products?category=3-Wheeler" },
@@ -223,19 +265,18 @@ const Navbar = () => {
                     to={cat.link}
                     onClick={() => setIsOpen(false)}
                   >
-                    {cat.name} ▾
+                    {cat.name}
                   </Link>
                 ))}
               </div>
             </li>
 
-
-            <li>
+            <li className="mobile-nav-item">
               <Link to="/dealership" onClick={() => setIsOpen(false)}>
                 Dealership
               </Link>
             </li>
-            <li>
+            <li className="mobile-nav-item">
               <Link to="/contact-us" onClick={() => setIsOpen(false)}>
                 Contact Us
               </Link>

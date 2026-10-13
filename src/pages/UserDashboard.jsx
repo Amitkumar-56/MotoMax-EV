@@ -78,26 +78,29 @@ const UserDashboard = () => {
     setAuthError("");
     setAuthSuccessMsg("");
     setAuthLoading(true);
-    const action = isLoginMode ? "login" : "register";
+    const action = isLoginMode ? "user_login" : "register";
 
     fetch(`${API_BASE}/auth.php?action=${action}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData)
+      body: JSON.stringify({
+        ...formData,
+        expected_role: isLoginMode ? "user" : undefined
+      })
     })
       .then(res => res.json())
       .then(data => {
         setAuthLoading(false);
         if (data.status === "success") {
           if (isLoginMode) {
-            if (data.user.role === 'admin') {
-              localStorage.setItem("adminLoggedIn", "true");
-              navigate("/admin");
-            } else {
-              localStorage.setItem("authUser", JSON.stringify(data.user));
-              setUser(data.user);
-              window.dispatchEvent(new Event("authUpdated"));
+            // Strict role check: user portal is for 'user' role only
+            if (data.user && data.user.role !== 'user') {
+              setAuthError("Is account ka role 'admin' hai. User panel me sirf 'user' role wale login kar sakte hain. Kripya Admin Portal (/admin) par jayein.");
+              return;
             }
+            localStorage.setItem("authUser", JSON.stringify(data.user));
+            setUser(data.user);
+            window.dispatchEvent(new Event("authUpdated"));
           } else {
             setAuthSuccessMsg("Account created successfully! Please sign in.");
             setIsLoginMode(true);
@@ -502,9 +505,9 @@ const UserDashboard = () => {
                 <div className="form-input-wrapper">
                   <span className="form-input-icon">✉️</span>
                   <input
-                    type="email"
+                    type={isLoginMode ? "text" : "email"}
                     className="modern-auth-input"
-                    placeholder="name@example.com"
+                    placeholder={isLoginMode ? "Email address or Admin ID" : "name@example.com"}
                     value={formData.email}
                     onChange={e => setFormData({ ...formData, email: e.target.value })}
                     required

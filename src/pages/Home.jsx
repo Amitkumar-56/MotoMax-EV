@@ -618,25 +618,96 @@ const Home = () => {
                 }
               }
               @media (max-width: 768px) {
+                #products-section {
+                  padding: 50px 10px !important;
+                }
+                #products-section h2 {
+                  font-size: 1.8rem !important;
+                  line-height: 1.25 !important;
+                }
+                #products-section p {
+                  font-size: 0.95rem !important;
+                  padding: 0 10px;
+                }
                 .slider-wrapper {
-                  padding: 0 35px;
+                  padding: 0 10px;
+                }
+                .product-slider-track {
+                  gap: 14px;
+                  padding: 10px 4px 18px;
+                  scroll-snap-type: x mandatory;
+                  -webkit-overflow-scrolling: touch;
                 }
                 .attractive-card {
-                  min-width: 240px;
-                  max-width: 240px;
-                  padding: 15px;
+                  min-width: calc(100vw - 70px) !important;
+                  max-width: calc(100vw - 70px) !important;
+                  width: calc(100vw - 70px) !important;
+                  padding: 18px 16px;
+                  margin: 6px auto;
+                  scroll-snap-align: center;
+                  box-sizing: border-box;
+                  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+                  border: 1px solid #f1f5f9;
+                }
+                .card-icon-wrapper {
+                  height: 190px !important;
+                  margin-bottom: 14px;
                 }
                 .slider-arrow {
-                  width: 35px !important;
-                  height: 35px !important;
-                  font-size: 1.2rem !important;
+                  width: 38px !important;
+                  height: 38px !important;
+                  font-size: 1.3rem !important;
+                  background: rgba(255, 255, 255, 0.95) !important;
+                  box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
                 }
                 .slider-arrow-left {
-                  left: -5px !important;
+                  left: 2px !important;
                 }
                 .slider-arrow-right {
-                  right: -5px !important;
+                  right: 2px !important;
                 }
+                .view-all-products-container {
+                  margin-top: 30px !important;
+                  width: 100% !important;
+                  padding: 0 15px !important;
+                  box-sizing: border-box !important;
+                }
+                .view-all-dash {
+                  display: none !important;
+                }
+                .view-all-products-btn {
+                  width: 100% !important;
+                  max-width: 320px !important;
+                  padding: 14px 24px !important;
+                  font-size: 1rem !important;
+                  box-sizing: border-box !important;
+                  justify-content: center !important;
+                }
+              }
+              .view-all-products-container {
+                margin-top: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 15px;
+              }
+              .view-all-dash {
+                width: 30px;
+                height: 2px;
+                background: rgba(254,166,3,0.3);
+              }
+              .view-all-products-btn {
+                background: var(--primary);
+                color: #fff;
+                padding: 15px 35px;
+                border-radius: 30px;
+                font-weight: 800;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                box-shadow: 0 10px 20px rgba(254,166,3,0.25);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
               }
               .attractive-card:hover {
                 transform: translateY(-10px);
@@ -738,31 +809,34 @@ const Home = () => {
                   <button
                     onClick={(e) => handleAction(e, prod.id, 'cart', false)}
                     style={{
-                      flex: 1,
-                      padding: '8px 10px',
+                      width: '100%',
+                      maxWidth: '220px',
+                      padding: '11px 16px',
                       background: 'var(--primary)',
                       color: 'white',
                       border: 'none',
-                      borderRadius: '6px',
+                      borderRadius: '8px',
                       cursor: 'pointer',
                       fontWeight: 'bold',
-                      fontSize: '0.82rem',
+                      fontSize: '0.9rem',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      gap: '6px',
+                      gap: '8px',
+                      marginTop: '10px',
+                      boxShadow: '0 4px 12px rgba(254, 166, 3, 0.3)',
                       transition: 'transform 0.2s ease, box-shadow 0.2s ease'
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = 'translateY(-1px)';
-                      e.currentTarget.style.boxShadow = '0 3px 10px rgba(254, 166, 3, 0.35)';
+                      e.currentTarget.style.boxShadow = '0 6px 16px rgba(254, 166, 3, 0.45)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = 'none';
-                      e.currentTarget.style.boxShadow = 'none';
+                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(254, 166, 3, 0.3)';
                     }}
                   >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                       <circle cx="9" cy="21" r="1"></circle>
                       <circle cx="20" cy="21" r="1"></circle>
                       <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -775,23 +849,11 @@ const Home = () => {
         </div>
 
         {/* View All Products Button */}
-        <div style={{ marginTop: "40px", display: "flex", justifyContent: "center", alignItems: "center", gap: "15px" }}>
-          <span style={{ width: "30px", height: "2px", background: "rgba(254,166,3,0.3)" }}></span>
+        <div className="view-all-products-container">
+          <span className="view-all-dash"></span>
           <Link
             to="/products"
-            style={{
-              background: "var(--primary)",
-              color: "#fff",
-              padding: "15px 35px",
-              borderRadius: "30px",
-              fontWeight: 800,
-              textDecoration: "none",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "10px",
-              boxShadow: "0 10px 20px rgba(254,166,3,0.2)",
-              transition: "transform 0.3s ease"
-            }}
+            className="view-all-products-btn"
             onMouseOver={(e) => e.currentTarget.style.transform = "translateY(-3px)"}
             onMouseOut={(e) => e.currentTarget.style.transform = "translateY(0)"}
           >
