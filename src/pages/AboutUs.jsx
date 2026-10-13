@@ -507,6 +507,178 @@ const AboutUs = () => {
           border-color: #ffffff;
         }
 
+        /* Mission & Vision Cards */
+        .mv-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 26px;
+        }
+        .mv-card {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 20px;
+          padding: 36px 28px;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+          transition: all 0.3s ease;
+          display: flex;
+          flex-direction: column;
+        }
+        .mv-card:hover {
+          transform: translateY(-5px);
+          border-color: #FEA603;
+          box-shadow: 0 16px 35px rgba(254,166,3,0.12);
+        }
+        .mv-icon {
+          width: 52px;
+          height: 52px;
+          border-radius: 14px;
+          background: rgba(254, 166, 3, 0.12);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.6rem;
+          margin-bottom: 20px;
+        }
+        .mv-title {
+          font-size: 1.3rem;
+          font-weight: 800;
+          color: #0f172a;
+          margin: 0 0 12px 0;
+        }
+        .mv-text {
+          color: #64748b;
+          font-size: 0.95rem;
+          line-height: 1.65;
+          margin: 0;
+        }
+        .values-list {
+          list-style: none;
+          padding: 0;
+          margin: 12px 0 0 0;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .values-list li {
+          font-size: 0.9rem;
+          color: #334155;
+          display: flex;
+          align-items: flex-start;
+          gap: 8px;
+          line-height: 1.45;
+        }
+        .values-list li strong {
+          color: #0f172a;
+        }
+
+        /* Timeline Milestone */
+        .timeline-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 24px;
+          position: relative;
+        }
+        .timeline-card {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 18px;
+          padding: 28px 24px;
+          transition: all 0.3s ease;
+          position: relative;
+          border-top: 4px solid #FEA603;
+        }
+        .timeline-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+        }
+        .timeline-year {
+          font-size: 1.6rem;
+          font-weight: 900;
+          color: #FEA603;
+          margin-bottom: 8px;
+        }
+        .timeline-title {
+          font-size: 1.1rem;
+          font-weight: 800;
+          color: #0f172a;
+          margin: 0 0 8px 0;
+        }
+        .timeline-desc {
+          font-size: 0.88rem;
+          color: #64748b;
+          line-height: 1.55;
+          margin: 0;
+        }
+
+        /* Certifications Badges */
+        .cert-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+          gap: 20px;
+        }
+        .cert-card {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 16px;
+          padding: 28px 20px;
+          text-align: center;
+          transition: all 0.3s ease;
+        }
+        .cert-card:hover {
+          transform: translateY(-3px);
+          border-color: #FEA603;
+          box-shadow: 0 10px 25px rgba(254,166,3,0.1);
+        }
+        .cert-icon {
+          font-size: 2.2rem;
+          margin-bottom: 12px;
+        }
+        .cert-title {
+          font-size: 1.05rem;
+          font-weight: 800;
+          color: #0f172a;
+          margin: 0 0 6px 0;
+        }
+        .cert-desc {
+          font-size: 0.82rem;
+          color: #64748b;
+          margin: 0;
+          line-height: 1.45;
+        }
+
+        /* FAQ Grid */
+        .faq-grid-about {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+        }
+        .faq-card-about {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 16px;
+          padding: 26px 24px;
+          transition: border-color 0.25s ease;
+        }
+        .faq-card-about:hover {
+          border-color: #FEA603;
+        }
+        .faq-q {
+          font-size: 1.05rem;
+          font-weight: 800;
+          color: #0f172a;
+          margin: 0 0 10px 0;
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+        }
+        .faq-a {
+          font-size: 0.92rem;
+          color: #64748b;
+          line-height: 1.6;
+          margin: 0;
+          padding-left: 28px;
+        }
+
         /* Responsive */
         @media (max-width: 992px) {
           .story-grid, .infra-split {
@@ -517,6 +689,12 @@ const AboutUs = () => {
             grid-template-columns: repeat(2, 1fr);
           }
           .beyond-grid {
+            grid-template-columns: 1fr;
+          }
+          .mv-grid {
+            grid-template-columns: 1fr;
+          }
+          .faq-grid-about {
             grid-template-columns: 1fr;
           }
           .story-card img {
@@ -549,7 +727,7 @@ const AboutUs = () => {
             {about.hero_title}
           </h1>
           <p className="about-hero-subtitle">
-            {about.hero_subtitle}
+            India's premier clean-tech enterprise driving two synergistic core businesses: Advanced Lithium Battery Engineering and Smart Electric Scooty Mobility.
           </p>
         </div>
       </section>
@@ -581,8 +759,149 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* 3. Proven Impact Metrics */}
+      {/* 2.2 Dual Business Pillars: Battery & Electric Scooty */}
       <section className="about-section about-section-alt">
+        <div className="about-container">
+          <div className="section-header-center">
+            <span className="section-tag">Our Core Business Verticals</span>
+            <h2 className="section-heading">Two Pillars of MotoMax Clean Tech</h2>
+            <p className="section-desc">
+              MotoMax EV operates two specialized, high-impact divisions engineered to power India's sustainable energy and green transportation future.
+            </p>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: "28px", marginTop: "35px" }}>
+            {/* Division 1: Lithium Batteries */}
+            <div style={{
+              background: "#ffffff",
+              border: "2px solid #e2e8f0",
+              borderRadius: "24px",
+              padding: "36px 30px",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.04)",
+              position: "relative",
+              transition: "transform 0.3s ease, border-color 0.3s ease",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#FEA603"; e.currentTarget.style.transform = "translateY(-4px)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#e2e8f0"; e.currentTarget.style.transform = "none"; }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "20px" }}>
+                <div style={{ width: "56px", height: "56px", borderRadius: "16px", background: "rgba(254,166,3,0.12)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.8rem" }}>
+                  🔋
+                </div>
+                <div>
+                  <span style={{ fontSize: "0.8rem", fontWeight: 800, color: "#d97706", textTransform: "uppercase", letterSpacing: "1px" }}>Business Pillar 01</span>
+                  <h3 style={{ margin: "4px 0 0", fontSize: "1.35rem", fontWeight: 800, color: "#0f172a" }}>Lithium Battery Division</h3>
+                </div>
+              </div>
+              <p style={{ color: "#64748b", fontSize: "0.95rem", lineHeight: "1.65", margin: "0 0 20px" }}>
+                Pioneering high-density LiFePO4 and NMC power packs engineered for maximum safety, thermal stability, and deep cycle longevity in extreme Indian climates.
+              </p>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
+                <li style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.92rem", color: "#334155" }}>
+                  <span style={{ color: "#FEA603", fontWeight: 800 }}>✔</span> AIS-156 Phase 2 & BIS Certified Cell Grading
+                </li>
+                <li style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.92rem", color: "#334155" }}>
+                  <span style={{ color: "#FEA603", fontWeight: 800 }}>✔</span> Proprietary Smart BMS with Multi-Tier Protection
+                </li>
+                <li style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.92rem", color: "#334155" }}>
+                  <span style={{ color: "#FEA603", fontWeight: 800 }}>✔</span> Inverter, Home Solar, EV & Industrial BESS Solutions
+                </li>
+                <li style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.92rem", color: "#334155" }}>
+                  <span style={{ color: "#FEA603", fontWeight: 800 }}>✔</span> 2,500+ Charge Cycles & 3-Year Warranty
+                </li>
+              </ul>
+            </div>
+
+            {/* Division 2: Electric Scooty */}
+            <div style={{
+              background: "#ffffff",
+              border: "2px solid #e2e8f0",
+              borderRadius: "24px",
+              padding: "36px 30px",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.04)",
+              position: "relative",
+              transition: "transform 0.3s ease, border-color 0.3s ease",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#10b981"; e.currentTarget.style.transform = "translateY(-4px)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#e2e8f0"; e.currentTarget.style.transform = "none"; }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "20px" }}>
+                <div style={{ width: "56px", height: "56px", borderRadius: "16px", background: "rgba(16,185,129,0.12)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.8rem" }}>
+                  🛵
+                </div>
+                <div>
+                  <span style={{ fontSize: "0.8rem", fontWeight: 800, color: "#059669", textTransform: "uppercase", letterSpacing: "1px" }}>Business Pillar 02</span>
+                  <h3 style={{ margin: "4px 0 0", fontSize: "1.35rem", fontWeight: 800, color: "#0f172a" }}>Smart Electric Scooty Mobility</h3>
+                </div>
+              </div>
+              <p style={{ color: "#64748b", fontSize: "0.95rem", lineHeight: "1.65", margin: "0 0 20px" }}>
+                Engineering next-generation high-speed electric scooters designed for daily urban commuters, college students, and commercial delivery fleets.
+              </p>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
+                <li style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.92rem", color: "#334155" }}>
+                  <span style={{ color: "#10b981", fontWeight: 800 }}>✔</span> High-Speed EV 2-Wheelers with 90 - 150 KM Real Range
+                </li>
+                <li style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.92rem", color: "#334155" }}>
+                  <span style={{ color: "#10b981", fontWeight: 800 }}>✔</span> Ultra-Low Running Cost: Only ~15 Paise per Kilometer
+                </li>
+                <li style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.92rem", color: "#334155" }}>
+                  <span style={{ color: "#10b981", fontWeight: 800 }}>✔</span> Portable Home Charging & Instant Detachable Battery
+                </li>
+                <li style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.92rem", color: "#334155" }}>
+                  <span style={{ color: "#10b981", fontWeight: 800 }}>✔</span> Pan-India Dealership Network & Certified Service Centers
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2.5 Mission, Vision & Core Values */}
+      <section className="about-section about-section-alt">
+        <div className="about-container">
+          <div className="section-header-center">
+            <span className="section-tag">Our Guiding North Star</span>
+            <h2 className="section-heading">Mission, Vision & Core Values</h2>
+            <p className="section-desc">
+              Pioneering safe, sustainable, and affordable electric mobility solutions built for Indian commuters, fleets, and families.
+            </p>
+          </div>
+
+          <div className="mv-grid">
+            <div className="mv-card">
+              <div className="mv-icon">🎯</div>
+              <h3 className="mv-title">Our Mission</h3>
+              <p className="mv-text">
+                To democratize zero-emission electric mobility across India by engineering rugged, thermally safe lithium power packs and smart e-scooters accessible to every daily rider.
+              </p>
+            </div>
+
+            <div className="mv-card">
+              <div className="mv-icon">🔭</div>
+              <h3 className="mv-title">Our Vision</h3>
+              <p className="mv-text">
+                To be India's most trusted green energy and electric two-wheeler ecosystem, reducing 100,000+ metric tons of urban emissions while powering sustainable commutes by 2030.
+              </p>
+            </div>
+
+            <div className="mv-card">
+              <div className="mv-icon">💎</div>
+              <h3 className="mv-title">Core Values</h3>
+              <p className="mv-text">
+                Safety first with zero compromise, continuous indigenous innovation, and green responsibility.
+              </p>
+              <ul className="values-list">
+                <li><span>✔</span> <strong>Safety First:</strong> Multi-tier thermal BMS & AIS-156 protocols</li>
+                <li><span>✔</span> <strong>Innovation:</strong> 100% in-house testing & smart telematics</li>
+                <li><span>✔</span> <strong>Integrity:</strong> Honest warranties & transparent real-world range</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Proven Impact Metrics */}
+      <section className="about-section">
         <div className="about-container">
           <div className="section-header-center">
             <span className="section-tag">Proven Track Record</span>
@@ -621,7 +940,7 @@ const AboutUs = () => {
       </section>
 
       {/* 4. Built on Quality & Engineering */}
-      <section className="about-section">
+      <section className="about-section about-section-alt">
         <div className="about-container">
           <div className="section-header-center">
             <span className="section-tag">Engineering Standard</span>
@@ -668,7 +987,7 @@ const AboutUs = () => {
       </section>
 
       {/* 5. Infrastructure & Team */}
-      <section className="about-section about-section-alt">
+      <section className="about-section">
         <div className="about-container">
           <div className="infra-split">
             <div>
@@ -710,6 +1029,53 @@ const AboutUs = () => {
         </div>
       </section>
 
+      {/* 5.5 Our Journey & Milestones */}
+      <section className="about-section about-section-alt">
+        <div className="about-container">
+          <div className="section-header-center">
+            <span className="section-tag">How We Grew</span>
+            <h2 className="section-heading">Two Decades of Clean Energy Innovation</h2>
+            <p className="section-desc">
+              From early pioneering lead-acid battery designs to ultra-advanced smart lithium power trains and flagship electric scooties.
+            </p>
+          </div>
+
+          <div className="timeline-grid">
+            <div className="timeline-card">
+              <div className="timeline-year">2005</div>
+              <h4 className="timeline-title">Foundations Laid</h4>
+              <p className="timeline-desc">
+                Inception of the parent energy research lab focusing on robust power storage and industrial battery solutions for semi-urban India.
+              </p>
+            </div>
+
+            <div className="timeline-card">
+              <div className="timeline-year">2014</div>
+              <h4 className="timeline-title">Lithium-Ion Transition</h4>
+              <p className="timeline-desc">
+                Pioneered indigenous Smart BMS design and high-density Lithium Ferrophosphate (LFP) pack assembly tailored for extreme Indian summer temperatures.
+              </p>
+            </div>
+
+            <div className="timeline-card">
+              <div className="timeline-year">2020</div>
+              <h4 className="timeline-title">AIS-156 Certification</h4>
+              <p className="timeline-desc">
+                Achieved premier Automotive Research Association of India (ARAI) certifications and scaled factory capacity to 50,000+ packs annually.
+              </p>
+            </div>
+
+            <div className="timeline-card">
+              <div className="timeline-year">2024 - 2026</div>
+              <h4 className="timeline-title">Electric Scooty Lineup</h4>
+              <p className="timeline-desc">
+                Launched flagship high-speed electric scooties (CityGlide EX & Storm Pro), expanding across 25+ states with 500+ certified service touchpoints.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 6. Beyond Mobility (Energy Storage) */}
       <section className="about-section">
         <div className="about-container">
@@ -744,6 +1110,74 @@ const AboutUs = () => {
               <p className="beyond-text">
                 Compact, elegant wall-mounted home energy storage systems for uninterrupted green power.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6.5 Quality Certifications & Accreditations */}
+      <section className="about-section about-section-alt">
+        <div className="about-container">
+          <div className="section-header-center">
+            <span className="section-tag">Government & Global Accreditations</span>
+            <h2 className="section-heading">Certified for Maximum Safety & Trust</h2>
+            <p className="section-desc">
+              MotoMax products undergo 45+ destructive, thermal, vibration, and water-submersion tests certified by top national laboratories.
+            </p>
+          </div>
+
+          <div className="cert-grid">
+            <div className="cert-card">
+              <div className="cert-icon">🏅</div>
+              <h4 className="cert-title">AIS-156 Phase 2</h4>
+              <p className="cert-desc">Certified thermal propagation and ingress prevention standard for EV battery packs.</p>
+            </div>
+            <div className="cert-card">
+              <div className="cert-icon">🛡️</div>
+              <h4 className="cert-title">BIS Certified</h4>
+              <p className="cert-desc">Bureau of Indian Standards certified cells, enclosures, and high-efficiency smart chargers.</p>
+            </div>
+            <div className="cert-card">
+              <div className="cert-icon">💧</div>
+              <h4 className="cert-title">IP67 Waterproof</h4>
+              <p className="cert-desc">100% dust-tight and submersible up to 1 meter for 30 minutes in flood and monsoon conditions.</p>
+            </div>
+            <div className="cert-card">
+              <div className="cert-icon">🌱</div>
+              <h4 className="cert-title">ISO 9001 & 14001</h4>
+              <p className="cert-desc">International standards for rigorous manufacturing quality control and environmental management.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6.8 About MotoMax FAQ */}
+      <section className="about-section">
+        <div className="about-container">
+          <div className="section-header-center">
+            <span className="section-tag">Common Inquiries</span>
+            <h2 className="section-heading">Frequently Asked Questions</h2>
+            <p className="section-desc">
+              Everything you need to know about MotoMax EV engineering, warranty, and dealership partnerships.
+            </p>
+          </div>
+
+          <div className="faq-grid-about">
+            <div className="faq-card-about">
+              <h4 className="faq-q"><span>❓</span> What warranty does MotoMax offer on Scooties & Batteries?</h4>
+              <p className="faq-a">We provide an industry-leading 3-Year / 50,000 km replacement warranty on all our smart lithium battery packs, and comprehensive bumper-to-bumper support across all authorized service centers.</p>
+            </div>
+            <div className="faq-card-about">
+              <h4 className="faq-q"><span>❓</span> Can I buy a MotoMax Electric Scooty directly or book a test ride?</h4>
+              <p className="faq-a">Yes! You can reserve your test ride or book online via our contact & sales desk, or walk into any of our 500+ authorized dealer showrooms nationwide.</p>
+            </div>
+            <div className="faq-card-about">
+              <h4 className="faq-q"><span>❓</span> How long does a full battery charge take?</h4>
+              <p className="faq-a">With our standard 6A smart home charger, it takes approximately 3.5 to 4 hours. With our optional Ultra-Fast DC charger, 80% charge is reached in under 90 minutes.</p>
+            </div>
+            <div className="faq-card-about">
+              <h4 className="faq-q"><span>❓</span> How do I become an authorized dealer or franchisee?</h4>
+              <p className="faq-a">Reach out to us through our Partner With Us form on the Contact page. Our regional dealership team will contact you within 24 hours with complete commercial details.</p>
             </div>
           </div>
         </div>

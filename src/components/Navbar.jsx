@@ -24,7 +24,6 @@ const Navbar = () => {
   const location = useLocation();
   const [showEnquiryModal, setShowEnquiryModal] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
-  const isAdmin = location.pathname.startsWith('/admin') || localStorage.getItem('adminLoggedIn') === 'true';
 
   const [user, setUser] = useState(() => {
     const userStr = localStorage.getItem("authUser");
@@ -134,20 +133,20 @@ const Navbar = () => {
   return (
     <>
       <nav className="navbar-light" ref={navRef}>
-        <div className="nav-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', maxWidth: '1250px', margin: '0 auto' }}>
-          <div className="logo" style={{ flex: 1 }}>
+        <div className="nav-container">
+          <div className="logo">
             <Link to="/" style={{ display: "flex", alignItems: "center" }}>
               <img
                 src="/Icon.png"
                 alt="MotoMax EV Logo"
-                style={{ height: "45px", width: "auto", objectFit: "contain", borderRadius: "5px" }}
+                className="navbar-logo-img"
                 onError={(e) => { e.target.style.display = "none"; e.target.nextSibling.style.display = "block"; }}
               />
               <h2 style={{ display: "none", color: "var(--primary)", margin: 0, fontWeight: 900 }}>MotoMax EV</h2>
             </Link>
           </div>
 
-          <ul className={`nav-links-light ${isOpen ? "active" : ""}`} style={{ flex: 2, display: 'flex', justifyContent: 'center' }}>
+          <ul className={`nav-links-light ${isOpen ? "active" : ""}`}>
             <li className="hide-on-desktop mobile-menu-header" style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 20px', borderBottom: '1px solid rgba(0,0,0,0.05)', marginBottom: '10px' }}>
               <img src="/Icon.png" alt="MotoMax EV" style={{ height: "40px", objectFit: "contain" }} onError={(e) => { e.target.style.display = 'none' }} />
               <button onClick={() => setIsOpen(false)} style={{ background: "none", border: "none", fontSize: "1.5rem", cursor: "pointer", color: "#333", padding: "5px" }}>✖</button>
@@ -232,18 +231,8 @@ const Navbar = () => {
 
 
             <li>
-              <Link to="/news-events" onClick={() => setIsOpen(false)}>
-                News & Events
-              </Link>
-            </li>
-            <li>
-              <Link to="/blog" onClick={() => setIsOpen(false)}>
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link to="/gallery" onClick={() => setIsOpen(false)}>
-                Gallery
+              <Link to="/dealership" onClick={() => setIsOpen(false)}>
+                Dealership
               </Link>
             </li>
             <li>
@@ -251,152 +240,272 @@ const Navbar = () => {
                 Contact Us
               </Link>
             </li>
-            <li className="hide-on-desktop">
+            <li className="hide-on-desktop mobile-drawer-actions" style={{ width: '100%', padding: '24px 20px 35px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <button
+                onClick={() => { setIsOpen(false); setShowEnquiryModal(true); }}
+                style={{
+                  background: "linear-gradient(135deg, #FEA603 0%, #ff8c00 100%)",
+                  color: "#fff",
+                  height: "48px",
+                  borderRadius: "30px",
+                  fontWeight: "bold",
+                  border: "none",
+                  cursor: "pointer",
+                  fontSize: "1.05rem",
+                  width: "100%",
+                  maxWidth: "320px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                  boxShadow: "0 6px 18px rgba(254, 166, 3, 0.45)",
+                  fontFamily: "inherit"
+                }}
+              >
+                <span>⚡</span>
+                <span>Enquire Now</span>
+              </button>
+            </li>
+          </ul>
+
+          {/* Right side actions - Desktop */}
+          <ul className="nav-actions hide-on-mobile">
+            <li style={{ display: "flex", alignItems: "center", flexShrink: 0, margin: 0, padding: 0 }}>
               <button
                 onClick={() => { setIsOpen(false); setShowEnquiryModal(true); }}
                 style={{
                   background: "var(--primary)",
                   color: "#fff",
-                  padding: "10px 24px",
+                  height: "42px",
+                  padding: "0 22px",
                   borderRadius: "30px",
                   fontWeight: "bold",
                   border: "none",
                   cursor: "pointer",
-                  fontSize: "0.95rem",
-                  width: "90%",
-                  margin: "10px auto",
-                  display: "block"
+                  fontSize: "0.92rem",
+                  boxShadow: "0 4px 10px rgba(254, 166, 3, 0.3)",
+                  fontFamily: "inherit",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
+                  lineHeight: 1,
+                  boxSizing: "border-box",
+                  verticalAlign: "middle"
                 }}
               >
                 Enquire Now
               </button>
             </li>
-            <li className="hide-on-desktop">
-              <Link to="/dashboard?tab=cart" onClick={() => setIsOpen(false)} style={{ display: "flex", alignItems: "center", gap: "8px", position: "relative" }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <li style={{ display: "flex", alignItems: "center", flexShrink: 0, margin: 0, padding: 0 }}>
+              <Link
+                to="/dashboard?tab=cart"
+                onClick={() => setIsOpen(false)}
+                aria-label="Shopping Cart"
+                style={{
+                  position: "relative",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "42px",
+                  height: "42px",
+                  borderRadius: "50%",
+                  background: "#f8fafc",
+                  border: "1px solid #e2e8f0",
+                  textDecoration: "none",
+                  color: "#1e293b",
+                  transition: "all 0.25s ease",
+                  flexShrink: 0,
+                  boxSizing: "border-box"
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "#fff";
+                  e.currentTarget.style.borderColor = "var(--primary)";
+                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(254, 166, 3, 0.25)";
+                  e.currentTarget.style.transform = "translateY(-1px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "#f8fafc";
+                  e.currentTarget.style.borderColor = "#e2e8f0";
+                  e.currentTarget.style.boxShadow = "none";
+                  e.currentTarget.style.transform = "none";
+                }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="9" cy="21" r="1"></circle>
                   <circle cx="20" cy="21" r="1"></circle>
                   <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                 </svg>
-                <span>Cart</span>
                 {cartCount > 0 && (
-                  <span style={{ background: "#ef4444", color: "#fff", borderRadius: "10px", padding: "1px 7px", fontSize: "0.75rem", fontWeight: "bold", marginLeft: "4px" }}>
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: "-4px",
+                      right: "-4px",
+                      background: "#ef4444",
+                      color: "#fff",
+                      borderRadius: "10px",
+                      minWidth: "18px",
+                      height: "18px",
+                      padding: "0 5px",
+                      fontSize: "0.72rem",
+                      fontWeight: 700,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      boxShadow: "0 2px 6px rgba(239, 68, 68, 0.4)",
+                      border: "2px solid #fff"
+                    }}
+                  >
                     {cartCount}
                   </span>
                 )}
               </Link>
             </li>
-            <li className="hide-on-desktop">
-              <Link to="/dashboard" onClick={() => setIsOpen(false)}>
-                {user ? `👤 Hi, ${user.name.split(' ')[0]}` : "👤 Login"}
+            <li style={{ display: "flex", alignItems: "center", flexShrink: 0, margin: 0, padding: 0 }}>
+              <Link
+                to="/dashboard"
+                onClick={() => setIsOpen(false)}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "6px",
+                  height: "42px",
+                  padding: "0 18px",
+                  borderRadius: "20px",
+                  background: "#f1f5f9",
+                  border: "1px solid #e2e8f0",
+                  textDecoration: "none",
+                  color: "#0f172a",
+                  fontWeight: "700",
+                  fontSize: "0.92rem",
+                  transition: "all 0.25s ease",
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
+                  lineHeight: 1,
+                  boxSizing: "border-box"
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = "rgba(254, 166, 3, 0.12)";
+                  e.currentTarget.style.borderColor = "#FEA603";
+                  e.currentTarget.style.color = "#d97706";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = "#f1f5f9";
+                  e.currentTarget.style.borderColor = "#e2e8f0";
+                  e.currentTarget.style.color = "#0f172a";
+                }}
+              >
+                <span>👤</span>
+                <span>{user ? `Hi, ${user.name.split(' ')[0]}` : "Login"}</span>
               </Link>
             </li>
           </ul>
 
-          {/* Right side actions - Desktop */}
-          <ul className="nav-actions hide-on-mobile" style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '15px', listStyle: 'none', margin: 0, padding: 0 }}>
+          {/* Mobile Actions and Hamburger Toggle */}
+          <div className="hide-on-desktop mobile-header-actions" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {/* 1. Add to Cart */}
+            <Link
+              to="/dashboard?tab=cart"
+              aria-label="Shopping Cart"
+              style={{
+                position: "relative",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "38px",
+                height: "38px",
+                borderRadius: "50%",
+                background: "#f8fafc",
+                border: "1px solid #e2e8f0",
+                color: "#1e293b",
+                textDecoration: "none",
+                flexShrink: 0
+              }}
+            >
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              </svg>
+              {cartCount > 0 && (
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "-3px",
+                    right: "-3px",
+                    background: "#ef4444",
+                    color: "#fff",
+                    borderRadius: "10px",
+                    minWidth: "16px",
+                    height: "16px",
+                    padding: "0 4px",
+                    fontSize: "0.68rem",
+                    fontWeight: 700,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: "2px solid #fff"
+                  }}
+                >
+                  {cartCount}
+                </span>
+              )}
+            </Link>
 
+            {/* 2. Login Button */}
+            <Link
+              to="/dashboard"
+              aria-label="User Login"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "5px",
+                height: "36px",
+                padding: "0 12px",
+                borderRadius: "20px",
+                background: "#f1f5f9",
+                border: "1px solid #e2e8f0",
+                color: "#0f172a",
+                textDecoration: "none",
+                fontSize: "0.85rem",
+                fontWeight: 700,
+                whiteSpace: "nowrap",
+                flexShrink: 0
+              }}
+            >
+              <span>👤</span>
+              <span>{user ? user.name.split(' ')[0] : "Login"}</span>
+            </Link>
 
-
-            {!isAdmin && (
-              <>
-                <li style={{ display: "flex", alignItems: "center" }}>
-                  <button
-                    onClick={() => { setIsOpen(false); setShowEnquiryModal(true); }}
-                    style={{
-                      background: "var(--primary)",
-                      color: "#fff",
-                      padding: "10px 24px",
-                      borderRadius: "30px",
-                      fontWeight: "bold",
-                      border: "none",
-                      cursor: "pointer",
-                      fontSize: "0.95rem",
-                      boxShadow: "0 4px 10px rgba(254, 166, 3, 0.3)",
-                      fontFamily: "inherit",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center"
-                    }}
-                  >
-                    Enquire Now
-                  </button>
-                </li>
-                <li>
-                  <Link
-                    to="/dashboard?tab=cart"
-                    onClick={() => setIsOpen(false)}
-                    aria-label="Shopping Cart"
-                    style={{
-                      position: "relative",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "50%",
-                      background: "#f8fafc",
-                      border: "1px solid #e2e8f0",
-                      textDecoration: "none",
-                      color: "#1e293b",
-                      transition: "all 0.25s ease"
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = "#fff";
-                      e.currentTarget.style.borderColor = "var(--primary)";
-                      e.currentTarget.style.boxShadow = "0 4px 12px rgba(254, 166, 3, 0.2)";
-                      e.currentTarget.style.transform = "translateY(-1px)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = "#f8fafc";
-                      e.currentTarget.style.borderColor = "#e2e8f0";
-                      e.currentTarget.style.boxShadow = "none";
-                      e.currentTarget.style.transform = "none";
-                    }}
-                  >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="9" cy="21" r="1"></circle>
-                      <circle cx="20" cy="21" r="1"></circle>
-                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                    </svg>
-                    {cartCount > 0 && (
-                      <span
-                        style={{
-                          position: "absolute",
-                          top: "-4px",
-                          right: "-4px",
-                          background: "#ef4444",
-                          color: "#fff",
-                          borderRadius: "10px",
-                          minWidth: "18px",
-                          height: "18px",
-                          padding: "0 5px",
-                          fontSize: "0.7rem",
-                          fontWeight: 700,
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          boxShadow: "0 2px 6px rgba(239, 68, 68, 0.4)",
-                          border: "2px solid #fff"
-                        }}
-                      >
-                        {cartCount}
-                      </span>
-                    )}
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/dashboard" onClick={() => setIsOpen(false)} style={{ textDecoration: "none", color: "#333", fontWeight: "600" }}>
-                    {user ? `Hi, ${user.name.split(' ')[0]}` : "Login"}
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
-
-          {/* Mobile Menu Toggle Icon */}
-          <div className="menu-icon hide-on-desktop" onClick={() => setIsOpen(!isOpen)} style={{ color: "#000", fontSize: "1.8rem", cursor: "pointer", marginLeft: "-20px" }}>
-            {isOpen ? "✖" : "☰"}
+            {/* 3. Toggle Bar (Hamburger Menu) */}
+            <button
+              className="menu-icon"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle Navigation Menu"
+              style={{
+                background: isOpen ? "#0f172a" : "#ffffff",
+                border: "1px solid #e2e8f0",
+                borderRadius: "10px",
+                width: "38px",
+                height: "38px",
+                color: isOpen ? "#ffffff" : "#0f172a",
+                fontSize: "1.4rem",
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: 0,
+                lineHeight: 1,
+                flexShrink: 0,
+                boxShadow: "0 2px 6px rgba(0,0,0,0.06)"
+              }}
+            >
+              {isOpen ? "✕" : "☰"}
+            </button>
           </div>
         </div>
       </nav>

@@ -24,6 +24,7 @@ import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
 import Products from "./pages/Products";
+import Dealership from "./pages/Dealership";
 import UserDashboard from "./pages/UserDashboard";
 
 import "./index.css";
@@ -69,6 +70,7 @@ function AppContent() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/post/:slug" element={<PostDetail />} />
+          <Route path="/dealership" element={<Dealership />} />
           <Route path="/contact-us" element={<Contact />} />
 
           {/* Admin Panel */}

@@ -43,7 +43,8 @@ const Cart = () => {
   const [loading, setLoading] = useState(true);
   const [step, setStep] = useState('cart'); // cart, address, summary, payment, success
   
-  const [address, setAddress] = useState({ name: '', phone: '', address: '', city: '', pincode: '' });
+  const user = JSON.parse(localStorage.getItem("authUser") || "{}");
+  const [address, setAddress] = useState({ name: user.name || '', phone: '', email: user.email || '', address: '', city: '', pincode: '' });
   const [savedAddresses, setSavedAddresses] = useState([]);
   const [showNewAddressForm, setShowNewAddressForm] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('upi');
@@ -51,7 +52,6 @@ const Cart = () => {
   const [cardExpiry, setCardExpiry] = useState('');
   const [cardCvv, setCardCvv] = useState('');
   const [upiId, setUpiId] = useState('');
-  const user = JSON.parse(localStorage.getItem("authUser") || "{}");
 
   const fetchCart = () => {
     if (!user.id) return;
@@ -73,7 +73,7 @@ const Cart = () => {
           setSavedAddresses(data);
           if (data.length > 0 && !address.address) {
              const first = data[0];
-             setAddress({ name: user.name || '', phone: first.phone || '', address: first.address_line, city: first.city, pincode: first.zip });
+             setAddress({ name: user.name || '', phone: first.phone || '', email: user.email || '', address: first.address_line, city: first.city, pincode: first.zip });
           } else if (data.length === 0) {
              setShowNewAddressForm(true);
           }
@@ -212,11 +212,15 @@ const Cart = () => {
   };
 
   const saveOrderToDB = () => {
+    const finalEmail = (address && address.email) || user.email || "";
+    const finalName = (address && address.name) || user.name || "";
     fetch(`${API_BASE}/orders.php`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         user_id: user.id,
+        customer_email: finalEmail,
+        customer_name: finalName,
         items: cartItems,
         address: address,
         payment_method: paymentMethod,
@@ -256,13 +260,19 @@ const Cart = () => {
           <button onClick={() => window.location.href = '/products'} style={{marginTop: '20px', background: '#2874f0', color: '#fff', padding: '10px 20px', border: 'none', borderRadius: '2px', fontWeight: 'bold'}}>Shop Now</button>
         </div>
       ) : step === 'success' ? (
-        <div style={{textAlign: "center", padding: "60px 20px", background: '#fff', borderRadius: '4px', margin: '20px'}}>
-          <div style={{fontSize: "4rem", marginBottom: "20px"}}>🎉</div>
-          <h2 style={{fontSize: "1.8rem", fontWeight: "bold", color: "#2874f0", marginBottom: "10px"}}>Order Placed Successfully!</h2>
-          <p style={{color: "#878787", fontSize: "1rem", maxWidth: "500px", margin: "0 auto 30px"}}>
-            Thank you for shopping! Your order has been confirmed.
+        <div style={{textAlign: "center", padding: "60px 20px", background: '#fff', borderRadius: '8px', margin: '20px', boxShadow: '0 2px 8px rgba(0,0,0,0.06)'}}>
+          <div style={{fontSize: "4rem", marginBottom: "15px"}}>🎉</div>
+          <h2 style={{fontSize: "1.8rem", fontWeight: "bold", color: "#166534", marginBottom: "10px"}}>Order Placed Successfully!</h2>
+          <p style={{color: "#475569", fontSize: "1rem", maxWidth: "550px", margin: "0 auto 15px", lineHeight: 1.5}}>
+            Thank you for shopping with MotoMax EV! An order confirmation email with your itemized invoice has been dispatched to your email address, and our administration team has received your order.
           </p>
-          <button onClick={() => window.location.href = "/"} style={{background: '#fb641b', color: '#fff', padding: '12px 30px', border: 'none', borderRadius: '2px', fontWeight: 'bold'}}>Return to Home</button>
+          <div style={{display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#dcfce7', border: '1px solid #86efac', color: '#166534', padding: '10px 20px', borderRadius: '30px', fontSize: '0.9rem', fontWeight: 600, marginBottom: '25px'}}>
+            <span>✉️</span> Order Confirmation Email Dispatched & Admin Alert Sent
+          </div>
+          <div style={{display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap'}}>
+            <button onClick={() => window.location.href = "/dashboard?tab=orders"} style={{background: '#2874f0', color: '#fff', padding: '12px 25px', border: 'none', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer'}}>View My Orders</button>
+            <button onClick={() => window.location.href = "/"} style={{background: '#f1f5f9', color: '#334155', border: '1px solid #cbd5e1', padding: '12px 25px', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer'}}>Return to Home</button>
+          </div>
         </div>
       ) : (
         <>
@@ -361,6 +371,7 @@ const Cart = () => {
                 <h3 style={{color: '#2874f0', marginBottom: '20px', fontSize: '1rem', fontWeight: 'bold'}}>ADD A NEW ADDRESS</h3>
                 <div style={{display: 'flex', flexDirection: 'column', gap: '15px'}}>
                   <input type="text" placeholder="Full Name" style={{padding: '12px', border: '1px solid #c2c2c2', borderRadius: '2px'}} required value={address.name} onChange={e=>setAddress({...address, name: e.target.value})} />
+                  <input type="email" placeholder="Email Address (for order tracking & invoice)" style={{padding: '12px', border: '1px solid #c2c2c2', borderRadius: '2px'}} value={address.email || ''} onChange={e=>setAddress({...address, email: e.target.value})} />
                   <input type="tel" placeholder="Phone Number" style={{padding: '12px', border: '1px solid #c2c2c2', borderRadius: '2px'}} required value={address.phone} onChange={e=>setAddress({...address, phone: e.target.value})} />
                   <textarea placeholder="Road name, Area, Colony" style={{padding: '12px', border: '1px solid #c2c2c2', borderRadius: '2px', minHeight: '80px'}} required value={address.address} onChange={e=>setAddress({...address, address: e.target.value})}></textarea>
                   <div style={{display: 'flex', gap: '15px'}}>

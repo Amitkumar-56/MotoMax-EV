@@ -115,10 +115,18 @@ const Admin = () => {
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
 
+  // Dealership Inquiries
+  const [dealershipInquiries, setDealershipInquiries] = useState([]);
+  const [dealershipStats, setDealershipStats] = useState({ total: 0, new_count: 0, contacted_count: 0, approved_count: 0 });
+  const [dealershipFilter, setDealershipFilter] = useState("all");
+  const [dealershipSearch, setDealershipSearch] = useState("");
+  const [dealershipPage, setDealershipPage] = useState(1);
+  const [selectedDealership, setSelectedDealership] = useState(null);
+  const [dealershipLoading, setDealershipLoading] = useState(false);
+
   const [productPage, setProductPage] = useState(1);
   const [userPage, setUserPage] = useState(1);
   const [orderPage, setOrderPage] = useState(1);
-  const [blogPage, setBlogPage] = useState(1);
   const ITEMS_PER_PAGE = 5;
 
   const renderPagination = (currentPage, totalItems, onPageChange) => {
@@ -133,14 +141,6 @@ const Admin = () => {
     );
   };
 
-  // Blogs
-  const [blogs, setBlogs] = useState([]);
-  const [blogTitle, setBlogTitle] = useState("");
-  const [blogCategory, setBlogCategory] = useState("Company News");
-  const [blogImage, setBlogImage] = useState("");
-  const [blogContent, setBlogContent] = useState("");
-  const [showBlogForm, setShowBlogForm] = useState(false);
-
   // Settings (Images and Text)
   const [settings, setSettings] = useState({
     heroImage: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7",
@@ -148,45 +148,16 @@ const Admin = () => {
     contactImage: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d",
     heroTitle: "Powering the Future of Mobility",
     homepage_slider: JSON.stringify([
-      { type: "video", src: "/assets/home-video.mp4" },
-      { type: "image", src: "/assets/1.png", title: "INDIA'S LEADING ENERGY TECHNOLOGY COMPANY", subtitle: "Pioneering the EV Revolution Across the Globe" }
+      { type: "image", src: "/assets/motomax-banner-batteries.jpg", title: "", subtitle: "" },
+      { type: "image", src: "/assets/motomax-banner-assembly.jpg", title: "", subtitle: "" },
+      { type: "image", src: "/assets/motomax-scooty-fleet.jpg", title: "INDIA'S LEADING ELECTRIC MOBILITY ECOSYSTEM", subtitle: "High Speed Scooties, Commercial Fleets & Smart EV Powertrains" },
+      { type: "image", src: "/assets/motomax-cell-grading.jpg", title: "AIS-156 & BIS CERTIFIED CELL GRADING", subtitle: "Laser-Tested Internal Resistance & Smart Thermal Management" },
+      { type: "image", src: "/assets/motomax-battery-warehouse.jpg", title: "HIGH CAPACITY ENERGY STORAGE SOLUTIONS", subtitle: "Trusted by Top OEMs and 500,000+ Daily Drivers Across India" },
+      { type: "video", src: "/assets/home-video.mp4" }
     ], null, 2)
   });
 
-  // Gallery
-  const [galleryImages, setGalleryImages] = useState([]);
-  const [galleryTitle, setGalleryTitle] = useState("");
-  const [galleryCategory, setGalleryCategory] = useState("General");
-  const [galleryImageFile, setGalleryImageFile] = useState(null);
-  const [showGalleryForm, setShowGalleryForm] = useState(false);
-  const [galleryPage, setGalleryPage] = useState(1);
 
-  // News & Events
-  const [newsArticles, setNewsArticles] = useState([]);
-  const [eventsList, setEventsList] = useState([]);
-  const [newsSubTab, setNewsSubTab] = useState("articles"); // "articles" | "events"
-  const [showNewsForm, setShowNewsForm] = useState(false);
-  const [editNewsId, setEditNewsId] = useState(null);
-  const [newsTitle, setNewsTitle] = useState("");
-  const [newsSlug, setNewsSlug] = useState("");
-  const [newsCategory, setNewsCategory] = useState("Press & Media");
-  const [newsSource, setNewsSource] = useState("The Battery Magazine");
-  const [newsDateText, setNewsDateText] = useState("");
-  const [newsReadTime, setNewsReadTime] = useState("3 min read");
-  const [newsImage, setNewsImage] = useState("");
-  const [newsTags, setNewsTags] = useState("");
-  const [newsSummary, setNewsSummary] = useState("");
-  const [newsContent, setNewsContent] = useState("");
-  const [newsIsFeatured, setNewsIsFeatured] = useState(false);
-
-  const [showEventForm, setShowEventForm] = useState(false);
-  const [editEventId, setEditEventId] = useState(null);
-  const [eventTitle, setEventTitle] = useState("");
-  const [eventDateText, setEventDateText] = useState("");
-  const [eventLocation, setEventLocation] = useState("");
-  const [eventBooth, setEventBooth] = useState("");
-  const [eventBadge, setEventBadge] = useState("Official Exhibitor");
-  const [eventDesc, setEventDesc] = useState("");
 
   // About Us
   const [aboutSettings, setAboutSettings] = useState({
@@ -270,10 +241,7 @@ const Admin = () => {
       { title: "Home", url: "/" },
       { title: "About Us", url: "/about-us" },
       { title: "Contact", url: "/contact-us" },
-      { title: "Management", url: "/team" },
-      { title: "News & Events", url: "/news-events" },
-      { title: "Blog", url: "/blog" },
-      { title: "Gallery", url: "/gallery" }
+      { title: "Management", url: "/team" }
     ],
     product_links: [
       { title: "Automotive Lithium Battery", url: "/products/electric-scooter-battery" },
@@ -317,11 +285,65 @@ const Admin = () => {
       .then((data) => setQueries(data || []));
   };
 
-  const fetchBlogs = () => {
-    fetch(`${API_BASE}/blogs.php`)
+  const fetchDealershipInquiries = (status = dealershipFilter, search = dealershipSearch) => {
+    setDealershipLoading(true);
+    const filterParam = status && status !== "all" ? `&status=${encodeURIComponent(status)}` : "";
+    const searchParam = search ? `&search=${encodeURIComponent(search)}` : "";
+    fetch(`${API_BASE}/dealership.php?fetch=1${filterParam}${searchParam}`)
       .then((res) => res.json())
-      .then((data) => setBlogs(data || []));
+      .then((data) => {
+        setDealershipLoading(false);
+        if (data && data.status === "success") {
+          setDealershipInquiries(data.data || []);
+          if (data.stats) setDealershipStats(data.stats);
+        }
+      })
+      .catch((err) => {
+        setDealershipLoading(false);
+        console.error("Error fetching dealership inquiries:", err);
+      });
   };
+
+  const handleUpdateDealershipStatus = (id, newStatus) => {
+    fetch(`${API_BASE}/dealership.php?id=${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: newStatus })
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.status === "success") {
+          fetchDealershipInquiries(dealershipFilter, dealershipSearch);
+          if (selectedDealership && selectedDealership.id === id) {
+            setSelectedDealership((prev) => ({ ...prev, status: newStatus }));
+          }
+        } else {
+          alert((data && data.message) || "Failed to update status");
+        }
+      })
+      .catch((err) => alert("Error: " + err.message));
+  };
+
+  const handleDeleteDealership = (id) => {
+    if (window.confirm("Are you sure you want to delete this dealership inquiry? This cannot be undone.")) {
+      fetch(`${API_BASE}/dealership.php?id=${id}`, {
+        method: "DELETE"
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && data.status === "success") {
+            if (selectedDealership && selectedDealership.id === id) {
+              setSelectedDealership(null);
+            }
+            fetchDealershipInquiries(dealershipFilter, dealershipSearch);
+          } else {
+            alert((data && data.message) || "Failed to delete inquiry");
+          }
+        })
+        .catch((err) => alert("Error: " + err.message));
+    }
+  };
+
 
   const fetchOrders = () => {
     fetch(`${API_BASE}/orders.php?admin=true`)
@@ -329,53 +351,6 @@ const Admin = () => {
       .then((data) => setOrders(Array.isArray(data) ? data : []));
   };
 
-  const fetchGallery = () => {
-    fetch(`${API_BASE}/gallery.php`)
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data)) setGalleryImages(data);
-      });
-  };
-
-  const handleGallerySubmit = (e) => {
-    e.preventDefault();
-    if (!galleryImageFile) {
-      alert("Please select an image");
-      return;
-    }
-    const formData = new FormData();
-    formData.append("title", galleryTitle);
-    formData.append("category", galleryCategory);
-    formData.append("image", galleryImageFile);
-
-    fetch(`${API_BASE}/gallery.php`, {
-      method: "POST",
-      body: formData
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === "success") {
-          alert("Image uploaded to gallery!");
-          setGalleryTitle("");
-          setGalleryCategory("General");
-          setGalleryImageFile(null);
-          setShowGalleryForm(false);
-          fetchGallery();
-        } else {
-          alert(data.message || "Upload failed");
-        }
-      });
-  };
-
-  const handleDeleteGallery = (id) => {
-    if (window.confirm("Delete this gallery image?")) {
-      fetch(`${API_BASE}/gallery.php`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id })
-      }).then(() => fetchGallery());
-    }
-  };
 
   const handleUpdateOrderStatus = (id, newStatus) => {
     fetch(`${API_BASE}/orders.php`, {
@@ -407,180 +382,6 @@ const Admin = () => {
       .catch(err => console.error(err));
   };
 
-  const fetchNewsEvents = () => {
-    fetch(`${API_BASE}/news_events.php`)
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.status === "success") {
-          setNewsArticles(data.news || []);
-          setEventsList(data.events || []);
-        }
-      })
-      .catch(err => console.error(err));
-  };
-
-  const handleResetNewsForm = () => {
-    setEditNewsId(null);
-    setNewsTitle("");
-    setNewsSlug("");
-    setNewsCategory("Press & Media");
-    setNewsSource("The Battery Magazine");
-    setNewsDateText("");
-    setNewsReadTime("3 min read");
-    setNewsImage("");
-    setNewsTags("");
-    setNewsSummary("");
-    setNewsContent("");
-    setNewsIsFeatured(false);
-    setShowNewsForm(false);
-  };
-
-  const handleEditNews = (item) => {
-    setEditNewsId(item.id);
-    setNewsTitle(item.title || "");
-    setNewsSlug(item.slug || "");
-    setNewsCategory(item.category || "Press & Media");
-    setNewsSource(item.source || "");
-    setNewsDateText(item.date_text || "");
-    setNewsReadTime(item.read_time || "3 min read");
-    setNewsImage(item.image || "");
-    setNewsTags(item.tags || "");
-    setNewsSummary(item.summary || "");
-    setNewsContent(item.content || "");
-    setNewsIsFeatured(Number(item.is_featured) === 1);
-    setShowNewsForm(true);
-  };
-
-  const handleSaveNews = (e) => {
-    e.preventDefault();
-    if (!newsTitle.trim()) {
-      alert("Please enter article title");
-      return;
-    }
-    const payload = {
-      action: editNewsId ? "update_news" : "create_news",
-      type: "news",
-      id: editNewsId,
-      title: newsTitle,
-      slug: newsSlug,
-      category: newsCategory,
-      source: newsSource,
-      date_text: newsDateText || new Date().toLocaleDateString("en-GB", { day: '2-digit', month: 'short', year: 'numeric' }),
-      read_time: newsReadTime,
-      image: newsImage || "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&q=80&w=800",
-      tags: newsTags,
-      summary: newsSummary,
-      content: newsContent,
-      is_featured: newsIsFeatured ? 1 : 0
-    };
-
-    fetch(`${API_BASE}/news_events.php`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === "success") {
-          alert(data.message || "News article saved successfully!");
-          handleResetNewsForm();
-          fetchNewsEvents();
-        } else {
-          alert(data.message || "Failed to save news article.");
-        }
-      })
-      .catch(err => alert("Server error: " + err.message));
-  };
-
-  const handleDeleteNews = (id) => {
-    if (window.confirm("Are you sure you want to delete this news article?")) {
-      fetch(`${API_BASE}/news_events.php?type=news&id=${id}`, {
-        method: "DELETE"
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.status === "success") {
-            fetchNewsEvents();
-          } else {
-            alert(data.message || "Delete failed");
-          }
-        });
-    }
-  };
-
-  const handleResetEventForm = () => {
-    setEditEventId(null);
-    setEventTitle("");
-    setEventDateText("");
-    setEventLocation("");
-    setEventBooth("");
-    setEventBadge("Official Exhibitor");
-    setEventDesc("");
-    setShowEventForm(false);
-  };
-
-  const handleEditEvent = (evt) => {
-    setEditEventId(evt.id);
-    setEventTitle(evt.title || "");
-    setEventDateText(evt.date_text || "");
-    setEventLocation(evt.location || "");
-    setEventBooth(evt.booth || "");
-    setEventBadge(evt.badge || "Official Exhibitor");
-    setEventDesc(evt.description || "");
-    setShowEventForm(true);
-  };
-
-  const handleSaveEvent = (e) => {
-    e.preventDefault();
-    if (!eventTitle.trim()) {
-      alert("Please enter event title");
-      return;
-    }
-    const payload = {
-      action: editEventId ? "update_event" : "create_event",
-      type: "event",
-      id: editEventId,
-      title: eventTitle,
-      date_text: eventDateText,
-      location: eventLocation,
-      booth: eventBooth,
-      badge: eventBadge,
-      description: eventDesc
-    };
-
-    fetch(`${API_BASE}/news_events.php`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === "success") {
-          alert(data.message || "Event saved successfully!");
-          handleResetEventForm();
-          fetchNewsEvents();
-        } else {
-          alert(data.message || "Failed to save event.");
-        }
-      })
-      .catch(err => alert("Server error: " + err.message));
-  };
-
-  const handleDeleteEvent = (id) => {
-    if (window.confirm("Are you sure you want to delete this event?")) {
-      fetch(`${API_BASE}/news_events.php?type=event&id=${id}`, {
-        method: "DELETE"
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.status === "success") {
-            fetchNewsEvents();
-          } else {
-            alert(data.message || "Delete failed");
-          }
-        });
-    }
-  };
 
   const fetchAboutSettings = () => {
     fetch(`${API_BASE}/about.php`)
@@ -681,16 +482,14 @@ const Admin = () => {
     if (isLoggedIn) {
       fetchProducts();
       fetchQueries();
-      fetchBlogs();
       fetchSettings();
       fetchProfile();
       fetchOrders();
       fetchUsers();
-      fetchGallery();
-      fetchNewsEvents();
       fetchAboutSettings();
       fetchFooterSettings();
       fetchContactSettings();
+      fetchDealershipInquiries();
     }
   }, [isLoggedIn]);
 
@@ -789,26 +588,6 @@ const Admin = () => {
     }
   };
 
-  const handleBlogSubmit = (e) => {
-    e.preventDefault();
-    fetch(`${API_BASE}/blogs.php`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title: blogTitle, category: blogCategory, image_url: blogImage, content: blogContent }),
-    }).then(() => {
-      alert("Blog Published!");
-      setBlogTitle(""); setBlogCategory("Company News"); setBlogImage(""); setBlogContent("");
-      setShowBlogForm(false);
-      fetchBlogs();
-    });
-  };
-
-  const handleDeleteBlog = (id) => {
-    if (window.confirm("Delete this blog?")) {
-      fetch(`${API_BASE}/blogs.php?id=${id}`, { method: "DELETE" })
-        .then(() => fetchBlogs());
-    }
-  };
 
   const handleResolveQuery = (id) => {
     fetch(`${API_BASE}/inquiries.php?id=${id}`, {
@@ -1243,10 +1022,15 @@ const Admin = () => {
           <div className={`menu-item ${activeTab === "products" ? "active" : ""}`} onClick={() => { setActiveTab("products"); setIsSidebarOpen(false); }}>Products</div>
           <div className={`menu-item ${activeTab === "orders" ? "active" : ""}`} onClick={() => { setActiveTab("orders"); setIsSidebarOpen(false); }}>Orders</div>
           <div className={`menu-item ${activeTab === "queries" ? "active" : ""}`} onClick={() => { setActiveTab("queries"); setIsSidebarOpen(false); }}>Inquiries</div>
+          <div className={`menu-item ${activeTab === "dealership" ? "active" : ""}`} onClick={() => { setActiveTab("dealership"); setIsSidebarOpen(false); }}>
+            <span>🤝 Dealership Inquiries</span>
+            {parseInt(dealershipStats?.new_count || 0) > 0 && (
+              <span style={{ marginLeft: "auto", background: "#ef4444", color: "#fff", borderRadius: "10px", padding: "1px 7px", fontSize: "0.75rem", fontWeight: "bold" }}>
+                {dealershipStats.new_count}
+              </span>
+            )}
+          </div>
           <div className={`menu-item ${activeTab === "partners" ? "active" : ""}`} onClick={() => { setActiveTab("partners"); setIsSidebarOpen(false); }}>Partner Requests</div>
-          <div className={`menu-item ${activeTab === "blog" ? "active" : ""}`} onClick={() => { setActiveTab("blog"); setIsSidebarOpen(false); }}>Blog</div>
-          <div className={`menu-item ${activeTab === "news_events" ? "active" : ""}`} onClick={() => { setActiveTab("news_events"); setIsSidebarOpen(false); }}>News & Events</div>
-          <div className={`menu-item ${activeTab === "gallery" ? "active" : ""}`} onClick={() => { setActiveTab("gallery"); setIsSidebarOpen(false); }}>Gallery</div>
           <div className={`menu-item ${activeTab === "cms" ? "active" : ""}`} onClick={() => { setActiveTab("cms"); setIsSidebarOpen(false); }}>Page Images</div>
           <div className={`menu-item ${activeTab === "about" ? "active" : ""}`} onClick={() => { setActiveTab("about"); setIsSidebarOpen(false); }}>About Us</div>
           <div className={`menu-item ${activeTab === "contact" ? "active" : ""}`} onClick={() => { setActiveTab("contact"); setIsSidebarOpen(false); }}>Contact Us</div>
@@ -1259,7 +1043,7 @@ const Admin = () => {
       <main className="admin-main">
         <div className="admin-topbar">
           <button className="menu-toggle" onClick={() => setIsSidebarOpen(true)}>☰</button>
-          <div style={{fontWeight: 700, fontSize: "1.2rem", textTransform: "capitalize"}}>{activeTab}</div>
+          <div style={{fontWeight: 700, fontSize: "1.2rem", textTransform: "capitalize"}}>{activeTab === "dealership" ? "Dealership Inquiries" : activeTab}</div>
           <div style={{display: "flex", alignItems: "center", gap: "10px"}}>
             <div style={{width: "40px", height: "40px", borderRadius: "50%", background: "#FEA603", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold"}}>A</div>
           </div>
@@ -1270,7 +1054,16 @@ const Admin = () => {
             <div>
               <div className="stat-grid" style={{marginBottom: "30px"}}>
                 <div className="stat-card"><h4>Total Products</h4><h2>{products.length}</h2></div>
-                <div className="stat-card"><h4>Published Blogs</h4><h2>{blogs.length}</h2></div>
+                <div className="stat-card"><h4>Total Users</h4><h2>{users.length}</h2></div>
+                <div className="stat-card" style={{cursor: "pointer", borderBottom: parseInt(dealershipStats?.new_count || 0) > 0 ? "4px solid #FEA603" : "none"}} onClick={() => setActiveTab("dealership")}>
+                  <h4>Dealership Inquiries</h4>
+                  <div style={{display: "flex", alignItems: "baseline", gap: "10px"}}>
+                    <h2>{dealershipStats?.total || dealershipInquiries.length}</h2>
+                    {parseInt(dealershipStats?.new_count || 0) > 0 && (
+                      <span style={{color: "#ef4444", fontWeight: 700, fontSize: "0.95rem"}}>({dealershipStats.new_count} New)</span>
+                    )}
+                  </div>
+                </div>
                 <div className="stat-card"><h4>Total Queries</h4><h2>{queries.length}</h2></div>
                 <div className="stat-card" style={{borderBottom: pendingQueries > 0 ? "4px solid #ef4444" : "4px solid #22c55e"}}>
                   <h4>Pending Queries</h4><h2 style={{color: pendingQueries > 0 ? "#ef4444" : "#22c55e"}}>{pendingQueries}</h2>
@@ -1281,8 +1074,9 @@ const Admin = () => {
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={[
                     { name: 'Products', count: products.length },
-                    { name: 'Blogs', count: blogs.length },
+                    { name: 'Users', count: users.length },
                     { name: 'Orders', count: orders.length },
+                    { name: 'Dealerships', count: dealershipInquiries.length },
                     { name: 'Queries', count: queries.length },
                     { name: 'Pending', count: pendingQueries }
                   ]} margin={{top: 30, right: 30, left: 0, bottom: 5}}>
@@ -1410,8 +1204,9 @@ const Admin = () => {
                     <div>
                       <div style={{color: "#64748b", fontSize: "0.85rem", textTransform: "uppercase", fontWeight: 700, marginBottom: "5px"}}>Customer Details</div>
                       <div style={{fontWeight: "bold", color: "#1e293b"}}>{o.customer_name || `User ${o.user_id}`}</div>
-                      {o.customer_phone && <div style={{fontSize: "0.9rem", color: "#475569"}}>📞 {o.customer_phone}</div>}
-                      {o.shipping_address && <div style={{fontSize: "0.85rem", marginTop: "5px", color: "#64748b", whiteSpace: "pre-wrap"}}>{o.shipping_address}</div>}
+                      {o.customer_email && <div style={{fontSize: "0.85rem", color: "#0284c7", wordBreak: "break-all", marginTop: "2px"}}>✉️ {o.customer_email}</div>}
+                      {o.customer_phone && <div style={{fontSize: "0.88rem", color: "#475569", marginTop: "2px"}}>📞 {o.customer_phone}</div>}
+                      {o.shipping_address && <div style={{fontSize: "0.85rem", marginTop: "5px", color: "#64748b", whiteSpace: "pre-wrap"}}>📍 {o.shipping_address}</div>}
                     </div>
 
                     <div>
@@ -1507,104 +1302,6 @@ const Admin = () => {
             </div>
           )}
 
-          {activeTab === "blog" && (
-            <div>
-              {showBlogForm ? (
-                <div className="admin-card" style={{maxWidth: "800px", margin: "0 auto"}}>
-                  <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px"}}>
-                    <h3 style={{margin: 0}}>Publish New Article</h3>
-                    <button onClick={() => { setShowBlogForm(false); setBlogTitle(""); setBlogCategory("Company News"); setBlogImage(""); setBlogContent(""); }} style={{padding: "8px 16px", background: "#f1f5f9", border: "none", borderRadius: "8px", cursor: "pointer", color: "#475569", fontWeight: "bold"}}>← Back to Articles</button>
-                  </div>
-                  <form onSubmit={handleBlogSubmit}>
-                    <div className="form-group"><label>Article Title</label><input className="form-input" placeholder="Title" value={blogTitle} onChange={e=>setBlogTitle(e.target.value)} required /></div>
-                    <div className="form-group"><label>Category</label><input className="form-input" placeholder="e.g. Industry News" value={blogCategory} onChange={e=>setBlogCategory(e.target.value)} /></div>
-                    <ImageUploadField
-                      label="Cover Image"
-                      currentImage={blogImage}
-                      onImageUploaded={(url) => setBlogImage(url)}
-                    />
-                    <div className="form-group"><label>Content</label>
-                      <textarea className="form-input" style={{minHeight:"200px", fontFamily: "monospace", fontSize: "0.9rem"}} placeholder="Write your article HTML or text here..." value={blogContent} onChange={e=>setBlogContent(e.target.value)} required />
-                    </div>
-                    <button type="submit" className="btn-primary">Publish Article</button>
-                  </form>
-                </div>
-              ) : (
-                <div className="admin-card">
-                  <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px"}}>
-                    <h3 style={{margin: 0}}>Published Articles</h3>
-                    <button onClick={() => setShowBlogForm(true)} className="btn-primary" style={{width: "auto", padding: "8px 16px", fontSize: "0.9rem"}}>+ Add New Article</button>
-                  </div>
-                  <div style={{overflowX: "auto"}}>
-                    <table className="admin-table">
-                      <thead>
-                        <tr><th>Image</th><th>Title</th><th>Action</th></tr>
-                      </thead>
-                      <tbody>
-                        {blogs.slice((blogPage - 1) * ITEMS_PER_PAGE, blogPage * ITEMS_PER_PAGE).map(b => (
-                          <tr key={b.id}>
-                            <td>
-                              <img src={b.image_url ? (b.image_url.startsWith('http') ? b.image_url : `${API_BASE}/../${b.image_url}`) : "/assets/1.png"} alt={b.title} style={{width: "50px", height: "50px", objectFit: "cover", borderRadius: "8px"}} />
-                            </td>
-                            <td style={{fontWeight: 600, color: "#1e293b"}}>{b.title}</td>
-                            <td><button onClick={() => handleDeleteBlog(b.id)} style={{color: "#ef4444", border: "none", background: "rgba(239,68,68,0.1)", padding: "6px 12px", fontSize: "0.85rem", borderRadius: "6px", cursor: "pointer", fontWeight: 600}}>Delete</button></td>
-                          </tr>
-                        ))}
-                        {blogs.length === 0 && (
-                          <tr><td colSpan="3" style={{textAlign: "center", padding: "30px", color: "#888"}}>No articles published yet. Click 'Add New Article' to get started.</td></tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                  {renderPagination(blogPage, blogs.length, setBlogPage)}
-                </div>
-              )}
-            </div>
-          )}
-
-          {activeTab === "gallery" && (
-            <div>
-              {showGalleryForm ? (
-                <div className="admin-card" style={{maxWidth: "800px", margin: "0 auto"}}>
-                  <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px"}}>
-                    <h3 style={{margin: 0}}>Upload Gallery Image</h3>
-                    <button onClick={() => { setShowGalleryForm(false); setGalleryTitle(""); setGalleryCategory("General"); setGalleryImageFile(null); }} style={{padding: "8px 16px", background: "#f1f5f9", border: "none", borderRadius: "8px", cursor: "pointer", color: "#475569", fontWeight: "bold"}}>← Back to Gallery</button>
-                  </div>
-                  <form onSubmit={handleGallerySubmit}>
-                    <div className="form-group"><label>Image Title</label><input className="form-input" placeholder="e.g. Lithium Power Station" value={galleryTitle} onChange={e=>setGalleryTitle(e.target.value)} required /></div>
-                    <div className="form-group"><label>Category</label><input className="form-input" placeholder="e.g. Batteries, Chargers, 2-Wheeler" value={galleryCategory} onChange={e=>setGalleryCategory(e.target.value)} required /></div>
-                    <div className="form-group"><label>Upload Image</label><input className="form-input" type="file" accept="image/*" onChange={e=>setGalleryImageFile(e.target.files[0])} required /></div>
-                    <button type="submit" className="btn-primary">Upload Image</button>
-                  </form>
-                </div>
-              ) : (
-                <div className="admin-card">
-                  <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px", borderBottom: "2px solid #f1f5f9", paddingBottom: "16px"}}>
-                    <h3 style={{margin: 0, border: "none", padding: 0}}>Manage Gallery</h3>
-                    <button className="btn-primary" style={{width: "auto", padding: "10px 20px"}} onClick={() => setShowGalleryForm(true)}>+ Upload Image</button>
-                  </div>
-                  
-                  {galleryImages.length === 0 ? (
-                    <div style={{textAlign: "center", padding: "40px", color: "#64748b"}}>No gallery images found. Upload your first image!</div>
-                  ) : (
-                    <div style={{display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "20px"}}>
-                      {galleryImages.slice((galleryPage - 1) * 8, galleryPage * 8).map(img => (
-                        <div key={img.id} style={{border: "1px solid #e2e8f0", borderRadius: "12px", overflow: "hidden"}}>
-                          <img src={img.image_url.startsWith('http') ? img.image_url : `http://localhost/assinment/my-react-app/public${img.image_url}`} alt={img.title} style={{width: "100%", height: "150px", objectFit: "cover"}} onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1593941707882-a5bba14938c7"; }} />
-                          <div style={{padding: "15px"}}>
-                            <h4 style={{margin: "0 0 5px 0", fontSize: "0.95rem", color: "#1e293b"}}>{img.title}</h4>
-                            <p style={{margin: "0 0 10px 0", fontSize: "0.8rem", color: "#64748b"}}>{img.category}</p>
-                            <button onClick={() => handleDeleteGallery(img.id)} style={{width: "100%", padding: "8px", background: "#fee2e2", color: "#ef4444", border: "none", borderRadius: "6px", cursor: "pointer", fontWeight: "bold"}}>Delete</button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  {renderPagination(galleryPage, galleryImages.length, setGalleryPage)}
-                </div>
-              )}
-            </div>
-          )}
 
           {activeTab === "cms" && (
             <div className="admin-card" style={{maxWidth: "800px", margin: "0 auto"}}>
@@ -1765,448 +1462,554 @@ const Admin = () => {
               </div>
             </div>
           )}
-          {activeTab === "news_events" && (
-            <div className="admin-card">
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "15px", marginBottom: "25px" }}>
-                <div>
-                  <h3 style={{ margin: 0, fontSize: "1.4rem" }}>News & Events Management</h3>
-                  <p style={{ margin: "5px 0 0", color: "#64748b", fontSize: "0.9rem" }}>
-                    Manage live press articles, media coverage, product launches, and upcoming expos directly on the website.
-                  </p>
+
+          {activeTab === "dealership" && (
+            <div>
+              {/* Stat Cards for Dealership */}
+              <div className="stat-grid" style={{ marginBottom: "25px" }}>
+                <div className="stat-card" style={{ borderLeft: "4px solid #3b82f6" }}>
+                  <h4>Total Applications</h4>
+                  <h2>{dealershipStats?.total || dealershipInquiries.length}</h2>
                 </div>
-                <div style={{ display: "flex", gap: "10px" }}>
-                  <button
-                    onClick={() => {
-                      if (newsSubTab === "articles") {
-                        handleResetNewsForm();
-                        setShowNewsForm(true);
-                      } else {
-                        handleResetEventForm();
-                        setShowEventForm(true);
-                      }
-                    }}
-                    style={{
-                      background: "var(--primary)",
-                      color: "#fff",
-                      border: "none",
-                      padding: "10px 20px",
-                      borderRadius: "8px",
-                      cursor: "pointer",
-                      fontWeight: "700",
-                      fontSize: "0.9rem"
-                    }}
-                  >
-                    {newsSubTab === "articles" ? "+ Add News Article" : "+ Add Upcoming Event"}
-                  </button>
+                <div className="stat-card" style={{ borderLeft: "4px solid #ef4444" }}>
+                  <h4>New / Unreviewed</h4>
+                  <h2 style={{ color: "#ef4444" }}>{dealershipStats?.new_count || 0}</h2>
+                </div>
+                <div className="stat-card" style={{ borderLeft: "4px solid #f59e0b" }}>
+                  <h4>Under Discussion</h4>
+                  <h2 style={{ color: "#d97706" }}>{dealershipStats?.contacted_count || 0}</h2>
+                </div>
+                <div className="stat-card" style={{ borderLeft: "4px solid #22c55e" }}>
+                  <h4>Approved Dealers</h4>
+                  <h2 style={{ color: "#16a34a" }}>{dealershipStats?.approved_count || 0}</h2>
                 </div>
               </div>
 
-              {/* Subtab Switcher */}
-              <div style={{ display: "flex", gap: "10px", borderBottom: "2px solid #e2e8f0", marginBottom: "25px", paddingBottom: "10px" }}>
-                <button
-                  onClick={() => setNewsSubTab("articles")}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    padding: "8px 16px",
-                    fontWeight: newsSubTab === "articles" ? "800" : "600",
-                    color: newsSubTab === "articles" ? "var(--primary)" : "#64748b",
-                    borderBottom: newsSubTab === "articles" ? "3px solid var(--primary)" : "3px solid transparent",
-                    cursor: "pointer",
-                    fontSize: "0.95rem"
-                  }}
-                >
-                  📰 Press & News Articles ({newsArticles.length})
-                </button>
-                <button
-                  onClick={() => setNewsSubTab("events")}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    padding: "8px 16px",
-                    fontWeight: newsSubTab === "events" ? "800" : "600",
-                    color: newsSubTab === "events" ? "var(--primary)" : "#64748b",
-                    borderBottom: newsSubTab === "events" ? "3px solid var(--primary)" : "3px solid transparent",
-                    cursor: "pointer",
-                    fontSize: "0.95rem"
-                  }}
-                >
-                  📅 Upcoming Expos & Events ({eventsList.length})
-                </button>
-              </div>
+              <div className="admin-card">
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "15px", marginBottom: "20px" }}>
+                  <div>
+                    <h3 style={{ margin: 0, padding: 0, border: "none" }}>🤝 Dealership & Franchise Inquiries</h3>
+                    <p style={{ margin: "4px 0 0", color: "#64748b", fontSize: "0.9rem" }}>
+                      Manage dealer applications, verify GST, review territory demand, investment, and full proposals.
+                    </p>
+                  </div>
+                  <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                    <button
+                      onClick={() => fetchDealershipInquiries(dealershipFilter, dealershipSearch)}
+                      style={{
+                        padding: "9px 18px",
+                        background: "#f1f5f9",
+                        border: "1px solid #cbd5e1",
+                        borderRadius: "10px",
+                        cursor: "pointer",
+                        fontWeight: 700,
+                        fontSize: "0.88rem",
+                        color: "#334155",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "6px"
+                      }}
+                    >
+                      <span>🔄</span>
+                      <span>{dealershipLoading ? "Refreshing..." : "Refresh"}</span>
+                    </button>
+                  </div>
+                </div>
 
-              {/* SECTION 1: NEWS ARTICLES */}
-              {newsSubTab === "articles" && (
-                <>
-                  {showNewsForm && (
-                    <div style={{ background: "#f8fafc", padding: "25px", borderRadius: "14px", border: "1px solid #e2e8f0", marginBottom: "30px" }}>
-                      <h4 style={{ margin: "0 0 15px", fontSize: "1.15rem", color: "#1e293b" }}>
-                        {editNewsId ? "✏️ Edit News Article" : "➕ Create New News Article"}
-                      </h4>
-                      <form onSubmit={handleSaveNews} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px" }}>
-                        <div style={{ gridColumn: "1 / -1" }}>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "5px" }}>Article Title *</label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="e.g. Featured in The Battery Magazine: Next-Gen EV Power"
-                            value={newsTitle}
-                            onChange={(e) => setNewsTitle(e.target.value)}
-                            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                          />
-                        </div>
+                {/* Filter and Search Bar */}
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "15px", background: "#f8fafc", padding: "16px 20px", borderRadius: "14px", border: "1px solid #e2e8f0", marginBottom: "20px" }}>
+                  <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                    {[
+                      { key: "all", label: "All Applications" },
+                      { key: "new", label: "New" },
+                      { key: "contacted", label: "Contacted" },
+                      { key: "approved", label: "Approved" },
+                      { key: "rejected", label: "Rejected" }
+                    ].map(tab => (
+                      <button
+                        key={tab.key}
+                        onClick={() => {
+                          setDealershipFilter(tab.key);
+                          fetchDealershipInquiries(tab.key, dealershipSearch);
+                        }}
+                        style={{
+                          padding: "7px 16px",
+                          borderRadius: "20px",
+                          border: "none",
+                          fontSize: "0.85rem",
+                          fontWeight: 700,
+                          cursor: "pointer",
+                          background: dealershipFilter === tab.key ? "#FEA603" : "#fff",
+                          color: dealershipFilter === tab.key ? "#fff" : "#475569",
+                          boxShadow: dealershipFilter === tab.key ? "0 4px 12px rgba(254,166,3,0.3)" : "0 1px 3px rgba(0,0,0,0.05)",
+                          transition: "all 0.2s"
+                        }}
+                      >
+                        {tab.label}
+                      </button>
+                    ))}
+                  </div>
 
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "5px" }}>Category</label>
-                          <select
-                            value={newsCategory}
-                            onChange={(e) => setNewsCategory(e.target.value)}
-                            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #cbd5e1", background: "#fff" }}
-                          >
-                            <option value="Press & Media">Press & Media</option>
-                            <option value="Product Launches">Product Launches</option>
-                            <option value="Company Milestones">Company Milestones</option>
-                            <option value="Tech Innovation">Tech Innovation</option>
-                          </select>
-                        </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", minWidth: "260px" }}>
+                    <input
+                      type="text"
+                      placeholder="Search name, phone, city, GST..."
+                      value={dealershipSearch}
+                      onChange={(e) => setDealershipSearch(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          fetchDealershipInquiries(dealershipFilter, dealershipSearch);
+                        }
+                      }}
+                      style={{
+                        padding: "9px 14px",
+                        borderRadius: "10px",
+                        border: "1px solid #cbd5e1",
+                        fontSize: "0.88rem",
+                        width: "100%",
+                        outline: "none"
+                      }}
+                    />
+                    <button
+                      onClick={() => fetchDealershipInquiries(dealershipFilter, dealershipSearch)}
+                      style={{
+                        padding: "9px 14px",
+                        background: "#0f172a",
+                        color: "#fff",
+                        border: "none",
+                        borderRadius: "10px",
+                        cursor: "pointer",
+                        fontWeight: 700,
+                        fontSize: "0.85rem"
+                      }}
+                    >
+                      Search
+                    </button>
+                    {dealershipSearch && (
+                      <button
+                        onClick={() => {
+                          setDealershipSearch("");
+                          fetchDealershipInquiries(dealershipFilter, "");
+                        }}
+                        style={{
+                          padding: "9px 12px",
+                          background: "#e2e8f0",
+                          border: "none",
+                          borderRadius: "10px",
+                          cursor: "pointer",
+                          color: "#475569"
+                        }}
+                        title="Clear search"
+                      >
+                        ✕
+                      </button>
+                    )}
+                  </div>
+                </div>
 
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "5px" }}>Publisher / Source</label>
-                          <input
-                            type="text"
-                            placeholder="e.g. The Battery Magazine, EV Tech News"
-                            value={newsSource}
-                            onChange={(e) => setNewsSource(e.target.value)}
-                            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                          />
-                        </div>
+                {/* Dealership Inquiries Table */}
+                <div style={{ overflowX: "auto" }}>
+                  <table className="admin-table">
+                    <thead>
+                      <tr>
+                        <th>ID & Date</th>
+                        <th>Owner Name</th>
+                        <th>Contact Number</th>
+                        <th>GST Details</th>
+                        <th>Location</th>
+                        <th>Investment Amount</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {dealershipInquiries.map((d) => (
+                        <tr key={d.id} style={{ background: d.status === "new" ? "rgba(254, 166, 3, 0.04)" : "#fff" }}>
+                          <td style={{ fontSize: "0.85rem", color: "#64748b" }}>
+                            <strong style={{ color: "#0f172a", display: "block" }}>#{d.id}</strong>
+                            {d.created_at ? new Date(d.created_at).toLocaleDateString() : "Recent"}
+                          </td>
 
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "5px" }}>Display Date</label>
-                          <input
-                            type="text"
-                            placeholder="e.g. 15 Sep 2026"
-                            value={newsDateText}
-                            onChange={(e) => setNewsDateText(e.target.value)}
-                            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                          />
-                        </div>
+                          <td>
+                            <strong style={{ color: "#0f172a", fontSize: "0.95rem", display: "block" }}>{d.owner_name}</strong>
+                          </td>
 
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "5px" }}>Read Time</label>
-                          <input
-                            type="text"
-                            placeholder="e.g. 4 min read"
-                            value={newsReadTime}
-                            onChange={(e) => setNewsReadTime(e.target.value)}
-                            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                          />
-                        </div>
+                          <td>
+                            <a href={`tel:${d.phone}`} style={{ textDecoration: "none", color: "#2563eb", fontWeight: 700, fontSize: "0.92rem", display: "inline-flex", alignItems: "center", gap: "5px" }}>
+                              📞 {d.phone}
+                            </a>
+                            {d.email ? (
+                              <div style={{ fontSize: "0.8rem", color: "#64748b", marginTop: "2px" }}>
+                                ✉️ {d.email}
+                              </div>
+                            ) : null}
+                          </td>
 
-                        <div style={{ gridColumn: "1 / -1" }}>
-                          <ImageUploadField
-                            label="Article Cover Image"
-                            currentImage={newsImage}
-                            onImageUploaded={(url) => setNewsImage(url)}
-                          />
-                        </div>
-
-                        <div style={{ gridColumn: "1 / -1" }}>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "5px" }}>Tags (comma-separated)</label>
-                          <input
-                            type="text"
-                            placeholder="e.g. #EVTech, #CleanEnergy, #Battery"
-                            value={newsTags}
-                            onChange={(e) => setNewsTags(e.target.value)}
-                            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                          />
-                        </div>
-
-                        <div style={{ gridColumn: "1 / -1" }}>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "5px" }}>Short Summary (Excerpt) *</label>
-                          <textarea
-                            rows={3}
-                            required
-                            placeholder="A concise 2-3 sentence overview displayed on the news card..."
-                            value={newsSummary}
-                            onChange={(e) => setNewsSummary(e.target.value)}
-                            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                          />
-                        </div>
-
-                        <div style={{ gridColumn: "1 / -1" }}>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "5px" }}>Full Story Content</label>
-                          <textarea
-                            rows={6}
-                            placeholder="Detailed article text for quick-read preview and article page..."
-                            value={newsContent}
-                            onChange={(e) => setNewsContent(e.target.value)}
-                            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                          />
-                        </div>
-
-                        <div style={{ gridColumn: "1 / -1", display: "flex", alignItems: "center", gap: "10px" }}>
-                          <input
-                            type="checkbox"
-                            id="featCheck"
-                            checked={newsIsFeatured}
-                            onChange={(e) => setNewsIsFeatured(e.target.checked)}
-                            style={{ width: "18px", height: "18px", cursor: "pointer" }}
-                          />
-                          <label htmlFor="featCheck" style={{ fontSize: "0.9rem", fontWeight: "700", cursor: "pointer", color: "#1e293b" }}>
-                            ⭐ Set as Featured Spotlight (Displayed as hero banner on News & Events page)
-                          </label>
-                        </div>
-
-                        <div style={{ gridColumn: "1 / -1", display: "flex", gap: "10px", marginTop: "10px" }}>
-                          <button
-                            type="submit"
-                            style={{ background: "#22c55e", color: "#fff", border: "none", padding: "10px 24px", borderRadius: "8px", fontWeight: "700", cursor: "pointer" }}
-                          >
-                            {editNewsId ? "Update Article" : "Publish Article"}
-                          </button>
-                          <button
-                            type="button"
-                            onClick={handleResetNewsForm}
-                            style={{ background: "#94a3b8", color: "#fff", border: "none", padding: "10px 20px", borderRadius: "8px", fontWeight: "600", cursor: "pointer" }}
-                          >
-                            Cancel
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  )}
-
-                  {/* News Table */}
-                  <div style={{ overflowX: "auto" }}>
-                    <table className="admin-table">
-                      <thead>
-                        <tr>
-                          <th>Image</th>
-                          <th>Title & Source</th>
-                          <th>Category</th>
-                          <th>Date</th>
-                          <th>Spotlight</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {newsArticles.map((item) => (
-                          <tr key={item.id}>
-                            <td>
-                              <img
-                                src={item.image || "https://images.unsplash.com/photo-1585829365295-ab7cd400c167"}
-                                alt={item.title}
-                                style={{ width: "60px", height: "45px", objectFit: "cover", borderRadius: "6px" }}
-                              />
-                            </td>
-                            <td>
-                              <div style={{ fontWeight: "700", color: "#1e293b" }}>{item.title}</div>
-                              <div style={{ fontSize: "0.8rem", color: "#64748b" }}>📰 {item.source} • {item.read_time}</div>
-                            </td>
-                            <td>
-                              <span style={{ fontSize: "0.8rem", padding: "4px 10px", background: "#f1f5f9", borderRadius: "12px", fontWeight: "600" }}>
-                                {item.category}
-                              </span>
-                            </td>
-                            <td style={{ fontSize: "0.85rem", color: "#64748b" }}>{item.date_text}</td>
-                            <td>
-                              {Number(item.is_featured) === 1 ? (
-                                <span style={{ background: "rgba(254,166,3,0.15)", color: "#b45309", padding: "4px 8px", borderRadius: "10px", fontSize: "0.75rem", fontWeight: "800" }}>
-                                  ⭐ FEATURED
+                          <td>
+                            {d.gst_registered === "Yes" ? (
+                              <div>
+                                <span style={{ background: "#dcfce7", color: "#166534", padding: "2px 8px", borderRadius: "10px", fontSize: "0.75rem", fontWeight: 700 }}>
+                                  ✓ Registered
                                 </span>
-                              ) : (
-                                <span style={{ color: "#94a3b8", fontSize: "0.8rem" }}>Standard</span>
-                              )}
-                            </td>
-                            <td>
-                              <div style={{ display: "flex", gap: "8px" }}>
-                                <button
-                                  onClick={() => handleEditNews(item)}
-                                  style={{ padding: "6px 12px", background: "#3b82f6", color: "#fff", border: "none", borderRadius: "6px", cursor: "pointer", fontSize: "0.8rem", fontWeight: "600" }}
-                                >
-                                  Edit
-                                </button>
-                                <button
-                                  onClick={() => handleDeleteNews(item.id)}
-                                  style={{ padding: "6px 12px", background: "#ef4444", color: "#fff", border: "none", borderRadius: "6px", cursor: "pointer", fontSize: "0.8rem", fontWeight: "600" }}
-                                >
-                                  Delete
-                                </button>
+                                <div style={{ fontSize: "0.82rem", fontWeight: 600, color: "#334155", marginTop: "3px", fontFamily: "monospace" }}>
+                                  {d.gst_number || "Provided"}
+                                </div>
                               </div>
-                            </td>
-                          </tr>
-                        ))}
-                        {newsArticles.length === 0 && (
-                          <tr>
-                            <td colSpan="6" style={{ textAlign: "center", padding: "30px", color: "#888" }}>
-                              No news articles found. Click "+ Add News Article" to create one.
-                            </td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </>
-              )}
-
-              {/* SECTION 2: UPCOMING EVENTS */}
-              {newsSubTab === "events" && (
-                <>
-                  {showEventForm && (
-                    <div style={{ background: "#f8fafc", padding: "25px", borderRadius: "14px", border: "1px solid #e2e8f0", marginBottom: "30px" }}>
-                      <h4 style={{ margin: "0 0 15px", fontSize: "1.15rem", color: "#1e293b" }}>
-                        {editEventId ? "✏️ Edit Event" : "➕ Create Upcoming Event"}
-                      </h4>
-                      <form onSubmit={handleSaveEvent} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "15px" }}>
-                        <div style={{ gridColumn: "1 / -1" }}>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "5px" }}>Event Title *</label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="e.g. EV India Expo 2026"
-                            value={eventTitle}
-                            onChange={(e) => setEventTitle(e.target.value)}
-                            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                          />
-                        </div>
-
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "5px" }}>Date Schedule *</label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="e.g. 18 - 20 Nov 2026"
-                            value={eventDateText}
-                            onChange={(e) => setEventDateText(e.target.value)}
-                            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                          />
-                        </div>
-
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "5px" }}>Role / Badge</label>
-                          <input
-                            type="text"
-                            placeholder="e.g. Official Exhibitor, Keynote Speaker"
-                            value={eventBadge}
-                            onChange={(e) => setEventBadge(e.target.value)}
-                            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                          />
-                        </div>
-
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "5px" }}>Venue / Location *</label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="e.g. Pragati Maidan, New Delhi"
-                            value={eventLocation}
-                            onChange={(e) => setEventLocation(e.target.value)}
-                            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                          />
-                        </div>
-
-                        <div>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "5px" }}>Booth / Hall Details</label>
-                          <input
-                            type="text"
-                            placeholder="e.g. Hall 5, Booth #A-42"
-                            value={eventBooth}
-                            onChange={(e) => setEventBooth(e.target.value)}
-                            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                          />
-                        </div>
-
-                        <div style={{ gridColumn: "1 / -1" }}>
-                          <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "5px" }}>Event Description</label>
-                          <textarea
-                            rows={3}
-                            placeholder="Brief description of what will be showcased..."
-                            value={eventDesc}
-                            onChange={(e) => setEventDesc(e.target.value)}
-                            style={{ width: "100%", padding: "10px", borderRadius: "8px", border: "1px solid #cbd5e1" }}
-                          />
-                        </div>
-
-                        <div style={{ gridColumn: "1 / -1", display: "flex", gap: "10px", marginTop: "10px" }}>
-                          <button
-                            type="submit"
-                            style={{ background: "#22c55e", color: "#fff", border: "none", padding: "10px 24px", borderRadius: "8px", fontWeight: "700", cursor: "pointer" }}
-                          >
-                            {editEventId ? "Update Event" : "Save Event"}
-                          </button>
-                          <button
-                            type="button"
-                            onClick={handleResetEventForm}
-                            style={{ background: "#94a3b8", color: "#fff", border: "none", padding: "10px 20px", borderRadius: "8px", fontWeight: "600", cursor: "pointer" }}
-                          >
-                            Cancel
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  )}
-
-                  {/* Events Table */}
-                  <div style={{ overflowX: "auto" }}>
-                    <table className="admin-table">
-                      <thead>
-                        <tr>
-                          <th>Event Name</th>
-                          <th>Date</th>
-                          <th>Location & Booth</th>
-                          <th>Role Badge</th>
-                          <th>Description</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {eventsList.map((evt) => (
-                          <tr key={evt.id}>
-                            <td style={{ fontWeight: "700", color: "#1e293b" }}>{evt.title}</td>
-                            <td style={{ fontSize: "0.85rem", color: "var(--primary)", fontWeight: "700" }}>{evt.date_text}</td>
-                            <td style={{ fontSize: "0.85rem" }}>
-                              <div>{evt.location}</div>
-                              {evt.booth && <div style={{ color: "#64748b", fontSize: "0.75rem" }}>{evt.booth}</div>}
-                            </td>
-                            <td>
-                              <span style={{ fontSize: "0.8rem", padding: "4px 10px", background: "#dcfce7", color: "#166534", borderRadius: "12px", fontWeight: "700" }}>
-                                {evt.badge || "Exhibitor"}
+                            ) : (
+                              <span style={{ background: "#fef3c7", color: "#92400e", padding: "2px 8px", borderRadius: "10px", fontSize: "0.75rem", fontWeight: 700 }}>
+                                Not Registered
                               </span>
-                            </td>
-                            <td style={{ fontSize: "0.85rem", color: "#64748b", maxWidth: "250px" }}>{evt.description}</td>
-                            <td>
-                              <div style={{ display: "flex", gap: "8px" }}>
-                                <button
-                                  onClick={() => handleEditEvent(evt)}
-                                  style={{ padding: "6px 12px", background: "#3b82f6", color: "#fff", border: "none", borderRadius: "6px", cursor: "pointer", fontSize: "0.8rem", fontWeight: "600" }}
-                                >
-                                  Edit
-                                </button>
-                                <button
-                                  onClick={() => handleDeleteEvent(evt.id)}
-                                  style={{ padding: "6px 12px", background: "#ef4444", color: "#fff", border: "none", borderRadius: "6px", cursor: "pointer", fontSize: "0.8rem", fontWeight: "600" }}
-                                >
-                                  Delete
-                                </button>
+                            )}
+                          </td>
+
+                          <td>
+                            <strong style={{ color: "#1e293b", fontSize: "0.9rem" }}>{d.city || "N/A"}</strong>
+                            <div style={{ color: "#64748b", fontSize: "0.8rem" }}>{d.state || ""}</div>
+                          </td>
+
+                          <td>
+                            <span style={{ background: "#eff6ff", color: "#1e40af", padding: "4px 10px", borderRadius: "8px", fontSize: "0.85rem", fontWeight: 700, display: "inline-block" }}>
+                              {d.investment_capacity || "Not specified"}
+                            </span>
+                          </td>
+
+                          <td>
+                            <select
+                              value={d.status || "new"}
+                              onChange={(e) => handleUpdateDealershipStatus(d.id, e.target.value)}
+                              style={{
+                                padding: "6px 10px",
+                                borderRadius: "8px",
+                                fontSize: "0.82rem",
+                                fontWeight: 700,
+                                border: "1px solid #cbd5e1",
+                                cursor: "pointer",
+                                background:
+                                  d.status === "approved"
+                                    ? "#dcfce7"
+                                    : d.status === "contacted"
+                                    ? "#fef3c7"
+                                    : d.status === "rejected"
+                                    ? "#fee2e2"
+                                    : "#fff7ed",
+                                color:
+                                  d.status === "approved"
+                                    ? "#166534"
+                                    : d.status === "contacted"
+                                    ? "#92400e"
+                                    : d.status === "rejected"
+                                    ? "#991b1b"
+                                    : "#c2410c"
+                              }}
+                            >
+                              <option value="new">🟡 New</option>
+                              <option value="contacted">🔵 Contacted</option>
+                              <option value="approved">🟢 Approved</option>
+                              <option value="rejected">🔴 Rejected</option>
+                            </select>
+                          </td>
+
+                          <td>
+                            <div style={{ display: "flex", gap: "8px" }}>
+                              <button
+                                onClick={() => setSelectedDealership(d)}
+                                style={{
+                                  background: "#0f172a",
+                                  color: "#fff",
+                                  border: "none",
+                                  padding: "6px 12px",
+                                  borderRadius: "8px",
+                                  cursor: "pointer",
+                                  fontWeight: 600,
+                                  fontSize: "0.82rem",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "4px"
+                                }}
+                                title="View full message & proposal"
+                              >
+                                <span>👁️</span>
+                                <span>Details</span>
+                              </button>
+                              <button
+                                onClick={() => handleDeleteDealership(d.id)}
+                                style={{
+                                  background: "#fee2e2",
+                                  color: "#dc2626",
+                                  border: "none",
+                                  padding: "6px 10px",
+                                  borderRadius: "8px",
+                                  cursor: "pointer",
+                                  fontWeight: 600,
+                                  fontSize: "0.82rem"
+                                }}
+                                title="Delete application"
+                              >
+                                🗑️
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+
+                      {dealershipInquiries.length === 0 && (
+                        <tr>
+                          <td colSpan="8" style={{ textAlign: "center", padding: "40px", color: "#64748b" }}>
+                            {dealershipLoading ? (
+                              <span>Loading dealership inquiries...</span>
+                            ) : (
+                              <div>
+                                <div style={{ fontSize: "2rem", marginBottom: "8px" }}>🤝</div>
+                                <div style={{ fontWeight: 600 }}>No dealership applications found.</div>
+                                <div style={{ fontSize: "0.85rem", color: "#94a3b8" }}>New inquiries submitted via the Dealership page will appear here.</div>
                               </div>
-                            </td>
-                          </tr>
-                        ))}
-                        {eventsList.length === 0 && (
-                          <tr>
-                            <td colSpan="6" style={{ textAlign: "center", padding: "30px", color: "#888" }}>
-                              No upcoming events found. Click "+ Add Upcoming Event" to create one.
-                            </td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
+                            )}
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Modal for viewing complete inquiry & full proposal */}
+              {selectedDealership && (
+                <div
+                  style={{
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: "rgba(0, 0, 0, 0.65)",
+                    backdropFilter: "blur(4px)",
+                    zIndex: 999999,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "20px"
+                  }}
+                  onClick={() => setSelectedDealership(null)}
+                >
+                  <div
+                    style={{
+                      background: "#fff",
+                      borderRadius: "20px",
+                      width: "100%",
+                      maxWidth: "760px",
+                      maxHeight: "90vh",
+                      overflowY: "auto",
+                      padding: "36px",
+                      position: "relative",
+                      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+                    }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <button
+                      onClick={() => setSelectedDealership(null)}
+                      style={{
+                        position: "absolute",
+                        top: "20px",
+                        right: "20px",
+                        background: "#f1f5f9",
+                        border: "none",
+                        borderRadius: "50%",
+                        width: "36px",
+                        height: "36px",
+                        fontSize: "1.1rem",
+                        cursor: "pointer",
+                        color: "#475569",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center"
+                      }}
+                    >
+                      ✕
+                    </button>
+
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "6px" }}>
+                      <span style={{ background: "#FEA603", color: "#fff", padding: "3px 10px", borderRadius: "12px", fontSize: "0.78rem", fontWeight: 800 }}>
+                        Application #{selectedDealership.id}
+                      </span>
+                      <span style={{ fontSize: "0.85rem", color: "#64748b" }}>
+                        Submitted on: {selectedDealership.created_at || "Recent"}
+                      </span>
+                    </div>
+
+                    <h2 style={{ margin: "4px 0 20px", fontSize: "1.7rem", fontWeight: 800, color: "#0f172a" }}>
+                      {selectedDealership.owner_name}
+                    </h2>
+
+                    {/* Status updater in modal */}
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px", padding: "14px 18px", background: "#f8fafc", borderRadius: "12px", marginBottom: "24px", border: "1px solid #e2e8f0", flexWrap: "wrap" }}>
+                      <span style={{ fontSize: "0.88rem", fontWeight: 700, color: "#475569" }}>Application Status:</span>
+                      <select
+                        value={selectedDealership.status || "new"}
+                        onChange={(e) => handleUpdateDealershipStatus(selectedDealership.id, e.target.value)}
+                        style={{
+                          padding: "8px 14px",
+                          borderRadius: "8px",
+                          fontWeight: 700,
+                          fontSize: "0.9rem",
+                          border: "1.5px solid #cbd5e1",
+                          cursor: "pointer"
+                        }}
+                      >
+                        <option value="new">🟡 New / Unreviewed</option>
+                        <option value="contacted">🔵 Contacted / In Discussion</option>
+                        <option value="approved">🟢 Approved Dealership</option>
+                        <option value="rejected">🔴 Rejected</option>
+                      </select>
+
+                      <div style={{ marginLeft: "auto", display: "flex", gap: "8px" }}>
+                        <a
+                          href={`tel:${selectedDealership.phone}`}
+                          style={{
+                            background: "#22c55e",
+                            color: "#fff",
+                            textDecoration: "none",
+                            padding: "8px 14px",
+                            borderRadius: "8px",
+                            fontWeight: 700,
+                            fontSize: "0.85rem",
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: "5px"
+                          }}
+                        >
+                          📞 Call {selectedDealership.phone}
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Key Details Grid */}
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "24px" }}>
+                      <div style={{ background: "#fff", padding: "14px", borderRadius: "12px", border: "1px solid #e2e8f0" }}>
+                        <span style={{ fontSize: "0.78rem", color: "#64748b", textTransform: "uppercase", fontWeight: 700 }}>Owner / Applicant Name</span>
+                        <div style={{ fontSize: "1rem", fontWeight: 700, color: "#0f172a", marginTop: "2px" }}>{selectedDealership.owner_name}</div>
+                      </div>
+
+                      <div style={{ background: "#fff", padding: "14px", borderRadius: "12px", border: "1px solid #e2e8f0" }}>
+                        <span style={{ fontSize: "0.78rem", color: "#64748b", textTransform: "uppercase", fontWeight: 700 }}>Contact Number</span>
+                        <div style={{ fontSize: "1rem", fontWeight: 700, color: "#0f172a", marginTop: "2px" }}>{selectedDealership.phone}</div>
+                      </div>
+
+                      <div style={{ background: "#fff", padding: "14px", borderRadius: "12px", border: "1px solid #e2e8f0" }}>
+                        <span style={{ fontSize: "0.78rem", color: "#64748b", textTransform: "uppercase", fontWeight: 700 }}>GST Registered</span>
+                        <div style={{ fontSize: "1rem", fontWeight: 700, color: "#0f172a", marginTop: "2px" }}>
+                          {selectedDealership.gst_registered === "Yes" ? "✅ Yes" : "❌ No"}
+                        </div>
+                      </div>
+
+                      <div style={{ background: "#fff", padding: "14px", borderRadius: "12px", border: "1px solid #e2e8f0" }}>
+                        <span style={{ fontSize: "0.78rem", color: "#64748b", textTransform: "uppercase", fontWeight: 700 }}>GST Number</span>
+                        <div style={{ fontSize: "1rem", fontWeight: 700, color: "#0f172a", marginTop: "2px", fontFamily: "monospace" }}>
+                          {selectedDealership.gst_number || "None / Not Registered"}
+                        </div>
+                      </div>
+
+                      <div style={{ background: "#fff", padding: "14px", borderRadius: "12px", border: "1px solid #e2e8f0" }}>
+                        <span style={{ fontSize: "0.78rem", color: "#64748b", textTransform: "uppercase", fontWeight: 700 }}>Target Location</span>
+                        <div style={{ fontSize: "1rem", fontWeight: 700, color: "#0f172a", marginTop: "2px" }}>
+                          {selectedDealership.city}, {selectedDealership.state}
+                        </div>
+                      </div>
+
+                      <div style={{ background: "#fff", padding: "14px", borderRadius: "12px", border: "1px solid #e2e8f0" }}>
+                        <span style={{ fontSize: "0.78rem", color: "#64748b", textTransform: "uppercase", fontWeight: 700 }}>Proposed Investment Amount</span>
+                        <div style={{ fontSize: "1.1rem", fontWeight: 800, color: "#d97706", marginTop: "2px" }}>
+                          {selectedDealership.investment_capacity || "Not specified"}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Proposal / Message Box with NO character limit */}
+                    <div style={{ background: "#f8fafc", borderRadius: "14px", padding: "20px", border: "1px solid #cbd5e1" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
+                        <span style={{ fontSize: "0.85rem", fontWeight: 800, color: "#0f172a", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                          📝 Applicant's Detailed Proposal / Message (Unlimited Text)
+                        </span>
+                        <button
+                          onClick={() => {
+                            if (selectedDealership.message) {
+                              navigator.clipboard.writeText(selectedDealership.message);
+                              alert("Message copied to clipboard!");
+                            }
+                          }}
+                          style={{
+                            background: "#fff",
+                            border: "1px solid #cbd5e1",
+                            padding: "4px 10px",
+                            borderRadius: "6px",
+                            fontSize: "0.78rem",
+                            cursor: "pointer",
+                            fontWeight: 600
+                          }}
+                        >
+                          📋 Copy Text
+                        </button>
+                      </div>
+
+                      <div
+                        style={{
+                          whiteSpace: "pre-wrap",
+                          wordBreak: "break-word",
+                          lineHeight: 1.6,
+                          color: "#1e293b",
+                          fontSize: "0.95rem",
+                          background: "#fff",
+                          padding: "16px",
+                          borderRadius: "10px",
+                          border: "1px solid #e2e8f0",
+                          maxHeight: "350px",
+                          overflowY: "auto",
+                          fontFamily: "inherit"
+                        }}
+                      >
+                        {selectedDealership.message || "No detailed message provided by the applicant."}
+                      </div>
+                    </div>
+
+                    {/* Modal Footer */}
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "24px" }}>
+                      <button
+                        onClick={() => handleDeleteDealership(selectedDealership.id)}
+                        style={{
+                          background: "#fee2e2",
+                          color: "#b91c1c",
+                          border: "none",
+                          padding: "10px 18px",
+                          borderRadius: "10px",
+                          fontWeight: 700,
+                          cursor: "pointer",
+                          fontSize: "0.9rem"
+                        }}
+                      >
+                        🗑️ Delete Inquiry
+                      </button>
+
+                      <button
+                        onClick={() => setSelectedDealership(null)}
+                        style={{
+                          background: "#0f172a",
+                          color: "#fff",
+                          border: "none",
+                          padding: "10px 24px",
+                          borderRadius: "10px",
+                          fontWeight: 700,
+                          cursor: "pointer",
+                          fontSize: "0.9rem"
+                        }}
+                      >
+                        Done / Close
+                      </button>
+                    </div>
                   </div>
-                </>
+                </div>
               )}
             </div>
           )}
+
           {activeTab === "about" && (
             <div className="admin-card">
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "15px", marginBottom: "25px", borderBottom: "2px solid #f1f5f9", paddingBottom: "16px" }}>
